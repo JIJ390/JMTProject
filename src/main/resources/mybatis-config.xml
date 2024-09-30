@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<!-- 마이바티스 설정용 XML 파일 -->
+
+	<settings>
+		<!-- Java -> DB로 INSERT,UPDATE 시 Java의 null 값을 DB의 NULL로 인식하도록 설정-->
+		<setting name="jdbcTypeForNull" value="NULL" />
+		
+		<!-- DB의 UnderScore (_) 표기법 <-> Java의 Camel 표기법
+			두 표기법이 서로 변환 될 수 있도록 매핑하여
+			Java 필드명(memberId)과 DB 컬럼명(MEMBER_ID)가 서로 연결되게 함
+		-->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	
+</configuration>
