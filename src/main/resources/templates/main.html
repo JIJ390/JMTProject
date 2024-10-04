@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J&T</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="static/css/main.css">
 </head>
 
 <body>
+    <th:block th:replace="~{templates/sideBar}"></th:block>
     <!-- Header Section -->
     <header>
         <div id="header-Font">
@@ -16,9 +17,14 @@
             <a href="#">점메추</a>
             <a href="#">공지사항</a>
             <a href="#">FAQ</a>
+
+            <div class="logoBox">
+                <img src="static/images/logo.png" alt="로고" id="logoImage">
+                <img src="static/images/logoText.png" alt="로고 글자" id="logoText">
+            </div>
+
         </div>
 
-        <img src="" alt="logo" id="logoImage">
 
         <div class="user-actions">
 
@@ -30,44 +36,128 @@
 
     <!-- Main Content -->
     <main>
+        <th:block th:replace="~{common/sideBar}"></th:block>
         <section class="content-header">
             <h1>맛집 검색 J&T ! </h1>
 
             <div class="searchBox">
-                <input type="text" id="searchBar" maxlength='20'>
-                <button id="searchBtn">제출</button>
+                <input type="text" id="searchBar" maxlength='15'>
+                <button id="searchBtn" type="submit">🍳</button>
             </div>
 
             <br>
 
-<div class="filter" >
+            <div class="filter">
                 <a href="#" class="filter-category">음식 종류</a>
 
                 <a href="#" class="filter-category">지역 선택</a>
 
                 <a href="#" class="filter-category">정렬 방식</a>
-</div>
-
-        </section>
-
-        <section class="popular-section">
-            <h3>인기순</h3>
-            <div class="popular-items">
-                <div class="item">가게 이름<br>짧은 리뷰 (점메추)</div>
-                <div class="item">가게 이름</div>
-                <div class="item">가게 이름</div>
             </div>
+
         </section>
 
-        <section class="latest-section">
-            <h3>최신순</h3>
-            <div class="latest-items">
-                <div class="item">가게 이름</div>
-                <div class="item">가게 이름</div>
-                <div class="item">가게 이름</div>
-            </div>
-        </section>
+
+        
+        <div class="sectionBox">
+
+            <h3>#인기순</h3>
+            <section class="popular-section">
+                <!-- <h3>#인기순</h3>
+                <div class="popular-items">
+                    <div class="item"> <img src="static/images/샘플.jpg" alt=""> </div> -->
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+                </div>
+            </section>
+        </div>
+
+
+        <div class="sectionBox">
+
+            <h3>#최신순</h3>
+            <section class="popular-section">
+                <!-- <h3>#인기순</h3>
+                <div class="popular-items">
+                    <div class="item"> <img src="static/images/샘플.jpg" alt=""> </div> -->
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+                </div>
+            </section>
+        </div>
+
+
     </main>
+
+
+
+
 
     <!-- Floating Buttons -->
     <div class="floating-buttons">
@@ -75,148 +165,10 @@
         <a class="menu" href="#">☰</a>
     </div>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        #header-Font a{
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        text-decoration-line: none;
-        color: black;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
-
-        #logoImage {
-            width: 50px;
-            height: auto;
-        }
 
 
 
 
-
-
-
-
-        .user-actions a {
-            color: rgb(0, 0, 0);
-            text-decoration: none;
-            margin: 0 5px;
-        }
-
-
-
-        .content-header {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
-            background-color: #4d8885;
-            color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .popular-section,
-        .latest-section {
-            margin-bottom: 20px;
-        }
-
-        h3 {
-            margin-bottom: 10px;
-        }
-
-        .popular-items,
-        .latest-items {
-            display: flex;
-            gap: 10px;
-        }
-
-        .item {
-            flex: 1;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .floating-buttons {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-        }
-
-        .floating-buttons a {
-            display: flex;
-            width: 50px;
-            height: 50px;
-            background-color: #4d8885;
-            border: none;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            
-            
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        .filter{
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .filter-category{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50px;
-            background-color: #ccc9c9;
-            width: 100px;
-            height: 35px;
-            text-decoration-line: none;
-            color: black;
-            font-weight: bold;
-        }
-        
-        #searchBar{
-            outline: none;
-            width: 60%;
-            height: 25px;
-            border-radius: 50px;
-            background-color: #ccc9c9;
-            text-align: center;
-        }
-        .searchBox{
-            width: 100%;
-        }
-        #searchBtn{
-            position: relative;
-            right: 50px;
-        }
-
-
-    </style>
 </body>
 
 </html>
