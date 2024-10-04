@@ -170,23 +170,28 @@ h3 {
 }
 
 #searchBar{
+  background-color: transparent;
+  border: none;
   outline: none;
-  width: 60%;
+  width: 95%;
   height: 25px;
-  border-radius: 50px;
-  background-color: #ccc9c9;
   text-align: center;
 }
-.searchBox{
-  width: 100%;
-}
+
 #searchBtn{
-  position: relative;
   right: 50px;
   border: 0;
   background-color: transparent;
 
   cursor: pointer;
+}
+.searchBox{
+  display: flex;
+  position: relative;
+  border-radius: 30px;
+  font-weight: bold;
+  width: 50%;
+  background-color: #90b65d;
 }
 #searchBtn:active{
   transform: scale(0.95); /* 살짝 눌린 효과 */
@@ -208,7 +213,7 @@ h3 {
 }
 
 .store-image {
-  background-color: lightgray;
+  background-color: rgb(233, 208, 208);
   height: 100%;
   display: flex;
   justify-content: center;
@@ -216,7 +221,7 @@ h3 {
 }
 
 .store-image img {
-  width: 100%;
+  max-width: 90%;
   height: 100%;
   object-fit: cover;
 }
