@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J&T</title>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+
+<body>
+    <th:block th:replace="~{templates/sideBar}"></th:block>
+    <!-- Header Section -->
+    <header>
+        <div id="header-Font">
+            <a href="#">메인페이지</a>
+            <a href="#">점메추</a>
+            <a href="#">공지사항</a>
+            <a href="#">FAQ</a>
+
+            <div class="logoBox">
+                <img src="static/images/logo.png" alt="로고" id="logoImage">
+                <img src="static/images/logoText.png" alt="로고 글자" id="logoText">
+            </div>
+
+        </div>
+
+
+        <div class="user-actions">
+
+            <a href="#">회원 가입</a> | <a href="#">로그인</a>
+            <a href="#">찜버튼</a>
+
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <th:block th:replace="~{common/sideBar}"></th:block>
+        <section class="content-header">
+            <h1>맛집 검색 J&T ! </h1>
+
+            <div class="searchBox">
+                <input type="text" id="searchBar" maxlength='15'>
+                <button id="searchBtn" type="submit">🍳</button>
+            </div>
+
+            <br>
+
+            <div class="filter">
+                <a href="#" class="filter-category">음식 종류</a>
+
+                <a href="#" class="filter-category">지역 선택</a>
+
+                <a href="#" class="filter-category">정렬 방식</a>
+            </div>
+
+        </section>
+
+
+        
+        <div class="sectionBox">
+
+            <h3>#인기순</h3>
+            <section class="popular-section">
+                <!-- <h3>#인기순</h3>
+                <div class="popular-items">
+                    <div class="item"> <img src="static/images/샘플.jpg" alt=""> </div> -->
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+                </div>
+            </section>
+        </div>
+
+
+        <div class="sectionBox">
+
+            <h3>#최신순</h3>
+            <section class="popular-section">
+                <!-- <h3>#인기순</h3>
+                <div class="popular-items">
+                    <div class="item"> <img src="static/images/샘플.jpg" alt=""> </div> -->
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="static/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <span class="favorite-button">❤️</span>
+                        </div>
+                      </div>
+                </div>
+            </section>
+        </div>
+
+
+    </main>
+
+
+
+
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <a class="scroll-top" href="#">⬆</a>
+        <a class="menu" href="#">☰</a>
+    </div>
+
+
+
+
+
+</body>
+
+</html>
