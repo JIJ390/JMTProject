@@ -1,0 +1,155 @@
+*{
+  box-sizing: border-box;
+}
+
+html, body{
+  background-color: rgb(231, 231, 231);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.viewContainer{
+  display: flex;
+}
+
+
+.sideBar{
+  width: 20%;
+  height: 100vh;
+  background-color: rgb(165, 201, 198);
+  position: sticky;
+  top: 0;
+
+}
+
+.sideInput{
+  height: 100px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sideInput > input{
+  width: 70%;
+  height: 40%;
+  border-radius: 10px;
+  border: 0;
+}
+
+.sideCategory{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sideCategory > a{
+  text-decoration: none;
+  color: black;
+}
+
+.main{
+  width: 50%;
+  height: max-content;
+  margin: 20px;
+  margin-left: 40px;
+  
+}
+
+.mainDetail{
+  width: 100%;
+  height: 1000px;
+  box-shadow: 0px 0px 10px 0px rgb(136, 136, 136);
+  border-radius: 50px;
+  background-color: white;
+
+  text-align: center;
+}
+
+.mainDetailPhoto{
+  width: 65%;
+  height: 35%;
+ 
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+}
+
+.photo1{
+  width: 50%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.photo2{
+  width: 50%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.mainDetailContent{
+  width: 100%;
+  height: max-content;
+
+  margin-top: 20px;
+}
+
+.mainReview{
+  width: 100%;
+  height: max-content;
+  box-shadow: 0px 0px 10px 0px rgb(136, 136, 136);
+  border-radius: 50px;
+
+  margin-top: 50px;
+  background-color: white;
+
+}
+
+.reviewProfile{
+  width: 100%;
+  height: 100px;
+
+  display: flex;
+}
+
+.reviewProfileImg{
+  width: 10%;
+  height: 100%;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.revewProfileName{
+  margin-top: 30px;
+  width: 90%;
+  height: 100%;
+}
+
+.mainReviewContent{
+  
+}
+
+
+
+
+
+.map{
+  width: 300px;
+  height: 300px;
+  margin-top: 50px;
+  margin-left: 20px;
+  position : sticky; /* 화면 밖으로 벗어났을 때 지정된 위치 붙음 */
+  top : 0;           /* 붙을 위치(고정될 위치) 지정 */
+  z-index: 1000;   
+
+  box-shadow: 0px 0px 10px 0px rgb(136, 136, 136);
+  border-radius: 20px;
+  background-color: white;
+}
