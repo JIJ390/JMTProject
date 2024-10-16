@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/restaurant/restaurantDetail.css">
     <title>식당 정보</title>
 </head>
+
 <body>
     <div class="headers">
         <div class="headerLeft">
@@ -40,18 +42,26 @@
             <div class="mainDetail">
 
                 <div class="mainDetailPhoto">
-                    <div class="photo1" style="background-image: url(/images/샘플.jpg)" ></div>
+                    <div class="photo1" style="background-image: url(/images/샘플.jpg)"></div>
                     <div class="photo2" style="background-image: url(/images/샘플3.jpg);"></div>
                 </div>
                 <div class="mainDetailContent" th:object="${restaurant}">
-                    <h1 th:text="*{restaurantName}">가게이름</h1>
+                    <ul>
+                        <li th:text="*{restaurantName}"></li>
+                        <hr>
+                        <ul th:each=" menu : *{menuList}">
+                            <li>
+                                <p th:text="${menu.menuName}"></p>
+                                <p th:text="${menu.menuPrice}"></p>
+                            </li>
+                        </ul>
+                    </ul>
+                    <hr>
                     <!-- <h1 th:text="*{menuList.menuName}">메뉴 이름</h1><h1 th:text="*{menu.menuPrice}">가격</h1> -->
-                    <th:block th:each= " menu : *{menuList}">
-                        <h1 th:text="${menu.menuName}"></h1>
-                        <h1 th:text="|${menu.menuPrice}|+'원'"></h1>
-                    </th:block>
-                    <h1 th:text="*{restaurantAddress}">주소</h1>
-                    <h1>기타 등등...</h1>
+                    <!-- <h1 th:text="${menu.menuName}"></h1>
+                        <h1 th:text="|${menu.menuPrice}|+'원'"></h1> -->
+
+                    <hr>
                 </div>
 
             </div>
@@ -104,35 +114,36 @@
                     </pre>
                 </div>
             </div>
-            
+
             <button class="reviewBtn">리뷰 등록하기</button>
         </div>
         <div class="map" id="map"></div>
     </div>
 
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=62328a4e1d94f31c96879420aa63935a"></script>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=62328a4e1d94f31c96879420aa63935a"></script>
     <script>
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-        mapOption = { 
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-        };
-    
-    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-    
-    // 마커가 표시될 위치입니다 
-    var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
-    
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        position: markerPosition
-    });
-    
-    // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
-    
-    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-    // marker.setMap(null);    
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        // 마커가 표시될 위치입니다 
+        var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+
+        // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+        // marker.setMap(null);    
     </script>
 
 
@@ -142,8 +153,9 @@
             location.href = "/restaurant/add"
         })
 
-        
+
     </script>
-   
+
 </body>
+
 </html>
