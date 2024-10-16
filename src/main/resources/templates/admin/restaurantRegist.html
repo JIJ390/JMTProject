@@ -22,7 +22,7 @@
 
         <h1>가게 등록</h1>
 
-        <form action="insert">
+        <form action="insert" id="restaurantResistFrm">
 
           <div class="img-area">
 
@@ -57,18 +57,18 @@
 
             <h3># 카테고리 선택</h3>
 
-            <div class="categoryChoose" >
+            <div class="inputChoose" >
               <th:block th:each= "category:${categoryList}">
-                <input type="radio" name="categoryNo"  th:value="${category.categoryNo}"  th:id="'category' + ${category.categoryNo}" >
+                <input type="radio" name="inputRadio"  th:value="${category.categoryNo}"  th:id="'category' + ${category.categoryNo}" >
                 <label th:for="'category' + ${category.categoryNo}" th:text="${category.categoryName}"></label>
               </th:block>
             </div>
 
             <h3># 지역 선택</h3>
 
-            <div class="categoryChoose" >
+            <div class="inputChoose" >
               <th:block th:each= "location:${locationList}">
-                <input type="radio" name="categoryNo"  th:value="${location.locationNo}"  th:id="'location' + ${location.locationNo}" >
+                <input type="radio" name="inputRadio"  th:value="${location.locationNo}"  th:id="'location' + ${location.locationNo}" >
                 <label th:for="'location' + ${location.locationNo}" th:text="${location.locationName}"></label>
               </th:block>
             </div>

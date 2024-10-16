@@ -93,14 +93,19 @@ menuMinusBtn.addEventListener("click", () => {
 /* 유효성 검사!!! */////////////////////////////////////////////////////
 
 /* 필수 입력 항목의 유효성 검사 여부를 체크하기 위한 객체(체크리스트) */
-const checkObj = {
-  "restaurantName"     : false,
-  "category"  : false,
-  "loction" : false,
-  "restaurantMenu"        : false,
-  "restaurantTel"       : false,
-  "restaurantAddress"         : false
-}
+const form = document.querySelector("#restaurantResistFrm");
 
-/* 가게 이름 유효성 검사 */
-const restaurantName = document.querySelector("#restaurantName");
+form.addEventListener("submit", e => {
+  const restaurantName = document.querySelector("[name=restaurantName]");
+  const inputRadio = document.querySelector("[name=inputRadio]");
+  const menuName = document.querySelectorAll("[name=menuName]");
+  const menuPrice = document.querySelectorAll("[name=menuPrice]");
+  const restaurantTel = document.querySelector("[name=restaurantTel]");
+
+  if (restaurantName.value.trim().length === 0) {
+    alert("가게명을 작성해 주세요");
+    restaurantName.focus();
+    e.preventDefault();
+    return;
+  }
+});

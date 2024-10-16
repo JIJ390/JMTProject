@@ -129,11 +129,11 @@ input {
 
 
 /* 카테고리 선택용 label */
-.categoryChoose {
+.inputChoose {
  margin: 20px;
 }
 
- .categoryChoose label {
+ .inputChoose label {
   width: 60px;
   height: 30px;
 
@@ -149,12 +149,12 @@ input {
   
 }
 
-[name=categoryNo] {
+[name=inputRadio] {
   display: none;
 }
 
 
-[name=categoryNo]:checked+label{
+[name=inputRadio]:checked+label{
   background-color: var(--main-color);
   border: none;
   color: white;
