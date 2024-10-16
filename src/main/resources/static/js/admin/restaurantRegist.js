@@ -87,3 +87,20 @@ menuMinusBtn.addEventListener("click", () => {
   const tr = document.querySelector('.menuTable-body > tr:last-child');
   tr.remove();
 })
+
+
+
+/* 유효성 검사!!! */////////////////////////////////////////////////////
+
+/* 필수 입력 항목의 유효성 검사 여부를 체크하기 위한 객체(체크리스트) */
+const checkObj = {
+  "restaurantName"     : false,
+  "category"  : false,
+  "loction" : false,
+  "restaurantMenu"        : false,
+  "restaurantTel"       : false,
+  "restaurantAddress"         : false
+}
+
+/* 가게 이름 유효성 검사 */
+const restaurantName = document.querySelector("#restaurantName");

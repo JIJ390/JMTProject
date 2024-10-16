@@ -13,7 +13,6 @@ public class AdminConroller {
 
 	@GetMapping("restaurant/regist")
 	public String restaurantRegist() {
-		
 		return "admin/restaurantRegist";
 	}
 	
