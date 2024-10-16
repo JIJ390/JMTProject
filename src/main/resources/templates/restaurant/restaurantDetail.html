@@ -43,10 +43,14 @@
                     <div class="photo1" style="background-image: url(/images/샘플.jpg)" ></div>
                     <div class="photo2" style="background-image: url(/images/샘플3.jpg);"></div>
                 </div>
-                <div class="mainDetailContent">
-                    <h1>가게이름</h1>
-                    <h1>메뉴 목록</h1>
-                    <h1>주소</h1>
+                <div class="mainDetailContent" th:object="${restaurant}">
+                    <h1 th:text="*{restaurantName}">가게이름</h1>
+                    <!-- <h1 th:text="*{menuList.menuName}">메뉴 이름</h1><h1 th:text="*{menu.menuPrice}">가격</h1> -->
+                    <th:block th:each= " menu : *{menuList}">
+                        <h1 th:text="${menu.menuName}"></h1>
+                        <h1 th:text="|${menu.menuPrice}|+'원'"></h1>
+                    </th:block>
+                    <h1 th:text="*{restaurantAddress}">주소</h1>
                     <h1>기타 등등...</h1>
                 </div>
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.jmt.restaurant.mapper.RestaurantMapper">
+
+	<!-- restaurantDto에 menuDto삽입하기 위한 resultMap -->
+	<!-- 
+  	type : 매핑할 DTO의 경로 또는 별칭 
+    id   : resultMap 태그를 식별할 이름  
+  -->
+	<resultMap type="RestaurantDto" id="restaurant_rm">
+	
+		<!-- id 태그 : PK 역할 필드, 컬럼 작성 태그(필수 작성) -->
+		<id property="restaurantNo" column="RESTAURANT_NO"/>
+	
+		<!--
+			property : List를 담을 DTO의 필드명
+			select : 실행할 select의 id
+			column : 조회 결과 중 지정된 컬럼의 값을 파라미터로 전달
+			javaType : List(컬렉션)의 타입을 지정
+			ofType : List(컬렉션)의 제네릭(타입 제한) 지정
+		-->
+		<collection 
+			property="menuList"
+			select="selectMenuList"
+			column="RESTAURANT_NO"
+			javaType="java.util.ArrayList"
+			ofType="MenuDto"
+		/>
+	</resultMap>
+
+
+	<select id="selectMenuList" resultType="MenuDto">
+		SELECT MENU_NO, MENU_NAME, MENU_PRICE
+		FROM MENU
+		WHERE RESTAURANT_NO = #{restaurantNo}
+	</select>
+	
+
+	<select id="restaurantDetail" resultMap="restaurant_rm">
+			SELECT *
+	FROM RESTAURANT
+	JOIN LOCATION USING(LOCATION_NO)
+	JOIN CATEGORY USING(CATEGORY_NO)
+	WHERE RESTAURANT_NO = #{restaurantNo}
+	</select>
+
+
+
+</mapper>
