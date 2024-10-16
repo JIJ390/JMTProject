@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>J&T</title>
+    <link rel="stylesheet" href="../html/css/main.css">
+    <link rel="stylesheet" href="../html/css/common/popUp.css">
+    <link rel="stylesheet" href="https://fontawesome.com/v5/icons/heart?f=classic&s=solid">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div id="header-Font">
+            <a href="#">메인페이지</a>
+            <a href="#">점메추</a>
+            <a href="#">공지사항</a>
+            <a href="#">FAQ</a>
+
+            <div class="logoBox">
+                <a href="#"><img src="../html/images/logo.png" alt="로고" id="logoImage">
+                <img src="../html/images/logoText.png" alt="로고 글자" id="logoText"></a>
+            </div>
+
+        </div>
+
+
+        <div class="user-actions">
+
+            <a href="#">회원 가입</a> | <a href=".menu-container">로그인</a>
+            <a class="menu" href="#">
+              <i class="fa-solid fa-bars"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="content-header">
+            <h1>맛집 검색 J&T ! </h1>
+
+            <br>
+
+            <div class="searchBox">
+
+                <input type="text" id="searchBar">
+
+                <button id="searchBtn" type="submit">🍳</button>
+                
+              </div>
+
+            <br>
+            <br>
+
+            <div class="filter">
+                <a href="#" class="filter-category">음식 종류</a>
+
+                <a href="#" class="filter-category">지역 선택</a>
+
+                <a href="#" class="filter-category">정렬 방식</a>
+            </div>
+
+
+        </section>
+
+
+<!-- ------------------------------------------------------------------------------------- 하나만 필요  -->        
+    
+        <div class="sectionBox">
+
+            <h3>#인기순</h3>
+            <br>
+            <section class="popular-section">
+
+                    <div class="store-box" onclick="">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="../html/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+                          <button class="heartBtn">
+                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+                          </button>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="../html/images/샘플1.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <button class="heartBtn">
+                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+                          </button>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="../html/images/샘플3.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <button class="heartBtn">
+                            <i class="fas fa-heart fa-lg" style="color: #ff0000;"></i>
+                          </button>
+                        </div>
+                      </div>
+                </div>
+            </section>
+        </div>
+        <div class="sectionBox">
+
+            <h3>#인기순</h3>
+            <br>
+            <section class="popular-section">
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="../html/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+                          <button class="heartBtn">
+                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+                          </button>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="../html/images/샘플1.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <button class="heartBtn">
+                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+                          </button>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="../html/images/샘플3.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <button class="heartBtn">
+                            <i class="fas fa-heart fa-lg" style="color: #ff0000;"></i>
+                          </button>
+                        </div>
+                      </div>
+                </div>
+            </section>
+        </div>
+        <div class="sectionBox">
+
+            <h3>#인기순</h3>
+            <br>
+            <section class="popular-section">
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="../html/images/샘플.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+                          <button class="heartBtn">
+                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+                          </button>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="../html/images/샘플1.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <button class="heartBtn">
+                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+                          </button>
+                        </div>
+                      </div>
+
+
+                    <div class="store-box">
+                        <div class="store-image">
+                          <!-- The image will go here -->
+                          <img src="../html/images/샘플3.jpg" alt="가게 사진">
+                        </div>
+                        <div class="store-info">
+                          <span class="store-name">떡볶이 엄청나</span>
+                          <button class="heartBtn">
+                            <i class="fas fa-heart fa-lg" style="color: #ff0000;"></i>
+                          </button>
+                        </div>
+                      </div>
+                </div>
+            </section>
+        </div>
+        <!-- -------------------------------------------------------------------------------------    밑에 샘플 -->    
+
+              
+          <!-- --------------------------------------- side --> 
+            <div class="menu-container">
+              <div class="profile-img">
+                <img src="../html/images/샘플.jpg" alt="profile">
+              </div>
+              
+              
+              <p class="sideP">김성민</p>
+              
+              <nav>
+                <a href="#" class="sideItem">마이 페이지</a>
+                <a href="#" class="sideItem">메인 페이지</a>
+                <a href="#" class="sideItem">점메추 게시판</a>
+                <a href="#" class="sideItem">공지 사항</a>
+                <a href="#" class="sideItem">FAQ</a>
+              </nav>
+            </div>
+      <!-- --------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <a class="scroll-top" href="#">⬆</a>
+    </div>
+
+      </main>
+
+      <script src="../html/js/main.js"></script>
+      <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
+      <script src="../html/js/sideBar.js"> </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailpage</title>
+
+    <link rel="stylesheet" href="../html/css/common/header.css">
+    <link rel="stylesheet" href="../html/css/common/search.css">
+    <link rel="stylesheet" href="../html/css/common/popUp.css">
+</head>
+
+
+<!-- ------------ 헤더 ----------------- -->
+
+
+<header>
+
+    <div id="header-Font">
+        <a href="#" class="headerBtn">메인페이지</a>
+        <a href="#" class="headerBtn">점메추</a>
+        <a href="#" class="headerBtn">공지사항</a>
+        <a href="#" class="headerBtn">FAQ</a>
+    </div>
+
+    <a href="#"><img src="../html/images/logo.png" alt="로고 이미지" id="logImg"></a>
+
+    <a class="menu" href="#">
+        <i class="fa-solid fa-bars"></i>
+    </a>
+
+    
+</header>
+<!-- ------------ 헤더 ----------------- -->
+
+<body>
+
+
+
+
+
+
+
+    <div class="bodyItem">
+        <!-- ------------- 사이드 ---------------------- -->
+        <aside class="category">
+
+            <div class="categoryBox">
+
+                <div class="categorySearchBox">
+
+                    <div class="searchBox">
+                        <input type="text" class="categorySearch" placeholder="검색">
+                        <button class="categorySearch_btn">🍳</button>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div>카테고리</div>
+
+                <hr>
+
+                <div>카테고리</div>
+
+                <hr>
+
+                <div class="categoryBtns_box">
+                    <button class="categoryBtns">최신순</button>|
+                    <button class="categoryBtns">호불호 순</button>|
+                    <button class="categoryBtns">리뷰 많은 순</button>|
+                    <button class="categoryBtns">찜 많은 순</button>
+
+                </div>
+                <hr>
+
+            </div>
+
+        </aside>
+        <!-- ------------- 사이드 ---------------------- -->
+
+
+
+        <div>
+            <!-- -------------------------- 몸통 ------------------ -->
+            <section class="store-section" onclick="restaurant()">
+                <div class="store-image">
+                    <img src="../html/images/샘플.jpg" alt="매장 이미지">
+                </div>
+                <div class="store-info">
+                    <h1>삐삐 맛있어</h1>
+                    <p class="store-address">경기도 의정부시</p>
+                    <p>떡볶이 / 한식</p>
+                    <p class="store-phone">010-2323-2322</p>
+                </div>
+                <div class="store-actions">
+                    <p class="store-rating">81%</p>
+                    <button class="heartBtn">
+                        <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- -------------------------- 몸통 ------------------ -->
+
+    </div>
+    
+              <!-- --------------------------------------- side --> 
+              <div class="menu-container">
+                <div class="profile-img">
+                  <img src="../html/images/샘플.jpg" alt="profile">
+                </div>
+                
+                
+                <p class="sideP">김성민</p>
+                
+                <nav>
+                  <a href="#" class="sideItem">마이 페이지</a>
+                  <a href="#" class="sideItem">메인 페이지</a>
+                  <a href="#" class="sideItem">점메추 게시판</a>
+                  <a href="#" class="sideItem">공지 사항</a>
+                  <a href="#" class="sideItem">FAQ</a>
+                </nav>
+              </div>
+        <!-- --------------------------------------- -->
+
+    <div class="floating-buttons">
+        <a class="scroll-top" href="#">⬆</a>
+    </div>
+
+    <script src="../html/js/search.js"> </script>
+    <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
+</body>
+</html>
