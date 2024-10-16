@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService{
 
-	public final AdminMapper mapper;
+	private final AdminMapper mapper;
 	
 	@Override
 	public List<Map<String, String>> selectCategoryList() {
