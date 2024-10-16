@@ -21,13 +21,6 @@ main{
 
 }
 
-section{  
-  border: 1px solid black; /* 임시 */
-
-
-}
-
-
 .left-section, .right-section{
   width: 50%;
 }
