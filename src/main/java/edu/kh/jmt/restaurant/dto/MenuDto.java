@@ -17,4 +17,5 @@ public class MenuDto {
 	private int menuNo;
 	private String menuName;
 	private String menuPrice;
+	
 }
