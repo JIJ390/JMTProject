@@ -21,21 +21,17 @@
   overflow: hidden; 
   text-align: center;
   
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   
   /* -0------------------------------------------ */
   
   position: absolute;
   right: 0;
-  bottom: 800px;
   display: none;
   
 
 }
 
-.menu-container{
   
-}
 
 
 
