@@ -28,10 +28,8 @@ function findAddress() {
 
 /* 주소 검색 버튼 클릭 시 */
 /* 버튼 있을 때만!!! 활성화 */
-if (document.querySelector("#findAddressBtn") !== null) {
-  document.querySelector("#findAddressBtn")
-    .addEventListener("click", findAddress);
-};
+document.querySelector("#findAddressBtn")?.addEventListener("click", findAddress);
+
 
 
 
@@ -90,17 +88,25 @@ menuMinusBtn.addEventListener("click", () => {
 
 
 
-/* 유효성 검사!!! */////////////////////////////////////////////////////
 
-/* 필수 입력 항목의 유효성 검사 여부를 체크하기 위한 객체(체크리스트) */
+/* 필수 입력 항목의 입력 여부를 체크 */
 const form = document.querySelector("#restaurantResistFrm");
 
 form.addEventListener("submit", e => {
+
+  /* 메뉴 이름과 가격 어떻게 할지 */
+  /* 라디오 타입 어떤 식??? */
   const restaurantName = document.querySelector("[name=restaurantName]");
   const inputRadio = document.querySelector("[name=inputRadio]");
   const menuName = document.querySelectorAll("[name=menuName]");
   const menuPrice = document.querySelectorAll("[name=menuPrice]");
   const restaurantTel = document.querySelector("[name=restaurantTel]");
+
+  /* 주소 */
+  const postcode = document.querySelector("#postcode");
+  const address = document.querySelector("#address");
+  const detailAddress = document.querySelector("#detailAddress");
+
 
   if (restaurantName.value.trim().length === 0) {
     alert("가게명을 작성해 주세요");
@@ -108,4 +114,20 @@ form.addEventListener("submit", e => {
     e.preventDefault();
     return;
   }
+
+  if (restaurantTel.value.trim().length === 0) {
+    alert("전화번호를 작성해 주세요");
+    restaurantTel.focus();
+    e.preventDefault();
+    return;
+  }
+
+  if (postcode.value.trim().length === 0) {
+    alert("주소를 입력해 주세요");
+    findAddressBtn.focus();
+    e.preventDefault;
+    return;
+  }
+
+
 });

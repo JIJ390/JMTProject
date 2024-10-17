@@ -19,4 +19,9 @@
 		FROM "LOCATION"
 	</select>
 	
+	
+	<insert id="restaurantInsert">
+		<!-- 내일 하자!! -->
+	</insert>
+	
 </mapper>

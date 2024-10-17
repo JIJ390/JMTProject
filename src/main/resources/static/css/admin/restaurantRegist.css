@@ -133,7 +133,7 @@ input {
  margin: 20px;
 }
 
- .inputChoose label {
+.inputChoose label {
   width: 60px;
   height: 30px;
 
@@ -149,12 +149,12 @@ input {
   
 }
 
-[name=inputRadio] {
+.inputChoose input {
   display: none;
 }
 
 
-[name=inputRadio]:checked+label{
+.inputChoose input:checked+label{
   background-color: var(--main-color);
   border: none;
   color: white;
