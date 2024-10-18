@@ -1,0 +1,145 @@
+/* 기본 스타일 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+} */
+
+/* 검색바 스타일 */
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+}
+
+.search-container input {
+  width: 200px;
+  padding: 5px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+/* 게시글 스타일 */
+.post-container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.post {
+  background-color: #FFFFFF;
+  border-radius: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  position: relative;
+  width: 60%;
+  height: 650px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* 글쓰기 버튼 스타일 */
+.writeBtn {
+  right: 20px;
+  background-color: #6EC3C2;
+  width: 8%;
+  margin-left: 50%;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* 이미지 상자 영역 */
+.image-container {
+  display: flex; /* Flexbox로 정렬 */
+  justify-content: space-between; /* 상자 사이의 공간을 동일하게 */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* 이미지 상자 스타일 */
+.image-box {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+/* 제목 css */
+.title-write{
+
+  width: 300px; /* 너비 */
+  height:50px; /* 높이 */
+  padding: 10px; /* 안쪽 여백 */
+  border: 2px solid #ffffff; /* 테두리 색상과 두께 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  background-color: #ffffff; /* 배경색 */
+  font-family: 'Arial', sans-serif; /* 글꼴 */
+  font-size: 16px; /* 글자 크기 */
+  color: #333; /* 글자 색상 */
+  line-height: 1.5; /* 줄 간격 */
+  resize: none; /* 크기 조절 가능 여부 (none: 비활성화) */
+  outline: none; /* 포커스 시 외곽선 제거 */
+  animation: blink 1s step-start infinite;
+
+}
+
+/* 메인 내용 css */
+.body-write{
+
+  width: 500px; /* 너비 */
+  height:350px; /* 높이 */
+  padding: 10px; /* 안쪽 여백 */
+  border: 2px solid #ccc; /* 테두리 색상과 두께 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  background-color: #ffffff; /* 배경색 */
+  font-family: 'Arial', sans-serif; /* 글꼴 */
+  font-size: 16px; /* 글자 크기 */
+  color: #333; /* 글자 색상 */
+  line-height: 1.5; /* 줄 간격 */
+  resize: none; /* 크기 조절 가능 여부 (none: 비활성화) */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+  outline: none; /* 포커스 시 외곽선 제거 */
+  animation: blink 1s step-start infinite;
+
+}
+
+/* 상단 버튼*/
+#topBtn{
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  border-radius: 50%;
+  border: none;
+  padding: 40;
+  color: #6EC3C2;
+  width: 60px;
+  height: 60px;
+  font-size:40px;
+  cursor: pointer;
+}
