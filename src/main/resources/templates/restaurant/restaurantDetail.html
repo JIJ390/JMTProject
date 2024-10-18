@@ -5,20 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/restaurant/restaurantDetail.css">
+    <link rel="stylesheet" href="/css/common/header.css">
     <title>식당 정보</title>
 </head>
 
 <body>
-    <div class="headers">
-        <div class="headerLeft">
-            <a href="#">메인페이지</a>
-            <a href="#">점메추</a>
-            <a href="#">공지사항</a>
-            <a href="#">FAQ</a>
-        </div>
-        <div class="headerCenter"></div>
-        <div class="headerRight"></div>
-    </div>
+    <div th:replace= "~{common/header}"></div>
     <div class="viewContainer">
         <div class="sideBar">
             <div class="sideInput">
@@ -42,21 +34,24 @@
             <div class="mainDetail">
 
                 <div class="mainDetailPhoto">
-                    <div class="photo1" style="background-image: url(/images/샘플.jpg)"></div>
-                    <div class="photo2" style="background-image: url(/images/샘플3.jpg);"></div>
+                    <div class="photo1" style="background-image: url(/images/logo.png)"></div>
+                    <div class="photo2" style="background-image: url(/images/logo.png);"></div>
                 </div>
                 <div class="mainDetailContent" th:object="${restaurant}">
                     <ul>
-                        <li th:text="*{restaurantName}"></li>
+                        <li><p th:text="*{restaurantName}" style="font-size: 30px;"></p></li>
                         <hr>
-                        <ul th:each=" menu : *{menuList}">
-                            <li>
+                        <ul th:each=" menu : *{menuList}" >
+                            <li class="menuList">
                                 <p th:text="${menu.menuName}"></p>
                                 <p th:text="${menu.menuPrice}"></p>
                             </li>
                         </ul>
+                        <hr>
+                        <li>
+                            <p th:text="*{restaurantAddress}"></p>
+                        </li>
                     </ul>
-                    <hr>
                     <!-- <h1 th:text="*{menuList.menuName}">메뉴 이름</h1><h1 th:text="*{menu.menuPrice}">가격</h1> -->
                     <!-- <h1 th:text="${menu.menuName}"></h1>
                         <h1 th:text="|${menu.menuPrice}|+'원'"></h1> -->
@@ -121,7 +116,7 @@
     </div>
 
     <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=62328a4e1d94f31c96879420aa63935a"></script>
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=apikey"></script>
     <script>
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {

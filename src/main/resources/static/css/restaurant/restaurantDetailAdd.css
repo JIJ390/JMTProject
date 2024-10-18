@@ -2,7 +2,12 @@
   box-sizing: border-box;
 }
 
+html, body{
+  background-color: rgb(241, 241, 241);
+}
+
 .contentAreaBorder{
+  background-color: white;
   width: 55%;
   height: 1000px;
   border-radius: 20px;
@@ -11,7 +16,7 @@
   padding: 10px;
   margin-bottom: 30px;
 
-  box-shadow: 3px 3px 5px 5px rgb(136, 136, 136);
+  box-shadow: 0px 0px 10px 0px rgb(230, 230, 230);
 }
 
 .contentTitle{

@@ -1,0 +1,8 @@
+diff a/src/main/java/edu/kh/jmt/common/interceptor/CategoryInterceptor.java b/src/main/java/edu/kh/jmt/common/interceptor/CategoryInterceptor.java	(rejected hunks)
+@@ -1,5 +1,6 @@
+ package edu.kh.jmt.common.interceptor;
+ 
++
+ import java.util.List;
+ import java.util.Map;
+ 

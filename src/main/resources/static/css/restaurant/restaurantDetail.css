@@ -103,17 +103,21 @@ html, body{
   height: max-content;
 
   margin-top: 20px;
+  padding: 30px;                   
 }
 
-
-.mainDetailContent > ul {
-  
+.menuList{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }
 
 .mainDetailContent > ul > li{
   display: flex;
   justify-content: space-between;
   margin-right: 40px;
+
+  padding: 20px;
 
 }
 

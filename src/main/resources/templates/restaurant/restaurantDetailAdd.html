@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/restaurant/restaurantDetailAdd.css">
+  <link rel="stylesheet" href="/css/common/header.css">
 
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -18,13 +19,13 @@
 </head>
 
 <body>
-  <div class="headers">
-    <h1>header</h1>
+  <div th:replace="~{common/header}">
   </div>
 
   <div class="contentAreaBorder">
     <div class="contentTitle">
-      <p>이 가게에 대한 정보 123...</p> <hr>
+      <p>이 가게에 대한 정보 123...</p>
+      <hr>
     </div>
     <div class="contentArea">
       <textarea id="content"></textarea>
@@ -42,8 +43,8 @@
       $("#content").summernote({
         width: null,
         height: 800,          // 최소 높이
-        minHeight:800,
-        maxHeight:800,
+        minHeight: 800,
+        maxHeight: 800,
         lang: "ko-KR",
         placeholder: "내용을 입력해주세요",
         toolbar: [
@@ -58,16 +59,48 @@
           ['view', ['fullscreen', 'help']]
         ],
         fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
-        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+        callbacks: {
+          onImageUpload: function (files) {
+            sendFile(files[0]);
+          },
+          onInit: function () {
+            console.log('Summernote 초기화 완료');
+          },
+          onChange: function (contents) {
+            console.log('내용 변경됨:', contents);
+          }
+        }
       });
-      $('.note-statusbar').hide() 
+      $('.note-statusbar').hide()
     });
-    
-  const goToList = document.querySelector(".goToList");
-  goToList.addEventListener("click", () => {
-    location.href = "/restaurant/returnView"
-  })
 
+    $('#getContent').click(function () {
+      const content = $('#summernote').summernote('code');
+      console.log('현재 내용:', content);
+    });
+
+    function sendFile(file) {
+      const data = new FormData();
+      data.append("file", file);
+
+      fetch('/summerNoteUpload', {
+        method: 'POST',
+        body: data
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('업로드 실패');
+          }
+          return response.json();
+        })
+        .then(url => {
+          $('#summernote').summernote('insertImage', url);
+        })
+        .catch(error => {
+          console.error("이미지 업로드 오류:", error);
+        });
+    }
 
 
 
