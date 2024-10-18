@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 관리 페이지</title>
+  <link rel="stylesheet" href="/css/admin/memberManage.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+</head>
+<body>
+
+  <th:block th:replace="~{common/header}"></th:block>
+  
+  <main>
+    <section class="left-section">사이드 메뉴</section>
+    <section class="main-section">
+
+      <h1>회원 관리 페이지</h1>
+
+      <div class="memberStatus">
+        <div class="memberStatus-head">
+          JMT 회원 현황
+        </div>
+        <div class="container-1">
+          <div>전체 회원 수</div>
+          <div>0</div>
+        </div>
+        <div class="container-1">
+          <div>활동 회원 수</div>
+          <div>0</div>
+        </div>
+        <div class="container-1">
+          <div>차단 회원 수</div>
+          <div>0</div>
+        </div>
+        <div class="container-1">
+          <div>탈퇴 회원 수</div>
+          <div>0</div>
+        </div>
+      </div>
+
+
+      <div class="btn-area">
+        <button>전체 회원</button>
+        <button>차단 회원</button>
+        <button>탈퇴 회원</button>
+
+      </div>
+
+      <table border="1" class="memberListTable">
+        <thead>
+          <tr>
+            <th>회원 번호</th>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>회원 상태</th>
+            <th colspan="2">-</th>
+          </tr>
+        </thead>
+        <tbody id="memberList">
+
+
+        </tbody>
+
+      </table>
+
+
+      <div class="pagination-area">
+
+        <ul class="pagination">
+          <li><a href="#">&lt;&lt;</a></li>
+          <li><a href="#">&lt;</a></li>
+
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+
+          <li><a href="#">&gt;</a></li>
+          <li><a href="#">&gt;&gt;</a></li>
+        </ul>
+
+      </div>
+
+    </section>
+    <section class="right-section">
+     
+
+    </section>
+  </main>
+
+  <script src="/js/admin/memberManage.js"></script>
+</body>
+</html>

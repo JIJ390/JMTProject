@@ -1,5 +1,6 @@
 package edu.kh.jmt.admin.service;
 
+import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,13 @@ public interface AdminService {
 			List<MultipartFile> restaurantImages,
 			List<String> menuNameList,
 			List<String> menuPriceList);
+
+	
+	/**
+	 * 회원 정보 모두 불러오기
+	 * @return
+	 */
+	List<Member> selectMemberList();
 
 
 }

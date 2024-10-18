@@ -1,6 +1,7 @@
 package edu.kh.jmt.admin.service;
 
 import java.io.File;
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +76,9 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		// 4) DB UPDATE
-		int restaurantNo = mapper.restaurantInsert(insertRestaurant);
+		int result1 = mapper.restaurantInsert(insertRestaurant);
+		
+		int restaurantNo = insertRestaurant.getRestaurantNo();
 		
 		// 입력된 메뉴 정보를 저장할 list 객체 생성
 		List<Menu> menuList = new ArrayList<Menu>();
@@ -88,11 +91,13 @@ public class AdminServiceImpl implements AdminService{
 											.menuPrice(menuPriceList.get(i))
 											.restaurantNo(restaurantNo)
 											.build();
+			
+			log.debug("menu : {}", menu.toString());
 
 			menuList.add(menu);
 		}
 		
-		int result = mapper.menuListInsert(menuList);
+		int result2 = mapper.menuListInsert(menuList);
 		
 		try {
 			// C:/uploadFiles/restaurantImg/  폴더가 없으면 생성
@@ -113,6 +118,14 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		return 0;
+	}
+	
+	
+	
+	// 회원 정보 모두 조회
+	@Override
+	public List<Member> selectMemberList() {
+		return mapper.selectMemberList();
 	}
 	
 }

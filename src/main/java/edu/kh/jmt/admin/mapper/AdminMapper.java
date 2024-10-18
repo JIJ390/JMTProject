@@ -1,5 +1,6 @@
 package edu.kh.jmt.admin.mapper;
 
+import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,16 @@ public interface AdminMapper {
 	 * @return
 	 */
 	int menuListInsert(List<Menu> menuList);
+
+	
+	/** 
+	 * 회원 정보 모두 조회
+	 * @return
+	 */
+	List<Member> selectMemberList();
+	
+	
+	
 
 
 }

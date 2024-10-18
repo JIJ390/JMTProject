@@ -9,16 +9,16 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 @ToString
-public class Menu {
+@Builder
+public class Member {
 	
-	private int restaurantNo;
-	private String menuName;
-	private String menuPrice;
-	
-	
+	private int memberNo;
+	private String memberName;
+	private String memberEmail;
+	private String memberDelFl;
+	private String memberAuth;
 
 }
