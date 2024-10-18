@@ -48,6 +48,7 @@ dependencies {
 	// Lettuce : Redis 클라이언트 라이브러리, Redis를 사용할 수 있는 Java 코드 제공
 	// https://mvnrepository.com/artifact/io.lettuce/lettuce-core
 	implementation 'io.lettuce:lettuce-core:6.4.0.RELEASE'
+
 }
 
 tasks.named('test') {
