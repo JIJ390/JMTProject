@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myPage</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .header {
+            height: 10%;
+            width: 100%;
+            background-color: #4dc4b4;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header img {
+            max-width: 160px;
+            height: auto;
+        }
+
+        .header .sub-links {
+            position: absolute;
+            bottom: 5px;
+            left: 20px;
+            font-size: 0.8rem;
+            color: black;
+            display: flex;
+            gap: 15px;
+        }
+
+        .header .sub-links a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .container {
+            height: 100%;
+            width: 70%;
+            max-width: 500px;
+            background-color: white;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px;
+            margin-top: 90px;
+        }
+
+        .profile {
+            margin-top: 50px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #d8d8d8;
+        }
+
+        .button {
+            width: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 0;
+            background-color: #4dc4b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .profile .name {
+            font-size: 1.5rem;
+        }
+
+        .profile .email {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .footer-links {
+            margin-top: 30px;
+        }
+
+        .footer-links .horizontal-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            display: block;
+            color: #777;
+            margin-bottom: 6px;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #4dc4b4;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4dc4b4;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../static/images/logo.png" alt="로고" id="logoImage">
+        <div class="sub-links">
+            <a href="#">메인페이지</a>
+            <a href="#">점메추</a>
+            <a href="#">공지사항</a>
+            <a href="#">FAQ</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="profile">
+            <img src="https://via.placeholder.com/100" alt="사진 없음">
+            <button class="button">이미지 선택</button>
+            <div class="name">샘플 이름</div>
+            <div class="email">이메일: test01@naver.com</div>
+            <a href="#" class="button">수정하기</a>
+        </div>
+        <div class="footer-links">
+            <div class="horizontal-links">
+                <a href="#">비밀 번호 변경</a>|
+                <a href="#">회원탈퇴</a>
+            </div>
+            <a href="#">내가 쓴글</a>
+            <a href="#">리뷰 목록</a>
+            <a href="#">찜목록</a>
+        </div>
+    </div>
+    <button class="back-to-top">▲</button>
+    <script>
+        document.querySelector('.back-to-top').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
