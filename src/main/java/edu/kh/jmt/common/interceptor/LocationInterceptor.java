@@ -1,7 +1,5 @@
 package edu.kh.jmt.common.interceptor;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.util.List;
 import java.util.Map;
 

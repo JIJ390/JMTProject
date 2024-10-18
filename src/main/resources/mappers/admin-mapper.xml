@@ -19,4 +19,5 @@
 		FROM "LOCATION"
 	</select>
 	
+	
 </mapper>
