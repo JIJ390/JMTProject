@@ -8,5 +8,4 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class MyPageServiceImpl implements MyPageService{
 
-	private final MyPageService service;
 }
