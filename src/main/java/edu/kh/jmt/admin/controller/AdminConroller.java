@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.jmt.admin.dto.Menu;
 import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.service.AdminService;
 import lombok.RequiredArgsConstructor;
@@ -47,25 +48,19 @@ public class AdminConroller {
 	public String restaurantInsert(
 			@ModelAttribute Restaurant insertRestaurant,
 			@RequestParam("restaurantImages") List<MultipartFile> restaurantImages,
-			@RequestParam("menuName") List<String> menuNamelist,
-			@RequestParam("menuPrice") List<String> menuPricelist
+			@RequestParam("menuName") List<String> menuNameList,
+			@RequestParam("menuPrice") List<String> menuPriceList
 			) {
 		
 //		log.debug(" insertRestaurant : {}", insertRestaurant);
 //		log.debug(" menuNamelist : {}", menuNamelist);
 //		log.debug(" menuPricelist : {}", menuPricelist);
 		
-		// 입력된 메뉴 정보를 저장할 list 객체 생성
-		List<Map<String, String>> menuList = new ArrayList<Map<String, String>>();
-		
-		// 메뉴의 수 만큼 메뉴 정보 menuList 에 삽입
-		for (int i = 0; i < menuNamelist.size(); i++) {
-			menuList.add(Map.of(menuNamelist.get(i), menuPricelist.get(i)));
-		}
+
 		
 //		log.debug(" menuList : {}", menuList);
 		
-		int result = service.restaurantInsert(insertRestaurant, restaurantImages, menuList);
+		int result = service.restaurantInsert(insertRestaurant, restaurantImages, menuNameList, menuPriceList);
 		
 		return "admin/restaurantManage";
 	}

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import edu.kh.jmt.admin.dto.Menu;
 import edu.kh.jmt.admin.dto.Restaurant;
 import io.lettuce.core.dynamic.annotation.Param;
 
@@ -27,12 +28,17 @@ public interface AdminMapper {
 	/**
 	 * 가게 정보 등록
 	 * @param insertRestaurant
+	 * @return restaurantNo
+	 */
+	int restaurantInsert(Restaurant insertRestaurant);
+
+	/**
+	 * 메뉴 정보 등록
 	 * @param menuList
+	 * @param restaurantNo	: 해당 메뉴가 등록된 가게 번호
 	 * @return
 	 */
-	int restaurantInsert(
-			@Param("insertRestaurant") Restaurant insertRestaurant, 
-			@Param("menuList") List<Map<String, String>> menuList);
+	int menuListInsert(List<Menu> menuList);
 
 
 }

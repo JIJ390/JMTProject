@@ -20,8 +20,43 @@
 	</select>
 	
 	
+	
+	<!-- 식당 정보 등록 -->
 	<insert id="restaurantInsert">
-		<!-- 내일 하자!! -->
+		<selectKey order="BEFORE"
+				   resultType="_int"
+				   keyProperty="restaurantNo">
+			SELECT SEQ_RESTAURANT_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+		INSERT INTO "RESTAURANT"
+		VALUES(
+			#{restaurantNo},
+			#{restaurantName},
+			#{restaurantAddress},
+			#{restaurantTel},
+			#{restaurantImg1},
+			#{restaurantImg2},
+			DEFAULT,
+			#{locationNo},
+			#{categoryNo}
+		)
+
 	</insert>
 	
+	
+	 <insert id="menuListInsert">
+  		INSERT INTO "MENU"
+  		
+  		<foreach collection="list" item="menu"
+  				 open="(" close=")" separator=" UNION ALL ">
+  				 
+  			SELECT 
+  				SEQ_MENU_NO.NEXTVAL
+				#{menu.menuName}, 
+				#{menu.menuPrice},
+				#{menu.restaurantNo}
+			FROM DUAL
+  		</foreach>
+  	</insert>
 </mapper>

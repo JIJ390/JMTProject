@@ -1,6 +1,7 @@
 package edu.kh.jmt.admin.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.jmt.admin.dto.Menu;
 import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.mapper.AdminMapper;
 import edu.kh.jmt.common.util.FileUtil;
@@ -49,7 +51,8 @@ public class AdminServiceImpl implements AdminService{
 	public int restaurantInsert(
 			Restaurant insertRestaurant, 
 			List<MultipartFile> restaurantImages,
-			List<Map<String, String>> menuList) {
+			List<String> menuNameList,
+			List<String> menuPriceList) {
 		
 		// 파일 업로드 확인!!!!
 		if (restaurantImages.isEmpty()) {
@@ -72,7 +75,24 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		// 4) DB UPDATE
-		int result = mapper.restaurantInsert(insertRestaurant, menuList);
+		int restaurantNo = mapper.restaurantInsert(insertRestaurant);
+		
+		// 입력된 메뉴 정보를 저장할 list 객체 생성
+		List<Menu> menuList = new ArrayList<Menu>();
+		
+		// 메뉴의 수 만큼 메뉴 정보 menuList 에 삽입
+		for (int i = 0; i < menuNameList.size(); i++) {
+			
+			Menu menu = Menu.builder()
+											.menuName(menuNameList.get(i))
+											.menuPrice(menuPriceList.get(i))
+											.restaurantNo(restaurantNo)
+											.build();
+
+			menuList.add(menu);
+		}
+		
+		int result = mapper.menuListInsert(menuList);
 		
 		try {
 			// C:/uploadFiles/restaurantImg/  폴더가 없으면 생성
@@ -92,7 +112,7 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		
-		return result;
+		return 0;
 	}
 	
 }

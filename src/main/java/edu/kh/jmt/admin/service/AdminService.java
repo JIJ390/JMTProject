@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.jmt.admin.dto.Menu;
 import edu.kh.jmt.admin.dto.Restaurant;
 
 public interface AdminService {
@@ -27,7 +28,11 @@ public interface AdminService {
 	 * @param restaurantImges
 	 * @return
 	 */
-	int restaurantInsert(Restaurant insertRestaurant, List<MultipartFile> restaurantImages, List<Map<String, String>> menuList);
+	int restaurantInsert(
+			Restaurant insertRestaurant, 
+			List<MultipartFile> restaurantImages,
+			List<String> menuNameList,
+			List<String> menuPriceList);
 
 
 }
