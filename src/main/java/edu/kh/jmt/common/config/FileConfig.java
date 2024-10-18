@@ -55,6 +55,9 @@ public class FileConfig implements WebMvcConfigurer{
 																							// 연결될 서버 폴더 경로
 	
 	
+
+	
+	
 	
 	
 	//---------------------------------------------------------------------------

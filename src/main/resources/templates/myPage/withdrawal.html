@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 탈퇴</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        header {
+            background-color: #67c8c5;
+            padding: 10px 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu li {
+            display: inline-block;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 20px;
+        }
+
+        .withdrawal-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 800px;
+            height: 800px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+            text-align: left; /* 추가된 부분 */
+        }
+
+        p {
+            margin-left: 5px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox label {
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        button {
+            background-color: #67c8c5;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 25px;
+            width: 90%;
+        }
+
+        button:hover {
+            background-color: #5bb1b0;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .scroll-up {
+            background-color: #67c8c5;
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .scroll-up:hover {
+            background-color: #5bb1b0;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#">메인 페이지</a></li>
+                    <li><a href="#">잠메뉴</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="menu-icon">
+                <span>&#9776;</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="withdrawal-container">
+            <h2>회원 탈퇴</h2>
+            <p style="text-align: left;">현재 비밀번호를 입력하는 경우 탈퇴할 수 있습니다</p>
+            <form action="#" method="post">
+                <label for="password"></label>
+                <input type="password" id="password" name="password" placeholder="현재 비밀번호" required>
+
+                <label for="agreement">탈퇴 약관</label>
+                <textarea id="agreement" name="agreement" rows="25" disabled>아 여기에 뭐 입력해야하지
+뭔가 스크롤이 길게 보일 정도로 길게 써야할 것 같은데....
+모르겠다 애국가나 적어야겠다
+1. 동해물과 백두산이 마르고 닳도록
+하느님이 보우하사 우리나라 만세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+
+2. 남산 위에 저 소나무 철갑을 두른 듯
+바람 서리 불변함은 우리 기상일세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+
+3. 가을 하늘 공활한데 높고 구름 없이
+밝은 달은 우리 가슴 일편단심일세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+
+4. 이 기상과 이 맘으로 충성을 다하여
+괴로우나 즐거우나 나라 사랑하세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+
+4절까지 적어도 모자르네
+그래도 이제 끝이 보인다
+스크롤 내려가는것만 확인하면 되는 거니까
+오 스크롤 내려간다
+오케이 확인 완료
+                </textarea>
+
+                <div class="checkbox">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">위 약관에 동의합니다</label>
+                </div>
+
+                <button type="submit">탈퇴하기</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="scroll-up">
+            <span>&#8679;</span>
+        </div>
+    </footer>
+</body>
+</html>
