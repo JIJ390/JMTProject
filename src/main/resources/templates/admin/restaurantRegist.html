@@ -22,7 +22,10 @@
 
         <h1>가게 등록</h1>
 
-        <form action="insert">
+        <form method="POST" 
+              action="insert" 
+              id="restaurantResistFrm" 
+              enctype="multipart/form-data">
 
           <div class="img-area">
 
@@ -31,7 +34,7 @@
                 +
                 <img class="preview" src="">
               </label>
-              <input type="file" name="images" class="inputImage" id="img1" accept="image/*">
+              <input type="file" name="restaurantImages" class="inputImage" id="img1" accept="image/*">
               <span class="delete-image">&times;</span>
             </div>
 
@@ -40,7 +43,7 @@
                 +
                 <img class="preview" src="">
               </label>
-              <input type="file" name="images" class="inputImage" id="img2" accept="image/*">
+              <input type="file" name="restaurantImages" class="inputImage" id="img2" accept="image/*">
               <span class="delete-image">&times;</span>
             </div>
 
@@ -57,7 +60,7 @@
 
             <h3># 카테고리 선택</h3>
 
-            <div class="categoryChoose" >
+            <div class="inputChoose" >
               <th:block th:each= "category:${categoryList}">
                 <input type="radio" name="categoryNo"  th:value="${category.categoryNo}"  th:id="'category' + ${category.categoryNo}" >
                 <label th:for="'category' + ${category.categoryNo}" th:text="${category.categoryName}"></label>
@@ -66,9 +69,9 @@
 
             <h3># 지역 선택</h3>
 
-            <div class="categoryChoose" >
+            <div class="inputChoose" >
               <th:block th:each= "location:${locationList}">
-                <input type="radio" name="categoryNo"  th:value="${location.locationNo}"  th:id="'location' + ${location.locationNo}" >
+                <input type="radio" name="locationNo"  th:value="${location.locationNo}"  th:id="'location' + ${location.locationNo}" >
                 <label th:for="'location' + ${location.locationNo}" th:text="${location.locationName}"></label>
               </th:block>
             </div>
@@ -109,20 +112,20 @@
             <div class="adress-area">
     
               <div class="restaurant-address">
-                <input type="text" name="memberAddress"
+                <input type="text" name="restaurantAddress"
                 placeholder="우편번호" id="postcode"
                 th:value="${postcode}">
                 <button type="button" id="findAddressBtn">검색</button>
               </div>
     
               <div class="restaurant-address">
-                <input type="text" name="memberAddress"
+                <input type="text" name="restaurantAddress"
                   placeholder="도로명/지번 주소" id="address"
                   th:value="${address}">
               </div>
     
               <div class="restaurant-address">
-                <input type="text" name="memberAddress"
+                <input type="text" name="restaurantAddress"
                   placeholder="상세 주소" id="detailAddress"
                   th:value="${detailAddress}">
               </div>
