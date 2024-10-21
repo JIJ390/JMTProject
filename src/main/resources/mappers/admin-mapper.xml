@@ -76,4 +76,25 @@
 		ORDER BY MEMBER_NO ASC
   	</select>
   	
+  	
+  	
+  	<select id="selectMemberStatus"
+  			resultType="map">
+  	SELECT
+		(SELECT COUNT(*)
+		 FROM "MEMBER"
+		 WHERE MEMBER_DEL_FL = 'N'
+		 AND   MEMBER_AUTH IN (0, 2)) AS "activeMember",
+		(SELECT COUNT(*)
+		 FROM "MEMBER") AS "totalMember",	
+		(SELECT COUNT(*)
+		 FROM "MEMBER"
+		 WHERE MEMBER_AUTH = 1) AS "blockMember",
+		(SELECT COUNT(*)
+		 FROM "MEMBER"
+		 WHERE MEMBER_DEL_FL = 'N') AS "secssionMember"
+	FROM
+	DUAL
+  	</select>
+  	
 </mapper>

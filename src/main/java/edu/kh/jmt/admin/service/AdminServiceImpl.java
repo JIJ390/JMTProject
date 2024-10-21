@@ -128,4 +128,9 @@ public class AdminServiceImpl implements AdminService{
 		return mapper.selectMemberList();
 	}
 	
+	
+	@Override
+	public Map<String, String> selectMemberStatus() {
+		return mapper.selectMemberStatus();
+	}
 }

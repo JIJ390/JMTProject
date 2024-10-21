@@ -1,5 +1,11 @@
 const memberList = document.querySelector("#memberList");
 
+
+/**
+ * 회원 정보 불러오는 함수
+ * 
+ * 검색 조건, 페이지네이션 추가해야 함!!
+ */
 const selectMemberList = () => {
 
   fetch("/admin/selectMemberList")
@@ -62,8 +68,33 @@ const selectMemberList = () => {
 };
 
 
+/**
+ * 현재 회원 현황 불러오는 함수
+ */
+const selectMemberStatus = () => {
+
+  fetch("/admin/selectMemberStatus")
+  .then(response => {
+    if (response.ok) return response.json();
+    throw new Error("조회 오류");
+  })
+  .then(memberStatus => {
+
+    console.log(memberStatus);
+
+    // const totalMember = document.querySelector("#totalMember");
+    // const activeMember = document.querySelector("#activeMember");
+    // const blockMember = document.querySelector("#blockMember");
+    // const secessionMember = document.querySelector("#secessionMember");
+    
+  })
+  .catch(err => console.error(err));
+};
+
+
 
 /* 페이지 로딩(렌더링) 끝난 후 수행 */
 document.addEventListener("DOMContentLoaded", () => {
   selectMemberList();
+  selectMemberStatus();
 })

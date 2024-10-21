@@ -19,6 +19,7 @@ import ch.qos.logback.core.model.Model;
 import edu.kh.jmt.admin.dto.Menu;
 import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.service.AdminService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -93,7 +94,7 @@ public class AdminConroller {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/selectMemberList")
+	@GetMapping("selectMemberList")
 	@ResponseBody
 	public List<Member> selectMemberList(
 		@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
@@ -104,4 +105,19 @@ public class AdminConroller {
 		return service.selectMemberList();
 	}
 
+	
+	/**
+	 * 회원 현황 
+	 * @return
+	 */
+	@GetMapping("selectMemberStatus")
+	@ResponseBody
+	public Map<String, String> selectMemberStatus() {
+		
+		Map<String, String> memberStatus = service.selectMemberStatus();
+		
+		log.debug("memberStatus : {}", memberStatus);
+		
+		return memberStatus;
+	}
 }

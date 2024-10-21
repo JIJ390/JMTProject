@@ -42,5 +42,12 @@ public interface AdminService {
 	 */
 	List<Member> selectMemberList();
 
+	
+	/**
+	 * 회원 현황 조회
+	 * @return
+	 */
+	Map<String, String> selectMemberStatus();
+
 
 }
