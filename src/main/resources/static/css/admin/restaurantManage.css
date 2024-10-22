@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'LeeSeoyun';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{font-family: 'LeeSeoyun';}
+
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -20,8 +30,8 @@ main{
 }
 
 section{  
-  border: 1px solid black; /* 임시 */
-
+  /* border: 1px solid black; */
+ /* 임시 */
   height: 100%;
 
 }

@@ -2,15 +2,19 @@ package edu.kh.jmt.admin.service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.jmt.admin.dto.Member;
 import edu.kh.jmt.admin.dto.Menu;
+import edu.kh.jmt.admin.dto.Pagination;
 import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.mapper.AdminMapper;
 import edu.kh.jmt.common.util.FileUtil;
@@ -75,7 +79,9 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		// 4) DB UPDATE
-		int restaurantNo = mapper.restaurantInsert(insertRestaurant);
+		int result1 = mapper.restaurantInsert(insertRestaurant);
+		
+		int restaurantNo = insertRestaurant.getRestaurantNo();
 		
 		// 입력된 메뉴 정보를 저장할 list 객체 생성
 		List<Menu> menuList = new ArrayList<Menu>();
@@ -88,11 +94,13 @@ public class AdminServiceImpl implements AdminService{
 											.menuPrice(menuPriceList.get(i))
 											.restaurantNo(restaurantNo)
 											.build();
+			
+			log.debug("menu : {}", menu.toString());
 
 			menuList.add(menu);
 		}
 		
-		int result = mapper.menuListInsert(menuList);
+		int result2 = mapper.menuListInsert(menuList);
 		
 		try {
 			// C:/uploadFiles/restaurantImg/  폴더가 없으면 생성
@@ -115,4 +123,60 @@ public class AdminServiceImpl implements AdminService{
 		return 0;
 	}
 	
+	/////////////////////////////////////////////////////////////////////////
+	//회원 관리 페이지
+	
+	// 회원 정보 모두 조회
+	@Override
+	public Map<String, Object> selectMemberList(Map<String, String> condition) {
+		
+		int cp = Integer.parseInt(condition.get("cp")); 
+		
+		// 검색 조건에 맞는 회원 수 조회
+		int searchCount = mapper.getSearchCount(condition);
+//		log.debug("count : {}", searchCount);
+		
+		// 페이지네이션 객체 생성
+		Pagination pagination = new Pagination(cp, searchCount);
+		
+		int limit = pagination.getLimit();  // limit  : 한 페이지에 보여질 게시글의 최대 개수
+		int offset = (cp - 1) * limit;			// offset : 몇 개의 게시글을 건너뛰고 조회할 건지에 대한 값
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		
+		List<Member> memberList = mapper.selectMemberList(condition, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put(("memberList"), memberList);
+		map.put(("pagination"), pagination);		
+		
+		return map;
+	}
+	
+	
+	// 회원 현황 조회
+	@Override
+	public Map<String, String> selectMemberStatus() {
+		return mapper.selectMemberStatus();
+	}
+	
+	// 회원 차단 여부 변경
+	@Override
+	public int changeMemberBlock(int memberNo) {
+		return mapper.changeMemberBlock(memberNo);
+	}
+	
+	
+	// 회원 탈퇴 여부 변경
+	@Override
+	public int changeMemberSecession(int memberNo) {
+		return mapper.changeMemberSecession(memberNo);
+	}
+	
+	
+	// 임시로그인
+	@Override
+	public Member directLogin(int memberNo) {
+		return mapper.directLogin(memberNo);
+	}
 }

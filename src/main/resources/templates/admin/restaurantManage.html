@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>가게 관리 페이지</title>
   <link rel="stylesheet" href="/css/admin/restaurantManage.css">
+  <link rel="stylesheet" href="/css/common/header.css">
 </head>
 <body>
 
-  <header>
-    헤더
-  </header>
+  <th:block th:replace="~{common/header}"></th:block>
   
   <main>
-    <section class="left-section">사이드 메뉴</section>
+    <th:block th:replace= "~{admin/adminSide}"></th:block>
     <section class="main-section">
 
       <h1>가게 관리 페이지</h1>
@@ -75,7 +74,7 @@
       </div>
 
       <div class="btn-area">
-        <button class="restaurant-regis-btn">가게 등록</button>
+        <button class="restaurant-regist-btn" id="restaurantRegistBtn">가게 등록</button>
       </div>
 
       <div class="pagination-area">
@@ -117,5 +116,6 @@
 
 
 
+  <script src="/js/admin/restaurantManage.js"></script>
 </body>
 </html>
