@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ</title>
+  <title>공지사항</title>
   <!-- <link rel="stylesheet" href="/css/faq/faq.css"> -->
 
   <style>
@@ -14,6 +14,7 @@
       align-items: center;
       justify-content: center;
       justify-content: space-around;
+      box-sizing: border-box;
     }
     #panel {
       padding: 50px;
@@ -24,12 +25,14 @@
 
     #fix-area{
       width: 800px;
-      height: 600px;
+      height: 80vh;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       justify-content: space-around;
-      align-items: center
+      align-items: center;
+      box-sizing: border-box;
+      margin: 20px;
     }
 
     #faq-container{
@@ -37,6 +40,7 @@
       flex-direction: column;
       display: block;
       justify-content: space-between
+      
     }
 
     /* hr 효과 */
@@ -44,6 +48,25 @@
       border-width:1px 0 0 0; 
       border-style:solid; 
       border-color:#bbb;
+    }
+
+    /* 페이지 목록 */
+    .list{
+      align-items: center;
+      top: 28px;
+    }
+
+    /* new 추가 */
+    .btn > div{
+      position: relative;
+    }
+
+    .new {
+      font-size: 12px;
+      font-family: 'Lato', sans-serif;
+      position: absolute;
+      right: 0px;
+      top: 0.9px;
     }
 
     /* btn 효과 */
@@ -95,7 +118,9 @@
   flex-direction: row;
   font-weight: bold;
 }
-  </style>
+
+
+  </style>  
 </head>
 
 <body>
@@ -105,40 +130,64 @@
       <!-- 감싸는 배경 -->
 
       <section id="fix-area">
+        <div class="header">
+          <img src="/static/images/logo.png" alt="로고" id="logoImage">
+          <div class="sub-links">
+              <span>메인페이지</span>
+              <span>점메추</span>
+              <span>공지사항</span>
+              <span>FAQ</span>
+          </div>
+      </div>
         <section id="faq-container">
-          <span><h3>자주 하는 질문 BEST 5</h3></span>
+          <span><h3>공지사항</h3></span>
           <hr>
           <br>
           <!-- 내용 정렬 -->
            <div>
               <span><button class="btn">
-                <div>Q</div>
-                <div>사이트 이용 어떻게 해요?</div>
-                <div><span class="open-close">▼</span></div>
+                <div>5</div>
+                <div>공지사항 게시글 예시</div>
+                <div><span class="new">new</span></div>
               </button></span>
-              <div id="panel">A1. 그렇게 되었다. </div>
            </div>
            <br>
            <div>
-            <span><button class="btn">Q2. 눌러도 반응 없음</button></span>
-            <div id="panel">A1. 그렇게 되었다. </div>
-           </div>
+            <span><button class="btn">
+              <div>4</div>
+              <div>공지사항 게시글 예시</div>
+              <div></div>
+            </button></span>
+         </div>
            <br>
            <div>
-            <span><button class="btn">Q3. 대충 위치 보려고</button></span>
-            <div id="panel">A3. 그렇게 되었다. </div>
-           </div>
+            <span><button class="btn">
+              <div>3</div>
+              <div>공지사항 게시글 예시</div>
+              <div></div>
+            </button></span>
+         </div>
            <br>
            <div>
-            <span><button class="btn">Q4. 놓은 것이라</button></span>
-            <div id="panel">A4. 그렇게 되었다. </div>
-           </div>
+            <span><button class="btn">
+              <div>2</div>
+              <div>공지사항 게시글 예시</div>
+              <div></div>
+            </button></span>
+         </div>
            <br>
            <div>
-            <span><button class="btn">Q5. 테스트용</button></span>
-            <div id="panel">A5. 그렇게 되었다. </div>
-           </div>
+            <span><button class="btn">
+              <div>1</div>
+              <div>공지사항 게시글 예시</div>
+              <div></div>
+            </button></span>
+         </div>
+
         </section>
+        <div class="list">
+          <span> << < 1 2 3 4 5 6 7 8 9 10 > >></span>
+        </div>
       </section>
           
     </section>
@@ -153,19 +202,6 @@
   <!-- <script src="/js/faq/faq.js"></script> -->
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <script>
-    $("span[name='toggle-control']").click(function () {
-      $('#target').toggle();
-      $("span[name='toggle-control']").toggle();
-    });
-
-    $(document).ready(function () {
-      $(".btn").click(function () {
-        $("#panel").slideToggle(100);
-      });
-    });
-
-  </script>
 </body>
 
 </html>
