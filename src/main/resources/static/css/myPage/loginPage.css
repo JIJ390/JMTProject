@@ -1,24 +1,30 @@
+body {
+  overflow: hidden;
+}
 
+main {
+  height: 100%; /* 메인 컨테이너가 전체 화면 높이를 사용 */
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+}
 
 .login-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  height: 100%; /* 부모 컨테이너의 전체 높이 사용 */
   width: 100%;
-  margin-top: 10%;
 }
 
 .login-box {
-  margin-left: 400%;
   width: 300px;
   padding: 32px;
-  margin-bottom: 50%;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  margin-bottom: 150px;
 }
 
 .login-box input[type="email"],

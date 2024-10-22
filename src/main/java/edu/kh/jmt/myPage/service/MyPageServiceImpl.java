@@ -72,5 +72,12 @@ public class MyPageServiceImpl implements MyPageService{
 		return mapper.emailCheck(email);
 	}
 	
+
+	// 이름 중복 검사
+	@Override
+	public int nameCheck(String memberName) {
+		return mapper.nameCheck(memberName);
+	}
+	
 	
 }

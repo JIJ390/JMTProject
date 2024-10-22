@@ -39,4 +39,13 @@
 		AND   MEMBER_DEL_FL = 'N'
 	</select>
 
+
+
+	<!-- 이름 중복 검사 -->
+	<select id="nameCheck" resultType="_int">
+		SELECT COUNT(*)
+		FROM "MEMBER"
+		WHERE MEMBER_NAME = #{memberName}
+		AND	  MEMBER_DEL_FL = 'N'
+	</select>
 </mapper>

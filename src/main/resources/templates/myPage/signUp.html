@@ -23,7 +23,7 @@
     <!-- Main Content -->
     <main>
             <div class="signup-container">
-                <form action="signUp" method="POST" name="signUpForm" id="signUp">
+                <form action="signUp" method="POST" name="signUpForm" id="signUpForm">
                     <div class="signup-box">
                         <h2>회원 가입</h2>
                         <div style="display: flex; width: 100%;">
@@ -38,16 +38,16 @@
                         </div>
                         <span class="signup-message" id="authKeyMessage" style="display: flex;"></span>
                         <div style="display: flex; width: 130%;">
-                            <input type="password" name="memberPw" placeholder="비밀번호">
+                            <input type="password" name="memberPw" id="memberPw" maxlength="20" placeholder="비밀번호">
                         </div>
                         <div style="display: flex; width: 130%;">
-                            <input type="password" name="memberPwConfirm" placeholder="비밀번호 확인">
+                            <input type="password" name="memberPwConfirm" id="memberPwConfirm" maxlength="20" placeholder="비밀번호 확인">
                         </div>
-                        <div style="text-align: left; color: #acacac; font-size: 0.8rem; margin-left: 1%; margin-bottom: 2%;">영어,숫자,특수문자 1글자 이상, 6~20자 사이로 입력해주세요.</div>
+                        <div id="pwMessage" style="text-align: left; font-size: 0.8rem; margin-left: 1%; margin-bottom: 2%;">영어,숫자,특수문자 1글자 이상, 6~20자 사이로 입력해주세요.</div>
                         <div style="display: flex; width: 130%;">
-                            <input type="text" name="memberName" placeholder="이름">
+                            <input type="text" name="memberName" id="memberName" placeholder="이름">
                         </div>
-                        <div style="text-align: left; color: #acacac; font-size: 0.8rem; margin-left: 1%; margin-bottom: 2%;">한글,영어,숫자로만 3~10글자</div>
+                        <div id="nameMessage" style="text-align: left; font-size: 0.8rem; margin-left: 1%; margin-bottom: 2%;">한글,영어,숫자로만 3~10글자</div>
                         <button style="margin-top: 5%;">회원가입</button>
                         <div class="signup-links">
                             <a href="/myPage/loginPage">이미 회원이신가요?</a>

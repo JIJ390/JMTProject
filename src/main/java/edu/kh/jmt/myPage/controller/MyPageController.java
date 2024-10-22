@@ -116,6 +116,19 @@ public class MyPageController {
 	}
 	
 	
+	/** 이름 중복 검사 (비동기)
+	 * @param memberName
+	 * @return 0 : 중복 X, 1 : 중복 O
+	 */
+	@ResponseBody
+	@GetMapping("nameCheck")
+	public int nameCheck(
+			@RequestParam("memberName")  String memberName) {
+		
+		
+		return service.nameCheck(memberName);
+	}
+	
 	
 		
 	}

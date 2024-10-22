@@ -24,4 +24,10 @@ public interface MyPageService{
 	 */
 	int emailCheck(String email);
 
+	/** 이름 중복 검사
+	 * @param memberName
+	 * @return count
+	 */
+	int nameCheck(String memberName);
+
 }
