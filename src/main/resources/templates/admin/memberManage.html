@@ -12,8 +12,10 @@
   <th:block th:replace="~{common/header}"></th:block>
   
   <main>
-    <section class="left-section">사이드 메뉴</section>
+    <th:block th:replace= "~{admin/adminSide}"></th:block>
     <section class="main-section">
+
+      [[${session.loginMember}]]
 
       <h1>회원 관리 페이지</h1>
 
@@ -30,20 +32,38 @@
           <div id="activeMember">0</div>
         </div>
         <div class="container-1">
-          <div id="blockMember">차단 회원 수</div>
-          <div>0</div>
+          <div>차단 회원 수</div>
+          <div id="blockMember">0</div>
         </div>
         <div class="container-1">
-          <div id="secessionMember">탈퇴 회원 수</div>
-          <div>0</div>
+          <div>탈퇴 회원 수</div>
+          <div id="secessionMember">0</div>
         </div>
       </div>
 
 
-      <div class="btn-area">
-        <button>전체 회원</button>
-        <button>차단 회원</button>
-        <button>탈퇴 회원</button>
+      <div class="search-area">
+        <input type="radio" name="searchCondition" id="totalMemberInput" value="0" checked></input>
+        <label for="totalMemberInput">전체 회원</label>
+
+        <input type="radio" name="searchCondition" id="blockMemberInput" value="1"></input>
+        <label for="blockMemberInput">차단 회원</label>
+
+        <input type="radio" name="searchCondition" id="recessionMemberInput" value="Y"></input>
+        <label for="recessionMemberInput">탈퇴 회원</label>
+
+
+        <br><br>
+
+        <select name="key" id="searchKey">
+          <option value="n">번호</option>
+          <option value="e">이메일</option>
+          <option value="nn">이름</option>
+        </select>
+
+        <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+        <button id="searchBtn" class="aaa">검색</button>
 
       </div>
 
@@ -54,7 +74,7 @@
             <th>이름</th>
             <th>이메일</th>
             <th>회원 상태</th>
-            <th colspan="2">-</th>
+            <th colspan="3">-</th>
           </tr>
         </thead>
         <tbody id="memberList">
@@ -65,22 +85,7 @@
       </table>
 
 
-      <div class="pagination-area">
-
-        <ul class="pagination">
-          <li><a href="#">&lt;&lt;</a></li>
-          <li><a href="#">&lt;</a></li>
-
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-
-          <li><a href="#">&gt;</a></li>
-          <li><a href="#">&gt;&gt;</a></li>
-        </ul>
-
+      <div id="paginationArea" class="pagination-area">
       </div>
 
     </section>

@@ -1,11 +1,11 @@
 package edu.kh.jmt.admin.service;
 
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.jmt.admin.dto.Member;
 import edu.kh.jmt.admin.dto.Menu;
 import edu.kh.jmt.admin.dto.Restaurant;
 
@@ -38,9 +38,10 @@ public interface AdminService {
 	
 	/**
 	 * 회원 정보 모두 불러오기
+	 * @param condition 
 	 * @return
 	 */
-	List<Member> selectMemberList();
+	Map<String, Object> selectMemberList(Map<String, String> condition);
 
 	
 	/**
@@ -48,6 +49,32 @@ public interface AdminService {
 	 * @return
 	 */
 	Map<String, String> selectMemberStatus();
+
+	
+	
+	/**
+	 * 회원 차단 여부 변경
+	 * @param memberNo
+	 * @return
+	 */
+	int changeMemberBlock(int memberNo);
+
+	
+	/**
+	 * 회원 탈퇴 여부 변경
+	 * @param memberNo
+	 * @return
+	 */
+	int changeMemberSecession(int memberNo);
+
+	
+	
+	/**
+	 * 임시 로그인
+	 * @param memberNo
+	 * @return
+	 */
+	Member directLogin(int memberNo);
 
 
 }

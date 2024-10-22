@@ -18,7 +18,10 @@ public class Member {
 	private int memberNo;
 	private String memberName;
 	private String memberEmail;
+	private String memberPw;
+	private String profileImg;
 	private String memberDelFl;
 	private String memberAuth;
+	private String memberDate;
 
 }

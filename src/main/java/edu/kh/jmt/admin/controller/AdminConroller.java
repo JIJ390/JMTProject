@@ -1,30 +1,30 @@
 package edu.kh.jmt.admin.controller;
 
-import java.lang.reflect.Member;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import ch.qos.logback.core.model.Model;
-import edu.kh.jmt.admin.dto.Menu;
+import edu.kh.jmt.admin.dto.Member;
 import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.service.AdminService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("admin")
+@SessionAttributes("loginMember")
 @RequiredArgsConstructor
 @Slf4j
 public class AdminConroller {
@@ -94,15 +94,17 @@ public class AdminConroller {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("selectMemberList")
+	@PostMapping("selectMemberList")
 	@ResponseBody
-	public List<Member> selectMemberList(
-		@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-		Model model) {
+	public Map<String, Object> selectMemberList(
+		@RequestBody Map<String, String> condition) {
+		
+		
+		log.debug("condition : {}", condition);
 		
 		// 페이지 네이션 관련 클래스 생성 후 cp 사용 예정
 		
-		return service.selectMemberList();
+		return service.selectMemberList(condition);
 	}
 
 	
@@ -113,11 +115,68 @@ public class AdminConroller {
 	@GetMapping("selectMemberStatus")
 	@ResponseBody
 	public Map<String, String> selectMemberStatus() {
+
 		
-		Map<String, String> memberStatus = service.selectMemberStatus();
 		
-		log.debug("memberStatus : {}", memberStatus);
+		Map<String, String> map = service.selectMemberStatus();
 		
-		return memberStatus;
+//		log.debug("map : {}", map);
+		
+		return map;
 	}
+	
+	
+	/**
+	 * 회원 차단 여부 변경
+	 * @param memberNo
+	 * @return
+	 */
+	@PutMapping("memberBlock")
+	@ResponseBody
+	public int changeMemberBlock(
+			@RequestBody int memberNo) {
+		
+		return service.changeMemberBlock(memberNo);
+		
+	}
+	
+	
+	/**
+	 * 회원 탈퇴 상태 변경
+	 * @param memberNo
+	 * @return
+	 */
+	@PutMapping("memberSecession")
+	@ResponseBody
+	public int changeMemberSecession (
+			@RequestBody int memberNo) {
+		
+		
+		return service.changeMemberSecession(memberNo);
+	}
+	
+	
+	
+	/**
+	 * 다이렉트 로그인//// 임시 삭제 예정
+	 * @param memberNo
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("directLogin")
+	public String directLogin(
+			@RequestParam("memberNo") int memberNo,
+			Model model
+			) {
+		Member loginMember = service.directLogin(memberNo);
+		
+		log.debug("member : {}", loginMember);
+		
+		// @SessionAttributes({"loginMember"})
+		// 로그인된 회원 정보를 session 에 추가
+		model.addAttribute("loginMember", loginMember);
+		
+		return "redirect:/admin/member/manage";
+	}
+	
 }
