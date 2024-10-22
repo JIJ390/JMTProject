@@ -1,0 +1,120 @@
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.signup-box {
+  width: 600px;
+  padding: 32px;
+  margin-bottom: 15%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.signup-box input[type="text"],
+.signup-box input[type="email"],
+.signup-box input[type="password"],
+.signup-box .inline-button {
+  height: 38px;
+  padding: 8px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.signup-box input[type="text"],
+.signup-box input[type="email"],
+.signup-box input[type="password"] {
+  width: calc(75% - 8px);
+  text-align: left;
+}
+
+.signup-box .inline-button {
+  margin-left: 8px;
+  background-color: #4dc4b4;
+  color: white;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: auto;
+  padding: 0 20px;
+  text-align: left;
+}
+
+.signup-box .inline-button:nth-child(2) {
+  width: auto;
+  padding: 0 20px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.signup-box .inline-button:hover {
+  background-color: #3b8277;
+}
+
+.signup-box label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.signup-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4dc4b4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.signup-box button:hover {
+  background-color: #3b8277;
+}
+
+.signup-links {
+  margin-top: 12px;
+  font-size: 0.8rem;
+}
+
+.signup-links a {
+  color: #4da89b;
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+.signup-links a:hover {
+  text-decoration: underline;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4dc4b4;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #333;
+  text-align: left; /* 추가된 부분 */
+}
+
+/* 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }
