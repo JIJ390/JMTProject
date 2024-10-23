@@ -1,0 +1,148 @@
+/* 기본 스타일 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+} */
+
+
+/* 검색바 스타일 */
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  
+}
+
+.search-container input {
+  width: 200px;
+  padding: 5px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+/* 게시글 스타일 */
+.post-container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.post {
+  background-color: #FFFFFF;
+  border-radius: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  position: relative;
+  width: 60%;
+  height: 400px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.post-title {
+  font-weight: bold;
+}
+
+.post-time {
+  margin-left: auto;
+  color: gray;
+  font-size: 12px;
+}
+
+.post-content {
+  margin-top: 10px;
+  color: #333;
+  width: 100%;
+  display: flex;
+}
+
+.imageSize{
+  margin-top: 30px;
+  height: 200px;
+  width: 200px;
+}
+
+.contentCss{
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* 댓글 보기 토글 버튼 */
+.comment-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #3b3d3d;
+  font-weight: bold;
+}
+
+/* 삼각형 아이콘 */
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #6EC3C2;
+  margin-right: 5px;
+}
+
+/* 글쓰기 버튼 스타일 */
+.writeBtn {
+  right: 20px;
+  background-color: #6EC3C2;
+  width: 8%;
+  margin-left: 50%;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  
+}
+
+/* 상단 버튼*/
+#topBtn{
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  border-radius: 50%;
+  border: none;
+  padding: 40;
+  color: #6EC3C2;
+  width: 60px;
+  height: 60px;
+  font-size:40px;
+  cursor: pointer;
+}

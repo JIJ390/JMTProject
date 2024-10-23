@@ -53,21 +53,29 @@ public class FileConfig implements WebMvcConfigurer{
 	@Value("${my.profile.resource-location}")
 	private String profileResourceLocation; 		// 프로필 이미지 요청 시 
 																							// 연결될 서버 폴더 경로
+  
+  
 	@Value("${my.restaurant.resource-handler}")
-	private String restaurantResourceHandler;			// 프로필 이미지 요청 주소
+	private String restaurantResourceHandler;			// 가게 이미지 요청 주소
 	
 	@Value("${my.restaurant.resource-location}")
-	private String restaurantResourceLocation; 		// 프로필 이미지 요청 시 
+	private String restaurantResourceLocation; 		// 가게 이미지 요청 시 
 	// 연결될 서버 폴더 경로
 	
+  
 	@Value("${my.review.resource-handler}")
-	private String reviewResourceHandler;			// 프로필 이미지 요청 주소
+	private String reviewResourceHandler;			// 리뷰 이미지 요청 주소
 	
 	@Value("${my.review.resource-location}")
-	private String reviewResourceLocation; 		// 프로필 이미지 요청 시 
+	private String reviewResourceLocation; 		//  이미지 요청 시 
 	// 연결될 서버 폴더 경로
-	
 
+	
+	@Value("${my.board.resource-handler}")
+	private String boardResourceHandler;
+	
+	@Value("${my.board.resource-location}")
+	private String boardResourceLocation; 
 	
 	
 	
@@ -130,6 +138,10 @@ public class FileConfig implements WebMvcConfigurer{
 		
 		
 		registry
+		.addResourceHandler(boardResourceHandler)					// /images/board/**
+		.addResourceLocations(boardResourceLocation);
+    
+    registry
 		.addResourceHandler(reviewResourceHandler)					// /images/review/**
 		.addResourceLocations(reviewResourceLocation);			// file:///C:/uploadFiles/review/
 		
