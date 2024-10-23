@@ -1,11 +1,16 @@
-@font-face {
+/* @font-face {
   font-family: 'LeeSeoyun';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
-*{font-family: 'LeeSeoyun';}
+*{font-family: 'LeeSeoyun';} */
+
+
+th {font-family: 'NEXON Lv1 Gothic OTF';}
+.memberStatus-head {font-family: 'NEXON Lv1 Gothic OTF';}
+
 
 *{
   box-sizing: border-box;
@@ -244,7 +249,6 @@ h1 {
 }
 
 .current {
-
 
   font-weight: bold;
   background-color: var(--main-color);

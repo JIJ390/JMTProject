@@ -37,6 +37,10 @@ public class AdminServiceImpl implements AdminService{
 	private String restaurantFolderPath; 
 	
 	
+	
+	////////////////////////////////////////////////
+	// 가게 관리 관련 메서드
+	
 	// 카테고리 리스트 불러오기
 	@Override
 	public List<Map<String, String>> selectCategoryList() {
@@ -50,7 +54,63 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	
+	// 검색 아닐 때 가게 정보 가져오기
+	@Override
+	public Map<String, Object> selectRestaurantList(int cp) {
+		
+		// 폐업하지 않은 가게 수 조회
+		int restaurantListCount = mapper.getRestaurantListCount();
+		
+		Pagination pagination = new Pagination(cp, restaurantListCount);
+		
+		int limit = pagination.getLimit(); 	// 10
+		int offset = (cp - 1) * limit;			// 0
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Restaurant> restaurantList = mapper.selectRestaurantList(rowBounds);
+		
+		// 4. 목록 조회 결과 + Pagination 객체 Map 으로 묶어서 반환
+		Map<String, Object> map = new HashMap<>();
+		map.put(("restaurantList"), restaurantList);
+		map.put(("pagination"), pagination);		
+		
+		return map;
+	}
 	
+	
+	@Override
+	public Map<String, Object> restaurantSearchList(int cp, Map<String, Object> paramMap) {
+	// 1. 지정된 게시판에서 검색 조건이 일치하는 게시글이 
+			//    몇 개나 존재하는지 조회
+		
+			log.debug("aaa : {}", paramMap);
+		
+			int searchCount = mapper.getSearchCount(paramMap);
+
+			
+			// 2. Pagination 객체 생성하기
+			Pagination pagination = new Pagination(cp, searchCount);
+			
+			
+			//3. DB에서 cp(조회 하려는 페이지)에 해당하는 행을 조회
+			int limit = pagination.getLimit(); // 10
+			int offset = (cp - 1) * limit;
+			RowBounds rowBounds = new RowBounds(offset, limit);
+			
+			
+			// 4. 검색 결과 + Pagination 객체 Map 으로 묶어서 반환
+			List<Restaurant> restaurantList = mapper.restaurantSearchList(paramMap, rowBounds);
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put(("restaurantList"), restaurantList);
+			map.put(("pagination"), pagination);		// 3 줄
+			
+			return map;
+	}
+	
+	
+	// 가게 등록
 	@Override
 	public int restaurantInsert(
 			Restaurant insertRestaurant, 
@@ -123,6 +183,19 @@ public class AdminServiceImpl implements AdminService{
 		return 0;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/////////////////////////////////////////////////////////////////////////
 	//회원 관리 페이지
 	
@@ -133,7 +206,7 @@ public class AdminServiceImpl implements AdminService{
 		int cp = Integer.parseInt(condition.get("cp")); 
 		
 		// 검색 조건에 맞는 회원 수 조회
-		int searchCount = mapper.getSearchCount(condition);
+		int searchCount = mapper.getMemberSearchCount(condition);
 //		log.debug("count : {}", searchCount);
 		
 		// 페이지네이션 객체 생성

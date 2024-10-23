@@ -28,6 +28,36 @@ public interface AdminMapper {
 	
 	
 	/**
+	 * 폐업하지 않은 가게 전체 수 조회
+	 * @return
+	 */
+	int getRestaurantListCount();
+	
+	
+	/**
+	 * 검색 아닌 경우 전체 가게 리스트 조회
+	 * @param rowBounds
+	 * @return restaurantList
+	 */
+	List<Restaurant> selectRestaurantList(RowBounds rowBounds);
+	
+	/**
+	 * 검색 조건에 맞는 전체 가게 수 조회
+	 * @param paramMap
+	 * @return
+	 */
+	int getSearchCount(Map<String, Object> paramMap);
+	
+	/**
+	 * 검색 조건에 맞는 전체 가게 목록 조회
+	 * @param paramMap
+	 * @param rowBounds
+	 * @return restaurantList
+	 */
+	List<Restaurant> restaurantSearchList(Map<String, Object> paramMap, RowBounds rowBounds);
+	
+	
+	/**
 	 * 가게 정보 등록
 	 * @param insertRestaurant
 	 * @return restaurantNo
@@ -42,6 +72,21 @@ public interface AdminMapper {
 	 */
 	int menuListInsert(List<Menu> menuList);
 
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	///////////////////////////////////////////////////
+	// 회원 관리 페이지
+	
+	
+	
 	
 	/** 
 	 * 검색 조건에 맞는 회원 정보 모두 조회
@@ -81,7 +126,7 @@ public interface AdminMapper {
 	 * @param condition
 	 * @return
 	 */
-	int getSearchCount(Map<String, String> condition);
+	int getMemberSearchCount(Map<String, String> condition);
 
 	
 	/**
@@ -90,6 +135,14 @@ public interface AdminMapper {
 	 * @return
 	 */
 	Member directLogin(int memberNo);
+
+
+
+
+
+
+
+
 	
 	
 	
