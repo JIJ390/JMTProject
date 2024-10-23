@@ -23,11 +23,9 @@ html, body{
   width: 100%;
   height: 100px;
   padding: 30px;
+  display: flex;
 }
 
-.contentTitle > p{
-  font-size: 20px;
-}
 
 
 
@@ -37,12 +35,12 @@ html, body{
 }
 
 .addButton{
-  width: 50%;
+  width: 60%;
   display: flex;
   margin: auto;
-  margin-bottom: 100px;
   display: flex;
   justify-content: space-around;
+  padding-bottom: 40px;
 }
 
 .addButton > button{
@@ -50,10 +48,13 @@ html, body{
   height: 70px;
 
   background-color: rgb(255, 255, 255);
-  border: 1px solid black;
+  border: 1px solid gray;
 
   font-size : 20px;
   border-radius: 20px;
+
+  
+  transition: all 0.2s ;
 
 }
 
@@ -63,8 +64,182 @@ html, body{
   height: 70px;
   border-radius: 20px;
   background-color: rgb(66, 170, 161);
-  border: 1px solid white;
+  border: 1px solid gray;
 
   font-size: 20px;
   color: white;
+
+  transition: all 0.2s ;
+  transform: scale(1.1,1.1);
+  -ms-transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+  
+}
+
+
+
+
+
+
+
+.suggestBtn1{
+  width: 100px;
+  height: 30px;
+  border: 1px gray solid;
+  border-radius: 10px;
+
+  display : flex;
+
+  justify-content : center;
+
+  align-items : center;
+
+  margin-left: 40px;
+
+  transition: all 0.2s ;
+}
+.suggestBtn1:hover{
+  width: 100px;
+  height: 30px;
+  border: 1px gray solid;
+  border-radius: 10px;
+  
+  background-color: rgb(103, 224, 212);
+
+  display : flex;
+
+  justify-content : center;
+
+  align-items : center;
+
+  margin-left: 40px;
+
+  transition: all 0.2s ;
+
+  transform: scale(1.1,1.1);
+  -ms-transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+}
+
+.suggestBtn2{
+  width: 100px;
+  height: 30px;
+  border: 1px gray solid;
+  border-radius: 10px;
+
+  display : flex;
+
+  justify-content : center;
+
+  align-items : center;
+
+  margin-left: 40px;
+
+  transition: all 0.2s ;
+}
+
+.suggestBtn2:hover{
+  width: 100px;
+  height: 30px;
+  border: 1px gray solid;
+  border-radius: 10px;
+  
+  background-color: rgb(103, 224, 212);
+
+  display : flex;
+
+  justify-content : center;
+
+  align-items : center;
+
+  margin-left: 40px;
+
+  transition: all 0.2s ;
+
+  transform: scale(1.1,1.1);
+  -ms-transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+}
+
+.selectBtn{
+  width: 100px;
+  height: 30px;
+  border: 1px gray solid;
+  border-radius: 10px;
+  
+  background-color: rgb(103, 224, 212);
+
+  display : flex;
+
+  justify-content : center;
+
+  align-items : center;
+
+  margin-left: 40px;
+
+  transition: all 0.2s ;
+  transform: scale(1.1,1.1);
+  -ms-transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+.btnFloat {
+  background: none;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.btnFloat:before {
+  content: 'Float';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
+  transition: all 0.2s ;
+}
+
+.btnBlueGreen.btnFloat:before {
+  background: #00AE68;
+}
+
+.btnLightBlue.btnFloat:before {
+  background: #5DC8CD;
+}
+
+.btnOrange.btnFloat:before {
+  background: #FFAA40;
+}
+
+.btnPurple.btnFloat:before {
+  background: #8D336A;
+}
+
+
+.btnFloat:before {
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.4);
+}
+
+.btnFloat:hover:before {
+  
+}
+
+.btnFloat:hover:before {
+  margin-top: -2px;
+  margin-left: 0px;
+  transform: scale(1.1,1.1);
+  -ms-transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+  box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
 }

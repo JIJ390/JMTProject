@@ -22,22 +22,26 @@
   <div th:replace="~{common/header}">
   </div>
 
-  <div class="contentAreaBorder">
-    <div class="contentTitle">
-      <p>이 가게에 대한 정보 123...</p>
-      <hr>
+  <form th:action="@{/review/reviewUpload}" method="post" class="pormTag">
+    <div class="contentAreaBorder">
+      <div class="contentTitle">
+        <b th:text="|${restaurant.restaurantName}|" style="font-size: 20px; padding-right: 10px;"></b>
+        <p style="font-size: 20px;">이 가게를 추천하시겠습니까?</p><div class="suggestBtn1 selectBtn">추천</div><div class="suggestBtn2">비추천</div>
+        <hr>
+      </div>
+      <div class="contentArea">
+        <textarea id="content" name="content"></textarea>
+      </div>
     </div>
-    <div class="contentArea">
-      <textarea id="content"></textarea>
+    <div class="addButton">
+      <button class="uploadBtn">등록</button>
+      <button class="goToList" type="button">작성 취소</button>
+      <input type="hidden" name="getRestaurantNo" class="getRestaurantNo" th:value="${restaurant.restaurantNo}">
     </div>
-  </div>
-  <div class="addButton">
-    <button>등록</button>
-    <button class="goToList">목록으로</button>
-  </div>
+  </form>
 
 
-
+  <script src="/js/restaurant/restaurantDetailAdd.js"></script>
   <script>
     $(function () {
       $("#content").summernote({
@@ -46,7 +50,7 @@
         minHeight: 800,
         maxHeight: 800,
         lang: "ko-KR",
-        placeholder: "내용을 입력해주세요",
+        placeholder: "리뷰를 작성해주세요",
         toolbar: [
           // [groupName, [list of button]]
           ['fontname', ['fontname']],
@@ -92,15 +96,17 @@
           if (!response.ok) {
             throw new Error('업로드 실패');
           }
-          return response.json();
+          return response.text();
         })
         .then(url => {
-          $('#summernote').summernote('insertImage', url);
+          console.log(url);
+          $('#content').summernote('insertImage', url);
         })
         .catch(error => {
           console.error("이미지 업로드 오류:", error);
         });
     }
+
 
 
 

@@ -1,6 +1,7 @@
 package edu.kh.jmt.restaurant.service;
 
 import edu.kh.jmt.restaurant.dto.RestaurantDto;
+import edu.kh.jmt.restaurant.dto.ReviewDto;
 
 public interface RestaurantService {
 
@@ -10,5 +11,13 @@ public interface RestaurantService {
 	 * @return restaurant : restaurantDto (가게 정보가 담긴 dto)
 	 */
 	RestaurantDto restaurantDetail(int restaurantNo);
+
+	/**
+	 * 식당 리뷰 조회
+	 * @param restaurantNo
+	 * @param reviewRownum
+	 * @return
+	 */
+	ReviewDto selectReview(int restaurantNo, int reviewRownum);
 
 }
