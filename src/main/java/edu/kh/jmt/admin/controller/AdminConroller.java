@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.admin.dto.Member;
+import edu.kh.jmt.admin.dto.Pagination;
 import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.service.AdminService;
 import lombok.RequiredArgsConstructor;
@@ -42,11 +44,41 @@ public class AdminConroller {
 	}
 	
 	
-	@GetMapping("restaurant/manage")
+
+	/**
+	 * 가게 관리 페이지 연결
+	 * @param cp			 : 현재 페이지 번호
+	 * @param model		 : 가게 리스트 담을 객체 
+	 * @param paramMap : 검색 조건
+	 * @return
+	 */
+	@GetMapping("restaurant")
 	public String restaurantManage(
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-			Model model) {
+			Model model,
+			@RequestParam Map<String, Object> paramMap) {
 		
+		// 페이지 네이션, 가게 정보 묶어서 담을 객체
+		Map<String, Object> map = null;
+		
+		
+		if (paramMap.get("key") == null) {	
+			map = service.selectRestaurantList(cp);
+			
+		} else { // 검색한 경우
+			
+			// paramMap 에 key, query 담겨 있음
+			map = service.restaurantSearchList(cp, paramMap);
+		}
+		
+		log.debug("map : {}", map);
+		
+		List<Restaurant> restaurantList = (List<Restaurant>)map.get("restaurantList");
+		Pagination pagination = (Pagination)map.get("pagination");
+		
+		
+		model.addAttribute("restaurantList", restaurantList);
+		model.addAttribute("pagination", pagination);
 		
 		return "admin/restaurantManage";
 	}
@@ -72,6 +104,9 @@ public class AdminConroller {
 		
 		return "admin/restaurantManage";
 	}
+	
+	
+
 	
 	
 	

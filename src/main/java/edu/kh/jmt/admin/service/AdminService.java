@@ -34,7 +34,30 @@ public interface AdminService {
 			List<MultipartFile> restaurantImages,
 			List<String> menuNameList,
 			List<String> menuPriceList);
+	
+	/**
+	 * 검색 아닐 시 가게 리스트 가져오기
+	 * @param cp
+	 * @return restaurantList
+	 */
+	Map<String, Object> selectRestaurantList(int cp);
 
+	/**
+	 * 검색일 때 가게 정보 가져오기
+	 * @param cp
+	 * @param paramMap
+	 * @return restaurantList
+	 */
+	Map<String, Object> restaurantSearchList(int cp, Map<String, Object> paramMap);
+
+
+	
+	
+	
+	
+	
+	
+	/////////////////////////////////////////////////////
 	
 	/**
 	 * 회원 정보 모두 불러오기
@@ -75,6 +98,8 @@ public interface AdminService {
 	 * @return
 	 */
 	Member directLogin(int memberNo);
+
+	
 
 
 }

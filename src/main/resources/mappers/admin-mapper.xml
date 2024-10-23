@@ -21,6 +21,96 @@
 	
 	
 	
+	<!-- 폐업하지 않은 가게 수만 조회 -->
+	<select id="getRestaurantListCount">
+		SELECT 
+			COUNT(*)
+		FROM "RESTAURANT"
+		WHERE RESTAURANT_DEL_FL = 'N'
+	</select>
+	
+	
+	<!-- 가게 리스트 조회 -->
+	<select id="selectRestaurantList"
+			resultType="Restaurant">
+		SELECT 
+			RESTAURANT_NO,
+			RESTAURANT_NAME,
+			CATEGORY_NAME,
+			LOCATION_NAME,
+			SUBSTR(RESTAURANT_TEL, 1, 3) || '-' || 
+			SUBSTR(RESTAURANT_TEL, 4, 4) || '-' || 
+			SUBSTR(RESTAURANT_TEL, 8) AS "RESTAURANT_TEL"
+			
+		FROM "RESTAURANT"
+		JOIN "LOCATION" USING (LOCATION_NO)
+		JOIN "CATEGORY" USING (CATEGORY_NO)
+		WHERE 
+			RESTAURANT_DEL_FL = 'N'		
+			
+	</select>
+	
+	<!-- 검색 조건에 맞는 전체 가게 수 조회 -->
+	<select id="getSearchCount">
+		SELECT 
+			COUNT(*)
+		FROM "RESTAURANT"
+		
+		<if test='key == "l"'>
+			JOIN "LOCATION" USING (LOCATION_NO)
+		</if>
+		
+		WHERE RESTAURANT_DEL_FL = 'N'
+		
+		<choose>
+			<!-- 가게명 검색인 경우 -->
+			<when test='key == "rn"'>
+				AND RESTAURANT_NAME LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 가게 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				AND RESTAURANT_NO LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 지역 검색인 경우 -->
+			<when test='key == "l"'>
+				AND LOCATION_NAME LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 검색 조건에 맞는 전체 가게 목록 조회 -->
+	<select id="restaurantSearchList">
+		SELECT 
+			RESTAURANT_NO,
+			RESTAURANT_NAME,
+			CATEGORY_NAME,
+			LOCATION_NAME,
+			SUBSTR(RESTAURANT_TEL, 1, 3) || '-' || 
+			SUBSTR(RESTAURANT_TEL, 4, 4) || '-' || 
+			SUBSTR(RESTAURANT_TEL, 8) AS "RESTAURANT_TEL"
+		FROM "RESTAURANT"
+		JOIN "LOCATION" USING (LOCATION_NO)
+		JOIN "CATEGORY" USING (CATEGORY_NO)
+
+		
+		WHERE RESTAURANT_DEL_FL = 'N'
+		
+		<choose>
+			<!-- 가게명 검색인 경우 -->
+			<when test='key == "rn"'>
+				AND RESTAURANT_NAME LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 가게 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				AND RESTAURANT_NO LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 지역 검색인 경우 -->
+			<when test='key == "l"'>
+				AND LOCATION_NAME LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+	</select>	
+	
 	<!-- 식당 정보 등록 -->
 	<insert id="restaurantInsert">
 		<selectKey order="BEFORE"
@@ -66,7 +156,7 @@
   	
   	<!-- 조건에 따른 전체 회원 조회
   		searchCondition 0 : 전체, 1 : 차단 Y : 탈퇴
-  		searchKey n : 번호 , e : 이메일 , nn : 이름
+  		searchKey n : 번호 , e : 이메일 , mn : 이름
   		searchQuery : 검색어 
   	 -->
   	<select id="selectMemberList"
@@ -101,7 +191,7 @@
 			</when>
 			
 			<!-- 작성자 검색인 경우 -->
-			<when test='searchKey == "nn"'>
+			<when test='searchKey == "mn"'>
 				AND LOWER(MEMBER_NAME) LIKE  LOWER('%' || #{searchQuery} || '%')
 			</when>
 	
@@ -148,7 +238,7 @@
   	
   	
   	
-  	<select id="getSearchCount">  		
+  	<select id="getMemberSearchCount">  		
   		SELECT 
 			COUNT(*) 
 		FROM "MEMBER"
@@ -175,7 +265,7 @@
 			</when>
 			
 			<!-- 작성자 검색인 경우 -->
-			<when test='searchKey == "nn"'>
+			<when test='searchKey == "mn"'>
 				AND LOWER(MEMBER_NAME) LIKE  LOWER('%' || #{searchQuery} || '%')
 			</when>
 	
