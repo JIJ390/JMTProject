@@ -15,4 +15,8 @@ public interface BoardService {
 	 */
 	int boardWrite(Board inputBoard, MultipartFile boardImage);
 
+	
+	
+	List<Board> boardMain();
+
 }

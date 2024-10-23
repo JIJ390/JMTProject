@@ -1,14 +1,15 @@
 package edu.kh.jmt.board.controller;
 
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,7 +25,16 @@ public class BoardController {
 	private final BoardService service;
 	
 	@GetMapping("boardMain")
-	public String boardMain() {
+	public String boardMain(
+			Model model
+			) {
+		
+		List<Board> boardList = service.boardMain();
+				
+				
+		model.addAttribute("boardList", boardList);
+		
+		
 		
 		return "/board/boardMain";
 	}
@@ -47,18 +57,23 @@ public class BoardController {
 	public String boardWrite(
 			@ModelAttribute Board inputBoard,
 //			@SessionAttribute("loginMember") Member loginMember,
-			@RequestParam("images") MultipartFile boardImage,
-			RedirectAttributes ra) {
+			@RequestParam("boardImage") MultipartFile boardImage,
+			RedirectAttributes ra
+			) {
+		
 		
 		// 1) 작성자 회원번호를 inputBoard에 세팅
 		//		inputBoard.setMemberNo(loginMember.getMemberNo());
+		inputBoard.setMemberNo(1);
 		
 		// 2) 서비스 호출 후 결과(작성된 게시글 번호) 반환받기
 		int boardNo = service.boardWrite(inputBoard, boardImage);
 		
+		
 		// 3) 서비스 호출 후 결과(작성된 게시글 번호) 반환받기
 		
-		return "/board/boardMain";
+		
+		return "redirect:boardMain";
 	}
 	
 	@GetMapping("boardComment")

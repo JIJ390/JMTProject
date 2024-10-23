@@ -28,12 +28,13 @@
 	<form class="post-container" 
 		action="writeToMain"
 		method="POST"
+		id="boardWriteFrm"
 		enctype="multipart/form-data">
 
 		<div class="post">
 			<div class="post-header">
 				<div class="post-title">
-					<textarea name="" id="" class="title-write" placeholder="제목"></textarea>
+					<textarea name="boardTitle" id="" class="title-write" placeholder="제목"></textarea>
 				</div>
 			</div>
 
@@ -50,7 +51,7 @@
 
 			<!-- 메인내용 -->
 			<div class="post-content">
-				<textarea name="" id="write-content" class="body-write"></textarea>
+				<textarea name="boardContent" id="write-content" class="body-write"></textarea>
 			</div>
 		</div>
 

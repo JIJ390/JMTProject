@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@PropertySource("classpath:/config.properties")
 public class BoardServiceImpl implements BoardService{
 
 	private final BoardMapper mapper;
@@ -39,13 +41,14 @@ public class BoardServiceImpl implements BoardService{
 		// -> INSERT가 성공이 된다면???? 실제 파일을 서버에 올린다!
 		
 		
-			
+		String rename = null;	
+		
 		// 1) 파일 업로드 확인
 		if(!boardImage.isEmpty()) { 
 				
 		// 2) 웹 접근경로(config.properties) + 변경된 파일명
 		
-			String rename = FileUtil.rename(boardImage.getOriginalFilename());
+			rename = FileUtil.rename(boardImage.getOriginalFilename());
 			
 			String url = webPath + rename;
 			
@@ -55,6 +58,7 @@ public class BoardServiceImpl implements BoardService{
 
 			// 3) 게시글 부분 ( 제목, 내용, 작성자, 게시판 종류 ) INSERT
 			int result = mapper.boardWrite(inputBoard);
+			
 			System.out.println(inputBoard.getBoardNo());
 			
 	    // 삽입 실패 시
@@ -62,27 +66,33 @@ public class BoardServiceImpl implements BoardService{
 			
 			/* 삽입된 게시글 번호 */
 			int boardNo = inputBoard.getBoardNo();
-			
-		
-	
-
 		
 		// 4) DB UPDATE 수행
-//				int result = mapper.profile(url, memberNo);
-//				
-//				if(result == 0) return null; // 업데이트 실패시 null 반환
-//				
-//				try {
-//					// C:/uploadFiles/profile/ 폴더가 없으면 생성
-//					File folder = new File(profileFolderPath);
-//					if(!folder.exists()) folder.mkdir();
-//					
-//					// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
-//					boardImage.transferTo(
-//							new File(profileFolderPath + rename));
+
+			// 파일 없을 시 업로드 하지 않고 리턴
+			if(boardImage.isEmpty()) {
+				return boardNo;
+			}
+			
+				try {
+					// C:/uploadFiles/board2/ 폴더가 없으면 생성
+					File folder = new File(folderPath);
+					if(!folder.exists()) folder.mkdir();
+					
+					// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
+					boardImage.transferTo(
+							new File(folderPath + rename));
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 		
-		
-		return 0;
+		return boardNo;
+	}
+	
+	
+	@Override
+	public List<Board> boardMain() {
+		return mapper.boardMain();
 	}
 				
 	
