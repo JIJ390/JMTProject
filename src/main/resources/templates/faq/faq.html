@@ -9,6 +9,24 @@
 
   <style>
 
+  @font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+  body      { font-family: 'NanumSquare', sans-serif }
+  .normal      { font-weight: 400 }
+  .bold      { font-weight: 700 }
+  .bolder      { font-weight: 800 }
+  .light      { font-weight: 300 }
+
+    h3 {font-family: 'NEXON Lv1 Gothic OTF';}
+   header {font-family: 'NEXON Lv1 Gothic OTF';}
+
     .main{
       display: flex;
       align-items: center;
@@ -152,8 +170,10 @@
   </main>
   <!-- <script src="/js/faq/faq.js"></script> -->
 
+  <!-- JQuery 사용 구문 -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script>
+    /* 슬라이드 토글 */
     $("span[name='toggle-control']").click(function () {
       $('#target').toggle();
       $("span[name='toggle-control']").toggle();

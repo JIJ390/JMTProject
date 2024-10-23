@@ -6,8 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>공지사항</title>
   <!-- <link rel="stylesheet" href="/css/faq/faq.css"> -->
-
+  <link rel="stylesheet" href="/css/common/header.css">
   <style>
+
+  @font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+  body      { font-family: 'NanumSquare', sans-serif }
+  .normal      { font-weight: 400 }
+  .bold      { font-weight: 700 }
+  .bolder      { font-weight: 800 }
+  .light      { font-weight: 300 }
+
+  h3 {font-family: 'NEXON Lv1 Gothic OTF';}
+  header {font-family: 'NEXON Lv1 Gothic OTF';}
 
     .main{
       display: flex;
@@ -25,7 +43,7 @@
 
     #fix-area{
       width: 800px;
-      height: 80vh;
+      height: 580px;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
@@ -39,8 +57,7 @@
       display: flex;
       flex-direction: column;
       display: block;
-      justify-content: space-between
-      
+      justify-content: space-between;
     }
 
     /* hr 효과 */
@@ -56,6 +73,15 @@
       top: 28px;
     }
 
+    /* category 추가 */
+    .category {
+      font-size: 12px;
+      font-family: 'Lato', sans-serif;
+      position: absolute;
+      width: 45px;
+    }
+    
+
     /* new 추가 */
     .btn > div{
       position: relative;
@@ -65,14 +91,15 @@
       font-size: 12px;
       font-family: 'Lato', sans-serif;
       position: absolute;
-      right: 0px;
-      top: 0.9px;
+      right: 2px;
+      top: 0.5px;
     }
+
 
     /* btn 효과 */
     .btn {
     width: 800px;
-    height: 40px;
+    height: 42px;
     padding: 10px 25px;
     border: 1px solid #aaaaaa;
     font-family: 'Lato', sans-serif;
@@ -85,10 +112,12 @@
     justify-content: space-between;
     border-radius: 1em;
   }
+
   .btn {
     transition: all 0.3s ease;
     overflow: hidden;
   }
+
   .btn:after {
     position: absolute;
     content: " ";
@@ -101,9 +130,11 @@
     -webkit-transform: scale(.1);
     transform: scale(.1);
   }
+
   .btn:hover {
     color: #fff;
   }
+
   .btn:hover:after {
     background: #BBDED6;
     -webkit-transform: scale(1);
@@ -124,65 +155,61 @@
 </head>
 
 <body>
-
+  <th:block th:replace="~{common/header}"></th:block>
   <main class="main">
     <section id="back">
       <!-- 감싸는 배경 -->
 
       <section id="fix-area">
-        <div class="header">
-          <img src="/static/images/logo.png" alt="로고" id="logoImage">
-          <div class="sub-links">
-              <span>메인페이지</span>
-              <span>점메추</span>
-              <span>공지사항</span>
-              <span>FAQ</span>
-          </div>
-      </div>
+      
         <section id="faq-container">
           <span><h3>공지사항</h3></span>
           <hr>
           <br>
           <!-- 내용 정렬 -->
-           <div>
-              <span><button class="btn">
-                <div>5</div>
-                <div>공지사항 게시글 예시</div>
+          <th:block th:each="notice : ${noticeList}">
+            <div>
+              <span class="btn">
+                <div class="category" th:text="${notice.noticeCategory}">[공지]</div>
+                <div th:text="${notice.noticeTitle}">공지사항 게시글 예시</div>
                 <div><span class="new">new</span></div>
-              </button></span>
+              </span>
+            </div>
+            <br>
+          </th:block>
+           
+          <!-- <div>
+            <span class="btn">
+              <div class="category">[이벤트]</div>
+              <div>공지사항 게시글 예시</div>
+              <div><span class="new"></span></div>
+            </span>
            </div>
            <br>
            <div>
-            <span><button class="btn">
-              <div>4</div>
+            <span class="btn">
+              <div class="category">[공지]</div>
               <div>공지사항 게시글 예시</div>
-              <div></div>
-            </button></span>
-         </div>
+              <div><span class="new"></span></div>
+            </span>
+           </div>
            <br>
            <div>
-            <span><button class="btn">
-              <div>3</div>
+            <span class="btn">
+              <div class="category">[공지]</div>
               <div>공지사항 게시글 예시</div>
-              <div></div>
-            </button></span>
-         </div>
+              <div><span class="new"></span></div>
+            </span>
+           </div>
            <br>
            <div>
-            <span><button class="btn">
-              <div>2</div>
+            <span class="btn">
+              <div class="category">[공지]</div>
               <div>공지사항 게시글 예시</div>
-              <div></div>
-            </button></span>
-         </div>
-           <br>
-           <div>
-            <span><button class="btn">
-              <div>1</div>
-              <div>공지사항 게시글 예시</div>
-              <div></div>
-            </button></span>
-         </div>
+              <div><span class="new"></span></div>
+            </span>
+           </div> 
+         </div> -->
 
         </section>
         <div class="list">
