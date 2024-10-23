@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <div th:replace= "~{common/header}"></div>
+    <div th:replace="~{common/header}"></div>
     <div class="viewContainer">
         <div class="sideBar">
-            <div class="sideInput">
+            <!-- <div class="sideInput">
                 <input type="text" placeholder="검색">
             </div>
             <hr>
@@ -27,129 +27,92 @@
                 <a href="#">리뷰 많은 순</a>
                 <a href="#">찜 많은 순</a>
             </div>
-            <hr>
+            <hr> -->
         </div>
-        <div class="main">
+        <div class="main" th:object="${restaurant}">
 
             <div class="mainDetail">
-
                 <div class="mainDetailPhoto">
-                    <div class="photo1" style="background-image: url(/images/logo.png)"></div>
-                    <div class="photo2" style="background-image: url(/images/logo.png);"></div>
+                    <img class="photo1" th:src="*{restaurantImg2}"></img>
+                    <img class="photo2" th:src="*{restaurantImg1}"></img>
                 </div>
-                <div class="mainDetailContent" th:object="${restaurant}">
-                    <ul>
-                        <li><p th:text="*{restaurantName}" style="font-size: 30px;"></p></li>
-                        <hr>
-                        <ul th:each=" menu : *{menuList}" >
-                            <li class="menuList">
-                                <p th:text="${menu.menuName}"></p>
-                                <p th:text="${menu.menuPrice}"></p>
-                            </li>
-                        </ul>
-                        <hr>
-                        <li>
-                            <p th:text="*{restaurantAddress}"></p>
-                        </li>
+                <div class="mainDetailContent">
+                    <b th:text="*{restaurantName}" style="font-size: 40px;"></b>
+                    <hr style="margin-top: 20px; margin-bottom: 20px;">
+                    <b th:text="*{categoryName}" style="font-size: 30px; margin-right: 20px;"></b>
+                    <b th:text="*{locationName}" style="font-size: 30px;"></b>
+                    <hr style="margin-top: 20px; margin-bottom: 20px;">
+                    <ul style="list-style: none;">
+                        <li th:text="*{restaurantTel}"></li>
+                        <li th:text="*{restaurantAddress}"></li>
+                        <li></li>
                     </ul>
-                    <!-- <h1 th:text="*{menuList.menuName}">메뉴 이름</h1><h1 th:text="*{menu.menuPrice}">가격</h1> -->
-                    <!-- <h1 th:text="${menu.menuName}"></h1>
-                        <h1 th:text="|${menu.menuPrice}|+'원'"></h1> -->
-
-                    <hr>
+                    <div class="map2" id="map2"></div>
                 </div>
+
+
+            </div>
+            <div class="menuContainer">
+                <h1 style="margin-bottom: 20px;">메뉴</h1>
+                <ul th:each=" menu : *{menuList}">
+                    <li class="menuList">
+                        <b th:text="${menu.menuName}"></b>
+                        <b th:text="|${menu.menuPrice}원|"></b>
+                    </li>
+                </ul>
 
             </div>
 
             <div class="mainReview">
-                <div class="reviewProfile">
-                    <div class="reviewProfileImg">프사</div>
-                    <div class="revewProfileName">닉네임, 호불호, 기타 등등...</div>
+                <div class="reviewT"><b th:text="*{restaurantName}" style="font-size: 30px;"></b>
+                    <p style="font-size: 30px;">방문자 평가</p>
+                    <button class="reviewBtn1">리뷰 등록하기</button>
                 </div>
-                <div class="mainReviewContent">
-                    <h1>메인 리뷰</h1>
-                    <pre>
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                        리뷰 내용
-                    </pre>
+                <div class="reviewView" style=" background-color: rgb(241, 241, 241); box-shadow: 0px 0px 10px 0px rgb(202, 202, 202);">
+                    <div class="reviewProfile">
+                        <div class="reviewProfileImg" style="background-image: url(${review.profileImg});">프로필 이미지</div>
+                        <div class="revewProfileName" style="margin-left: 20px;">
+                            <p th:text="${review.memberName}"></p>
+                            <p th:text="${review.reviewDate}"></p>
+                            <p th:if= "${review.likeFl=='Y'}">이 가게를 추천해요</p>
+                            <p th:if= "${review.likeFl=='N'}">이 가게를 추천하지 않아요</p>
+                        </div>
+                    </div>
+                    <div class="mainReviewContent" style="padding: 20px;">
+                    </div>
                 </div>
             </div>
+            <button class="addBtnDiv">
+                <b style="font-size: 20px;">평가 더보기</b>
+            </button>
 
-            <button class="reviewBtn">리뷰 등록하기</button>
         </div>
-        <div class="map" id="map"></div>
+        <div class="map1">
+            <div class="map" id="map1"></div>
+            <button class="reviewBtn">해당 가게 리뷰 등록하기</button>
+        </div>
     </div>
 
-    <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=apikey"></script>
-    <script>
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            mapOption = {
-                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                level: 3 // 지도의 확대 레벨
-            };
+    <script th:inline="javascript">
+        const message =  /*[[${message}]]*/ "전달 받은 message";
 
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-        // 마커가 표시될 위치입니다 
-        var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
-
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-            position: markerPosition
-        });
-
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
-
-        // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-        // marker.setMap(null);    
-    </script>
+        if (message != null) alert(message);
 
 
-    <script>
-        const reviewBtn = document.querySelector(".reviewBtn");
-        reviewBtn.addEventListener("click", () => {
-            location.href = "/restaurant/add"
-        })
+
+        const mainReviewContent = document.querySelector(".mainReviewContent");
+
+        const content = /*[[${review.reviewContent}]]*/ "리뷰 본문"
+
+        mainReviewContent.innerHTML = content;
 
 
     </script>
+
+    <script type="text/javascript" th:src='|//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey}|'></script>
+    <script src="/js/restaurant/mapApi.js"></script>
+    <script src="/js/restaurant/restaurantDetail.js"></script>
+
 
 </body>
 

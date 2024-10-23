@@ -5,90 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>가게 관리 페이지</title>
   <link rel="stylesheet" href="/css/admin/restaurantManage.css">
+  <link rel="stylesheet" href="/css/common/header.css">
 </head>
 <body>
 
-  <header>
-    헤더
-  </header>
+  <th:block th:replace="~{common/header}"></th:block>
   
   <main>
-    <section class="left-section">사이드 메뉴</section>
+    <th:block th:replace= "~{admin/adminSide}"></th:block>
     <section class="main-section">
 
       <h1>가게 관리 페이지</h1>
       <div class="restaurant-list">
-        <div class="restaurant-div">
 
-          <div class="restaurant-box">
-            <a href="#">
-              <span>222342</span>
-              <span>냉면</span>
-              <span>혜화역</span>
-              <span>010-XXXX-XXXX</span>
-            </a>
-        
+
+        <th:block th:if="${#lists.isEmpty(restaurantList)}">        
+          <div class="none-list">조회된 결과가 없습니다</div>
+        </th:block>
+
+
+        <th:block th:each= "restaurant : ${restaurantList}" th:object="${restaurant}">
+          <div class="restaurant-div">
+            <div class="restaurant-box">
+              <a href="#">
+                <span th:text="*{restaurantNo}"></span>
+                <span th:text="*{restaurantName}"></span>
+                <span th:text="|# *{categoryName}|"></span>
+                <span th:text="|# *{locationName}|"></span>
+                <span th:text="*{restaurantTel}"></span>
+              </a>
+            </div>
           </div>
-          <div class="btn-box">
-            <button>수정</button>
-            <button>삭제</button>
-          </div>
-  
-        </div>
-  
-        
-        <div class="restaurant-div">
-  
-          <div class="restaurant-box">
-            <a href="#">
-              <span>222342</span>
-              <span>냉면</span>
-              <span>혜화역</span>
-              <span>010-XXXX-XXXX</span>
-            </a>
-          </div>
-          <div class="btn-box">
-            <button>수정</button>
-            <button>삭제</button>
-          </div>
-  
-        </div>
-  
-        
-        <div class="restaurant-div">
-  
-          <div class="restaurant-box">
-            <a href="#">
-              <span>222342</span>
-              <span>냉면</span>
-              <span>혜화역</span>
-              <span>010-XXXX-XXXX</span>
-            </a>
-          </div>
-          <div class="btn-box">
-            <button>수정</button>
-            <button>삭제</button>
-          </div>
-  
-        </div>
+        </th:block>
 
       </div>
 
       <div class="btn-area">
-        <button class="restaurant-regis-btn">가게 등록</button>
+        <button class="restaurant-regist-btn" id="restaurantRegistBtn">가게 등록</button>
       </div>
 
-      <div class="pagination-area">
+      <div class="pagination-area" th:unless="${#lists.isEmpty(restaurantList)}">
 
-        <ul class="pagination">
+        <ul class="pagination" th:object="${pagination}">
           <li><a href="#">&lt;&lt;</a></li>
           <li><a href="#">&lt;</a></li>
 
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
+          <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}" >
+            
+            <li th:if= "${i} == *{currentPage}">
+              <a class="current" th:text="${i}">현재 페이지</a>
+            </li>
+    
+            <li th:unless= "${i} == *{currentPage}"> 
+              <a href="#" th:text="${i}">이동할 수 있는 페이지</a>   <!-- th:href="|?cp=${i}|" -->
+            </li>
+          </th:block>
 
           <li><a href="#">&gt;</a></li>
           <li><a href="#">&gt;&gt;</a></li>
@@ -100,22 +71,27 @@
 
     </section>
     <section class="right-section">
-      <form action="#" method="get" id="boardSearch"></form>
+      <form action="/admin/restaurant/manage" method="GET" id="restaurantSearch">
 
         <select name="key" id="searchKey">
-          <option value="n">이름</option>
+          <option value="rn">이름</option>
           <option value="l">지역</option>
+          <option value="n">번호</option>
         </select>
 
         <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
 
-        <button>검색</button>
+        <button type="submit">검색</button>
       </form>
 
     </section>
   </main>
 
 
+  <script th:inline="javascript">
+    const pagination = /*[[${pagination}]]*/ "페이지네이션 객체"    
+  </script>
 
+  <script src="/js/admin/restaurantManage.js"></script>
 </body>
 </html>

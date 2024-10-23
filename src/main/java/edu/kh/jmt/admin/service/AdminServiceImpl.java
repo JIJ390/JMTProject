@@ -2,15 +2,19 @@ package edu.kh.jmt.admin.service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.jmt.admin.dto.Member;
 import edu.kh.jmt.admin.dto.Menu;
+import edu.kh.jmt.admin.dto.Pagination;
 import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.mapper.AdminMapper;
 import edu.kh.jmt.common.util.FileUtil;
@@ -33,6 +37,10 @@ public class AdminServiceImpl implements AdminService{
 	private String restaurantFolderPath; 
 	
 	
+	
+	////////////////////////////////////////////////
+	// 가게 관리 관련 메서드
+	
 	// 카테고리 리스트 불러오기
 	@Override
 	public List<Map<String, String>> selectCategoryList() {
@@ -46,7 +54,63 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	
+	// 검색 아닐 때 가게 정보 가져오기
+	@Override
+	public Map<String, Object> selectRestaurantList(int cp) {
+		
+		// 폐업하지 않은 가게 수 조회
+		int restaurantListCount = mapper.getRestaurantListCount();
+		
+		Pagination pagination = new Pagination(cp, restaurantListCount);
+		
+		int limit = pagination.getLimit(); 	// 10
+		int offset = (cp - 1) * limit;			// 0
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Restaurant> restaurantList = mapper.selectRestaurantList(rowBounds);
+		
+		// 4. 목록 조회 결과 + Pagination 객체 Map 으로 묶어서 반환
+		Map<String, Object> map = new HashMap<>();
+		map.put(("restaurantList"), restaurantList);
+		map.put(("pagination"), pagination);		
+		
+		return map;
+	}
 	
+	
+	@Override
+	public Map<String, Object> restaurantSearchList(int cp, Map<String, Object> paramMap) {
+	// 1. 지정된 게시판에서 검색 조건이 일치하는 게시글이 
+			//    몇 개나 존재하는지 조회
+		
+			log.debug("aaa : {}", paramMap);
+		
+			int searchCount = mapper.getSearchCount(paramMap);
+
+			
+			// 2. Pagination 객체 생성하기
+			Pagination pagination = new Pagination(cp, searchCount);
+			
+			
+			//3. DB에서 cp(조회 하려는 페이지)에 해당하는 행을 조회
+			int limit = pagination.getLimit(); // 10
+			int offset = (cp - 1) * limit;
+			RowBounds rowBounds = new RowBounds(offset, limit);
+			
+			
+			// 4. 검색 결과 + Pagination 객체 Map 으로 묶어서 반환
+			List<Restaurant> restaurantList = mapper.restaurantSearchList(paramMap, rowBounds);
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put(("restaurantList"), restaurantList);
+			map.put(("pagination"), pagination);		// 3 줄
+			
+			return map;
+	}
+	
+	
+	// 가게 등록
 	@Override
 	public int restaurantInsert(
 			Restaurant insertRestaurant, 
@@ -75,7 +139,9 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		// 4) DB UPDATE
-		int restaurantNo = mapper.restaurantInsert(insertRestaurant);
+		int result1 = mapper.restaurantInsert(insertRestaurant);
+		
+		int restaurantNo = insertRestaurant.getRestaurantNo();
 		
 		// 입력된 메뉴 정보를 저장할 list 객체 생성
 		List<Menu> menuList = new ArrayList<Menu>();
@@ -88,11 +154,13 @@ public class AdminServiceImpl implements AdminService{
 											.menuPrice(menuPriceList.get(i))
 											.restaurantNo(restaurantNo)
 											.build();
+			
+			log.debug("menu : {}", menu.toString());
 
 			menuList.add(menu);
 		}
 		
-		int result = mapper.menuListInsert(menuList);
+		int result2 = mapper.menuListInsert(menuList);
 		
 		try {
 			// C:/uploadFiles/restaurantImg/  폴더가 없으면 생성
@@ -115,4 +183,73 @@ public class AdminServiceImpl implements AdminService{
 		return 0;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/////////////////////////////////////////////////////////////////////////
+	//회원 관리 페이지
+	
+	// 회원 정보 모두 조회
+	@Override
+	public Map<String, Object> selectMemberList(Map<String, String> condition) {
+		
+		int cp = Integer.parseInt(condition.get("cp")); 
+		
+		// 검색 조건에 맞는 회원 수 조회
+		int searchCount = mapper.getMemberSearchCount(condition);
+//		log.debug("count : {}", searchCount);
+		
+		// 페이지네이션 객체 생성
+		Pagination pagination = new Pagination(cp, searchCount);
+		
+		int limit = pagination.getLimit();  // limit  : 한 페이지에 보여질 게시글의 최대 개수
+		int offset = (cp - 1) * limit;			// offset : 몇 개의 게시글을 건너뛰고 조회할 건지에 대한 값
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		
+		List<Member> memberList = mapper.selectMemberList(condition, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put(("memberList"), memberList);
+		map.put(("pagination"), pagination);		
+		
+		return map;
+	}
+	
+	
+	// 회원 현황 조회
+	@Override
+	public Map<String, String> selectMemberStatus() {
+		return mapper.selectMemberStatus();
+	}
+	
+	// 회원 차단 여부 변경
+	@Override
+	public int changeMemberBlock(int memberNo) {
+		return mapper.changeMemberBlock(memberNo);
+	}
+	
+	
+	// 회원 탈퇴 여부 변경
+	@Override
+	public int changeMemberSecession(int memberNo) {
+		return mapper.changeMemberSecession(memberNo);
+	}
+	
+	
+	// 임시로그인
+	@Override
+	public Member directLogin(int memberNo) {
+		return mapper.directLogin(memberNo);
+	}
 }

@@ -21,6 +21,96 @@
 	
 	
 	
+	<!-- 폐업하지 않은 가게 수만 조회 -->
+	<select id="getRestaurantListCount">
+		SELECT 
+			COUNT(*)
+		FROM "RESTAURANT"
+		WHERE RESTAURANT_DEL_FL = 'N'
+	</select>
+	
+	
+	<!-- 가게 리스트 조회 -->
+	<select id="selectRestaurantList"
+			resultType="Restaurant">
+		SELECT 
+			RESTAURANT_NO,
+			RESTAURANT_NAME,
+			CATEGORY_NAME,
+			LOCATION_NAME,
+			SUBSTR(RESTAURANT_TEL, 1, 3) || '-' || 
+			SUBSTR(RESTAURANT_TEL, 4, 4) || '-' || 
+			SUBSTR(RESTAURANT_TEL, 8) AS "RESTAURANT_TEL"
+			
+		FROM "RESTAURANT"
+		JOIN "LOCATION" USING (LOCATION_NO)
+		JOIN "CATEGORY" USING (CATEGORY_NO)
+		WHERE 
+			RESTAURANT_DEL_FL = 'N'		
+			
+	</select>
+	
+	<!-- 검색 조건에 맞는 전체 가게 수 조회 -->
+	<select id="getSearchCount">
+		SELECT 
+			COUNT(*)
+		FROM "RESTAURANT"
+		
+		<if test='key == "l"'>
+			JOIN "LOCATION" USING (LOCATION_NO)
+		</if>
+		
+		WHERE RESTAURANT_DEL_FL = 'N'
+		
+		<choose>
+			<!-- 가게명 검색인 경우 -->
+			<when test='key == "rn"'>
+				AND RESTAURANT_NAME LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 가게 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				AND RESTAURANT_NO LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 지역 검색인 경우 -->
+			<when test='key == "l"'>
+				AND LOCATION_NAME LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 검색 조건에 맞는 전체 가게 목록 조회 -->
+	<select id="restaurantSearchList">
+		SELECT 
+			RESTAURANT_NO,
+			RESTAURANT_NAME,
+			CATEGORY_NAME,
+			LOCATION_NAME,
+			SUBSTR(RESTAURANT_TEL, 1, 3) || '-' || 
+			SUBSTR(RESTAURANT_TEL, 4, 4) || '-' || 
+			SUBSTR(RESTAURANT_TEL, 8) AS "RESTAURANT_TEL"
+		FROM "RESTAURANT"
+		JOIN "LOCATION" USING (LOCATION_NO)
+		JOIN "CATEGORY" USING (CATEGORY_NO)
+
+		
+		WHERE RESTAURANT_DEL_FL = 'N'
+		
+		<choose>
+			<!-- 가게명 검색인 경우 -->
+			<when test='key == "rn"'>
+				AND RESTAURANT_NAME LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 가게 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				AND RESTAURANT_NO LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 지역 검색인 경우 -->
+			<when test='key == "l"'>
+				AND LOCATION_NAME LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+	</select>	
+	
 	<!-- 식당 정보 등록 -->
 	<insert id="restaurantInsert">
 		<selectKey order="BEFORE"
@@ -45,18 +135,166 @@
 	</insert>
 	
 	
-	 <insert id="menuListInsert">
+	<!-- 메뉴 정보 입력 -->
+	<insert id="menuListInsert">
   		INSERT INTO "MENU"
   		
   		<foreach collection="list" item="menu"
   				 open="(" close=")" separator=" UNION ALL ">
-  				 
+ 
   			SELECT 
-  				SEQ_MENU_NO.NEXTVAL
+  				NEXT_MENU_NO(),
 				#{menu.menuName}, 
 				#{menu.menuPrice},
 				#{menu.restaurantNo}
 			FROM DUAL
   		</foreach>
   	</insert>
+  	
+  	<!-- //////////////////////////////////////////////////회원관리 페이지/////////////////////////////// -->
+  	
+  	
+  	<!-- 조건에 따른 전체 회원 조회
+  		searchCondition 0 : 전체, 1 : 차단 Y : 탈퇴
+  		searchKey n : 번호 , e : 이메일 , mn : 이름
+  		searchQuery : 검색어 
+  	 -->
+  	<select id="selectMemberList"
+  			resultType="Member">
+  		SELECT 
+		  	MEMBER_NO, 
+		  	MEMBER_NAME,
+		  	MEMBER_EMAIL,
+		  	MEMBER_DEL_FL,
+		  	MEMBER_AUTH 
+		FROM "MEMBER"
+		WHERE MEMBER_NO > 0
+		<!-- 차단 회원 -->
+		<if test='searchCondition == "1"'>
+			AND MEMBER_AUTH = 1
+		</if>
+		
+		<!-- 탈퇴 회원 -->
+		<if test='searchCondition == "Y"'>
+			AND MEMBER_DEL_FL = 'Y'
+		</if>
+		
+		<choose>
+			<!-- 번호 검색인 경우 -->
+			<when test='searchKey == "n"'>
+				AND MEMBER_NO LIKE  '%' || #{searchQuery} || '%'
+			</when>
+			
+			<!-- 이메일 검색인 경우 -->
+			<when test='searchKey == "e"'>
+				AND LOWER(MEMBER_EMAIL) LIKE LOWER('%' || #{searchQuery} || '%') 
+			</when>
+			
+			<!-- 작성자 검색인 경우 -->
+			<when test='searchKey == "mn"'>
+				AND LOWER(MEMBER_NAME) LIKE  LOWER('%' || #{searchQuery} || '%')
+			</when>
+	
+		</choose>
+
+		ORDER BY MEMBER_NO ASC
+  	</select>
+  	
+  	
+  	
+  	<select id="selectMemberStatus"
+  			resultType="map">
+  	SELECT
+		CAST((SELECT COUNT(*)
+		 FROM "MEMBER"
+		 WHERE MEMBER_DEL_FL = 'N'
+		 AND   MEMBER_AUTH IN (0, 2)) AS VARCHAR2(4)) AS "activeMember",
+		CAST((SELECT COUNT(*)
+		 FROM "MEMBER") AS VARCHAR2(4)) AS "totalMember",	
+		CAST((SELECT COUNT(*)
+		 FROM "MEMBER"
+		 WHERE MEMBER_AUTH = 1) AS VARCHAR2(4)) AS "blockMember",
+		CAST((SELECT COUNT(*)
+		 FROM "MEMBER"
+		 WHERE MEMBER_DEL_FL = 'N') AS VARCHAR2(4)) AS "secessionMember"
+	FROM
+	DUAL
+  	</select>
+  	
+  	
+  	<!-- 탈퇴 여부 변경 -->
+  	<update id="changeMemberBlock">
+  		UPDATE "MEMBER"
+  		SET MEMBER_AUTH = DECODE(MEMBER_AUTH, 0, 1, 1, 0, 2)
+  		WHERE MEMBER_NO = #{memberNo}
+  	</update>
+  	
+  	
+  	<update id="changeMemberSecession">
+  		UPDATE "MEMBER"
+  		SET MEMBER_DEL_FL = DECODE(MEMBER_DEL_FL, 'Y', 'N', 'Y')
+  		WHERE MEMBER_NO = #{memberNo}
+  	</update>
+  	
+  	
+  	
+  	<select id="getMemberSearchCount">  		
+  		SELECT 
+			COUNT(*) 
+		FROM "MEMBER"
+		WHERE MEMBER_NO > 0
+		<!-- 차단 회원 -->
+		<if test='searchCondition == "1"'>
+			AND MEMBER_AUTH = 1
+		</if>
+		
+		<!-- 탈퇴 회원 -->
+		<if test='searchCondition == "Y"'>
+			AND MEMBER_DEL_FL = 'Y'
+		</if>
+		
+		<choose>
+			<!-- 번호 검색인 경우 -->
+			<when test='searchKey == "n"'>
+				AND MEMBER_NO LIKE  '%' || #{searchQuery} || '%'
+			</when>
+			
+			<!-- 이메일 검색인 경우 -->
+			<when test='searchKey == "e"'>
+				AND LOWER(MEMBER_EMAIL) LIKE LOWER('%' || #{searchQuery} || '%') 
+			</when>
+			
+			<!-- 작성자 검색인 경우 -->
+			<when test='searchKey == "mn"'>
+				AND LOWER(MEMBER_NAME) LIKE  LOWER('%' || #{searchQuery} || '%')
+			</when>
+	
+		</choose>
+
+		ORDER BY MEMBER_NO ASC
+  	
+  	
+  	</select>
+  	
+  	
+  	
+  	
+  	<!-- 임시 로그인 삭제예정 -->
+  	<select id="directLogin"
+			resultType="Member">
+	  	SELECT 
+		  	MEMBER_NO, 
+		  	MEMBER_NAME, 
+		  	MEMBER_EMAIL, 
+		  	MEMBER_PW,
+			PROFILE_IMG, 
+			MEMBER_AUTH,
+			MEMBER_DEL_FL,
+			TO_CHAR(MEMBER_DATE, 
+				'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') MEMBER_DATE
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+		AND   MEMBER_DEL_FL = 'N'
+	
+	</select>
 </mapper>

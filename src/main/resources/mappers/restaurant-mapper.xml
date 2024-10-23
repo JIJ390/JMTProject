@@ -45,5 +45,30 @@
 	</select>
 
 
+	<select id="selectReview" resultType="reviewDto">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+			ROWNUM AS RN,
+			REVIEW_NO,
+			REVIEW_CONTENT,
+			LIKE_FL,
+			REVIEW_DATE,
+			REVIEW_DEL_FL,
+			RESTAURANT_NO,
+			MEMBER_NO
+			FROM
+			"REVIEW"
+			WHERE
+			RESTAURANT_NO = #{restaurantNo}
+			) T
+		JOIN (SELECT MEMBER_NO, PROFILE_IMG, MEMBER_NAME
+			FROM "MEMBER") USING (MEMBER_NO) 
+		WHERE T.RN = #{reviewRownum}
+	
+	</select>
+
 
 </mapper>
