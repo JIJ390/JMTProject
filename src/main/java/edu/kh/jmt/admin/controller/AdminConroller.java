@@ -71,7 +71,7 @@ public class AdminConroller {
 			map = service.restaurantSearchList(cp, paramMap);
 		}
 		
-		log.debug("map : {}", map);
+//		log.debug("map : {}", map);
 		
 		List<Restaurant> restaurantList = (List<Restaurant>)map.get("restaurantList");
 		Pagination pagination = (Pagination)map.get("pagination");
@@ -102,9 +102,22 @@ public class AdminConroller {
 		
 		int result = service.restaurantInsert(insertRestaurant, restaurantImages, menuNameList, menuPriceList);
 		
-		return "admin/restaurantManage";
+		return "redirect:/admin/restaurant";
 	}
 	
+	
+	@GetMapping("restaurant/{restaurantNo:[0-9]+}")
+	@ResponseBody
+	public Map<String, Object> restaurantDetail(
+			@PathVariable("restaurantNo") int restaurantNo)	 {
+		
+		Map<String, Object> map = service.restaurantDetail(restaurantNo);
+		
+		log.debug("detailmap : {}", map);
+		
+		return map;
+		
+	}
 	
 
 	
@@ -123,9 +136,8 @@ public class AdminConroller {
 	
 	
 	/**
-	 * 추후 검색 조건 추가해야 함!!
 	 * 비동기로 회원 정보 모두 가져오기
-	 * @param cp
+	 * @param condition	: 검색 조건 담긴 객체
 	 * @param model
 	 * @return
 	 */
@@ -135,9 +147,8 @@ public class AdminConroller {
 		@RequestBody Map<String, String> condition) {
 		
 		
-		log.debug("condition : {}", condition);
+//		log.debug("condition : {}", condition);
 		
-		// 페이지 네이션 관련 클래스 생성 후 cp 사용 예정
 		
 		return service.selectMemberList(condition);
 	}
@@ -205,7 +216,7 @@ public class AdminConroller {
 			) {
 		Member loginMember = service.directLogin(memberNo);
 		
-		log.debug("member : {}", loginMember);
+//		log.debug("member : {}", loginMember);
 		
 		// @SessionAttributes({"loginMember"})
 		// 로그인된 회원 정보를 session 에 추가

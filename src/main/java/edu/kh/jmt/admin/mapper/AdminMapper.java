@@ -73,9 +73,21 @@ public interface AdminMapper {
 	int menuListInsert(List<Menu> menuList);
 
 
+
+	/**
+	 * 특정 가게 정보 상세 조회
+	 * @param restaurantNo
+	 * @return Restaurant
+	 */
+	Restaurant selectRestaurant(int restaurantNo);
+
 	
-	
-	
+	/**
+	 * 특정 가게 메뉴 정보 조회
+	 * @param restaurantNo
+	 * @return menuList
+	 */
+	List<Menu> selectMenuList(int restaurantNo);
 	
 	
 	
@@ -135,6 +147,8 @@ public interface AdminMapper {
 	 * @return
 	 */
 	Member directLogin(int memberNo);
+
+
 
 
 

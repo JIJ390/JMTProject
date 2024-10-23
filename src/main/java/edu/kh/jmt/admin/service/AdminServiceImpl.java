@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +22,7 @@ import edu.kh.jmt.common.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+@PropertySource("classpath:/config.properties")
 @Slf4j
 @Transactional
 @Service
@@ -186,7 +188,22 @@ public class AdminServiceImpl implements AdminService{
 	
 	
 	
-	
+	@Override
+	public Map<String, Object> restaurantDetail(int restaurantNo) {
+		
+		// 번호가 일치하는 가게 정보 가져오기
+		Restaurant restaurant = mapper.selectRestaurant(restaurantNo);
+		
+		// 번호가 일치하는 메뉴리스트 가져오기
+		List<Menu> menuList = mapper.selectMenuList(restaurantNo);
+		
+		// 가져온 정보 map 으로 묶기
+		Map<String, Object> map = Map.of(
+					"restaurant", restaurant,
+					"menuList", menuList);
+		
+		return map;
+	}
 	
 	
 	

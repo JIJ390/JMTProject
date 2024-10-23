@@ -51,7 +51,12 @@ public interface AdminService {
 	Map<String, Object> restaurantSearchList(int cp, Map<String, Object> paramMap);
 
 
-	
+	/**
+	 * 가게 정보 상세 조회
+	 * @param restaurantNo
+	 * @return
+	 */
+	Map<String, Object> restaurantDetail(int restaurantNo);
 	
 	
 	
@@ -98,6 +103,8 @@ public interface AdminService {
 	 * @return
 	 */
 	Member directLogin(int memberNo);
+
+
 
 	
 
