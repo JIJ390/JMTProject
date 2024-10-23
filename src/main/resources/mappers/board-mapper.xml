@@ -26,7 +26,7 @@
 		)
 	</insert>
 	
-	
+	<!-- 화면출력 -->
 	<select id="boardMain" resultType="Board">
 		SELECT
 			*

@@ -26,8 +26,7 @@ public class BoardController {
 	
 	@GetMapping("boardMain")
 	public String boardMain(
-			Model model
-			) {
+			Model model) {
 		
 		List<Board> boardList = service.boardMain();
 				
