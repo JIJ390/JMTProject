@@ -3,7 +3,9 @@ package edu.kh.jmt.myPage.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import edu.kh.jmt.admin.dto.Member;
 import edu.kh.jmt.myPage.dto.Mypage;
 import edu.kh.jmt.myPage.mapper.MyPageMapper;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 @Service
 public class MyPageServiceImpl implements MyPageService{
 	
@@ -79,5 +82,39 @@ public class MyPageServiceImpl implements MyPageService{
 		return mapper.nameCheck(memberName);
 	}
 	
+
+	// 비밀번호 변경
+	@Override
+	public int passwordChange(String currentPw, String newPw, Mypage loginMember) {
+		
+		if(encoder.matches(currentPw, loginMember.getMemberPw()) == false) { // 비밀번호가 일치하지 않을때
+			return 0;
+		} 
+		
+		String encPw = encoder.encode(newPw);
+		
+		loginMember.setMemberPw(encPw);
+		return mapper.passwordChange(loginMember.getMemberNo(), encPw);
+	}
+	
+
+	// 회원 탈퇴 기능
+	@Override
+	public int withdrawal(String memberPw, Mypage loginMember) {
+	// 1) 비밀번호 일치 검사
+		if(encoder.matches(memberPw, loginMember.getMemberPw()) == false) {
+			return 0; // 다를 경우 0 반환
+		}
+		
+		// 2) 회원 탈퇴 Mapper 호출(update)
+		return mapper.withdrawal(loginMember.getMemberNo());
+		}
+	
+	
+	// 이름 수정 기능
+	@Override
+	public int updateInfo(Mypage inputMember) {
+		return mapper.updateInfo(inputMember);
+	}
 	
 }

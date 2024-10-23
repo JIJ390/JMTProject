@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 찾기</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+    <link rel="stylesheet" href="/css/myPage/pwFind.css">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <th:block th:replace="~{common/header}"></th:block>
+    <link rel="stylesheet" href="/css/common/header.css">
+
+    <!-- Main Content -->
+    <form action="pwFind" method="POST" name="pwFindFrm" id="pwFindFrm">
+        <div class="signup-container">
+            <div class="signup-box">
+              <h2>비밀번호 찾기</h2>
+                <div style="display: flex; width: 100%;">
+                    <input type="email" placeholder="이메일">
+                    <button class="inline-button" id="sendAuthKeyBtn" type="button" style="padding: 0 20px; width: 24%; text-align: center;">인증번호 받기</button>
+                </div>
+                <div style="text-align: left; color: #acacac; font-size: 0.8rem; margin-left: 1%; margin-bottom: 5%;">메일을 받을 수 있는 이메일을 입력해주세요.</div>
+                <div style="display: flex; width: 100%;">
+                    <input type="text" placeholder="인증번호 입력">
+                    <button class="inline-button" id="checkAuthKeyBtn" type="button" style="padding: 0 20px; width: 24%; text-align: center;">인증하기</button>
+                </div>
+                <span class="signup-message" id="authKeyMessage" style="display: flex;"></span>
+                
+                <div style="display: flex; width: 130%;">
+                    <input type="password" placeholder="비밀번호" style="margin-bottom: 0; margin-top: 40px;">
+                </div>
+                <div style="display: flex; width: 130%;">
+                    <input type="password" placeholder="비밀번호 확인" style="margin-top: 0;">
+                </div>
+                <div style="text-align: left; color: #acacac; font-size: 0.8rem; margin-left: 1%; margin-bottom: 2%;">영어,숫자,특수문자 1글자 이상, 6~20자 사이로 입력해주세요.</div>
+                <div style="display: flex; width: 130%;">
+                </div>
+                <button style="margin-top: 5%;">비밀번호 변경</button>
+            </div>
+        </div>
+    </form>
+
+    <button class="back-to-top">▲</button>
+    <script>
+        document.querySelector('.back-to-top').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

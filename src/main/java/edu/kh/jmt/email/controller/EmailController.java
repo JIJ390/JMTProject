@@ -50,4 +50,7 @@ public class EmailController {
 		
 		return service.checkAuthKey(map);
 	}
+	
+	
+	
 }

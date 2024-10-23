@@ -1,9 +1,9 @@
 package edu.kh.jmt.myPage.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import edu.kh.jmt.myPage.dto.Mypage;
-import lombok.RequiredArgsConstructor;
 
 @Mapper
 public interface MyPageMapper {
@@ -35,4 +35,27 @@ public interface MyPageMapper {
 	 */
 	int nameCheck(String memberName);
 
+
+	/** 비밀번호 변경
+	 * @param memberNo
+	 * @param encPw
+	 * @return result
+	 */
+	int passwordChange(
+			@Param("memberNo") int memberNo, 
+			@Param("encPw") String encPw);
+
+
+	/** 회원 탈퇴
+	 * @param memberNo
+	 * @return
+	 */
+	int withdrawal(int memberNo);
+
+
+	/** 이름 변경
+	 * @param inputMember
+	 * @return result
+	 */
+	int updateInfo(Mypage inputMember);
 }
