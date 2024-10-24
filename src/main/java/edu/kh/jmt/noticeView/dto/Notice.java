@@ -22,4 +22,5 @@ public class Notice {
 	private String noticeDelFl;
 	private int noticeReadCount;
 	private String noticeCategory;
+	private String max;
 }

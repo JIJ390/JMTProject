@@ -1,5 +1,6 @@
 package edu.kh.jmt.noticeView.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,8 +42,9 @@ public class NoticeViewServiceImpl implements NoticeViewService {
 			
 			// 목록 조회 결과 + Pagination 객체 Map 묶어서 반환 
 			Map<String, Object> map = 
-					Map.of("noticeList", noticeList);
-		
+					Map.of("noticeList", noticeList, "pagination", pagination);
+				
+			
 		return map;
 	}
 

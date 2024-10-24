@@ -12,6 +12,7 @@
 
 	<select id="selectNoticeList">
 		SELECT
+			NOTICE_NO,
 			ROW_NUMBER() OVER (ORDER BY NOTICE_NO ASC) "RNUM",
 			NOTICE_TITLE,
 			NOTICE_CATEGORY

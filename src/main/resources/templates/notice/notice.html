@@ -43,7 +43,6 @@
 
     #fix-area{
       width: 800px;
-      height: 580px;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
@@ -172,50 +171,44 @@
               <span class="btn">
                 <div class="category" th:text="${notice.noticeCategory}">[공지]</div>
                 <div th:text="${notice.noticeTitle}">공지사항 게시글 예시</div>
-                <div><span class="new">new</span></div>
+                <!-- <div><span class="new">new</span></div> -->
               </span>
             </div>
             <br>
           </th:block>
-           
-          <!-- <div>
-            <span class="btn">
-              <div class="category">[이벤트]</div>
-              <div>공지사항 게시글 예시</div>
-              <div><span class="new"></span></div>
-            </span>
-           </div>
-           <br>
-           <div>
-            <span class="btn">
-              <div class="category">[공지]</div>
-              <div>공지사항 게시글 예시</div>
-              <div><span class="new"></span></div>
-            </span>
-           </div>
-           <br>
-           <div>
-            <span class="btn">
-              <div class="category">[공지]</div>
-              <div>공지사항 게시글 예시</div>
-              <div><span class="new"></span></div>
-            </span>
-           </div>
-           <br>
-           <div>
-            <span class="btn">
-              <div class="category">[공지]</div>
-              <div>공지사항 게시글 예시</div>
-              <div><span class="new"></span></div>
-            </span>
-           </div> 
-         </div> -->
-
         </section>
-        <div class="list">
-          <span> << < 1 2 3 4 5 6 7 8 9 10 > >></span>
-        </div>
       </section>
+
+      <!-- 게시글이 있을 때만 페이지네이션이 보이게 할 예정 -->
+      <div class="pagination-area" th:unless="${#lists.isEmpty(noticeList)}">
+
+        <ul class="pagination" th:object="${pagination}">
+        
+            <!-- 첫 페이지로 이동 -->
+            <li><a href="#">&lt;&lt;</a></li>
+
+            <!-- 이전 목록 마지막 번호로 이동 -->
+            <li><a href="#">&lt;</a></li>
+
+            <!-- 특정 페이지로 이동 -->
+            
+            <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
+                <!-- 현재 보고있는 페이지 -->
+                <li th:if="${i} == *{currentPage}">
+                    <a class="current" th:text="${i}">현재 페이지</a>
+                </li>
+
+                <!-- 보고있지 않은 페이지 -->                    
+                <li th:unless="${i} == *{currentPage}"> <a href="#" th:text="${i}">이동할 수 있는 페이지</a> </li>
+            </th:block>
+
+            <!-- 다음 목록 시작 번호로 이동 -->
+            <li><a href="#">&gt;</a></li>
+
+            <!-- 끝 페이지로 이동 -->
+            <li><a href="#">&gt;&gt;</a></li>
+        </ul>
+    </div>
           
     </section>
         
@@ -226,9 +219,12 @@
           <a class="scroll-top" href="#">⬆</a>
         </div>
   </main>
-  <!-- <script src="/js/faq/faq.js"></script> -->
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script th:inline="javascript">
+    const pagination = /*[[${pagination}]]*/ "페이지네이션객체";
+</script>
+<script src="/js/notice/notice.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.kh.jmt.noticeView.dto.Notice;
+import edu.kh.jmt.noticeView.dto.Pagination;
 import edu.kh.jmt.noticeView.service.NoticeViewService;
 import lombok.RequiredArgsConstructor;
 
@@ -44,8 +45,10 @@ public class NoticeViewController {
 		Map<String, Object> map = service.selectNoticeList(cp);
 		
 		List<Notice> noticeList = (List<Notice>)map.get("noticeList");
+		Pagination pagination = (Pagination)map.get("pagination");
 		
 		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("pagination", pagination);
 		
 		return "notice/notice";
 	}
