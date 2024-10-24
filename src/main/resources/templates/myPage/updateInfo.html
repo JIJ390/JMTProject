@@ -27,7 +27,8 @@
                              alt="프로필 이미지" >
                     </a> 
                 </div>
-                <button class="imgBtn" type="button">이미지 선택</button>
+                        <label for="imageInput">이미지 선택</label>
+                        <input type="file" name="profileImg" id="imageInput" accept="image/*">
                 <div class="name">
                     <input type="text" name="memberName" id="memberName" th:value="${session.loginMember.memberName}">
                 </div>
