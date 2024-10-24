@@ -203,6 +203,37 @@
   	</update>
   	
   	
+  	<select id="restaurantUpdateView">
+  	  	SELECT 
+  			RESTAURANT_NO, 
+			RESTAURANT_NAME,
+			LOCATION_NO,
+			CATEGORY_NO,
+			RESTAURANT_IMG1,
+			RESTAURANT_IMG2,
+			RESTAURANT_ADDRESS,
+			RESTAURANT_TEL
+  			
+  		FROM "RESTAURANT"
+  		WHERE 
+  			RESTAURANT_NO = #{restaurantNo}
+  		AND 
+  			RESTAURANT_DEL_FL = 'N'
+  	
+  	</select>
+  	
+  	
+  	<select id="menuUpdateView"
+  	 		resultType="menu">
+  		SELECT 
+  			MENU_NAME,
+  			MENU_PRICE
+  		FROM
+  			"MENU"
+  		WHERE 
+  			RESTAURANT_NO = #{restaurantNo}
+  	
+  	</select>
   	
   	
 </mapper>

@@ -98,18 +98,14 @@ section{
 
 /* 이미지 */
 .restaurantImg img{
-  max-width: 100%;
-  max-height: 100%;
+  min-width: 198px;
+  min-height: 198px;
 }
 
-.delete-image{
-  color: var(--border-color);
-
+.plus-mark {
   position: absolute;
-  top: 0;
-  right: 7px;
-  font-size: 20px;
-  cursor: pointer;
+  top: 70px;
+  z-index : -1;
 }
 
 

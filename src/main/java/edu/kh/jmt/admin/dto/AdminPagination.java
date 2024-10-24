@@ -1,6 +1,6 @@
 package edu.kh.jmt.admin.dto;
 
-public class Pagination {
+public class AdminPagination {
 	
 	private int currentPage;		// 현재 페이지 번호
 	private int listCount;			// 전체 게시글 수
@@ -22,7 +22,7 @@ public class Pagination {
 	 * @param currentPage : 현재 페이지
 	 * @param listCount   : 전체 게시글 수
 	 */
-	public Pagination(int currentPage, int listCount) {
+	public AdminPagination(int currentPage, int listCount) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
@@ -31,7 +31,7 @@ public class Pagination {
 	}
 
 	// 사이즈 임의 지정
-	public Pagination(int currentPage, int listCount, int limit, int pageSize) {
+	public AdminPagination(int currentPage, int listCount, int limit, int pageSize) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
