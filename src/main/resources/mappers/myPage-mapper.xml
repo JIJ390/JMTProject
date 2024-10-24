@@ -3,7 +3,7 @@
 <mapper namespace="edu.kh.jmt.myPage.mapper.MyPageMapper">
 
 	<!-- 로그인 -->
-	<select id="login" resultType = "mypage">
+	<select id="login" resultType = "member">
 		SELECT 
 			MEMBER_NO, 
 			MEMBER_NAME, 

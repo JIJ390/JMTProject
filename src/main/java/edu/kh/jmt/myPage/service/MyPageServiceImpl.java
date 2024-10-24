@@ -5,8 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.kh.jmt.admin.dto.Member;
-import edu.kh.jmt.myPage.dto.Mypage;
+import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.myPage.mapper.MyPageMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,14 +25,14 @@ public class MyPageServiceImpl implements MyPageService{
 
 	// 로그인 기능
 	@Override
-		public Mypage login(String loginEmail, String loginPW) {
+		public Member login(String loginEmail, String loginPW) {
 			
 		// 암호화 테스트
 //		log.debug("loginPw : {}", loginPW);
 //		log.debug("암호화된 loginPw : {}", encoder.encode(loginPW));
 		
 		// 1. loginEmail이 일치하는 회원의 정보를 DB에서 조회(비밀번호 포함!)
-		Mypage loginMember = mapper.login(loginEmail);
+		Member loginMember = mapper.login(loginEmail);
 		
 		// 2. 이메일이 일치하는 회원 정보가 없을 경우
 		if(loginMember == null) return null;
@@ -56,7 +55,7 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	// 회원 가입 기능
 	@Override
-	public int signUp(Mypage inputMember) {
+	public int signUp(Member inputMember) {
 		
 		// 비밀번호 암호화(BCrypt)
 		String encPw = encoder.encode(inputMember.getMemberPw());
@@ -85,7 +84,7 @@ public class MyPageServiceImpl implements MyPageService{
 
 	// 비밀번호 변경
 	@Override
-	public int passwordChange(String currentPw, String newPw, Mypage loginMember) {
+	public int passwordChange(String currentPw, String newPw, Member loginMember) {
 		
 		if(encoder.matches(currentPw, loginMember.getMemberPw()) == false) { // 비밀번호가 일치하지 않을때
 			return 0;
@@ -100,7 +99,7 @@ public class MyPageServiceImpl implements MyPageService{
 
 	// 회원 탈퇴 기능
 	@Override
-	public int withdrawal(String memberPw, Mypage loginMember) {
+	public int withdrawal(String memberPw, Member loginMember) {
 	// 1) 비밀번호 일치 검사
 		if(encoder.matches(memberPw, loginMember.getMemberPw()) == false) {
 			return 0; // 다를 경우 0 반환
@@ -113,7 +112,7 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	// 이름 수정 기능
 	@Override
-	public int updateInfo(Mypage inputMember) {
+	public int updateInfo(Member inputMember) {
 		return mapper.updateInfo(inputMember);
 	}
 	

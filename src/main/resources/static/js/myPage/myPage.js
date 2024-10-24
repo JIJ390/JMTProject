@@ -49,3 +49,14 @@ changePw?.addEventListener("submit", e => {
     return;
   }
 });
+
+
+/* 회원 탈퇴 유효성 검사 */
+const withdrawal = document.querySelector("#withdrawal");
+withdrawal?.addEventListener("submit", e => {
+  if(confirm("정말 탈퇴하시겠습니까?") == false) { // 취소 클릭 시
+    alert("탈퇴가 취소되었습니다");
+    e.preventDefault();
+    return;
+  }
+})
