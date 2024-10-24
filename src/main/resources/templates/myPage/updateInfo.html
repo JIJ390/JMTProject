@@ -15,7 +15,7 @@
 
     <!-- Main Content -->
     <main>
-    <form action="updateInfo" method="POST" name="updateInfoForm" id="updateInfoForm">
+    <form action="updateInfo" method="POST" name="updateInfoForm" id="updateInfoForm" enctype="multipart/form-data">
         <div class="container">
             <div class="profile">
                 <h1 style="margin-bottom: 30px;">프로필 수정</h1>
@@ -27,9 +27,10 @@
                              alt="프로필 이미지" >
                     </a> 
                 </div>
-                    <label for="imageInput">이미지 선택</label>
-                    <input type="file" name="profileImg" id="imageInput" accept="image/*">
-                    <div class="name">
+                <label for="profileImg">이미지 선택</label>
+                <input type="file" name="profileImg" id="profileImg" accept="image/*">
+
+                <div class="name">
                     <input type="text" name="memberName" id="memberName" th:value="${session.loginMember.memberName}">
                 </div>
                 <button class="myPage-submit" >수정하기</button>

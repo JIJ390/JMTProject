@@ -1,5 +1,7 @@
 package edu.kh.jmt.myPage.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import edu.kh.jmt.myPage.dto.Member;
 
 public interface MyPageService{
@@ -47,10 +49,12 @@ public interface MyPageService{
 	 */
 	int withdrawal(String memberPw, Member loginMember);
 
-	/** 이름 수정
-	 * @param inputMember
-	 * @return result
-	 */
-	int updateInfo(Member inputMember);
+//	/** 이름 수정
+//	 * @param inputMember
+//	 * @return result
+//	 */
+//	int updateInfo(Member inputMember);
+
+	int memberUpdate(Member inputMember);
 
 }

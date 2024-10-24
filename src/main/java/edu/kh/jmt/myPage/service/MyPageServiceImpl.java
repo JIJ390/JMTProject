@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.myPage.mapper.MyPageMapper;
@@ -110,10 +111,21 @@ public class MyPageServiceImpl implements MyPageService{
 		}
 	
 	
-	// 이름 수정 기능
-	@Override
-	public int updateInfo(Member inputMember) {
-		return mapper.updateInfo(inputMember);
-	}
+//	// 이름 수정 기능
+//	@Override
+//	public int updateInfo(Member inputMember) {
+//		return mapper.updateInfo(inputMember);
+//	}
 	
+	
+	@Override
+	public int memberUpdate(Member inputMember) {
+		
+		log.debug("aaa : {}", inputMember);
+		
+		int result = mapper.memberUpdate(inputMember);
+		
+			
+		return 0;
+	}
 }

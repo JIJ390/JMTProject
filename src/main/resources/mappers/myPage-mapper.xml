@@ -66,16 +66,20 @@
 	</update>
 	
 	
-	<!-- 이름 변경 -->
-	<update id="updateInfo">
+ 	<!-- 이름 변경 -->
+	<!-- <update id="updateInfo">
 		UPDATE "MEMBER"
 		SET MEMBER_NAME = #{memberName}
 		WHERE MEMBER_NO = #{memberNo}
+	</update> -->
+	
+	
+ 	<update id="memberUpdate">
+		UPDATE "MEMBER"
+		SET MEMBER_NAME = #{memberName},
+			PROFILE_IMG = #{profileImg}
+		WHERE MEMBER_NO = #{memberNo}
 	</update>
-	
-	
-	
-	
 	
 	
 	

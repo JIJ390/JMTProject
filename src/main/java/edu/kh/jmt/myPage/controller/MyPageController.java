@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.jmt.myPage.dto.Member;
@@ -244,40 +245,74 @@ public class MyPageController {
 		return "myPage/updateInfo";
 	}
 	
-	/** 이름 수정 기능
-	 * @param inputMember : 수정할 이름 주소
-	 * @param loginMember : 현재 로그인된 회원 정보
-	 * @param ra
-	 * @return
-	 */
+//	/** 이름 수정 기능
+//	 * @param inputMember : 수정할 이름 주소
+//	 * @param loginMember : 현재 로그인된 회원 정보
+//	 * @param ra
+//	 * @return
+//	 */
+//	@PostMapping("updateInfo")
+//	public String updateInfo(
+//			@ModelAttribute Member inputMember,
+//			@SessionAttribute ("loginMember") Member loginMember,
+//			RedirectAttributes ra) {
+//		
+//		int memberNo = loginMember.getMemberNo();
+//		inputMember.setMemberNo(memberNo);
+//		
+//		int result = service.updateInfo(inputMember);
+//		
+//		String message = null;
+//		
+//		if(result > 0) {message = "수정 되었습니다";
+//		
+//		loginMember.setMemberName(inputMember.getMemberName());
+//		
+//		}
+//		else					 message = "수정 실패";
+//		
+//		ra.addFlashAttribute("message", message);
+//		
+//		
+//		
+//		
+//		return "redirect:myPage";
+//	}
+	
+	
+	
 	@PostMapping("updateInfo")
-	public String updateInfo(
-			@ModelAttribute Member inputMember,
-			@SessionAttribute ("loginMember") Member loginMember,
-			RedirectAttributes ra) {
-		
+		public String updateInfo(
+				@ModelAttribute Member inputMember,
+				@SessionAttribute("loginMember") Member loginMember,
+				@RequestParam("profileImg") MultipartFile profileImg,
+				RedirectAttributes ra) {
+			
 		int memberNo = loginMember.getMemberNo();
 		inputMember.setMemberNo(memberNo);
 		
-		int result = service.updateInfo(inputMember);
+		int result = service.memberUpdate(inputMember);
 		
 		String message = null;
 		
-		if(result > 0) {message = "수정 되었습니다";
-		
-		loginMember.setMemberName(inputMember.getMemberName());
-		
+		if(result > 0) {
+			message = "수정 되었습니다";
+			
+			loginMember.setMemberName(inputMember.getMemberName());
+			loginMember.setProfileImg(profileImg);
+			
+		} else {
+			message = "수정 실패";
 		}
-		else					 message = "수정 실패";
 		
 		ra.addFlashAttribute("message", message);
 		
-		
-		
-		
-		return "redirect:myPage";
+			
+			return "redirect:myPage";
+		}
 	}
+
 	
 		
-	}
+	
 
