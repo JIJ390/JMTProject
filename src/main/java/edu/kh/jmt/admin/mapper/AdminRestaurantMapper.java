@@ -109,6 +109,20 @@ public interface AdminRestaurantMapper {
 	 * @return
 	 */
 	List<Menu> menuUpdateView(int restaurantNo);
+
+	/**
+	 * 가게 정보 수정
+	 * @param restaurant
+	 * @return
+	 */
+	int restaurantUpdate(Restaurant restaurant);
+
+	/**
+	 * 기존 메뉴 정보 삭제
+	 * @param restaurantNo
+	 * @return
+	 */
+	int menuListDelete(int restaurantNo);
 	
 	
 
