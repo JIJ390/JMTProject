@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.kh.jmt.noticeView.dto.Faq;
 import edu.kh.jmt.noticeView.dto.Notice;
 import edu.kh.jmt.noticeView.dto.NoticePagination;
 import edu.kh.jmt.noticeView.service.NoticeViewService;
@@ -54,5 +55,23 @@ public class NoticeViewController {
 		
 		return "notice/notice";
 	}
+	
+	
+	/**
+	 * FAQ 리스트 불러오기
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("faq")
+	public String selectFaqList(
+			Model model) {
+			List<Faq> faqList = service.selectFaqList();
+			
+			model.addAttribute("faqList", faqList);
+		
+		return "notice/faq";
+	}
+	
+	
 
-}
+} // end

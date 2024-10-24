@@ -20,6 +20,19 @@
 		WHERE NOTICE_NO > 0
 		ORDER BY NOTICE_NO DESC
 	</select>
+	
+	
+	<!-- FAQ 전체 조회 -->
+	<select id="selectFaqList">
+		SELECT
+			FAQ_NO,
+			FAQ_TITLE,
+			FAQ_CONTENT
+		FROM FAQ
+		WHERE FAQ_NO > 0
+		ORDER BY FAQ_NO DESC
+	</select>
+
 
 
 </mapper>

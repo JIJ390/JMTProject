@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ</title>
-  <!-- <link rel="stylesheet" href="/css/faq/faq.css"> -->
+  <link rel="stylesheet" href="/css/common/header.css">
 
   <style>
 
@@ -42,12 +42,13 @@
 
     #fix-area{
       width: 800px;
-      height: 600px;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       justify-content: space-around;
-      align-items: center
+      align-items: center;
+      box-sizing: border-box;
+      margin: 20px;
     }
 
     #faq-container{
@@ -83,6 +84,7 @@
   .btn {
     transition: all 0.3s ease;
     overflow: hidden;
+    padding: 10px;
   }
   .btn:after {
     position: absolute;
@@ -112,31 +114,39 @@
   display: flex;
   flex-direction: row;
   font-weight: bold;
-}
+  }
+
+.panel {
+  display: none;
+  padding: 20px;
+  }
   </style>
 </head>
 
 <body>
-
+  <th:block th:replace="~{common/header}"></th:block>
   <main class="main">
     <section id="back">
       <!-- 감싸는 배경 -->
 
       <section id="fix-area">
-        <section id="faq-container">
+        <th:block id="faq-container">
           <span><h3>자주 하는 질문 BEST 5</h3></span>
           <hr>
           <br>
           <!-- 내용 정렬 -->
+          <th:block th:each="faq, iterStat : ${faqList}">
            <div>
-              <span><button class="btn">
-                <div>Q</div>
-                <div>사이트 이용 어떻게 해요?</div>
+              <span><div class="btn">
+                <div class="q">Q</div>
+                <div class="faqTitle" th:text="${faq.faqTitle}">사이트 이용 어떻게 해요?</div>
                 <div><span class="open-close">▼</span></div>
-              </button></span>
-              <div id="panel">A1. 그렇게 되었다. </div>
+              </div></span>
+              <div class="panel"  th:text="${faq.faqContent}">
+               <p> A1. 그렇게 되었다.</p> </div>
            </div>
            <br>
+          </th:block>
 
         </section>
       </section>
@@ -163,7 +173,8 @@
 
     $(document).ready(function () {
       $(".btn").click(function () {
-        $("#panel").slideToggle(100);
+        $(".panel").slideUp(100);
+        $(this).parent().next().slideDown(100);
       });
     });
 
