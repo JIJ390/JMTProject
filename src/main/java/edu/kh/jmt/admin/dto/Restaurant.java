@@ -29,5 +29,5 @@ public class Restaurant {
 	private String categoryName;
 	private String locationName;
 	
-	private List<Map<String, String>> menuList;
+//	private List<Map<String, String>> menuList;
 }

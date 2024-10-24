@@ -24,10 +24,10 @@
         </th:block>
 
 
-        <th:block th:each= "restaurant : ${restaurantList}" th:object="${restaurant}">
+        <div th:each= "restaurant : ${restaurantList}" th:object="${restaurant}" id="restaurantList">
           <div class="restaurant-div">
             <div class="restaurant-box">
-              <a href="#">
+              <a th:href="@{/admin/restaurant/{restaurantNo}(restaurantNo=*{restaurantNo})}">
                 <span th:text="*{restaurantNo}"></span>
                 <span th:text="*{restaurantName}"></span>
                 <span th:text="|# *{categoryName}|"></span>
@@ -36,7 +36,7 @@
               </a>
             </div>
           </div>
-        </th:block>
+        </div>
 
       </div>
 
@@ -67,11 +67,15 @@
 
       </div>
 
+
+
+
+   
       
 
     </section>
     <section class="right-section">
-      <form action="/admin/restaurant/manage" method="GET" id="restaurantSearch">
+      <form action="/admin/restaurant" method="GET" id="restaurantSearch">
 
         <select name="key" id="searchKey">
           <option value="rn">이름</option>
@@ -85,6 +89,56 @@
       </form>
 
     </section>
+
+
+       <!-- 팝업 -->
+
+       <div id="restaurantDetail" class="popup-hidden">
+        <div class="popup-head-area">
+          <h1>가게 정보</h1> 
+          <span id="popupClose">&times;</span>
+        </div>
+
+        <div class="img-area">
+
+          <div class="restaurantImg">
+            <img id="restaurantImg1">
+          </div>
+
+          <div class="restaurantImg">
+            <img id="restaurantImg2">
+          </div>
+
+        </div>
+
+        <h3># 가게 이름</h3>
+        <span id="selectRestaurantName" class="restaurant-span"></span>
+
+        <h3># 메뉴</h3>
+
+        <div id="menuArea" class="menu-area"></div>
+
+        <h3># 태그</h3>
+        <span id="selectLoctionName" class="restaurant-tag"># 치킨</span>
+        <span id="selectCategoryName" class="restaurant-tag"># 혜화</span>
+
+        
+        <h3># 전화 번호</h3>
+        <span id="selectRestaurantTel" class="restaurant-span">02-1111-2222</span>
+
+        <h3># 주소</h3>
+        <span id="selectRestaurantAddress"></span>
+
+        <a href="#">해당 가게 페이지로 이동</a>
+
+        <div class="popup-btn-area">
+          <button id="updateBtn">수정</button>
+          <button id="deleteBtn">삭제</button>
+        </div>
+      </div>
+
+
+
   </main>
 
 

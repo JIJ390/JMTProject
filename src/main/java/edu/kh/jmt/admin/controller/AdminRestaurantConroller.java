@@ -9,35 +9,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.kh.jmt.admin.dto.Member;
+import edu.kh.jmt.admin.dto.Menu;
 import edu.kh.jmt.admin.dto.Pagination;
 import edu.kh.jmt.admin.dto.Restaurant;
-import edu.kh.jmt.admin.service.AdminService;
+import edu.kh.jmt.admin.service.AdminRestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("admin/restaurant")
 @SessionAttributes("loginMember")
 @RequiredArgsConstructor
 @Slf4j
-public class AdminConroller {
+public class AdminRestaurantConroller {
 	
-	private final AdminService service;
+	private final AdminRestaurantService service;
 
 	/**
 	 * 가게 등록 페이지 연결
 	 * @return
 	 */
-	@GetMapping("restaurant/regist")
+	@GetMapping("regist")
 	public String restaurantRegist() {
 		
 		return "admin/restaurantRegist";
@@ -52,7 +50,7 @@ public class AdminConroller {
 	 * @param paramMap : 검색 조건
 	 * @return
 	 */
-	@GetMapping("restaurant")
+	@GetMapping("")
 	public String restaurantManage(
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			Model model,
@@ -71,7 +69,7 @@ public class AdminConroller {
 			map = service.restaurantSearchList(cp, paramMap);
 		}
 		
-		log.debug("map : {}", map);
+//		log.debug("map : {}", map);
 		
 		List<Restaurant> restaurantList = (List<Restaurant>)map.get("restaurantList");
 		Pagination pagination = (Pagination)map.get("pagination");
@@ -88,7 +86,7 @@ public class AdminConroller {
 	 * @param insertRestaurant
 	 * @return 
 	 */
-	@PostMapping("restaurant/insert")
+	@PostMapping("insert")
 	public String restaurantInsert(
 			@ModelAttribute Restaurant insertRestaurant,
 			@RequestParam("restaurantImages") List<MultipartFile> restaurantImages,
@@ -102,116 +100,63 @@ public class AdminConroller {
 		
 		int result = service.restaurantInsert(insertRestaurant, restaurantImages, menuNameList, menuPriceList);
 		
-		return "admin/restaurantManage";
-	}
-	
-	
-
-	
-	
-	
-	///////////////////////////////////////////////////////
-	/**
-	 * 회원 관리 페이지 연결
-	 * @return
-	 */
-	@GetMapping("member/manage")
-	public String memberManage() {
-		
-		return "admin/memberManage";
+		return "redirect:/admin/restaurant";
 	}
 	
 	
 	/**
-	 * 추후 검색 조건 추가해야 함!!
-	 * 비동기로 회원 정보 모두 가져오기
-	 * @param cp
-	 * @param model
+	 * 가게 정보 상세 조회 (팝업)
+	 * @param restaurantNo
 	 * @return
 	 */
-	@PostMapping("selectMemberList")
+	@GetMapping("{restaurantNo:[0-9]+}")
 	@ResponseBody
-	public Map<String, Object> selectMemberList(
-		@RequestBody Map<String, String> condition) {
+	public Map<String, Object> restaurantDetail(
+			@PathVariable("restaurantNo") int restaurantNo)	 {
 		
+		Map<String, Object> map = service.restaurantDetail(restaurantNo);
 		
-		log.debug("condition : {}", condition);
-		
-		// 페이지 네이션 관련 클래스 생성 후 cp 사용 예정
-		
-		return service.selectMemberList(condition);
-	}
-
-	
-	/**
-	 * 회원 현황 
-	 * @return
-	 */
-	@GetMapping("selectMemberStatus")
-	@ResponseBody
-	public Map<String, String> selectMemberStatus() {
-
-		
-		
-		Map<String, String> map = service.selectMemberStatus();
-		
-//		log.debug("map : {}", map);
+		log.debug("detailmap : {}", map);
 		
 		return map;
-	}
-	
-	
-	/**
-	 * 회원 차단 여부 변경
-	 * @param memberNo
-	 * @return
-	 */
-	@PutMapping("memberBlock")
-	@ResponseBody
-	public int changeMemberBlock(
-			@RequestBody int memberNo) {
-		
-		return service.changeMemberBlock(memberNo);
 		
 	}
 	
 	
 	/**
-	 * 회원 탈퇴 상태 변경
-	 * @param memberNo
+	 * 가게 삭제(폐점)
+	 * @param restaurantNo
+	 * @param referer
 	 * @return
 	 */
-	@PutMapping("memberSecession")
-	@ResponseBody
-	public int changeMemberSecession (
-			@RequestBody int memberNo) {
+	@PostMapping("delete")
+	public String restaurantDelete(
+			@RequestParam("restaurantNo") int restaurantNo
+			) {
 		
+		int result = service.restaurantDelete(restaurantNo);
 		
-		return service.changeMemberSecession(memberNo);
+		return "redirect:/admin/restaurant";
 	}
 	
 	
 	
-	/**
-	 * 다이렉트 로그인//// 임시 삭제 예정
-	 * @param memberNo
-	 * @param model
-	 * @return
-	 */
-	@PostMapping("directLogin")
-	public String directLogin(
-			@RequestParam("memberNo") int memberNo,
+	@PostMapping("updateView")
+	public String restaurantUpdateView(
+			@RequestParam("restaurantNo") int restaurantNo,
 			Model model
 			) {
-		Member loginMember = service.directLogin(memberNo);
 		
-		log.debug("member : {}", loginMember);
+		Map<String, Object> map = service.restaurantDetail(restaurantNo);
 		
-		// @SessionAttributes({"loginMember"})
-		// 로그인된 회원 정보를 session 에 추가
-		model.addAttribute("loginMember", loginMember);
+		Restaurant restaurant = (Restaurant) map.get("restaurant");
+		List<Menu> menuList = (List<Menu>) map.get("menuList");
+ 		
 		
-		return "redirect:/admin/member/manage";
+		model.addAttribute("restaurant", restaurant);
+		model.addAttribute("menuList", menuList);
+		
+		return "admin/restaurantUpdate";
 	}
-	
+
 }

@@ -246,7 +246,7 @@ const updateRestaurant = (restaurantNo) => {
 
   updateBtn.addEventListener("click", () => {
 
-    const url = "/admin/restaurant/updateView";    // 요청 주소
+    const url = "/admin/restaurant/update";    // 요청 주소
   
     const form = document.createElement("form");
     form.action = url;            // 요청 주소
