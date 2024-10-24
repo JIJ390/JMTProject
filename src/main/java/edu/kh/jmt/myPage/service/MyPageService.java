@@ -1,7 +1,6 @@
 package edu.kh.jmt.myPage.service;
 
-import edu.kh.jmt.admin.dto.Member;
-import edu.kh.jmt.myPage.dto.Mypage;
+import edu.kh.jmt.myPage.dto.Member;
 
 public interface MyPageService{
 
@@ -10,13 +9,13 @@ public interface MyPageService{
 	 * @param loginPW
 	 * @return loginMember 또는 null(email, Pw 틀릴경우)
 	 */
-	Mypage login(String loginEmail, String loginPW);
+	Member login(String loginEmail, String loginPW);
 
 	/** 회원 가입 기능
 	 * @param inputMember
 	 * @return result
 	 */
-	int signUp(Mypage inputMember);
+	int signUp(Member inputMember);
 
 	
 	/** 이메일 중복 검사
@@ -38,7 +37,7 @@ public interface MyPageService{
 	 * @param loginMember
 	 * @return result
 	 */
-	int passwordChange(String currentPw, String newPw, Mypage loginMember);
+	int passwordChange(String currentPw, String newPw, Member loginMember);
 
 	
 	/** 회원 탈퇴 기능
@@ -46,12 +45,12 @@ public interface MyPageService{
 	 * @param loginMember
 	 * @return
 	 */
-	int withdrawal(String memberPw, Mypage loginMember);
+	int withdrawal(String memberPw, Member loginMember);
 
 	/** 이름 수정
 	 * @param inputMember
 	 * @return result
 	 */
-	int updateInfo(Mypage inputMember);
+	int updateInfo(Member inputMember);
 
 }

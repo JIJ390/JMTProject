@@ -3,7 +3,7 @@ package edu.kh.jmt.myPage.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import edu.kh.jmt.myPage.dto.Mypage;
+import edu.kh.jmt.myPage.dto.Member;
 
 @Mapper
 public interface MyPageMapper {
@@ -12,14 +12,14 @@ public interface MyPageMapper {
 	 * @param loginEmail
 	 * @return loginMember or null
 	 */
-	Mypage login(String loginEmail);
+	Member login(String loginEmail);
 
 	
 	/** 회원 가입 기능
 	 * @param inputMember
 	 * @return result
 	 */
-	int signUp(Mypage inputMember);
+	int signUp(Member inputMember);
 
 
 	/** 이메일 중복 검사
@@ -57,5 +57,5 @@ public interface MyPageMapper {
 	 * @param inputMember
 	 * @return result
 	 */
-	int updateInfo(Mypage inputMember);
+	int updateInfo(Member inputMember);
 }

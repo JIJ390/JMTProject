@@ -52,6 +52,7 @@ main {
   justify-content: center;
   align-items: center;
   background-color: #d8d8d8; /* 이미지가 없는 경우 배경색 */
+  pointer-events: none;
 }
 
 .profile-img-wrapper img {

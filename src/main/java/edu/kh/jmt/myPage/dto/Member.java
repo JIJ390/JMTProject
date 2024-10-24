@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class Mypage {
+public class Member {
 
 	private int memberNo; // 회원번호
   private String memberName; // 이름

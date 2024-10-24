@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.kh.jmt.admin.dto.Member;
-import edu.kh.jmt.myPage.dto.Mypage;
+import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.myPage.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +53,7 @@ public class MyPageController {
 //		log.debug("loginEmail : {}", loginEmail);
 //		log.debug("loginPW : {}", loginPW);
 		
-		Mypage loginMember = service.login(loginEmail, loginPW);
+		Member loginMember = service.login(loginEmail, loginPW);
 		
 		
 		if(loginMember == null) { // 로그인 실패
@@ -84,7 +84,7 @@ public class MyPageController {
 	 */
 	@PostMapping("signUp")
 	public String signUp(
-			@ModelAttribute Mypage inputMember,
+			@ModelAttribute Member inputMember,
 			RedirectAttributes ra) {
 		int result = service.signUp(inputMember);
 		
@@ -152,7 +152,7 @@ public class MyPageController {
 	public String passwordChange(
 			@RequestParam("currentPw") String currentPw,
 			@RequestParam("newPw") String newPw,
-			@SessionAttribute("loginMember") Mypage loginMember,
+			@SessionAttribute("loginMember") Member loginMember,
 			RedirectAttributes ra){
 		
 		int result = service.passwordChange(currentPw, newPw, loginMember);
@@ -212,8 +212,9 @@ public class MyPageController {
 	@PostMapping("withdrawal")
 	public String withdrawal(
 			@RequestParam("memberPw") String memberPw,
-			@SessionAttribute("loginMember") Mypage loginMember,
-			RedirectAttributes ra){
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra,
+			SessionStatus status){
 		
 		int result = service.withdrawal(memberPw, loginMember);
 		
@@ -223,6 +224,7 @@ public class MyPageController {
 		if(result > 0) {
 			message = "탈퇴 되었습니다";
 			path = "/";
+			status.setComplete(); // 세션 만료 -> 로그아웃
 		} else {
 			message = "비밀번호가 일치하지 않습니다";
 			path = "withdrawal";
@@ -250,8 +252,8 @@ public class MyPageController {
 	 */
 	@PostMapping("updateInfo")
 	public String updateInfo(
-			@ModelAttribute Mypage inputMember,
-			@SessionAttribute ("loginMember") Mypage loginMember,
+			@ModelAttribute Member inputMember,
+			@SessionAttribute ("loginMember") Member loginMember,
 			RedirectAttributes ra) {
 		
 		int memberNo = loginMember.getMemberNo();
