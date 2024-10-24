@@ -94,6 +94,21 @@ public interface AdminRestaurantMapper {
 	 * @return
 	 */
 	int restaurantDelete(int restaurantNo);
+
+	/**
+	 * 가게 수정용 select sql
+	 * 카테고리 코드와 전화번호 일반 형식으로 조회
+	 * @param restaurantNo
+	 * @return
+	 */
+	Restaurant restaurantUpdateView(int restaurantNo);
+
+	/**
+	 * 가게 수정용 메뉴리스트
+	 * @param restaurantNo
+	 * @return
+	 */
+	List<Menu> menuUpdateView(int restaurantNo);
 	
 	
 

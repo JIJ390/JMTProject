@@ -147,16 +147,45 @@ public class AdminRestaurantConroller {
 			Model model
 			) {
 		
-		Map<String, Object> map = service.restaurantDetail(restaurantNo);
+		Map<String, Object> map = service.restaurantUpdateView(restaurantNo);
 		
 		Restaurant restaurant = (Restaurant) map.get("restaurant");
 		List<Menu> menuList = (List<Menu>) map.get("menuList");
- 		
 		
+		String[] arr = restaurant.getRestaurantAddress().split(",");
+		
+		// 가게 주소 잘라내기
+		model.addAttribute("postcode"     , arr[0]);
+		model.addAttribute("address"      , arr[1]);
+		model.addAttribute("detailAddress", arr[2]);
+			
 		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("menuList", menuList);
 		
 		return "admin/restaurantUpdate";
+	}
+	
+	
+	/**
+	 * 가게 정보 수정
+	 * @param restaurantNo
+	 * @param insertRestaurant
+	 * @param restaurantImages	: 변화 없을 시 null 이 담김
+	 * @param menuNameList
+	 * @param menuPriceList
+	 * @return
+	 */
+	@PostMapping("update")
+	public String restaurantUpdate(
+			@ModelAttribute Restaurant restaurant,
+			@RequestParam(value="restaurantImages", required = false, defaultValue = "1") List<MultipartFile> restaurantImages,
+			@RequestParam("menuName") List<String> menuNameList,
+			@RequestParam("menuPrice") List<String> menuPriceList) {
+		
+		int result = service.restaurantUpdate(restaurant, restaurantImages, menuNameList, menuPriceList);
+		
+		return "redirect:/admin/restaurant";
+		
 	}
 
 }

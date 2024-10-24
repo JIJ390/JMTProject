@@ -213,6 +213,29 @@ public class AdminRestaurantServiceImpl implements AdminRestaurantService{
 	}
 	
 	
-	
+	// 가게 수정화면용 가게 정보 조회
+	@Override
+	public Map<String, Object> restaurantUpdateView(int restaurantNo) {
+		// 번호가 일치하는 가게 정보 가져오기
+		Restaurant restaurant = mapper.restaurantUpdateView(restaurantNo);
+		
+		// 번호가 일치하는 메뉴리스트 가져오기
+		List<Menu> menuList = mapper.menuUpdateView(restaurantNo);
+		
+		// 가져온 정보 map 으로 묶기
+		Map<String, Object> map = Map.of(
+					"restaurant", restaurant,
+					"menuList", menuList);
+		
+		return map;
+	}
 
+	// 가게 정보 수정
+	@Override
+	public int restaurantUpdate(Restaurant restaurant, List<MultipartFile> restaurantImages, List<String> menuNameList,
+	    List<String> menuPriceList) {
+		
+		
+		return 0;
+	}
 }
