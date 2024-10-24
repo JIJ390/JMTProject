@@ -48,4 +48,36 @@
 		WHERE MEMBER_NAME = #{memberName}
 		AND	  MEMBER_DEL_FL = 'N'
 	</select>
+	
+	
+	
+	<!-- 비밀번호 변경 -->
+	<update id="passwordChange">
+		UPDATE "MEMBER"
+		SET MEMBER_PW = #{encPw}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<update id="withdrawal">
+		UPDATE "MEMBER"
+		SET MEMBER_DEL_FL = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	<!-- 이름 변경 -->
+	<update id="updateInfo">
+		UPDATE "MEMBER"
+		SET MEMBER_NAME = #{memberName}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

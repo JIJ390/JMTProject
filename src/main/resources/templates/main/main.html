@@ -70,6 +70,8 @@
     
         <div class="sectionBox">
 
+          <th:block th:text="${session.loginMember}"></th:block>
+
             <h3>#인기순</h3>
             <br>
             <section class="popular-section">
@@ -231,7 +233,7 @@
               <p class="sideP">김성민</p>
               
               <nav>
-                <a href="#" class="sideItem">마이 페이지</a>
+                <a href="/myPage/myPage" id="myPage" class="sideItem">마이 페이지</a> <!-- 마이페이지 링크 추가 -->
                 <a href="#" class="sideItem">메인 페이지</a>
                 <a href="#" class="sideItem">점메추 게시판</a>
                 <a href="#" class="sideItem">공지 사항</a>

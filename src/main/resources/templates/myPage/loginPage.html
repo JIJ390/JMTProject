@@ -17,6 +17,7 @@
 <body>
   <!-- Header Section -->
   <th:block th:replace="~{common/header}"></th:block>
+  <link rel="stylesheet" href="/css/common/header.css">
 
     <!-- Main Content -->
    <main>
@@ -31,7 +32,7 @@
                     <button>로그인</button>
                     <div class="login-links">
                         <a href="/myPage/signUp">회원 가입</a>|
-                        <a href="#">비밀번호 찾기</a>
+                        <a href="/myPage/pwFind">비밀번호 찾기</a>
                     </div>
                 </div>
             </div>
@@ -45,16 +46,6 @@
             </script>
         </form>
    </main>
-
-    <script th:inline="javascript">
-    const message =  /*[[${message}]]*/ "전달 받은 message";
-  
-    if(message != null) alert(message);
-
-    
-    </script>
-
-
 
    
 </body>

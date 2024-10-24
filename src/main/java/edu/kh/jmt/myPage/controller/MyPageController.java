@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.kh.jmt.admin.dto.Member;
 import edu.kh.jmt.myPage.dto.Mypage;
 import edu.kh.jmt.myPage.service.MyPageService;
 import lombok.RequiredArgsConstructor;
@@ -129,6 +131,150 @@ public class MyPageController {
 		return service.nameCheck(memberName);
 	}
 	
+	/** 비밀번호 변경 페이지 호출
+	 * @return
+	 */
+	@GetMapping("passwordChange")
+	public String pwChange() {
+		
+		return "myPage/passwordChange";
+	}
+	
+	
+	/** 비밀번호 변경 기능
+	 * @param currentPw : 현재 비밀번호
+	 * @param newPw : 새로운 비밀번호
+	 * @param loginMember : 세션에서 얻어온 로그인 회원 정보
+	 * @param ra : 리다이렉트 시 request scope로 데이터 전달하는 객체
+	 * @return result
+	 */
+	@PostMapping("passwordChange")
+	public String passwordChange(
+			@RequestParam("currentPw") String currentPw,
+			@RequestParam("newPw") String newPw,
+			@SessionAttribute("loginMember") Mypage loginMember,
+			RedirectAttributes ra){
+		
+		int result = service.passwordChange(currentPw, newPw, loginMember);
+		
+		String message = null;
+		String path = null;
+		
+		if(result > 0) {
+			message = "비밀번호가 변경 되었습니다";
+			path = "myPage"; // 마이페이지로 리다이렉트
+		} else {
+			message = "현재 비밀번호가 일치하지 않습니다";
+			path = "passwordChange"; // 비밀번호 변경페이지로 리다이렉트
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+	}
+	
+	
+	
+	@GetMapping("pwFind")
+	public String pwFind() {
+		
+		return "myPage/pwFind";
+	}
+	
+	
+	
+	/** 마이페이지 페이지 호출
+	 * @return
+	 */
+	@GetMapping("myPage")
+	public String myPage() {
+		
+		return "myPage/myPage";
+	}
+	
+	
+	/** 회원 탈퇴 페이지 호출
+	 * @return
+	 */
+	@GetMapping("withdrawal")
+	public String withdrawal() {
+		
+		return "myPage/withdrawal";
+	}
+	
+	
+	/** 회원 탈퇴 기능
+	 * @param memberPw
+	 * @param loginMember
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("withdrawal")
+	public String withdrawal(
+			@RequestParam("memberPw") String memberPw,
+			@SessionAttribute("loginMember") Mypage loginMember,
+			RedirectAttributes ra){
+		
+		int result = service.withdrawal(memberPw, loginMember);
+		
+		String path = null;
+		String message = null;
+		
+		if(result > 0) {
+			message = "탈퇴 되었습니다";
+			path = "/";
+		} else {
+			message = "비밀번호가 일치하지 않습니다";
+			path = "withdrawal";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+	}
+		
+	
+	/** 내 정보 수정 페이지 불러오기
+	 * @return
+	 */
+	@GetMapping("updateInfo")
+	public String updateInfo() {
+		return "myPage/updateInfo";
+	}
+	
+	/** 이름 수정 기능
+	 * @param inputMember : 수정할 이름 주소
+	 * @param loginMember : 현재 로그인된 회원 정보
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("updateInfo")
+	public String updateInfo(
+			@ModelAttribute Mypage inputMember,
+			@SessionAttribute ("loginMember") Mypage loginMember,
+			RedirectAttributes ra) {
+		
+		int memberNo = loginMember.getMemberNo();
+		inputMember.setMemberNo(memberNo);
+		
+		int result = service.updateInfo(inputMember);
+		
+		String message = null;
+		
+		if(result > 0) {message = "수정 되었습니다";
+		
+		loginMember.setMemberName(inputMember.getMemberName());
+		
+		}
+		else					 message = "수정 실패";
+		
+		ra.addFlashAttribute("message", message);
+		
+		
+		
+		
+		return "redirect:myPage";
+	}
 	
 		
 	}

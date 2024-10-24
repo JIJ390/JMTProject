@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>myPage</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
-    <link rel="stylesheet" href="/css/myPage/myPage.css">
+    <link rel="stylesheet" href="/css/myPage/updateInfo.css">
 </head>
 <body>
     <!-- Header Section -->
@@ -15,9 +15,10 @@
 
     <!-- Main Content -->
     <main>
-    <form action="myPage" method="POST" name="myPageForm" id="myPageForm">
+    <form action="updateInfo" method="POST" name="updateInfoForm" id="updateInfoForm">
         <div class="container">
             <div class="profile">
+                <h1 style="margin-bottom: 30px;">프로필 수정</h1>
                 <div class="profile-img-wrapper"> <!-- 프로필 이미지 -->
                     <a href="/myPage/profile">
                         <img th:with="user=#{user.default.image}" 
@@ -26,22 +27,11 @@
                              alt="프로필 이미지" >
                     </a> 
                 </div>
+                <button class="button">이미지 선택</button>
                 <div class="name">
                     <input type="text" name="memberName" id="memberName" th:value="${session.loginMember.memberName}">
                 </div>
-                <div class="email">
-                    <input type="text" name="memberEmail" id="memberEmail" th:value="${session.loginMember.memberEmail}">
-                </div>
-                <a href="/myPage/updateInfo" class="button">수정하기</a>
-            </div>
-            <div class="footer-links">
-                <div class="horizontal-links">
-                    <a href="/myPage/passwordChange">비밀 번호 변경</a> |
-                    <a href="/myPage/withdrawal">회원탈퇴</a>
-                </div>
-                <a href="#">내가 쓴글</a>
-                <a href="#">리뷰 목록</a>
-                <a href="#">찜목록</a>
+                <button class="myPage-submit" >수정하기</button>
             </div>
         </div>
     </form>

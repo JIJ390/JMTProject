@@ -136,4 +136,6 @@ public class EmailServiceImpl implements EmailService {
 		
 		return redisUtil.getValue(email).equals(authKey);
 	}
+	
+	
 }

@@ -17,5 +17,7 @@ public interface EmailService {
 	 * @return 
 	 */
 	boolean checkAuthKey(Map<String, String> map);
+	
+	
 
 }

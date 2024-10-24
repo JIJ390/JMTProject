@@ -1,5 +1,6 @@
 package edu.kh.jmt.myPage.service;
 
+import edu.kh.jmt.admin.dto.Member;
 import edu.kh.jmt.myPage.dto.Mypage;
 
 public interface MyPageService{
@@ -29,5 +30,28 @@ public interface MyPageService{
 	 * @return count
 	 */
 	int nameCheck(String memberName);
+
+	
+	/** 비밀번호 변경
+	 * @param currentPw
+	 * @param newPw
+	 * @param loginMember
+	 * @return result
+	 */
+	int passwordChange(String currentPw, String newPw, Mypage loginMember);
+
+	
+	/** 회원 탈퇴 기능
+	 * @param memberPw
+	 * @param loginMember
+	 * @return
+	 */
+	int withdrawal(String memberPw, Mypage loginMember);
+
+	/** 이름 수정
+	 * @param inputMember
+	 * @return result
+	 */
+	int updateInfo(Mypage inputMember);
 
 }
