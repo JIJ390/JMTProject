@@ -236,4 +236,36 @@
   	</select>
   	
   	
+  	
+  	<!-- 가게 정보 수정 -->
+  	<update id="restaurantUpdate">
+  		UPDATE "RESTAURANT"
+		SET
+			RESTAURANT_NAME = #{restaurantName},
+			RESTAURANT_ADDRESS = #{restaurantAddress},
+			RESTAURANT_TEL = #{restaurantTel},
+			
+			<if test="restaurantImg1 != null and !restaurantImg1.equals('')">
+    			RESTAURANT_IMG1	= #{restaurantImg1},
+			</if>
+			
+			<if test="restaurantImg2 != null and !restaurantImg2.equals('')">
+    			RESTAURANT_IMG2	= #{restaurantImg2},
+			</if>
+			
+			LOCATION_NO	= #{locationNo},
+			CATEGORY_NO	= #{categoryNo}
+			
+		WHERE 
+			RESTAURANT_NO = #{restaurantNo}
+  	</update>
+  	
+  	<!-- 기존 메뉴 삭제 -->
+  	<delete id="menuListDelete">
+  		DELETE "MENU"
+  		WHERE 
+  			RESTAURANT_NO = #{restaurantNo}
+  	</delete>
+  	
+  	
 </mapper>

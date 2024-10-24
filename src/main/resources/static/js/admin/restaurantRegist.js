@@ -204,13 +204,13 @@ form.addEventListener("submit", e => {
   // const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
 
 
-  // for (let i = 0; i < inputImageList.length; i++) {
-  //   if(inputImageList[i].value.trim().length === 0) {
-  //     alert("대표 이미지를 선택해 주세요");
-  //     e.preventDefault();
-  //     return;
-  //   }
-
+  for (let i = 0; i < inputImageList.length; i++) {
+    if(inputImageList[i].value.trim().length === 0) {
+      alert("대표 이미지를 선택해 주세요");
+      e.preventDefault();
+      return;
+    }
+  }
   //   if(!inputImageList[i].match(fileForm)) {
   //     alert("이미지 파일만 업로드할 수 있습니다");
   //     e.preventDefault();
@@ -219,7 +219,7 @@ form.addEventListener("submit", e => {
   // }
 
 
-
+  // 가게 이름
   if (restaurantName.value.trim().length === 0) {
     alert("가게명을 작성해 주세요");
     restaurantName.focus();
@@ -231,6 +231,7 @@ form.addEventListener("submit", e => {
   // 체크되었는지 확인하기 위한 flag 변수
   let flag = true;
 
+  // 카테고리 선택
   for (let i=0; i < categoryRadio.length; i++) {
     // input 이 체크된 경우가 있을 때 false
     if (categoryRadio[i].checked) flag = false;
@@ -245,6 +246,7 @@ form.addEventListener("submit", e => {
 
   flag = true;
 
+  // 지역 선택
   for (let i=0; i < locationRadio.length; i++) {
     if (locationRadio[i].checked) flag = false;
   }
@@ -255,7 +257,7 @@ form.addEventListener("submit", e => {
     return;
   }
 
-
+  // 메뉴 이름
   for (let i=0; i < menuName.length; i++) {
     if (menuName[i].value.trim().length < 2) {
       alert("최소 2 글자 이상의 음식 이름을 입력해주세요");
@@ -265,6 +267,7 @@ form.addEventListener("submit", e => {
     }
   }
 
+  // 가격 입력
   for (let i=0; i < menuPrice.length; i++) {
     if (!priceFormat.test(menuPrice[i].value.trim())) {
       menuPrice[i].focus();
@@ -274,7 +277,7 @@ form.addEventListener("submit", e => {
     }
   }
 
-
+  // 전화 번호
   if ((restaurantTel.value.trim().lecgth === 0)) {
     alert("전화번호를 검색해 주세요");
     restaurantTel.focus();
@@ -290,13 +293,13 @@ form.addEventListener("submit", e => {
     return;
   }
 
+  // 상세 주소
   if ((detailAddress.value.trim().length === 0)) {
     alert("상세 주소를 입력해 주세요");
     detailAddress.focus();
     e.preventDefault();
     return;
   }
-
 
 
 });

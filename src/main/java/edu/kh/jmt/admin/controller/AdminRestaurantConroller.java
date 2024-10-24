@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.jmt.admin.dto.Menu;
 import edu.kh.jmt.admin.dto.AdminPagination;
@@ -180,9 +181,18 @@ public class AdminRestaurantConroller {
 			@ModelAttribute Restaurant restaurant,
 			@RequestParam(value="restaurantImages", required = false, defaultValue = "1") List<MultipartFile> restaurantImages,
 			@RequestParam("menuName") List<String> menuNameList,
-			@RequestParam("menuPrice") List<String> menuPriceList) {
+			@RequestParam("menuPrice") List<String> menuPriceList,
+			RedirectAttributes ra) {
+		
+		log.debug("aaaa : {}", restaurantImages);
 		
 		int result = service.restaurantUpdate(restaurant, restaurantImages, menuNameList, menuPriceList);
+		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "수정 되었습니다");
+		} else {
+			ra.addFlashAttribute("message", "수정 실패");
+		}
 		
 		return "redirect:/admin/restaurant";
 		

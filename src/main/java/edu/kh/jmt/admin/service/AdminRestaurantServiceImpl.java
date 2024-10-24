@@ -119,8 +119,10 @@ public class AdminRestaurantServiceImpl implements AdminRestaurantService{
 			List<String> menuNameList,
 			List<String> menuPriceList) {
 		
+		
 		// 파일 업로드 확인!!!!
-		if (restaurantImages.isEmpty()) {
+		if (restaurantImages.get(0).isEmpty() || restaurantImages.get(1).isEmpty()) {
+			System.out.println("파일 업로드 오류");
 			return 0;
 		}
 		
@@ -240,31 +242,32 @@ public class AdminRestaurantServiceImpl implements AdminRestaurantService{
 			List<String> menuNameList,
 	    List<String> menuPriceList) {
 		
-		
-			// 파일이 업로드 된 경우
-			if (!restaurantImages.isEmpty()) {
-				return 0;
+			// 가게 번호 저장
+			int restaurantNo = restaurant.getRestaurantNo();
+
+			String rename1 = null;
+			String rename2 = null;
+			
+			// 첫번째 파일 업로드된
+			if (!restaurantImages.get(0).isEmpty()) {
+				rename1 = FileUtil.rename(restaurantImages.get(0).getOriginalFilename());
+				String url1 = restaurantWebPath + rename1;
+				restaurant.setRestaurantImg1(url1);
 			}
 			
-			// 파일명 변경
-			String rename1 = FileUtil.rename(restaurantImages.get(0).getOriginalFilename());
-			String rename2 = FileUtil.rename(restaurantImages.get(1).getOriginalFilename());
-			
-			// 웹 접근 경로(config.properties) + 변경된 파일명 준비
-			String url1 = restaurantWebPath + rename1;
-			String url2 = restaurantWebPath + rename2;
-			
-			// insertRestaurant 에 images 세팅
-			restaurant.setRestaurantImg1(url1);
-			restaurant.setRestaurantImg2(url2);
-			
-			log.debug("insertRestaurant : {} ", restaurant);
+			// 두번째 파일 업로드된 경우
+			if (!restaurantImages.get(1).isEmpty()) {
+				rename2 = FileUtil.rename(restaurantImages.get(1).getOriginalFilename());
+				String url2 = restaurantWebPath + rename2;
+				restaurant.setRestaurantImg2(url2);
+			}
+		
+
+			log.debug("restaurantUpdate : {} ", restaurant);
 			
 			
 			// 4) DB UPDATE
-			int result1 = mapper.restaurantInsert(restaurant);
-			
-			int restaurantNo = restaurant.getRestaurantNo();
+			int result1 = mapper.restaurantUpdate(restaurant);
 			
 			// 입력된 메뉴 정보를 저장할 list 객체 생성
 			List<Menu> menuList = new ArrayList<Menu>();
@@ -283,27 +286,38 @@ public class AdminRestaurantServiceImpl implements AdminRestaurantService{
 				menuList.add(menu);
 			}
 			
-			int result2 = mapper.menuListInsert(menuList);
+			// 기존 메뉴 정보 삭제
+			int result2 = mapper.menuListDelete(restaurantNo);
+			
+			// 새 메뉴리스트 세팅
+			int result3 = mapper.menuListInsert(menuList);
 			
 			try {
 				// C:/uploadFiles/restaurantImg/  폴더가 없으면 생성
 				File folder = new File(restaurantFolderPath);
+				
 				if(!folder.exists()) folder.mkdirs();
 				
 				// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
-				restaurantImages.get(0).transferTo(
-						new File(restaurantFolderPath + rename1));
+				// 해당 이미지가 업로드된 경우에만
+				if (!restaurantImages.get(0).isEmpty()) {
+						restaurantImages.get(0).transferTo(
+							new File(restaurantFolderPath + rename1));
+					}
+
+				if (!restaurantImages.get(1).isEmpty()) {
+						restaurantImages.get(1).transferTo(
+							new File(restaurantFolderPath + rename2));
+					}
 				
-				restaurantImages.get(1).transferTo(
-						new File(restaurantFolderPath + rename2));
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
-				throw new Error("가게 정보 삽입 실패");
+				throw new Error("가게 정보 수정 실패");
 			}
 			
-			
-		return 0;
+
+		return result3;
 		
 	}
 }
