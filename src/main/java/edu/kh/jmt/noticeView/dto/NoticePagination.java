@@ -7,7 +7,7 @@ package edu.kh.jmt.noticeView.dto;
  * Pagination 객체 : 페이징 처리에 필요한 값을 모아두고, 계산하는 객체
  */
 
-public class Pagination {
+public class NoticePagination {
 	
 	private int currentPage;		// 현재 페이지 번호
 	private int listCount;			// 전체 게시글 수
@@ -26,7 +26,7 @@ public class Pagination {
 	// 기본 생성자 X
 	
 	
-	public Pagination(int currentPage, int listCount) {
+	public NoticePagination(int currentPage, int listCount) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
@@ -35,7 +35,7 @@ public class Pagination {
 	}
 
 
-	public Pagination(int currentPage, int listCount, int limit, int pageSize) {
+	public NoticePagination(int currentPage, int listCount, int limit, int pageSize) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
