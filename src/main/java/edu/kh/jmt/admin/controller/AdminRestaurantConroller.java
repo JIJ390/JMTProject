@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.admin.dto.Menu;
-import edu.kh.jmt.admin.dto.Pagination;
+import edu.kh.jmt.admin.dto.AdminPagination;
 import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.service.AdminRestaurantService;
 import lombok.RequiredArgsConstructor;
@@ -72,11 +72,11 @@ public class AdminRestaurantConroller {
 //		log.debug("map : {}", map);
 		
 		List<Restaurant> restaurantList = (List<Restaurant>)map.get("restaurantList");
-		Pagination pagination = (Pagination)map.get("pagination");
+		AdminPagination adminPagination = (AdminPagination)map.get("pagination");
 		
 		
 		model.addAttribute("restaurantList", restaurantList);
-		model.addAttribute("pagination", pagination);
+		model.addAttribute("pagination", adminPagination);
 		
 		return "admin/restaurantManage";
 	}
