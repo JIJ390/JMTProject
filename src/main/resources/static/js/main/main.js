@@ -19,50 +19,84 @@ for (let i = 0; i < MainHeartBtn.length; i++) {
 
 
 foodCategoryBtn.addEventListener("click", e => {
-
+  
   e.preventDefault();
-
-
+  
+  
   if(foodCategoryPopUp.classList.contains("foodCategoryPopUp-close")){
     foodCategoryPopUp.classList.remove("foodCategoryPopUp-close")
   }
 });
 
-  
+
 
 
 const foodCategoryBtnValue = document.getElementsByName("valus")
 foodCategoryBtnValue.forEach(function(button){ // 모든 각각에버튼을 클릭시
   
+  const foodCloseBtn= document.querySelector(".foodClosePopup") // 취소버튼
   const foodCategorySubmit = document.querySelector(".foodCategorySubmit"); //카테고리 값 버튼
   const tag = document.querySelector(".tag"); //카테고리 전달 버튼
 
   button.addEventListener("click", function(){
     var value = button.value; // 클릭된 버튼의 value값 가져옴
-    document.getElementById("btnResult").textContent = "카테고리 : #" +  value; //저장할 요소 불러와 textContent 넣어주기
+    document.getElementById("foodBtnResult").textContent = "카테고리 : #" +  value; //저장할 요소 불러와 textContent 넣어주기
     console.log(value); //value값 넘어오는거보기
     
     
-    if(value == null){ //선택한 음식 카테고리가 없다면
-      alert("선택한 카테고리가 존재하지않습니다.");
-    }else{
       foodCategorySubmit.addEventListener("click", () => {
+
         tag.value = value;
 
-        foodCategoryPopUp.classList.add("foodCategoryPopUp-close");
+        
+        foodCategoryPopUp.classList.add("foodCategoryPopUp-close"); // 적용시 메인페이지에 값 저장
       })
-    }
 
 
   })
 });
 
 
+/* 지역 설정 */
+const regionListBtn = document.querySelectorAll(".regionListBtn")
+for(let i = 0; i < regionListBtn.length ; i++){
+
+  regionListBtn[i].addEventListener("click", () => { // 버튼들중 하나를 클릭했을경우
+// 클릭 시 추가 
+
+for(let a = 0; a < regionListBtn.length ; a++){
+  regionListBtn[a].classList.remove("regionListBtn-bc")
+}
+
+regionListBtn[i].classList.add("regionListBtn-bc") // 선택된거 클래스 추가
+
+const regionBtnResult = document.querySelector("#regionBtnResult")
+
+const value = regionListBtn[i].innerText; 
+console.log(value);
+
+regionBtnResult.textContent = value;
+
+const region = document.querySelector(".region")
 
 
+region.value = value;
 
+})
+}
 
+/* ========================================= 팝업 닫기 ====================================== */
+const regionCategorySubmit = document.querySelector(".regionCategorySubmit")
+const regionCategoryPopUp = document.querySelector(".regionCategoryPopUp")
+const regoinBtn = document.querySelector("#regionCategoryBtn")
 
+regionCategorySubmit.addEventListener("click", () => {
+  regionCategoryPopUp.classList.add("regionCategoryPopUp-close")
+
+})
+regoinBtn.addEventListener("click", () => {
+  regionCategoryPopUp.classList.remove("regionCategoryPopUp-close")
+})
 
 
 

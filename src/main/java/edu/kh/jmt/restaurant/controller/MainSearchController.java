@@ -40,13 +40,15 @@ public class MainSearchController {
 			
 			) throws UnsupportedEncodingException {
 		
+		
+		log.debug("================= searchCode : {} ", searchCode);
 		log.debug("================= region : {} ", region);
 		log.debug("================= tag : {} ", tag);
 		
 //		log.debug("=======View searchBar 값 : {}", searchCode );
 		// 값 가져올수 있음
 		
-		List<RestaurantDto> searchResult = service.searchResult(searchCode);
+		List<RestaurantDto> searchResult = service.searchResult(searchCode, tag, region);
 		
 		model.addAttribute("searchResult", searchResult);
 		
