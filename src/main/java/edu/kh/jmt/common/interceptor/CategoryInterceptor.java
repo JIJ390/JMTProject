@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.kh.jmt.admin.service.AdminService;
+import edu.kh.jmt.admin.service.AdminRestaurantService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CategoryInterceptor implements HandlerInterceptor{
 
 	@Autowired // 의존성 주입
-	private	AdminService service;
+	private	AdminRestaurantService service;
 	
 	// 후처리
 	@Override

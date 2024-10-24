@@ -13,11 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.kh.jmt.admin.dto.Member;
 import edu.kh.jmt.admin.dto.Menu;
 import edu.kh.jmt.admin.dto.Pagination;
 import edu.kh.jmt.admin.dto.Restaurant;
-import edu.kh.jmt.admin.mapper.AdminMapper;
+import edu.kh.jmt.admin.mapper.AdminRestaurantMapper;
 import edu.kh.jmt.common.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +26,9 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 @Service
 @RequiredArgsConstructor
-public class AdminServiceImpl implements AdminService{
+public class AdminRestaurantServiceImpl implements AdminRestaurantService{
 
-	private final AdminMapper mapper;
+	private final AdminRestaurantMapper mapper;
 	
 	
 	@Value("${my.restaurant.web-path}") // springframework 로 import
@@ -207,66 +206,13 @@ public class AdminServiceImpl implements AdminService{
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	/////////////////////////////////////////////////////////////////////////
-	//회원 관리 페이지
-	
-	// 회원 정보 모두 조회
+	// 가게 삭제
 	@Override
-	public Map<String, Object> selectMemberList(Map<String, String> condition) {
-		
-		int cp = Integer.parseInt(condition.get("cp")); 
-		
-		// 검색 조건에 맞는 회원 수 조회
-		int searchCount = mapper.getMemberSearchCount(condition);
-//		log.debug("count : {}", searchCount);
-		
-		// 페이지네이션 객체 생성
-		Pagination pagination = new Pagination(cp, searchCount);
-		
-		int limit = pagination.getLimit();  // limit  : 한 페이지에 보여질 게시글의 최대 개수
-		int offset = (cp - 1) * limit;			// offset : 몇 개의 게시글을 건너뛰고 조회할 건지에 대한 값
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		
-		List<Member> memberList = mapper.selectMemberList(condition, rowBounds);
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put(("memberList"), memberList);
-		map.put(("pagination"), pagination);		
-		
-		return map;
+	public int restaurantDelete(int restaurantNo) {
+		return mapper.restaurantDelete(restaurantNo);
 	}
 	
 	
-	// 회원 현황 조회
-	@Override
-	public Map<String, String> selectMemberStatus() {
-		return mapper.selectMemberStatus();
-	}
 	
-	// 회원 차단 여부 변경
-	@Override
-	public int changeMemberBlock(int memberNo) {
-		return mapper.changeMemberBlock(memberNo);
-	}
-	
-	
-	// 회원 탈퇴 여부 변경
-	@Override
-	public int changeMemberSecession(int memberNo) {
-		return mapper.changeMemberSecession(memberNo);
-	}
-	
-	
-	// 임시로그인
-	@Override
-	public Member directLogin(int memberNo) {
-		return mapper.directLogin(memberNo);
-	}
+
 }

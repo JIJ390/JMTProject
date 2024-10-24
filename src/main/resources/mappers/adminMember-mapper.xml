@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.jmt.admin.mapper.AdminMemberMapper">
+
+  	
+  	<!-- //////////////////////////////////////////////////회원관리 페이지/////////////////////////////// -->
+  	
+  	
+  	<!-- 조건에 따른 전체 회원 조회
+  		searchCondition 0 : 전체, 1 : 차단 Y : 탈퇴
+  		searchKey n : 번호 , e : 이메일 , mn : 이름
+  		searchQuery : 검색어 
+  	 -->
+  	<select id="selectMemberList"
+  			resultType="Member">
+  		SELECT 
+		  	MEMBER_NO, 
+		  	MEMBER_NAME,
+		  	MEMBER_EMAIL,
+		  	MEMBER_DEL_FL,
+		  	MEMBER_AUTH 
+		FROM "MEMBER"
+		WHERE MEMBER_NO > 0
+		<!-- 차단 회원 -->
+		<if test='searchCondition == "1"'>
+			AND MEMBER_AUTH = 1
+		</if>
+		
+		<!-- 탈퇴 회원 -->
+		<if test='searchCondition == "Y"'>
+			AND MEMBER_DEL_FL = 'Y'
+		</if>
+		
+		<choose>
+			<!-- 번호 검색인 경우 -->
+			<when test='searchKey == "n"'>
+				AND MEMBER_NO LIKE  '%' || #{searchQuery} || '%'
+			</when>
+			
+			<!-- 이메일 검색인 경우 -->
+			<when test='searchKey == "e"'>
+				AND LOWER(MEMBER_EMAIL) LIKE LOWER('%' || #{searchQuery} || '%') 
+			</when>
+			
+			<!-- 작성자 검색인 경우 -->
+			<when test='searchKey == "mn"'>
+				AND LOWER(MEMBER_NAME) LIKE  LOWER('%' || #{searchQuery} || '%')
+			</when>
+	
+		</choose>
+
+		ORDER BY MEMBER_NO DESC
+  	</select>
+  	
+  	
+  	
+  	<select id="selectMemberStatus"
+  			resultType="map">
+  	SELECT
+		CAST((SELECT COUNT(*)
+		 FROM "MEMBER"
+		 WHERE MEMBER_DEL_FL = 'N'
+		 AND   MEMBER_AUTH IN (0, 2)) AS VARCHAR2(4)) AS "activeMember",
+		CAST((SELECT COUNT(*)
+		 FROM "MEMBER") AS VARCHAR2(4)) AS "totalMember",	
+		CAST((SELECT COUNT(*)
+		 FROM "MEMBER"
+		 WHERE MEMBER_AUTH = 1) AS VARCHAR2(4)) AS "blockMember",
+		CAST((SELECT COUNT(*)
+		 FROM "MEMBER"
+		 WHERE MEMBER_DEL_FL = 'N') AS VARCHAR2(4)) AS "secessionMember"
+	FROM
+	DUAL
+  	</select>
+  	
+  	
+  	<!-- 탈퇴 여부 변경 -->
+  	<update id="changeMemberBlock">
+  		UPDATE "MEMBER"
+  		SET MEMBER_AUTH = DECODE(MEMBER_AUTH, 0, 1, 1, 0, 2)
+  		WHERE MEMBER_NO = #{memberNo}
+  	</update>
+  	
+  	
+  	<update id="changeMemberSecession">
+  		UPDATE "MEMBER"
+  		SET MEMBER_DEL_FL = DECODE(MEMBER_DEL_FL, 'Y', 'N', 'Y')
+  		WHERE MEMBER_NO = #{memberNo}
+  	</update>
+  	
+  	
+  	
+  	<select id="getMemberSearchCount">  		
+  		SELECT 
+			COUNT(*) 
+		FROM "MEMBER"
+		WHERE MEMBER_NO > 0
+		<!-- 차단 회원 -->
+		<if test='searchCondition == "1"'>
+			AND MEMBER_AUTH = 1
+		</if>
+		
+		<!-- 탈퇴 회원 -->
+		<if test='searchCondition == "Y"'>
+			AND MEMBER_DEL_FL = 'Y'
+		</if>
+		
+		<choose>
+			<!-- 번호 검색인 경우 -->
+			<when test='searchKey == "n"'>
+				AND MEMBER_NO LIKE  '%' || #{searchQuery} || '%'
+			</when>
+			
+			<!-- 이메일 검색인 경우 -->
+			<when test='searchKey == "e"'>
+				AND LOWER(MEMBER_EMAIL) LIKE LOWER('%' || #{searchQuery} || '%') 
+			</when>
+			
+			<!-- 작성자 검색인 경우 -->
+			<when test='searchKey == "mn"'>
+				AND LOWER(MEMBER_NAME) LIKE  LOWER('%' || #{searchQuery} || '%')
+			</when>
+	
+		</choose>
+
+		ORDER BY MEMBER_NO ASC
+  	
+  	
+  	</select>
+  	
+  	
+  	
+  	
+  	<!-- 임시 로그인 삭제예정 -->
+  	<select id="directLogin"
+			resultType="Member">
+	  	SELECT 
+		  	MEMBER_NO, 
+		  	MEMBER_NAME, 
+		  	MEMBER_EMAIL, 
+		  	MEMBER_PW,
+			PROFILE_IMG, 
+			MEMBER_AUTH,
+			MEMBER_DEL_FL,
+			TO_CHAR(MEMBER_DATE, 
+				'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') MEMBER_DATE
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+		AND   MEMBER_DEL_FL = 'N'
+	
+	</select>
+</mapper>

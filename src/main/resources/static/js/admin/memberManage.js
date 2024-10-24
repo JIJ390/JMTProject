@@ -25,7 +25,7 @@ const selectMemberList = (cp) => {
 
   console.log(condition);
 
-  fetch("/admin/selectMemberList", {
+  fetch("/admin/member/selectMemberList", {
     method : "POST", 
     headers: {"Content-Type": "application/json"}, 
     body : JSON.stringify(condition)
@@ -111,7 +111,7 @@ const selectMemberList = (cp) => {
         // 차단 버튼 이벤트 추가
         blockBtn.addEventListener("click", () => {
 
-          fetch("/admin/memberBlock", {
+          fetch("/admin/member/block", {
             method : "PUT", 
             headers: {"Content-Type": "application/json"}, 
             body : member.memberNo
@@ -154,7 +154,7 @@ const selectMemberList = (cp) => {
         // 차단 버튼 이벤트 추가
         secessionBtn.addEventListener("click", () => {
 
-          fetch("/admin/memberSecession", {
+          fetch("/admin/member/secession", {
             method : "PUT", 
             headers: {"Content-Type": "application/json"}, 
             body : member.memberNo
@@ -195,7 +195,7 @@ const selectMemberList = (cp) => {
           // form / Ajax 만 POST 방식
 
           const form = document.createElement("form");
-          form.action = "/admin/directLogin"; // 요청 주소
+          form.action = "/admin/member/directLogin"; // 요청 주소
           form.method = "POST";         // 메소드 지정
 
           const input = document.createElement("input");
@@ -235,7 +235,7 @@ const selectMemberList = (cp) => {
  */
 const selectMemberStatus = () => {
 
-  fetch("/admin/selectMemberStatus")
+  fetch("/admin/member/selectMemberStatus")
   .then(response => {
     if (response.ok) return response.json();
     throw new Error("조회 오류");
