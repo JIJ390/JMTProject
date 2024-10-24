@@ -1,5 +1,7 @@
 package edu.kh.jmt.restaurant.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,7 +24,7 @@ public interface RestaurantMapper {
 	 * @param reviewRownum
 	 * @return
 	 */
-	ReviewDto selectReview(
+	List<ReviewDto> selectReview(
 			@Param("restaurantNo") int restaurantNo, 
 			@Param("reviewRownum")int reviewRownum);
 

@@ -1,5 +1,7 @@
 package edu.kh.jmt.restaurant.service;
 
+import java.util.List;
+
 import edu.kh.jmt.restaurant.dto.RestaurantDto;
 import edu.kh.jmt.restaurant.dto.ReviewDto;
 
@@ -18,6 +20,6 @@ public interface RestaurantService {
 	 * @param reviewRownum
 	 * @return
 	 */
-	ReviewDto selectReview(int restaurantNo, int reviewRownum);
+	List<ReviewDto> selectReview(int restaurantNo, int reviewRownum);
 
 }

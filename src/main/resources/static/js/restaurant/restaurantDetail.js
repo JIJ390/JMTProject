@@ -1,10 +1,16 @@
 const reviewBtn = document.querySelector(".reviewBtn");
 reviewBtn.addEventListener("click", () => {
   location.href = "/restaurant/add"
-})
+});
 
-const mainReviewContent = document.querySelector(".mainReviewContent");
+const reviewBtn1 = document.querySelector(".reviewBtn1");
+reviewBtn1.addEventListener("click", () => {
+  location.href = "/restaurant/add"
+});
 
-const content = /*[[${review.reviewContent}]]*/ "리뷰 본문"
+const asc = document.querySelector(".asc");
 
-mainReviewContent.innerHTML = content;
+
+
+
+

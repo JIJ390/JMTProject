@@ -47,7 +47,15 @@
 
 	<select id="selectReview" resultType="reviewDto">
 		SELECT
-			*
+			REVIEW_NO,
+			REVIEW_CONTENT,
+			LIKE_FL,
+			TO_CHAR(REVIEW_DATE, 'YYYY-MM-DD') AS "REVIEW_DATE",
+			REVIEW_DEL_FL,
+			RESTAURANT_NO,
+			MEMBER_NO,
+			PROFILE_IMG,
+			MEMBER_NAME
 		FROM
 			(
 			SELECT
@@ -66,7 +74,7 @@
 			) T
 		JOIN (SELECT MEMBER_NO, PROFILE_IMG, MEMBER_NAME
 			FROM "MEMBER") USING (MEMBER_NO) 
-		WHERE T.RN = #{reviewRownum}
+		WHERE T.RN BETWEEN 1 AND #{reviewRownum}
 	
 	</select>
 
