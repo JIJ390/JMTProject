@@ -8,7 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import edu.kh.jmt.noticeView.dto.Notice;
-import edu.kh.jmt.noticeView.dto.Pagination;
+import edu.kh.jmt.noticeView.dto.NoticePagination;
 import edu.kh.jmt.noticeView.mapper.NoticeViewMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -32,7 +32,7 @@ public class NoticeViewServiceImpl implements NoticeViewService {
 			// 조회될 목록 페이지, 출력할 페이징(pageNation) 값을 계산할
 			// Pagination 객체 생성하기 
 			
-			Pagination pagination = new Pagination(cp, listCount);
+			NoticePagination pagination = new NoticePagination(cp, listCount);
 			int limit = pagination.getLimit();
 			int offset = (cp - 1)* limit;
 			
