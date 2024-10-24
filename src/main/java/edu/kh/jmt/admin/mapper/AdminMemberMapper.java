@@ -6,7 +6,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
-import edu.kh.jmt.admin.dto.Member;
+import edu.kh.jmt.myPage.dto.Member;
+
 
 @Mapper
 public interface AdminMemberMapper {

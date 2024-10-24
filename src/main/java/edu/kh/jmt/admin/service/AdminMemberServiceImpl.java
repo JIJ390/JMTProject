@@ -8,9 +8,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.kh.jmt.admin.dto.Member;
 import edu.kh.jmt.admin.dto.Pagination;
 import edu.kh.jmt.admin.mapper.AdminMemberMapper;
+import edu.kh.jmt.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

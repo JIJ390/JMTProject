@@ -2,7 +2,8 @@ package edu.kh.jmt.admin.service;
 
 import java.util.Map;
 
-import edu.kh.jmt.admin.dto.Member;
+import edu.kh.jmt.myPage.dto.Member;
+
 
 public interface AdminMemberService {
 

@@ -65,6 +65,7 @@ const selectMemberList = (cp) => {
     //  forEach
     list.forEach(member => {
       // 매개변수 member == 조회된 list 에서 하나씩 꺼낸 요소
+
       
       // tr 요소 만들기
       const tr = document.createElement("tr");
@@ -80,7 +81,7 @@ const selectMemberList = (cp) => {
       td3.innerText = member.memberEmail;
       
       const td4 = document.createElement("td");
-      let str = (member.memberAuth == 1) ? '차단' : '활동';
+      let str = (member.memberAuth === 1) ? '차단' : '활동';
       if (member.memberDelFl === 'Y') str = '탈퇴'
       td4.innerText = str;
 
@@ -91,8 +92,8 @@ const selectMemberList = (cp) => {
       let str2;
 
       switch (member.memberAuth) {
-        case '0' : str2 = '차단'; break;
-        case '1' : str2 = '복구'; break;
+        case 0 : str2 = '차단'; break;
+        case 1 : str2 = '복구'; break;
         default : str2 = '불가';
       }
 
@@ -103,7 +104,7 @@ const selectMemberList = (cp) => {
         // 탈퇴 상태일때 변경 불가
         blockBtn.disabled = true;
       } 
-      else if (member.memberAuth === '2') {
+      else if (member.memberAuth === 2) {
         // 관리자 계정 차단 불가
         blockBtn.disabled = true;
       }
@@ -138,7 +139,7 @@ const selectMemberList = (cp) => {
 
       // 회원 상태에 따라 다른 문구 출력
       let str3 = (member.memberDelFl === 'Y' ? '복구' : '탈퇴');
-      if (member.memberAuth === '2') {
+      if (member.memberAuth === 2) {
         str3 = '불가';
       }
 
@@ -146,7 +147,7 @@ const selectMemberList = (cp) => {
       secessionBtn.innerText = str3;
       td6.append(secessionBtn);
 
-      if (member.memberAuth === '2') {
+      if (member.memberAuth === 2) {
         // 관리자 계정 탈퇴 불가
         secessionBtn.disabled = true;
       }
