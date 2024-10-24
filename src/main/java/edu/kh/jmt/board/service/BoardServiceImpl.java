@@ -89,11 +89,23 @@ public class BoardServiceImpl implements BoardService{
 		return boardNo;
 	}
 	
-	
+	// 메인페이지 출력
 	@Override
 	public List<Board> boardMain() {
 		return mapper.boardMain();
 	}
-				
+
+	// 게시글 삭제
+	@Override
+	public int boardDelete(int boardNo, int memberNo) {
+		return mapper.boardDelete(boardNo, memberNo);
+	}
+
+	// 게시글 수정
+	@Override
+	public Board updateView(int boardNo) {
+		return mapper.updateView(boardNo);
+	}
+	
 	
 }

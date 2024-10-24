@@ -16,7 +16,24 @@ public interface BoardService {
 	int boardWrite(Board inputBoard, MultipartFile boardImage);
 
 	
-	
+	/**
+	 * 게시글 조회
+	 * @return
+	 */
 	List<Board> boardMain();
+
+	/** 게시글 삭제
+	 * @param boardNo
+	 * @param memberNo
+	 * @return
+	 */
+	int boardDelete(int boardNo, int memberNo);
+
+	/**
+	 *  게시글 수정
+	 * @param boardNo
+	 * @return
+	 */
+	Board updateView(int boardNo);
 
 }

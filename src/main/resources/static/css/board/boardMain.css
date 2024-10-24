@@ -57,6 +57,28 @@
   gap: 10px;
 }
 
+/* 버튼 영역 */
+.board-btn-area{
+  text-align: right;
+}
+
+/* 버튼 */
+.board-btn-area button{
+  background-color: #6EC3C2;
+  width: 80px;
+  height: 30px;
+  border: none;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.board-btn-area button:hover{
+  background-color: white;
+  color : #6EC3C2;
+  border: 2px solid #6EC3C2;
+}
+
 .profile-pic {
   width: 40px;
   height: 40px;
@@ -131,6 +153,12 @@
   position: fixed;
   bottom: 70px;
   right : 90px;
+}
+
+.writeBtn button:hover{
+  background-color: white;
+  color : #6EC3C2;
+  border: 2px solid #6EC3C2;
 }
 
 /* 상단 버튼*/
