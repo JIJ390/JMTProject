@@ -22,16 +22,16 @@
 
 
 
-    <div class="bodyItem">
+    <div class="bodyItem" >
         <!-- ------------- 사이드 ---------------------- -->
         <aside class="category">
 
-            <div class="categoryBox">
-
+            <form action="/search" method="get" class="categoryBox">
                 <div class="categorySearchBox">
 
                     <div class="searchBox">
-                        <input type="text" class="categorySearch" placeholder="검색">
+                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색"
+                        th:value="${searchCode}">
                         <button class="categorySearch_btn">🍳</button>
                     </div>
 
@@ -39,13 +39,12 @@
 
                 <hr>
 
-                <div>카테고리</div>
+                <div>지역별</div>
 
                 <hr>
 
                 <div>카테고리</div>
 
-                <hr>
 
                 <div class="categoryBtns_box">
                     <button class="categoryBtns">최신순</button>|
@@ -56,7 +55,7 @@
                 </div>
                 <hr>
 
-            </div>
+            </form>
 
         </aside>
         <!-- ------------- 사이드 ---------------------- -->
@@ -65,27 +64,28 @@
 
         <div>
             <!-- -------------------------- 몸통 ------------------ -->
-            <section class="store-section" onclick="restaurant()">
+            <section class="store-section" th:each="searchCode:${searchResult}">
                 <div class="store-image">
-                    <img src="../html/images/샘플.jpg" alt="매장 이미지">
+                    <img th:src="@{searchCode.restaurantImg1}" alt="매장 이미지">
                 </div>
                 <div class="store-info">
-                    <h1>삐삐 맛있어</h1>
-                    <p class="store-address">경기도 의정부시</p>
-                    <p>떡볶이 / 한식</p>
-                    <p class="store-phone">010-2323-2322</p>
+                    <h1 th:text="${searchCode.restaurantName}">매장 이름</h1>
+                    <p class="store-address" th:text="${searchCode.restaurantAddress}">주소</p>
+                    <p th:text="${searchCode.categoryName}"></p>
+                    <p class="store-phone" th:text="${searchCode.restaurantTel}">전화번호</p>
                 </div>
                 <div class="store-actions">
-                    <p class="store-rating">81%</p>
+                    <p class="store-rating" th:text="|${searchCode.likePercent}%|">퍼센트</p>
                     <button class="heartBtn">
                         <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
                     </button>
                 </div>
             </section>
+            
 
             <!-- -------------------------- 몸통 ------------------ -->
 
-    </div>
+        </div>
     
               <!-- --------------------------------------- side --> 
               <div class="menu-container">

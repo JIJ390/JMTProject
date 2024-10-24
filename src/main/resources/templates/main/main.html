@@ -16,13 +16,15 @@
   <header>
     <div id="header-Font">
       <a href="#">메인페이지</a>
-      <a href="#">점메추</a>
+      <a href="/notice/notice">점메추</a>
       <a href="#">공지사항</a>
       <a href="#">FAQ</a>
 
       <div class="logoBox">
-        <a href="#"><img src="/" alt="로고" id="logoImage">
-          <img src="../html/images/logoText.png" alt="로고 글자" id="logoText"></a>
+        <a href="#">
+          <img src="/images/logo.png" alt="로고" id="logoImage">
+          <img src="/images/logoText.png"  alt="로고 글자" id="logoText">
+        </a>
       </div>
 
     </div>
@@ -38,197 +40,165 @@
 
   <!-- Main Content -->
   <main>
-    <section class="content-header">
+    <form class="content-header"  action="/search" method="GET">
       <h1>맛집 검색 J&T ! </h1>
 
       <br>
 
-      <form class="searchBox" action="/search" method="GET">
-  
-            <input type="text" id="searchBar" name="searchBar">
-    
-            <button id="searchBtn" type="submit">🍳</button>
-    
-      </form>
+      <div class="searchBox">
 
-      <br>
-      <br>
+        <input type="text" id="searchCode" name="searchCode">
 
-      <div class="filter">
-        <a href="#" class="filter-category">음식 종류</a>
+        <button id="searchBtn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
 
-        <a href="#" class="filter-category">지역 선택</a>
-
-        <a href="#" class="filter-category">정렬 방식</a>
       </div>
 
 
-    </section>
+      <div class="filter">
+        <a class="filter-category" id="foodCategoryBtn">음식 종류</a>
 
+        <a class="filter-category" id="regionCategoryBtn">지역 선택</a>
+      </div>
+
+     <input class="tag" name="tag" readonly> </input>
+
+      <input class="region" name="region" readonly> </input>
+    </form>
+
+    <!-- ------------------------------------카테고리 팝업-------------------------------------------------------- -->
+      
+      <div class="foodCategoryPopUp foodCategoryPopUp-close">
+        <div class="foodCategoryPopUp-title">음식 카테고리</div>
+  
+        <div class="foodCategoryPopUp-arrow">
+          <div class="foodCategoryPopUp-left">
+            <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="한식">#한식</button> </div>
+            <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="양식">#양식</button> </div>
+            <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="일식">#일식</button> </div>
+            <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="중식">#중식</button> </div>
+          </div>
+    
+          <div class="foodCategoryPopUp-right"> 
+
+            <p id="btnResult">카테고리를 선택해주세요</p>
+            <button class="foodCategorySubmit">적용하기</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      
+      
 
     <!-- ------------------------------------------------------------------------------------- 하나만 필요  -->
 
+<section>
+
     <div class="sectionBox">
-
+  
       <h3>#인기순</h3>
-      <br>
+        <br>
       <section class="popular-section">
-
-        <div class="store-box" onclick="">
+  
+        <div class="store-box" th:each= "like:${listLike}">
           <div class="store-image">
-            <!-- The image will go here -->
-            <img src="../html/images/샘플.jpg" alt="가게 사진">
+              <!-- The image will go here -->
+            <img th:src="@{like.restaurantImg1}" alt="가게 사진">
           </div>
           <div class="store-info">
-            <span class="store-name">떡볶이 엄청나</span>
-            <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+            <span class="store-name" th:text="${like.restaurantName}">
+
+            </span>
+              <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
             <button class="heartBtn">
               <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
             </button>
           </div>
         </div>
-
-
-        <div class="store-box">
-          <div class="store-image">
-            <!-- The image will go here -->
-            <img src="../html/images/샘플1.jpg" alt="가게 사진">
-          </div>
-          <div class="store-info">
-            <span class="store-name">떡볶이 엄청나</span>
-            <button class="heartBtn">
-              <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
-            </button>
-          </div>
-        </div>
-
-
-        <div class="store-box">
-          <div class="store-image">
-            <!-- The image will go here -->
-            <img src="../html/images/샘플3.jpg" alt="가게 사진">
-          </div>
-          <div class="store-info">
-            <span class="store-name">떡볶이 엄청나</span>
-            <button class="heartBtn">
-              <i class="fas fa-heart fa-lg" style="color: #ff0000;"></i>
-            </button>
-          </div>
-        </div>
+  
+  
+      </section>
     </div>
-    </section>
-    </div>
+    
     <div class="sectionBox">
-
-      <h3>#인기순</h3>
-      <br>
+  
+      <h3>#최신등록순</h3>
+        <br>
       <section class="popular-section">
-
-        <div class="store-box">
+  
+        <div class="store-box" th:each= "current:${listCurrent}">
           <div class="store-image">
-            <!-- The image will go here -->
-            <img src="../html/images/샘플.jpg" alt="가게 사진">
+              <!-- The image will go here -->
+            <img th:src="@{current.restaurantImg1}" alt="가게 사진">
           </div>
           <div class="store-info">
-            <span class="store-name">떡볶이 엄청나</span>
-            <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+            <span class="store-name" th:text="${current.restaurantName}">
+
+            </span>
+              <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
             <button class="heartBtn">
               <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
             </button>
           </div>
         </div>
-
-
-        <div class="store-box">
-          <div class="store-image">
-            <!-- The image will go here -->
-            <img src="../html/images/샘플1.jpg" alt="가게 사진">
-          </div>
-          <div class="store-info">
-            <span class="store-name">떡볶이 엄청나</span>
-            <button class="heartBtn">
-              <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
-            </button>
-          </div>
-        </div>
-
-
-        <div class="store-box">
-          <div class="store-image">
-            <!-- The image will go here -->
-            <img src="../html/images/샘플3.jpg" alt="가게 사진">
-          </div>
-          <div class="store-info">
-            <span class="store-name">떡볶이 엄청나</span>
-            <button class="heartBtn">
-              <i class="fas fa-heart fa-lg" style="color: #ff0000;"></i>
-            </button>
-          </div>
-        </div>
+  
+  
+      </section>
     </div>
-    </section>
-    </div>
+
     <div class="sectionBox">
-
-      <h3>#인기순</h3>
-      <br>
+  
+      <h3>#리뷰 많은 순</h3>
+        <br>
       <section class="popular-section">
-
-        <div class="store-box">
+  
+        <div class="store-box" th:each= "review:${review}">
           <div class="store-image">
-            <!-- The image will go here -->
-            <img src="../html/images/샘플.jpg" alt="가게 사진">
+              <!-- The image will go here -->
+            <img th:src="@{review.restaurantImg1}" alt="가게 사진">
           </div>
           <div class="store-info">
-            <span class="store-name">떡볶이 엄청나</span>
-            <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+            <span class="store-name" th:text="${review.restaurantName}">
+
+            </span>
+              <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
             <button class="heartBtn">
               <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
             </button>
           </div>
         </div>
-
-
-        <div class="store-box">
-          <div class="store-image">
-            <!-- The image will go here -->
-            <img src="../html/images/샘플1.jpg" alt="가게 사진">
-          </div>
-          <div class="store-info">
-            <span class="store-name">떡볶이 엄청나</span>
-            <button class="heartBtn">
-              <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
-            </button>
-          </div>
-        </div>
-
-
-        <div class="store-box">
-          <div class="store-image">
-            <!-- The image will go here -->
-            <img src="../html/images/샘플3.jpg" alt="가게 사진">
-          </div>
-          <div class="store-info">
-            <span class="store-name">떡볶이 엄청나</span>
-            <button class="heartBtn">
-              <i class="fas fa-heart fa-lg" style="color: #ff0000;"></i>
-            </button>
-          </div>
-        </div>
+  
+  
+      </section>
     </div>
-    </section>
-    </div>
-    <!-- -------------------------------------------------------------------------------------    밑에 샘플 -->
 
 
-    <!-- --------------------------------------- side -->
-    <div class="menu-container">
-      <div class="profile-img">
+</section>
+
+      <!-- -------------------------------------------------------------------------------------    밑에 샘플 -->
+
+
+      <!-- --------------------------------------- side -->
+  <div class="menu-container">
+    <div class="profile-img">
         <img src="../html/images/샘플.jpg" alt="profile">
-      </div>
+    </div>
 
 
-      <p class="sideP">김성민</p>
+    <p class="sideP">김성민</p>
 
       <nav>
         <a href="#" class="sideItem">마이 페이지</a>
@@ -237,8 +207,8 @@
         <a href="#" class="sideItem">공지 사항</a>
         <a href="#" class="sideItem">FAQ</a>
       </nav>
-    </div>
-    <!-- --------------------------------------- -->
+  </div>
+      <!-- --------------------------------------- -->
 
 
 
@@ -249,10 +219,10 @@
 
 
 
-    <!-- Floating Buttons -->
-    <div class="floating-buttons">
-      <a class="scroll-top" href="#">⬆</a>
-    </div>
+      <!-- Floating Buttons -->
+      <div class="floating-buttons">
+        <a class="scroll-top" href="#">⬆</a>
+      </div>
 
   </main>
 

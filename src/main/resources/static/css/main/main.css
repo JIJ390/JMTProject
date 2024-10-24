@@ -163,7 +163,7 @@ header {
 .filter{
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 20px;
 }
 
 .filter-category{
@@ -177,13 +177,14 @@ header {
   text-decoration-line: none;
   color: black;
   font-weight: bold;
+  cursor: pointer;
 }
 .filter-category:active{
   scale: 0.9;
 }
 
-#searchBar{
-  width: 95%;
+#searchCode{
+  width: 100%;
   height: 100%;
   text-align: center;
   background: none;
@@ -196,9 +197,10 @@ header {
 .searchBox{
   display: flex;
   width: 50%;
-  height: 100%;
+  height: 20%;
   background-color: #E3E3E3;
   border-radius: 30px;
+  margin-bottom: 10px;
 }
 #searchBtn{
   border: 0;
@@ -229,7 +231,7 @@ header {
   overflow: hidden; 
 }
 .store-box {
-  width: 400px;
+  width: 300px;
 
 
   border-radius: 20px;
@@ -295,3 +297,116 @@ header {
 }
 
 
+/* ==================================================== 카테고리 팝업==================================== */
+.foodCategoryPopUp{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  justify-content: center;
+  /* top: 200px; */
+  /* left: 550px; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid #61C0BF;
+  background-color: #ffffff;
+  border-radius: 50px;
+  width: 600px;
+  height: 700px;
+  z-index: 1000;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  z-index: 999; /* 팝업 뒤 배경 */
+}
+
+.active .overlay {
+  display: block;
+}
+
+
+.foodCategoryPopUp-close{
+  display: none;
+}
+
+
+.foodCategoryPopUp-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  border-radius:  50px 50px 0 0;
+}
+.foodCategoryPopUp-arrow{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  border-radius:  0 0 50px 50px;
+}
+.foodCategoryPopUp-right{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+  width: 100%;
+  height: 100%;
+}
+
+.foodCategoryPopUp-left{
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid black;   border-top: 1px solid black;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+}
+.foodCategoryBtnBox{
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+  border-radius: 30px;
+  margin: 10px;
+  height: 100%;
+}
+.foodCategoryBtn{
+  height: 100%;
+  font-weight: bold;
+  text-decoration: underline;
+  background-color: none;
+  border: none;
+  cursor: pointer;
+  background-color:transparent;
+}
+
+#btnResult{
+  font-size: larger;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.foodCategoryBtn:active{
+  scale: 0.9;
+}
+/* 음식 팝업  */
+
+.tag, .region{
+  font-weight: bold;
+  color: #F4F6FF;
+
+  border: none;
+  background: none;
+  outline:none;
+  cursor: auto;
+  text-align: center;
+}
