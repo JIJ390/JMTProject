@@ -50,6 +50,8 @@ public class NoticeViewController {
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pagination", pagination);
 		
+		if(cp == 1) model.addAttribute("newMark", true);
+		
 		return "notice/notice";
 	}
 

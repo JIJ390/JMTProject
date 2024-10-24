@@ -24,12 +24,3 @@ pageNoList?.forEach((item, index) => {
 
   })
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.querySelector(".btn");
-
-  const div = document.createElement("div");
-  div.innerText = "new";
-  
-  btn.append(div);
-});

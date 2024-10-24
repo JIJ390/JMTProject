@@ -27,6 +27,11 @@
   h3 {font-family: 'NEXON Lv1 Gothic OTF';}
   header {font-family: 'NEXON Lv1 Gothic OTF';}
 
+    a{
+      text-decoration: none;
+      color : black;
+    }
+
     .main{
       display: flex;
       align-items: center;
@@ -148,6 +153,33 @@
   flex-direction: row;
   font-weight: bold;
 }
+/* 목록 */
+.pagination{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.pagination li{
+    width: 20px;
+    margin: 2 5px;
+    text-align: center;
+}
+
+.pagination a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.current{
+    font-weight: bold;
+    background-color: #61C0BF;
+    border-radius: 50%;
+    color: white !important;
+    letter-spacing: 0 !important;
+}
 
 
   </style>  
@@ -166,12 +198,15 @@
           <hr>
           <br>
           <!-- 내용 정렬 -->
-          <th:block th:each="notice : ${noticeList}">
+          <th:block th:each="notice, stat : ${noticeList}">
             <div>
               <span class="btn">
                 <div class="category" th:text="${notice.noticeCategory}">[공지]</div>
                 <div th:text="${notice.noticeTitle}">공지사항 게시글 예시</div>
-                <!-- <div><span class="new">new</span></div> -->
+
+                <div>
+                  <span th:if="${stat.index == 0 && newMark != null}" class="new">new</span>
+                </div>
               </span>
             </div>
             <br>
