@@ -1,5 +1,7 @@
 package edu.kh.jmt.restaurant.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +25,7 @@ public class RestaurantServiceImpl implements RestaurantService{
 
 	// 식당 리뷰 조회
 	@Override
-	public ReviewDto selectReview(int restaurantNo, int reviewRownum) {
+	public List<ReviewDto> selectReview(int restaurantNo, int reviewRownum) {
 		return mapper.selectReview(restaurantNo, reviewRownum);
 	}
 	

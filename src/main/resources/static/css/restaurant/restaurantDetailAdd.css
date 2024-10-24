@@ -85,7 +85,7 @@ html, body{
 .suggestBtn1{
   width: 100px;
   height: 30px;
-  border: 1px gray solid;
+  border: 1px rgb(175, 175, 175) solid;
   border-radius: 10px;
 
   display : flex;
@@ -101,7 +101,7 @@ html, body{
 .suggestBtn1:hover{
   width: 100px;
   height: 30px;
-  border: 1px gray solid;
+  border: 1px rgb(175, 175, 175) solid;
   border-radius: 10px;
   
   background-color: rgb(103, 224, 212);
@@ -124,7 +124,7 @@ html, body{
 .suggestBtn2{
   width: 100px;
   height: 30px;
-  border: 1px gray solid;
+  border: 1px rgb(175, 175, 175) solid;
   border-radius: 10px;
 
   display : flex;
@@ -141,7 +141,7 @@ html, body{
 .suggestBtn2:hover{
   width: 100px;
   height: 30px;
-  border: 1px gray solid;
+  border: 1px rgb(175, 175, 175) solid;
   border-radius: 10px;
   
   background-color: rgb(103, 224, 212);
@@ -164,7 +164,7 @@ html, body{
 .selectBtn{
   width: 100px;
   height: 30px;
-  border: 1px gray solid;
+  border: 1px rgb(175, 175, 175) solid;
   border-radius: 10px;
   
   background-color: rgb(103, 224, 212);

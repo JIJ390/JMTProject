@@ -40,12 +40,13 @@ suggestBtn2.addEventListener("click", () => {
 const uploadBtn = document.querySelector(".uploadBtn");
 const formTag = document.querySelector(".pormTag")
 
-uploadBtn.addEventListener("click", () => {
+formTag.addEventListener("submit", (e) => {
 
   const content = document.querySelector("#content").value.trim();
   const selectBtnText = document.querySelector(".selectBtn").innerText;
   if(content === ""){
     alert("내용을 입력해주세요");
+    e.preventDefault();
     return;
   }
 
@@ -57,7 +58,6 @@ uploadBtn.addEventListener("click", () => {
 
   formTag.append(likeFl);
 
-  submit();
 
 })
 

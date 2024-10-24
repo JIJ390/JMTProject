@@ -21,7 +21,69 @@
 	</insert>
 
 
+	<select id="selectNewReview" resultType="reviewDto">
+			SELECT
+				ROWNUM,
+				REVIEW_NO,
+				REVIEW_CONTENT,
+				LIKE_FL,
+				REVIEW_DATE,
+				REVIEW_DEL_FL,
+				RESTAURANT_NO,
+				MEMBER_NO,
+				MEMBER_NAME
+			FROM
+				(SELECT
+				REVIEW_NO,
+				REVIEW_CONTENT,
+				LIKE_FL,
+				REVIEW_DATE,
+				REVIEW_DEL_FL,
+				RESTAURANT_NO,
+				MEMBER_NO
+			FROM
+				REVIEW
+			WHERE
+				RESTAURANT_NO = #{restaurantNo}
+			ORDER BY
+				REVIEW_DATE DESC)
+			JOIN 
+				"MEMBER" USING (MEMBER_NO)
+			WHERE ROWNUM BETWEEN 1 AND #{rowNum}
+	</select>
 	
+
+
+	<select id="selectOldReview" resultType="reviewDto">
+			SELECT
+				ROWNUM,
+				REVIEW_NO,
+				REVIEW_CONTENT,
+				LIKE_FL,
+				REVIEW_DATE,
+				REVIEW_DEL_FL,
+				RESTAURANT_NO,
+				MEMBER_NO,
+				MEMBER_NAME
+			FROM
+				(SELECT
+				REVIEW_NO,
+				REVIEW_CONTENT,
+				LIKE_FL,
+				REVIEW_DATE,
+				REVIEW_DEL_FL,
+				RESTAURANT_NO,
+				MEMBER_NO
+			FROM
+				REVIEW
+			WHERE
+				RESTAURANT_NO = #{restaurantNo}
+			ORDER BY
+				REVIEW_DATE ASC)
+			JOIN 
+				"MEMBER" USING (MEMBER_NO)
+			WHERE ROWNUM BETWEEN 1 AND #{rowNum}
+	</select>
 
 
 

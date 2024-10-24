@@ -1,5 +1,7 @@
 package edu.kh.jmt.restaurant.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
@@ -38,11 +40,12 @@ public class RestaurantController {
 //		 ** 구현 예정 -> restaurantNo를 파라미터로 얻어와 조회할 것
 //									예시로 3 넣어둔것
 		RestaurantDto restaurant = service.restaurantDetail(13);
-		ReviewDto review = service.selectReview(13, 1); 
+//		List<ReviewDto> reviews = service.selectReview(13, 1); 
+		
 		
 		model.addAttribute("apiKey", apiKey);
 		model.addAttribute("restaurant", restaurant);
-		model.addAttribute("review", review);
+//		model.addAttribute("review", reviews.get(0));
 		
 		return "restaurant/restaurantDetail";
 	}

@@ -2,11 +2,13 @@ package edu.kh.jmt.restaurant.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.jmt.common.util.FileUtil;
+import edu.kh.jmt.restaurant.dto.ReviewDto;
+import edu.kh.jmt.restaurant.service.RestaurantService;
 import edu.kh.jmt.restaurant.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ReviewImageUpload {
 
 	private final ReviewService service;
-
+	
 	@ResponseBody
 	@PostMapping("summerNoteUpload")
 	public String summerNoteUpload(@RequestParam("file") MultipartFile file) {
@@ -77,12 +81,22 @@ public class ReviewImageUpload {
 		return "redirect:/restaurant/view";
 	}
 
-	@ResponseBody
 	@GetMapping("review/selectReview")
-	public String getMethodName(
-			
+	public String selectReview(
+			@RequestParam("rowNum") int rowNum,
+			@RequestParam("restaurantNo") int restaurantNo,
+			@RequestParam("sort") int sort,
+			Model model
 			) {
-		return new String();
+		
+		List<ReviewDto> reviews = service.selectReview(restaurantNo, rowNum, sort);
+		
+		model.addAttribute("reviews", reviews);
+		
+		System.out.println(reviews);
+		
+		return "restaurant/review";
+		
 	}
 	
 	
