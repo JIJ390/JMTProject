@@ -30,11 +30,10 @@ foodCategoryBtn.addEventListener("click", e => {
 
 
 
-
 const foodCategoryBtnValue = document.getElementsByName("valus")
 foodCategoryBtnValue.forEach(function(button){ // 모든 각각에버튼을 클릭시
   
-  const foodCloseBtn= document.querySelector(".foodClosePopup") // 취소버튼
+
   const foodCategorySubmit = document.querySelector(".foodCategorySubmit"); //카테고리 값 버튼
   const tag = document.querySelector(".tag"); //카테고리 전달 버튼
 
@@ -43,7 +42,8 @@ foodCategoryBtnValue.forEach(function(button){ // 모든 각각에버튼을 클�
     document.getElementById("foodBtnResult").textContent = "카테고리 : #" +  value; //저장할 요소 불러와 textContent 넣어주기
     console.log(value); //value값 넘어오는거보기
     
-    
+
+
       foodCategorySubmit.addEventListener("click", () => {
 
         tag.value = value;
@@ -55,6 +55,7 @@ foodCategoryBtnValue.forEach(function(button){ // 모든 각각에버튼을 클�
 
   })
 });
+
 
 
 /* 지역 설정 */
@@ -98,7 +99,16 @@ regoinBtn.addEventListener("click", () => {
   regionCategoryPopUp.classList.remove("regionCategoryPopUp-close")
 })
 
-
+/* 음식종류 취소 버튼 */
+const foodCloseBtn= document.querySelector(".foodClosePopup") // 취소버튼
+foodCloseBtn.addEventListener("click", () => {
+  foodCategoryPopUp.classList.add("foodCategoryPopUp-close");
+})
+/* 지역 선택 취소 버튼 */
+const regionCloseBtn= document.querySelector(".regionClosePopup") // 취소버튼
+regionCloseBtn.addEventListener("click", () => {
+  foodCategoryPopUp.classList.add("regionCategoryPopUp-close");
+})
 
 
 // ----------------------------------------------------
