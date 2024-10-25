@@ -6,52 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detailpage</title>
 
-    <link rel="stylesheet" href="/css/common/main/header.css">
-    <link rel="stylesheet" href="/css/common/main/search.css">
-    <link rel="stylesheet" href="/css/common/main/popUp.css">
+    <link rel="stylesheet" href="/css/main/search.css">
+    <link rel="stylesheet" href="/css/main/popUp.css">
+    <link rel="stylesheet" href="/css/common/header.css">
 </head>
 
 
 <!-- ------------ 헤더 ----------------- -->
 
-
-<header>
-
-    <div id="header-Font">
-        <a href="#" class="headerBtn">메인페이지</a>
-        <a href="#" class="headerBtn">점메추</a>
-        <a href="#" class="headerBtn">공지사항</a>
-        <a href="#" class="headerBtn">FAQ</a>
-    </div>
-
-    <a href="#"><img src="../html/images/logo.png" alt="로고 이미지" id="logImg"></a>
-
-    <a class="menu" href="#">
-        <i class="fa-solid fa-bars"></i>
-    </a>
-
-    
-</header>
+<th:block th:replace= "~{common/header}"></th:block>
 <!-- ------------ 헤더 ----------------- -->
-
 <body>
 
 
 
 
 
-
-
-    <div class="bodyItem">
+    <div class="bodyItem" >
         <!-- ------------- 사이드 ---------------------- -->
         <aside class="category">
 
-            <div class="categoryBox">
-
+            <form action="/search" method="get" class="categoryBox">
                 <div class="categorySearchBox">
 
                     <div class="searchBox">
-                        <input type="text" class="categorySearch" placeholder="검색">
+                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색"
+                        th:value="${searchCode}">
                         <button class="categorySearch_btn">🍳</button>
                     </div>
 
@@ -59,13 +39,12 @@
 
                 <hr>
 
-                <div>카테고리</div>
+                <div>지역별</div>
 
                 <hr>
 
                 <div>카테고리</div>
 
-                <hr>
 
                 <div class="categoryBtns_box">
                     <button class="categoryBtns">최신순</button>|
@@ -76,7 +55,7 @@
                 </div>
                 <hr>
 
-            </div>
+            </form>
 
         </aside>
         <!-- ------------- 사이드 ---------------------- -->
@@ -85,27 +64,41 @@
 
         <div>
             <!-- -------------------------- 몸통 ------------------ -->
-            <section class="store-section" onclick="restaurant()">
-                <div class="store-image">
-                    <img src="../html/images/샘플.jpg" alt="매장 이미지">
+
+            <!-- 게시글이 존재하지않을때 -->
+            <th:block th:if= "${#lists.isEmpty(searchResult)}">
+                <h1>  조회한 결과가 없습니다.  </h1>
+            </th:block>
+
+            <!-- 게시글이 존재할때 -->
+            <th:block th:unless= "${#lists.isEmpty(searchResult)}">
+                <section class="store-section" th:each="searchCode:${searchResult}">
+                  <div class="store-image">
+                    <img th:src="@{searchCode.restaurantImg1}" alt="매장 이미지">
                 </div>
                 <div class="store-info">
-                    <h1>삐삐 맛있어</h1>
-                    <p class="store-address">경기도 의정부시</p>
-                    <p>떡볶이 / 한식</p>
-                    <p class="store-phone">010-2323-2322</p>
+                    <h1 th:text="${searchCode.restaurantName}">매장 이름</h1>
+                    <p class="store-address" th:text="${searchCode.restaurantAddress}">주소</p>
+                    <p th:text="${searchCode.categoryName}"></p>
+                    <p class="store-phone" th:text="${searchCode.restaurantTel}">전화번호</p>
                 </div>
                 <div class="store-actions">
-                    <p class="store-rating">81%</p>
+                    <p class="store-rating" th:text="|${searchCode.likePercent}%|">퍼센트</p>
                     <button class="heartBtn">
                         <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
                     </button>
                 </div>
-            </section>
+                </section>
+            </th:block>
+
+
+            
+
+
 
             <!-- -------------------------- 몸통 ------------------ -->
 
-    </div>
+        </div>
     
               <!-- --------------------------------------- side --> 
               <div class="menu-container">

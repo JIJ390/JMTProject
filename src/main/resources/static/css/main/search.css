@@ -103,10 +103,12 @@ hr {
     border-radius: 30px;
     padding: 20px;
     width: 100%;
+    max-width: 800px;
     height: 300px;
     display: flex;
     align-items: center;
     font-family: Arial, sans-serif;
+    word-break: break-all;
 }
 .store-section:hover{
     scale: 1.01;

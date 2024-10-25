@@ -1,21 +1,23 @@
-const heartBtn = document.querySelector(".heartBtn");
-const storeBtn= document.querySelector(".store-section");
-    
+const heartBtn = document.querySelectorAll(".heartBtn");
+const storeSection = document.querySelectorAll(".store-section");
+
 
 //클릭 이벤트 전파되지 않게 설정 
 
-heartBtn.addEventListener('click', (event) => {
-  event.stopPropagation(); // 이벤트 전파를 막음
-  alert('버튼이 클릭되었습니다!');
-});
+for (let i = 0; i < storeSection.length; i++) {
+  storeSection[i].addEventListener('click', (event) => {
+    alert('section 클릭')
+  })
+};
+
+for (let i = 0; i < heartBtn.length; i++) {
+  heartBtn[i].addEventListener('click', (event) => {
+    event.stopPropagation(); // 버튼에 이벤트 전파 방지 
+    alert("하트 클릭")
+  })
+};
 
 
-
-storeBtn.addEventListener('click', (event) => {
-    storeBtn.classList.toggle('active');
-    event.stopPropagation(); // 이벤트 전파를 막음
-    alert("div 클릭 됨");
-  });  
 
 
 // ----------------------- 
@@ -24,11 +26,20 @@ const MenuContainer = document.querySelector(".menu-container");
 
 menu.addEventListener('click', () => {
 
-  if(MenuContainer.style.display=="block"){
-    MenuContainer.style.display="none"
-  }else{
-    MenuContainer.style.display="block"
+  if (MenuContainer.style.display == "block") {
+    MenuContainer.style.display = "none"
+  } else {
+    MenuContainer.style.display = "block"
   }
 
-  
+
 });
+
+//---------------------- 검색 값 남기기
+
+
+
+
+
+
+//---------------------------------------------------------------------------
