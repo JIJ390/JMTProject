@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신고 관리 페이지</title>
+  <link rel="stylesheet" href="/css/admin/reportReview.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+</head>
+<body>
+
+  <th:block th:replace="~{common/header}"></th:block>
+  
+  <main>
+    <th:block th:replace= "~{admin/adminSide}"></th:block>
+    <section class="main-section">
+
+      <h1>신고 관리 페이지 - 리뷰</h1>
+
+    </section>
+    <section class="right-section">
+      <form action="/admin/restaurant" method="GET" id="restaurantSearch">
+
+        <select name="key" id="searchKey">
+          <option value="rn">이름</option>
+          <option value="l">지역</option>
+          <option value="n">번호</option>
+        </select>
+
+        <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+        <button type="submit">검색</button>
+      </form>
+
+    </section>
+
+  </main>
+
+
+  <script th:inline="javascript">
+    const pagination = /*[[${pagination}]]*/ "페이지네이션 객체"    
+  </script>
+
+  <script src="/js/admin/restaurantManage.js"></script>
+</body>
+</html>
