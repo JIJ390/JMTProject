@@ -22,4 +22,7 @@ public interface RestaurantService {
 	 */
 	List<ReviewDto> selectReview(int restaurantNo, int reviewRownum);
 
+	// 리뷰 수정하기 위해 리뷰 조회
+	ReviewDto selectUserReview(int reviewNo);
+
 }

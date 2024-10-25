@@ -38,10 +38,23 @@
 
 	<select id="restaurantDetail" resultMap="restaurant_rm">
 			SELECT *
-	FROM RESTAURANT
-	JOIN LOCATION USING(LOCATION_NO)
-	JOIN CATEGORY USING(CATEGORY_NO)
-	WHERE RESTAURANT_NO = #{restaurantNo}
+			FROM (
+				SELECT 
+					RESTAURANT_NO, 
+					RESTAURANT_NAME, 
+					RESTAURANT_ADDRESS, 
+					SUBSTR(RESTAURANT_TEL,1,2) || '-' || 
+					SUBSTR(RESTAURANT_TEL,3,4) || '-' || 
+					SUBSTR(RESTAURANT_TEL,7)  AS RESTAURANT_TEL,
+					RESTAURANT_IMG1,
+					RESTAURANT_IMG2,
+					RESTAURANT_DEL_FL,
+					LOCATION_NO,
+					CATEGORY_NO
+				FROM RESTAURANT)
+			JOIN LOCATION USING(LOCATION_NO)
+			JOIN CATEGORY USING(CATEGORY_NO)
+			WHERE RESTAURANT_NO = #{restaurantNo}
 	</select>
 
 
@@ -76,6 +89,12 @@
 			FROM "MEMBER") USING (MEMBER_NO) 
 		WHERE T.RN BETWEEN 1 AND #{reviewRownum}
 	
+	</select>
+	
+	<select id="selectUserReview" resultType="reviewDto">
+		SELECT *
+		FROM "REVIEW"
+		WHERE REVIEW_NO = #{reviewNo}
 	</select>
 
 

@@ -23,7 +23,7 @@
   <div th:replace="~{common/header}">
   </div>
 
-  <form th:action="@{/review/reviewUpload}" method="POST" class="pormTag">
+  <form th:action="@{/review/reviewUpdate}" method="POST" class="pormTag">
     <div class="contentAreaBorder">
       <div class="contentTitle">
         <b th:text="|${restaurant.restaurantName}|" style="font-size: 20px; padding-right: 10px;"></b>
@@ -33,12 +33,13 @@
         <hr>
       </div>
       <div class="contentArea">
-        <textarea id="content" name="content" ></textarea>
+        <textarea id="content" name="content" th:text="${review.reviewContent}" ></textarea>
       </div>
     </div>
     <div class="addButton">
       <button class="uploadBtn">등록</button>
       <button class="goToList" type="button">작성 취소</button>
+      <input type="hidden" name="getReviewNo" th:value="${review.reviewNo}">
       <input type="hidden" name="getRestaurantNo" class="getRestaurantNo" th:value="${restaurant.restaurantNo}">
     </div>
   </form>

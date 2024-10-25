@@ -28,4 +28,7 @@ public interface RestaurantMapper {
 			@Param("restaurantNo") int restaurantNo, 
 			@Param("reviewRownum")int reviewRownum);
 
+	// 리뷰 수정하기 위한 조회
+	ReviewDto selectUserReview(int reviewNo);
+
 }

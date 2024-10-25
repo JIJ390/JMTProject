@@ -29,4 +29,10 @@ public class RestaurantServiceImpl implements RestaurantService{
 		return mapper.selectReview(restaurantNo, reviewRownum);
 	}
 	
+	// 리뷰 수정하기 위한 조회
+	@Override
+	public ReviewDto selectUserReview(int reviewNo) {
+		return mapper.selectUserReview(reviewNo);
+	}
+	
 }
