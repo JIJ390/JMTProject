@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.jmt.myPage.dto.Member;
@@ -252,6 +253,7 @@ public class MyPageController {
 	 */
 	@PostMapping("updateInfo")
 	public String updateInfo(
+			@RequestParam("updateProfileImg") MultipartFile profileImg,
 			@ModelAttribute Member inputMember,
 			@SessionAttribute ("loginMember") Member loginMember,
 			RedirectAttributes ra) {
@@ -259,16 +261,19 @@ public class MyPageController {
 		int memberNo = loginMember.getMemberNo();
 		inputMember.setMemberNo(memberNo);
 		
-		int result = service.updateInfo(inputMember);
+		String filePath = service.updateInfo(inputMember, profileImg);
+		
+		if (filePath != null) {
+			// DB, Session에 저장된 프로필 이미지 정보 동기화
+			loginMember.setProfileImg(filePath);
+		}
+		
+		// 세션에 이름 동기화
+		loginMember.setMemberName(inputMember.getMemberName());;
 		
 		String message = null;
 		
-		if(result > 0) {message = "수정 되었습니다";
-		
-		loginMember.setMemberName(inputMember.getMemberName());
-		
-		}
-		else					 message = "수정 실패";
+
 		
 		ra.addFlashAttribute("message", message);
 		
@@ -277,6 +282,7 @@ public class MyPageController {
 		
 		return "redirect:myPage";
 	}
+	
 	
 		
 	}

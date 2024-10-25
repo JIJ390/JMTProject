@@ -69,7 +69,12 @@
 	<!-- 이름 변경 -->
 	<update id="updateInfo">
 		UPDATE "MEMBER"
-		SET MEMBER_NAME = #{memberName}
+		SET 
+			<if test="profileImg != null and !profileImg.equals('')">
+             	PROFILE_IMG = #{profileImg},
+         	</if>
+			
+			MEMBER_NAME = #{memberName}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	

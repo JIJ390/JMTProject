@@ -2,6 +2,7 @@ package edu.kh.jmt.myPage.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.myPage.dto.Member;
 
