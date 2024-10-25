@@ -1,5 +1,7 @@
 package edu.kh.jmt.myPage.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import edu.kh.jmt.myPage.dto.Member;
 
 public interface MyPageService{
@@ -51,6 +53,6 @@ public interface MyPageService{
 	 * @param inputMember
 	 * @return result
 	 */
-	int updateInfo(Member inputMember);
+	String updateInfo(Member inputMember, MultipartFile profileImg);
 
 }

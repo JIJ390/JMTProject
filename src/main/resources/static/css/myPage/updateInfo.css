@@ -65,6 +65,22 @@ main {
   display: block;
 }
 
+label{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  background-color: #4dc4b4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 50px;
+}
 
 .imgBtn {
   width: 50%;
