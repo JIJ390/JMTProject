@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.common.util.FileUtil;
+import edu.kh.jmt.restaurant.dto.RestaurantDto;
 import edu.kh.jmt.restaurant.dto.ReviewDto;
 import edu.kh.jmt.restaurant.mapper.ReviewMapper;
 import lombok.RequiredArgsConstructor;
@@ -74,4 +75,35 @@ public class ReviewServiceImpl implements ReviewService{
 				
 	}
 	
+	// 리뷰 수정
+	@Override
+	public int updateReview(int reviewNo, String content, String likeFl) {
+		return mapper.updateReview(reviewNo,content,likeFl);
+	}
+	
+	
+	// 리뷰 삭제
+	@Override
+	public int reviewDelete(int reviewNo) {
+		return mapper.reviewDelete(reviewNo);
+	}
+	
+	// 리뷰 조회
+	@Override
+	public ReviewDto selectReview(int reviewNo) {
+		return mapper.selectReview(reviewNo);
+	}
+	
+	// 가게 조회
+	@Override
+	public RestaurantDto selectRestaurant(int restaurantNo) {
+		return mapper.selectRestaurant(restaurantNo);
+	}
+	
+	
+	
+	@Override
+	public int reviewUpdate(int reviewNo,  String content, String likeFl) {
+		return mapper.reviewUpdate(reviewNo, content, likeFl);
+	}
 }

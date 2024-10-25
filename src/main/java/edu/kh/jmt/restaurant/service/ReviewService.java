@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.jmt.restaurant.dto.RestaurantDto;
 import edu.kh.jmt.restaurant.dto.ReviewDto;
 
 public interface ReviewService {
@@ -31,5 +32,20 @@ public interface ReviewService {
 	 * @return
 	 */
 	List<ReviewDto> selectReview(int restaurantNo, int rowNum, int sort);
+
+	// 리뷰 수정
+	int updateReview(int reviewNo, String content, String likeFl);
+
+	// 리뷰 삭제
+	int reviewDelete(int reviewNo);
+
+	// 리뷰 조회
+	ReviewDto selectReview(int reviewNo);
+
+	// 가게 조회
+	RestaurantDto selectRestaurant(int restaurantNo);
+
+	// 리뷰 업데이트
+	int reviewUpdate(int reviewNo , String content, String likeFl);
 
 }

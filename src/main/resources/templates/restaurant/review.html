@@ -1,19 +1,20 @@
-  
-    
-    <th:block th:each= "r:${reviews}">
-
-      <div class="reviewView">
-        <div class="reviewProfile">
-          <img class="reviewProfileImg" th:src="${r.profileImg}"></img>
-          <div class="revewProfileName">
-            <b th:text="${r.memberName}"></b>
-            <p th:text="${r.reviewDate}"></p>
-            <p th:if="${r.likeFl=='Y'}">이 가게를 추천해요</p>
-            <p th:if="${r.likeFl=='N'}">이 가게를 추천하지 않아요</p>
-          </div>
-        </div>
-        <div class="mainReviewContent" th:utext="${r.reviewContent}">
-        </div>
+<th:block th:each="r:${reviews}">
+  <input type="hidden" class="getReviewNo" th:value="${r.reviewNo}">
+  <div class="reviewView">
+    <div class="reviewProfile">
+      <img class="reviewProfileImg" th:src="${r.profileImg}"></img>
+      <div class="revewProfileName">
+        <b th:text="${r.memberName}"></b>
+        <p th:text="${r.reviewDate}"></p>
+        <p th:if="${r.likeFl=='Y'}"><i class="fa-regular fa-thumbs-up"></i></p>
+        <p th:if="${r.likeFl=='N'}"><i class="fa-regular fa-thumbs-down"></i></p>
       </div>
-
-    </th:block>
+      <div class="ud">
+        <button class="updateBtn">수정</button><button class="deleteBtn">삭제</button>
+      </div>
+    </div>
+    <hr style="margin-top: 20px;">
+    <div class="mainReviewContent" th:utext="${r.reviewContent}">
+    </div>
+  </div>
+</th:block>

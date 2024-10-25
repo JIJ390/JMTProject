@@ -33,6 +33,8 @@
         <div class="main" th:object="${restaurant}">
 
             <input type="hidden" class="getRestaurantNo" th:value="*{restaurantNo}">
+            <input type="hidden" class="getRestaurantAddress" th:value="*{restaurantAddress}">
+            <input type="hidden" class="getRestaurantName" th:value="*{restaurantName}">
 
             <div class="mainDetail">
                 <div class="mainDetailPhoto">
@@ -47,8 +49,8 @@
                     </div>
                     <hr style="margin-top: 20px; margin-bottom: 20px;">
                     <ul style="list-style: none;">
-                        <li th:text="*{restaurantTel}"></li>
-                        <li th:text="*{restaurantAddress}"></li>
+                        <li><i class="fa-solid fa-phone-volume"></i><p th:text="*{restaurantTel}"></p></li>
+                        <li><i class="fa-solid fa-house"></i><p  th:text="*{restaurantAddress}"></p></li>
                         <li></li>
                     </ul>
                     <div class="map2" id="map2"></div>
@@ -57,7 +59,7 @@
 
             </div>
             <div class="menuContainer">
-                <h1 style="margin-bottom: 20px;">메뉴</h1>
+                <h1 style="margin-bottom: 20px;">메뉴정보</h1>
                 <ul th:each=" menu : *{menuList}">
                     <li class="menuList">
                         <b th:text="${menu.menuName}"></b>
@@ -69,18 +71,17 @@
             <div class="mainReview">
                 <div class="reviewT">
                     <b th:text="*{restaurantName}"></b>
-                    <p style="font-size: 30px;">방문자 평가</p>
+                    <p style="font-size: 30px; margin-right: 200px;">방문자 평가</p>
                     <div class="relative">
-                        <button id="popupButton" style="border: 1px solid gray; width: 50px; height: 30px; margin-top: 10px; border-radius: 5px;">
+                        <button id="popupButton" style="border: 1px solid gray; width: 50px; height: 30px; margin-top: 5px; border-radius: 5px;">
                             <i class="fa-solid fa-bars-staggered"></i>
                         </button>
-                        <div id="popup" class="hidden" style="position: absolute; width: 100px; height: 80px; background-color: white; padding: 12px; border: 1px solid gray;">
+                        <div id="popup" class="hidden popup">
                             <button class="new">최신순</button>
                             <hr style="margin: 5px;">
                             <button class="old">오래된순</button>
                         </div>
                     </div>
-                    
                     <button class="reviewBtn1">리뷰 등록하기</button>
                 </div>
                 <div>
@@ -122,7 +123,7 @@
     </script>
 
     <script src="https://kit.fontawesome.com/b289d4a0af.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" th:src='|//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey}|'></script>
+    <script type="text/javascript" th:src="|//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey}&libraries=services|"></script>
     <script src="/js/restaurant/mapApi.js"></script>
     <script src="/js/restaurant/restaurantDetail.js"></script>
     <script src="/js/restaurant/review.js"></script>
