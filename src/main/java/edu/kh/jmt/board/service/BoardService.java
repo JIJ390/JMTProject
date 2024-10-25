@@ -42,6 +42,6 @@ public interface BoardService {
 	 * @param boardImg
 	 * @return
 	 */
-	int boardUpdate(Board inputBoard, MultipartFile boardImg);
+	int boardUpdate(Board inputBoard, MultipartFile boardImage);
 
 }

@@ -149,7 +149,12 @@ public class BoardController {
 	}
 	
 //	@SessionAttribute("loginMember")Member loginMember,
-	
+ 	/** 게시글 수정
+	 * @param boardImage
+	 * @param inputBoard
+	 * @param ra
+	 * @return
+	 */
 	@PostMapping("update")
 	public String boardUpdate(
 			@RequestParam("boardImage")MultipartFile boardImage,
@@ -176,19 +181,8 @@ public class BoardController {
 	}
 	
 	
-	@GetMapping("boardComment")
-	public String boardComment() {
-		
-		return "/board/boardComment";
-	}
-	
-	/** 게시글 수정화면 전환
-	 * @param boardNo
-	 * @param ra
-	 * @param model
-	 * @return
-	 */
-	
+
+
 	
 	
 	

@@ -1,17 +1,47 @@
-// 스크롤 가장위로 올라가는 효과
-const topBtn = document.querySelector("#topBtn");
-
-topBtn.onclick = function(){
-  window.scrollTo({
-  top: 0,
-  behavior: 'smooth' // 부드러운 스크롤 효과
-  });
-};
+const commentClick = document.querySelectorAll(".comment-toggle");
+const c = document.querySelectorAll(".c");
+const boardNoList = document.querySelectorAll(".boardNoList");
+const commentArea = document.querySelectorAll(".commentArea");
 
 
-// 글쓰기 버튼을 눌렀을때 글쓰기 페이지로 넘어가는 효과
-const btn = document.querySelector(".writeBtn");
 
-btn.addEventListener("click", () => {
-  location.href = "/board/boardWrite";
-})
+
+
+
+for (let i = 0; i < commentClick.length; i++) {
+
+  commentClick[i].addEventListener("click", () => {
+// 처음 main 창에서 check가 없는상태
+    if (!commentClick[i].classList.contains("check")) {
+
+      commentClick[i].classList.add("check");
+
+      c[i].innerText = '댓글 닫기';
+
+      fetch("/board/boardComment?boardNo=" + boardNoList[i].value)
+        .then(response => {
+          if (response.ok) {
+            return response.text();
+          }
+          throw new Error("댓글 조회 실패");
+        })
+        .then(html => {
+          commentArea[i].innerHTML = html;
+        })
+        .catch(err => {console.log(err)});
+    }
+
+
+    else {
+
+      commentClick[i].classList.remove("check");
+
+      c[i].innerText = '댓글 보기';
+
+      // 덮어쓰기@@
+      commentArea[i].innerHTML = "";
+    }
+  })
+}
+
+//-------------------------------------------------------------------------------------------------

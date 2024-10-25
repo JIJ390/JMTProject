@@ -42,6 +42,7 @@
 						<hr>
 						<div class="post-content">
 							<div th:if="${board.boardImg}">
+								<input type="hidden" class="boardNoList" th:value="${board.boardNo}">
 									<img th:src="${board.boardImg}" alt="게시글이미지"
 									class="imageSize">
 								</div>
@@ -52,8 +53,13 @@
 						
 						<div class="post-footer">
 								<span class="comment-toggle">
-										<div class="triangle"></div> 댓글 보기
+										<div class="triangle"></div> <p class="c">댓글 보기</p>
+										<!-- <div hidden class="triangle-b"></div> <p class="c">댓글 닫기</p> -->
 							</span>
+						</div>
+						<div class="commentArea">
+
+
 						</div>
 					</div>
 				</div>
@@ -67,6 +73,7 @@
 	<button class="fa-solid fa-arrow-up" id="topBtn"></button>
 
 	<script src="/js/board/boardMain.js"></script>
+	<script src="/js/board/boardComment.js"></script>
 	<script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
 	<script th:inline="javascript">
 		const message =  /*[[${message}]]*/ "전달 받은 message";

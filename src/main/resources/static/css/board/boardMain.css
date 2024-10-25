@@ -48,7 +48,7 @@
   padding: 40px;
   position: relative;
   width: 60%;
-  height: 400px;
+  min-height: 400px;
 }
 
 .post-header {
@@ -140,6 +140,17 @@
   margin-right: 5px;
 }
 
+
+/* 삼각형 뒤집은 */
+.triangle-b {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #6EC3C2;
+  margin-right: 5px;
+}
+
 /* 글쓰기 버튼 스타일 */
 .writeBtn {
   background-color: #6EC3C2;
@@ -174,4 +185,88 @@
   height: 60px;
   font-size:40px;
   cursor: pointer;
+}
+
+/* .check{
+  background-color: gray;
+} */
+
+
+/* 댓글 */
+
+/* 댓글 post */
+.comment-post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 댓글 수정 ★★ margin-left : auto 로 가능!*/
+.comment-post-update {
+  margin-left: auto;
+  color: gray;
+  font-size: 12px;
+}
+
+
+/* 댓글 헤더 */
+.post-header {
+  display: flex;
+  gap: 10px;
+}
+
+
+
+/* 댓글 숨기기 토글 버튼 */
+.comment-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #3b3d3d;
+  font-weight: bold;
+}
+
+.comment-write{
+
+  width: 550px; /* 너비 */
+  height: 80px; /* 높이 */
+  padding: 10px; /* 안쪽 여백 */
+  border: 2px solid #ccc; /* 테두리 색상과 두께 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  background-color: #f9f9f9; /* 배경색 */
+  font-family: 'Arial', sans-serif; /* 글꼴 */
+  font-size: 16px; /* 글자 크기 */
+  color: #333; /* 글자 색상 */
+  line-height: 1.5; /* 줄 간격 */
+  resize: none; /* 크기 조절 가능 여부 (none: 비활성화) */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+  outline: none; /* 포커스 시 외곽선 제거 */
+
+}
+
+/* 댓글작성 스타일 */
+.commentBtn {
+  background-color: #6EC3C2;
+  width: 70px;
+  height: 30px;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.commentBtn:hover{
+  background-color: white;
+  color : #6EC3C2;
+  border: 2px solid #6EC3C2;
+  
+}
+
+.textarea-main{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
 }
