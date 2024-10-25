@@ -115,3 +115,7 @@ h2 {
   color: #333;
   text-align: left; /* 추가된 부분 */
 }
+
+/* 메시지 색상 */
+.confirm { color: green; }
+.error { color: red; }

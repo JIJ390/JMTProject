@@ -38,6 +38,31 @@ public class EmailController {
 		return service.sendEmail("signUp", email);
 	}
 	
+	/** 인증 번호 발송
+	 * @param email : 입력된 이메일
+	 * @return 성공 1, 실패 0
+	 */
+	@ResponseBody
+	@PostMapping("sendAuthKey2")
+	public int sendAuthKey2(
+			@RequestBody String email) {
+		
+		return service.sendEmail("pwFind", email);
+	}
+	
+	/** 인증 번호 발송
+	 * @param email : 입력된 이메일
+	 * @return 성공 1, 실패 0
+	 */
+	@ResponseBody
+	@PostMapping("sendAuthKey3")
+	public int sendAuthKey3(
+			@RequestBody String email) {
+		
+		return service.sendEmail("tempPw", email);
+	}
+	
+	
 	
 	/** 인증 번호확인
 	 * @param map 입력받은 값이 저장된 map

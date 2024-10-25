@@ -70,7 +70,7 @@ memberEmail.addEventListener("input", e => {
   .then(count => {
     // 매개 변수 count : 첫 번째 then에서 return된 값이 저장된 변수
 
-    if(count == 1){ // 중복인 경우
+    if(count > 0){ // 중복인 경우
       emailMessage.innerText = emailMessageObj.duplication; // 중복 메시지
       emailMessage.classList.add("error");
       emailMessage.classList.remove("confirm");
@@ -208,7 +208,7 @@ checkAuthKeyBtn.addEventListener("click", () => {
     .then(result => {
       console.log("인증 결과 :", result);
 
-      if(result == false){ // 인증 실패
+      if(result == 'false'){ // 인증 실패
         alert("인증 번호가 일치하지 않습니다")
         checkObj.authKey = false;
         return;

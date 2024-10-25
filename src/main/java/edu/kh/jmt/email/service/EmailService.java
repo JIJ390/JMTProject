@@ -9,7 +9,7 @@ public interface EmailService {
 	 * @param email
 	 * @return
 	 */
-	int sendEmail(String htmlName, String email);
+	int sendEmail(String htmlName,  String email);
 
 	
 	/** 인증번호 확인
