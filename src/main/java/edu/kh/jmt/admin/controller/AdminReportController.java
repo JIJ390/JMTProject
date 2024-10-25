@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.kh.jmt.admin.dto.AdminPagination;
 import edu.kh.jmt.admin.dto.ReportReview;
+import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.service.AdminReportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,9 +35,25 @@ public class AdminReportController {
 			Model model,
 			@RequestParam Map<String, Object> paramMap)	{
 		
-		List<ReportReview> reportReviewList = service.reportReviewList();
+		// 페이지 네이션, 가게 정보 묶어서 담을 객체
+		Map<String, Object> map = null;
+		
+		
+		if (paramMap.get("key") == null) {	
+			map = service.selectReportReviewList(cp);
+			
+		} else { // 검색한 경우
+			
+			// paramMap 에 key, query 담겨 있음
+			map = service.searchReportReviewList(cp, paramMap);
+		}
+		
+		List<ReportReview> reportReviewList = (List<ReportReview>)map.get("reportReviewList");
+		AdminPagination adminPagination = (AdminPagination)map.get("pagination");
+		
 		
 		model.addAttribute("reportReviewList", reportReviewList);
+		model.addAttribute("pagination", adminPagination);
 		
 		return "admin/reportReview";
 	}

@@ -2,10 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.kh.jmt.admin.mapper.AdminReportMapper">
 
+	<!-- 전체 리뷰 신고 수 조회 -->
+	<select id="getReportReviewCount">
+		SELECT 
+			COUNT(*)
+		FROM "REPORT_REVIEW"
+	</select>
+	
+
+
 
 	<!-- 신고 목록 게시판 신고 목록 가져오기 -->
-  	<select id="reportReviewList">
-  			
+  	<select id="selectReportReviewList"
+  			resultType="ReportReview">
 		SELECT 
 		  REPORT_REVIEW_NO,
 		  REPORT_TYPE_NAME,
@@ -28,12 +37,98 @@
 		  MEMBER_NAME,
 		  REPORT_REVIEW_FL
 		FROM
-		  REPORT_REVIEW
+		  "REPORT_REVIEW"
 		JOIN
 			"MEMBER" USING (MEMBER_NO)
 		JOIN
 			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		ORDER BY 
+			REPORT_REVIEW_DATE DESC
   	</select>
  
+ 
+ 
+ 
+ 	<!-- 검색 조건에 맞는 전체 리뷰 신고 수 조회 -->
+	<select id="searchReportReviewCount">
+		SELECT 
+			COUNT(*)
+		FROM "REPORT_REVIEW"
+		JOIN
+		<if test='key == "t"'>
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		</if>
+		
+		<if test='key == "rn"'>
+			"MEMBER" USING (MEMBER_NO)
+		</if>
+		
+		WHERE
+		
+		<choose>
+			<!-- 신고 유형 검색인 경우 -->
+			<when test='key == "t"'>
+				REPORT_TYPE_NAME LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				REPORT_REVIEW_NO LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고자 이름 검색인 경우 -->
+			<when test='key == "rn"'>
+				MEMBER_NAME LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	
+	
+	<!-- 신고 목록 게시판 조건에 맞는 신고 목록 가져오기 -->
+  	<select id="searchReportReviewList"
+  			resultType="ReportReview">
+		SELECT 
+		  REPORT_REVIEW_NO,
+		  REPORT_TYPE_NAME,
+		  	
+		  		<![CDATA[
+		  			CASE 
+						WHEN CURRENT_DATE - REPORT_REVIEW_DATE < 1 / 24 / 60
+						THEN FLOOR((CURRENT_DATE - REPORT_REVIEW_DATE) * 24 * 60 * 60) || '초 전'
+						
+						WHEN CURRENT_DATE - REPORT_REVIEW_DATE <  1 / 24 
+						THEN FLOOR((CURRENT_DATE - REPORT_REVIEW_DATE) * 24 * 60) || '분 전'
+						
+						WHEN CURRENT_DATE - REPORT_REVIEW_DATE <  1 
+						THEN FLOOR((CURRENT_DATE - REPORT_REVIEW_DATE) * 24) || '시간 전'
+					
+						ELSE TO_CHAR(REPORT_REVIEW_DATE, 'YYYY-MM-DD')
+					END AS REPORT_REVIEW_DATE
+					]]>
+			,
+		  MEMBER_NAME,
+		  REPORT_REVIEW_FL
+		FROM
+		  "REPORT_REVIEW"
+		JOIN
+			"MEMBER" USING (MEMBER_NO)
+		JOIN
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		WHERE
+		<choose>
+			<!-- 신고 유형 검색인 경우 -->
+			<when test='key == "t"'>
+				REPORT_TYPE_NAME LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				REPORT_REVIEW_NO LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고자 이름 검색인 경우 -->
+			<when test='key == "rn"'>
+				MEMBER_NAME LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+			
+  	</select>
  
 </mapper>

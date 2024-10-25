@@ -105,3 +105,46 @@ h1 {
 }
 
 
+
+
+/* pagination-area css */
+
+.pagination{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.pagination li{
+  width: 20px;
+  margin: 0 5px;
+  text-align: center;
+}
+
+.pagination a{
+  text-decoration-line: none;
+  color: black;
+
+  line-height: 24px;
+
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.pagination a:hover {
+  cursor: pointer;
+}
+
+.current {
+
+  font-weight: bold;
+  background-color: var(--main-color);
+  border-radius: 50%;
+  color: white !important;
+  letter-spacing: 0 !important;
+}
+
+
+

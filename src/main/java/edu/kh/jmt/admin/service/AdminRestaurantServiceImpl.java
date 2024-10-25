@@ -85,7 +85,6 @@ public class AdminRestaurantServiceImpl implements AdminRestaurantService{
 	// 1. 지정된 게시판에서 검색 조건이 일치하는 게시글이 
 			//    몇 개나 존재하는지 조회
 		
-			log.debug("aaa : {}", paramMap);
 		
 			int searchCount = mapper.getSearchCount(paramMap);
 

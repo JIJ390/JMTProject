@@ -27,19 +27,42 @@
               <span th:text="*{reportReviewDate}"></span>
             </a>
           </div>
+        </div>
       </div>
 
+      <!-- 페이지 네이션 -->
+      <div class="pagination-area" th:unless="${#lists.isEmpty(reportReviewList)}">
 
+        <ul class="pagination" th:object="${pagination}">
+          <li><a href="#">&lt;&lt;</a></li>
+          <li><a href="#">&lt;</a></li>
+
+          <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}" >
+            
+            <li th:if= "${i} == *{currentPage}">
+              <a class="current" th:text="${i}">현재 페이지</a>
+            </li>
+    
+            <li th:unless= "${i} == *{currentPage}"> 
+              <a href="#" th:text="${i}">이동할 수 있는 페이지</a>   <!-- th:href="|?cp=${i}|" -->
+            </li>
+          </th:block>
+
+          <li><a href="#">&gt;</a></li>
+          <li><a href="#">&gt;&gt;</a></li>
+        </ul>
+
+      </div>
 
 
     </section>
     <section class="right-section">
-      <form action="/admin/restaurant" method="GET" id="restaurantSearch">
+      <form action="/admin/report/review" method="GET" id="restaurantSearch">
 
         <select name="key" id="searchKey">
-          <option value="rn">이름</option>
-          <option value="l">지역</option>
-          <option value="n">번호</option>
+          <option value="rn">신고자 이름</option>
+          <option value="t">신고 유형</option>
+          <option value="n">신고 번호</option>
         </select>
 
         <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
@@ -56,5 +79,7 @@
     const pagination = /*[[${pagination}]]*/ "페이지네이션 객체"    
   </script>
 
+
+  <script src="/js/admin/reportReview.js"></script>
 </body>
 </html>
