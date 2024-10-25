@@ -91,10 +91,12 @@ const regionCategorySubmit = document.querySelector(".regionCategorySubmit")
 const regionCategoryPopUp = document.querySelector(".regionCategoryPopUp")
 const regoinBtn = document.querySelector("#regionCategoryBtn")
 
+//값 전달 버튼
 regionCategorySubmit.addEventListener("click", () => {
   regionCategoryPopUp.classList.add("regionCategoryPopUp-close")
 
 })
+// 카테고리 클릭시 팝업 열리는
 regoinBtn.addEventListener("click", () => {
   regionCategoryPopUp.classList.remove("regionCategoryPopUp-close")
 })
@@ -103,11 +105,12 @@ regoinBtn.addEventListener("click", () => {
 const foodCloseBtn= document.querySelector(".foodClosePopup") // 취소버튼
 foodCloseBtn.addEventListener("click", () => {
   foodCategoryPopUp.classList.add("foodCategoryPopUp-close");
-})
+});
+
 /* 지역 선택 취소 버튼 */
-const regionCloseBtn= document.querySelector(".regionClosePopup") // 취소버튼
+const regionCloseBtn = document.querySelector(".regionClosePopUp") // 취소버튼
 regionCloseBtn.addEventListener("click", () => {
-  foodCategoryPopUp.classList.add("regionCategoryPopUp-close");
+  regionCategoryPopUp.classList.add("regionCategoryPopUp-close");
 })
 
 
