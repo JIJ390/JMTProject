@@ -164,6 +164,8 @@ header {
   display: flex;
   justify-content: center;
   gap: 20px;
+  position: relative;
+  right: 17px;
 }
 
 .filter-category{
@@ -398,6 +400,8 @@ header {
   outline:none;
   cursor: auto;
   text-align: center;
+  right: 17px;
+  position: relative;
 }
 /* 지역 -======================================*/
 
