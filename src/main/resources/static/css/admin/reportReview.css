@@ -54,3 +54,54 @@ h1 {
   margin: 10px;
 }
 
+
+.report-div {
+  width: 90%;
+  height: 40px;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  margin: 10px auto; 
+  padding: 20px;
+
+  box-shadow: 0px 1px 6px -2px var(--border-color);
+}
+
+.report-box {
+  width: 100%;
+
+}
+
+.report-box a {
+  text-decoration-line: none;
+  color: black;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+/* 글 정렬 */
+.report-box a span {
+  text-align: center;
+}
+
+.report-box a span:nth-child(1) {
+  width: 10%;
+}
+.report-box a span:nth-child(2) {
+  width: 40%;
+}
+
+.report-box a span:nth-child(3) {
+  width: 30%;
+}
+.report-box a span:nth-child(4) {
+  width: 20%;
+}
+
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.jmt.admin.mapper.AdminReportMapper">
+
+
+	<!-- 신고 목록 게시판 신고 목록 가져오기 -->
+  	<select id="reportReviewList">
+  			
+		SELECT 
+		  REPORT_REVIEW_NO,
+		  REPORT_TYPE_NAME,
+		  	
+		  		<![CDATA[
+		  			CASE 
+						WHEN CURRENT_DATE - REPORT_REVIEW_DATE < 1 / 24 / 60
+						THEN FLOOR((CURRENT_DATE - REPORT_REVIEW_DATE) * 24 * 60 * 60) || '초 전'
+						
+						WHEN CURRENT_DATE - REPORT_REVIEW_DATE <  1 / 24 
+						THEN FLOOR((CURRENT_DATE - REPORT_REVIEW_DATE) * 24 * 60) || '분 전'
+						
+						WHEN CURRENT_DATE - REPORT_REVIEW_DATE <  1 
+						THEN FLOOR((CURRENT_DATE - REPORT_REVIEW_DATE) * 24) || '시간 전'
+					
+						ELSE TO_CHAR(REPORT_REVIEW_DATE, 'YYYY-MM-DD')
+					END AS REPORT_REVIEW_DATE
+					]]>
+			,
+		  MEMBER_NAME,
+		  REPORT_REVIEW_FL
+		FROM
+		  REPORT_REVIEW
+		JOIN
+			"MEMBER" USING (MEMBER_NO)
+		JOIN
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+  	</select>
+ 
+ 
+</mapper>

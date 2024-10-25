@@ -17,6 +17,21 @@
 
       <h1>신고 관리 페이지 - 리뷰</h1>
 
+      <div th:each= "reportReview : ${reportReviewList}" th:object="${reportReview}" id="reportReviewList">
+        <div class="report-div">
+          <div class="report-box">
+            <a href="#">
+              <span th:text="*{reportReviewNo}"></span>
+              <span th:text="*{reportTypeName}"></span>
+              <span th:text="*{memberName}"></span>
+              <span th:text="*{reportReviewDate}"></span>
+            </a>
+          </div>
+      </div>
+
+
+
+
     </section>
     <section class="right-section">
       <form action="/admin/restaurant" method="GET" id="restaurantSearch">
@@ -41,6 +56,5 @@
     const pagination = /*[[${pagination}]]*/ "페이지네이션 객체"    
   </script>
 
-  <script src="/js/admin/restaurantManage.js"></script>
 </body>
 </html>
