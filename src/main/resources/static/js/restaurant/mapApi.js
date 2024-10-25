@@ -1,4 +1,4 @@
-const restaurantAddress = document.querySelector(".getRestaurantAddress").value;
+const restaurantAddress = document.querySelector(".getRestaurantAddress").value.split(',');
 
 var mapContainer1 = document.getElementById('map1'), // 지도를 표시할 div 
   mapOption1 = {
@@ -15,7 +15,7 @@ var mapContainer1 = document.getElementById('map1'), // 지도를 표시할 div
   
   var coords
   // 주소로 좌표를 검색합니다
-  geocoder.addressSearch('경기 성남시 분당구 대왕판교로 477', function (result, status) {
+  geocoder.addressSearch(restaurantAddress[1], function (result, status) {
     
     // 정상적으로 검색이 완료됐으면 
     if (status === kakao.maps.services.Status.OK) {
