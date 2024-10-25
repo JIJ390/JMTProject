@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.kh.jmt.admin.dto.Member;
+
+import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.board.dto.Board;
 import edu.kh.jmt.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
