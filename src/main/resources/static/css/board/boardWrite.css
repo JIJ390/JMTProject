@@ -82,6 +82,7 @@
 .boardImg > label{
   width: 100%;
   height: 100%;
+  font-size: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,9 +125,12 @@
 form[name='myPageFrm']{position: relative;}
 
 #deleteImage{
+
   top: 0px;
-  right: 240px;
+  right: 7px;
+  font-size: 20px;
   cursor: pointer;
+  position: absolute;
 }
 
 /* 제목 css */
