@@ -1,0 +1,56 @@
+/* @font-face {
+  font-family: 'LeeSeoyun';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{font-family: 'LeeSeoyun';} */
+
+h3 {font-family: 'NEXON Lv1 Gothic OTF';}
+
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  --main-color : rgba(97, 192, 191, 1);
+  --border-color : rgb(182, 182, 182);
+}
+
+
+html, body, main {
+  height: 100%;
+}
+
+main{
+  display: flex;
+
+}
+
+section{  
+  /* border: 1px solid black; */
+ /* 임시 */
+  height: 100%;
+
+}
+
+
+.left-section, .right-section{
+  width: 50%;
+}
+
+.main-section {
+  width: 2000px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+h1 {
+  margin: 10px;
+}
+
