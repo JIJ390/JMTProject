@@ -16,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.myPage.service.MyPageService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,14 +43,18 @@ public class MyPageController {
 	 * @param loginPW : 제출된 비밀번호
 	 * @param loginPW : 리다이렉트 시 request scope로 값 전달
 	 * @param model : 데이터 전달용 객체 (기본값 : request scope)
+	 * @param saveEamil : 이메일 저장 여부
+	 * @param resp : 응답 방법을 제공하는 객체
 	 * @return
 	 */
 	@PostMapping("loginPage")
 	public String login(
 			@RequestParam("loginEmail") String loginEmail,
 			@RequestParam("loginPW") String loginPW,
+			@RequestParam(name ="saveEmail", required = false) String saveEmail,
 			RedirectAttributes ra,
-			Model model
+			Model model,
+			HttpServletResponse resp
 			) {
 		
 //		log.debug("loginEmail : {}", loginEmail);
@@ -62,7 +68,17 @@ public class MyPageController {
 			return "redirect:/myPage/loginPage";
 		} else { // 로그인 성공
 			model.addAttribute("loginMember", loginMember);
+			// 이메일 저장 기능
+			Cookie cookie = new Cookie("saveEmail", loginEmail);
 			
+			cookie.setPath("/");
+			
+			if(saveEmail == null) { // 체크가 안되어있을때
+				cookie.setMaxAge(0);
+			} else { // 체크가 되었을때
+				cookie.setMaxAge(60*60*24*30); // 30일 유지
+			}
+			resp.addCookie(cookie);
 		}
 		
 		
