@@ -153,7 +153,7 @@ public class AdminRestaurantConroller {
 		Restaurant restaurant = (Restaurant) map.get("restaurant");
 		List<Menu> menuList = (List<Menu>) map.get("menuList");
 		
-		String[] arr = restaurant.getRestaurantAddress().split(",");
+		String[] arr = restaurant.getRestaurantAddress() .split(",");
 		
 		// 가게 주소 잘라내기
 		model.addAttribute("postcode"     , arr[0]);

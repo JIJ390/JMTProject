@@ -32,14 +32,14 @@ public class RestaurantController {
 	
 	@GetMapping("view")
 	public String view(
-//			@RequestParam("restaurantNo") int restaurantNo // 받아올 매개변수
-			Model model
+			Model model,
+			@RequestParam("restaurantNo") int restaurantNo
 			) {
 		
 //		 정보 전달용 레스토랑 객체
 //		 ** 구현 예정 -> restaurantNo를 파라미터로 얻어와 조회할 것
 //									예시로 3 넣어둔것
-		RestaurantDto restaurant = service.restaurantDetail(13);
+		RestaurantDto restaurant = service.restaurantDetail(restaurantNo);
 //		List<ReviewDto> reviews = service.selectReview(13, 1); 
 		
 		
