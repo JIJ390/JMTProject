@@ -11,7 +11,7 @@
       </li>
 
       <li>
-        <a href="#">공지사항</a>
+        <a href="/notice/notice">공지사항</a>
       </li>
 
       <li>
@@ -33,5 +33,9 @@
 
 </header>
 
+<script th:inline="javascript">
+  const message =  /*[[${message}]]*/ "전달 받은 message";
+  if(message != null) alert(message);
+</script>
 
 <script src="https://kit.fontawesome.com/8c48587fe7.js" crossorigin="anonymous"></script>

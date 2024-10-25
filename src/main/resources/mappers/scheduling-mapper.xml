@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="edu.kh.jmt.common.scheduling.mapper.SchedulingMapper">
+
+	<select id="getDbfileNameList" resultType="string">
+		SELECT SUBSTR(PROFILE_IMG, INSTR(PROFILE_IMG, '/', -1) +1) AS FILE_NAME
+		FROM "MEMBER"
+		WHERE PROFILE_IMG IS NOT NULL
+
+		UNION
+
+		SELECT TO_CHAR(IMG_RENAME) "FILE_NAME"
+		FROM BOARD_IMG
+	</select>
+
+</mapper>

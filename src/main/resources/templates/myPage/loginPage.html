@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{app.name}">로그인 페이지</title>
+
+
+
+    <link rel="stylesheet" href="/css/common/header.css">
+    <link rel="stylesheet" href="/css/myPage/loginPage.css">
+    <link rel="stylesheet" href="/css/main/popUp.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+</head>
+
+<body>
+  <!-- Header Section -->
+  <th:block th:replace="~{common/header}"></th:block>
+  <link rel="stylesheet" href="/css/common/header.css">
+
+    <!-- Main Content -->
+   <main>
+        <form action="loginPage" method="POST" name="myPageFrm" id="loginPage">
+            <div class="login-container">
+                <div class="login-box">
+                    <input type="email" name="loginEmail" placeholder="이메일">
+                    <input type="password" name="loginPW" placeholder="비밀번호">
+                    <label>
+                        <input type="checkbox"> 로그인 상태 유지
+                    </label>
+                    <button>로그인</button>
+                    <div class="login-links">
+                        <a href="/myPage/signUp">회원 가입</a>|
+                        <a href="/myPage/pwFind">비밀번호 찾기</a>
+                    </div>
+                </div>
+            </div>
+
+            
+        
+            <script>
+                document.querySelector('.back-to-top').addEventListener('click', function () {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            </script>
+        </form>
+   </main>
+
+   
+</body>
+
+
+</html>

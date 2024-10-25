@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>BoardMain</title>
+		<link rel="stylesheet" href="/css/board/boardMain.css">
+		<link rel="stylesheet" href="/css/common/header.css">
+	</head>
+	<th:block th:replace="~{common/header}"></th:block>
+
+	<body>
+	 	
+				
+		
+		<br><br>
+		<!-- 검색바 -->
+		<form class="search-container">
+			<div>
+					<input type="text" placeholder="　검색">
+					<i class="fa-solid fa-magnifying-glass"></i>
+			</div>
+		</form>
+
+		<!-- 게시글 리스트 -->
+		<div class="post-container">
+				<div class="post" th:each="board : ${boardList}">
+						<div class="post-header">
+								<div class="profile-pic"></div>
+								<div class="post-title" th:text="${board.boardTitle}">제목</div>
+								<div class="post-time">이름 | 21분 전</div>
+						</div>
+						<br>
+						<hr>
+						<div class="post-content">
+							<div th:if="${board.boardImg}">
+									<img th:src="${board.boardImg}" alt="게시글이미지"
+									class="imageSize">
+								</div>
+								<div class="contentCss">
+									<th:block  th:text="${board.boardContent}" class="contentCss">본문 내용</th:block>
+								</div>
+						</div>
+						
+						<div class="post-footer">
+								<span class="comment-toggle">
+										<div class="triangle"></div> 댓글 보기
+								</span>
+				</div>
+		</div>
+
+			
+			
+
+		<div class="post">
+				<div class="post-header">
+						<div class="profile-pic"></div>
+						<div class="post-title">제목</div>
+						<div class="post-time">이름 | 21분 전</div>
+				</div>
+				<br>
+				<hr>
+				<div class="post-content">본문 내용</div>
+				<br><br><br><br><br><br>
+				<div class="post-footer">
+					<span class="comment-toggle">
+							<div class="triangle"></div> 댓글 보기
+					</span>
+			</div>
+		</div>
+					
+				<!-- 글쓰기 버튼 -->
+			
+				<button id="pageChange" class="writeBtn">글쓰기</button>
+
+
+
+	<!-- 상단으로 이동 버튼 -->
+	<button class="fa-solid fa-arrow-up" id="topBtn"></button>
+		
+
+	<script src="/js/board/boardMain.js"></script>
+	<script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
+
+	</body>
+
+</html>
+ 		

@@ -53,6 +53,29 @@ public class FileConfig implements WebMvcConfigurer{
 	@Value("${my.profile.resource-location}")
 	private String profileResourceLocation; 		// 프로필 이미지 요청 시 
 																							// 연결될 서버 폴더 경로
+  
+  
+	@Value("${my.restaurant.resource-handler}")
+	private String restaurantResourceHandler;			// 가게 이미지 요청 주소
+	
+	@Value("${my.restaurant.resource-location}")
+	private String restaurantResourceLocation; 		// 가게 이미지 요청 시 
+	// 연결될 서버 폴더 경로
+	
+  
+	@Value("${my.review.resource-handler}")
+	private String reviewResourceHandler;			// 리뷰 이미지 요청 주소
+	
+	@Value("${my.review.resource-location}")
+	private String reviewResourceLocation; 		//  이미지 요청 시 
+	// 연결될 서버 폴더 경로
+
+	
+	@Value("${my.board.resource-handler}")
+	private String boardResourceHandler;
+	
+	@Value("${my.board.resource-location}")
+	private String boardResourceLocation; 
 	
 	
 	
@@ -98,6 +121,10 @@ public class FileConfig implements WebMvcConfigurer{
 		.addResourceHandler(testResourceHandler)			// /images/test/**
 		.addResourceLocations(testResourceLocation);  // file:///C:/uploadFiles/test/
 		
+		registry
+		.addResourceHandler(restaurantResourceHandler)			// /images/test/**
+		.addResourceLocations(restaurantResourceLocation);  // file:///C:/uploadFiles/test/
+		
 		//  /images/test/ 로 시작하는 주소로 요청이 있을 경우
 		//  서버 컴퓨터에 C:/uploadFiles/test/ 폴더로 연결
 		
@@ -108,6 +135,21 @@ public class FileConfig implements WebMvcConfigurer{
 		
 		//  /images/profile/ 로 시작하는 주소로 요청이 있을 경우
 		//  서버 컴퓨터에 C:/uploadFiles/profile/ 폴더로 연결
+		
+		
+		registry
+		.addResourceHandler(boardResourceHandler)					// /images/board/**
+		.addResourceLocations(boardResourceLocation);
+    
+    registry
+		.addResourceHandler(reviewResourceHandler)					// /images/review/**
+		.addResourceLocations(reviewResourceLocation);			// file:///C:/uploadFiles/review/
+		
+		//  /images/profile/ 로 시작하는 주소로 요청이 있을 경우
+		//  서버 컴퓨터에 C:/uploadFiles/profile/ 폴더로 연결
+		
+		
+		
 	}
 	
 

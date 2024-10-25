@@ -26,9 +26,11 @@ public class InterceptorConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		
 		registry.addInterceptor(categoryInterceptor())
-				.addPathPatterns("/admin/restaurant/regist");
+				.addPathPatterns("/admin/restaurant/regist")
+				.addPathPatterns("/admin/restaurant/updateView");
 		
 		registry.addInterceptor(selectLocationList())
-				.addPathPatterns("/admin/restaurant/regist");
+				.addPathPatterns("/admin/restaurant/regist")
+				.addPathPatterns("/admin/restaurant/updateView");
 	}
 }

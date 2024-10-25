@@ -21,4 +21,7 @@ public class ReviewDto {
 	private String reviewDelFl;
 	private int restaurantNo;
 	private int memberNo;
+	
+	private String profileImg;
+	private String memberName;
 }

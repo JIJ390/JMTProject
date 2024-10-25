@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myPage</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+    <link rel="stylesheet" href="/css/myPage/updateInfo.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <th:block th:replace="~{common/header}"></th:block>
+    <link rel="stylesheet" href="/css/common/header.css">
+
+    <!-- Main Content -->
+    <main>
+    <form action="updateInfo" method="POST" name="updateInfoForm" id="updateInfoForm" enctype="multipart/form-data">
+        <div class="container">
+            <div class="profile">
+                <h1 style="margin-bottom: 30px;">프로필 수정</h1>
+                <div class="profile-img-wrapper"> <!-- 프로필 이미지 -->
+                    <a href="/myPage/profile">
+                        <img th:with="user=#{user.default.image}" 
+                             th:src="${session.loginMember.profileImg}"
+                             id="memberProfile"
+                             alt="프로필 이미지" >
+                    </a> 
+                </div>
+                <label for="imageInput">이미지 선택</label> <!-- label의 for 속성 : 글자를 클릭해도 input 태그와 연결되게 참조 -->
+                <input type="file" name="updateProfileImg" id="imageInput" accept="image/*">
+                <div class="name">
+                    <input type="text" name="memberName" id="memberName" th:value="${session.loginMember.memberName}">
+                </div>
+                <button class="myPage-submit" >수정하기</button>
+            </div>
+        </div>
+    </form>
+</main>
+
+    <script>
+        document.querySelector('.back-to-top').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+
+    
+
+</body>
+    
+</html>

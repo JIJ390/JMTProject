@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 탈퇴</title>
+    <link rel="stylesheet" href="/css/myPage/withdrawal.css">
+
+</head>
+<body>
+     <!-- Header Section -->
+     <th:block th:replace="~{common/header}"></th:block>
+     <link rel="stylesheet" href="/css/common/header.css">
+
+     <!-- Main Content -->
+
+    <main>
+            <div class="withdrawal-container">
+                <h2>회원 탈퇴</h2>
+                <p style="text-align: left;">현재 비밀번호를 입력하는 경우 탈퇴할 수 있습니다</p>
+                <form action="withdrawal"  method="POST" name="withdrawal" id="withdrawal">
+                    <label for="password"></label>
+                    <input type="password" id="memberPw" name="memberPw" placeholder="현재 비밀번호" required>
+    
+                    <label for="agreement">탈퇴 약관</label>
+                    <textarea id="agreement" name="agreement" rows="25" disabled>아 여기에 뭐 입력해야하지
+    뭔가 스크롤이 길게 보일 정도로 길게 써야할 것 같은데....
+    모르겠다 애국가나 적어야겠다
+    1. 동해물과 백두산이 마르고 닳도록
+    하느님이 보우하사 우리나라 만세
+    무궁화 삼천리 화려 강산
+    대한 사람 대한으로 길이 보전하세
+    
+    2. 남산 위에 저 소나무 철갑을 두른 듯
+    바람 서리 불변함은 우리 기상일세
+    무궁화 삼천리 화려 강산
+    대한 사람 대한으로 길이 보전하세
+    
+    3. 가을 하늘 공활한데 높고 구름 없이
+    밝은 달은 우리 가슴 일편단심일세
+    무궁화 삼천리 화려 강산
+    대한 사람 대한으로 길이 보전하세
+    
+    4. 이 기상과 이 맘으로 충성을 다하여
+    괴로우나 즐거우나 나라 사랑하세
+    무궁화 삼천리 화려 강산
+    대한 사람 대한으로 길이 보전하세
+    
+    4절까지 적어도 모자르네
+    그래도 이제 끝이 보인다
+    스크롤 내려가는것만 확인하면 되는 거니까
+    오 스크롤 내려간다
+    오케이 확인 완료
+                    </textarea>
+    
+                    <div class="checkbox">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">위 약관에 동의합니다</label>
+                    </div>
+    
+                    <button type="submit">탈퇴하기</button>
+                </form>
+            </div>
+    </main>
+
+    <footer>
+        <div class="scroll-up">
+            <span>&#8679;</span>
+        </div>
+    </footer>
+
+    <!-- 회원 탈퇴 JS 추가 -->
+    <script src="/js/myPage/myPage.js"></script>
+</body>
+</html>

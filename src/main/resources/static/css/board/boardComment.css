@@ -1,0 +1,215 @@
+/* 기본 스타일 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+} */
+
+/* 상단바 스타일 */
+/* header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6EC3C2;
+  padding: 10px 20px;
+} */
+
+.header-left h1 {
+  color: white;
+  font-size: 24px;
+}
+
+.header-right ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.header-right a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* 검색바 스타일 */
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+}
+
+.search-container input {
+  width: 200px;
+  padding: 5px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+/* 게시글 스타일 */
+.post-container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.post {
+  background-color: #FFFFFF;
+  border-radius: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  position: relative;
+  width: 60%;
+  height: 60%;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.post-title {
+  font-weight: bold;
+}
+
+.post-time {
+  margin-left: auto;
+  color: gray;
+  font-size: 12px;
+}
+
+.post-content {
+  margin-top: 10px;
+  color: #333;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* 댓글 박스 컨테이너 */
+.comment-container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 150%;
+}
+
+/* 댓글 post */
+.comment-post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 댓글 수정 ★★ margin-left : auto 로 가능!*/
+.comment-post-update {
+  margin-left: auto;
+  color: gray;
+  font-size: 12px;
+}
+
+
+/* 댓글 헤더 */
+.post-header {
+  display: flex;
+  gap: 10px;
+}
+
+
+
+/* 댓글 숨기기 토글 버튼 */
+.comment-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #3b3d3d;
+  font-weight: bold;
+}
+
+.comment-write{
+
+  width: 550px; /* 너비 */
+  height: 80px; /* 높이 */
+  padding: 10px; /* 안쪽 여백 */
+  border: 2px solid #ccc; /* 테두리 색상과 두께 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  background-color: #f9f9f9; /* 배경색 */
+  font-family: 'Arial', sans-serif; /* 글꼴 */
+  font-size: 16px; /* 글자 크기 */
+  color: #333; /* 글자 색상 */
+  line-height: 1.5; /* 줄 간격 */
+  resize: none; /* 크기 조절 가능 여부 (none: 비활성화) */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+  outline: none; /* 포커스 시 외곽선 제거 */
+
+}
+
+.textarea-main{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+}
+
+
+/* 삼각형 아이콘 */
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #6EC3C2;
+  margin-right: 5px;
+}
+
+/* 글쓰기 버튼 스타일 */
+.writeBtn {
+  right: 20px;
+  background-color: #6EC3C2;
+  width: 8%;
+  margin-left: 50%;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* 상단 버튼*/
+#topBtn{
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  border-radius: 50%;
+  border: none;
+  padding: 40;
+  color: #6EC3C2;
+  width: 60px;
+  height: 60px;
+  font-size:40px;
+  cursor: pointer;
+}

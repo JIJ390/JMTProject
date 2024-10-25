@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.jmt.board.mapper.BoardMapper">
+
+
+	<insert id="boardWrite" 
+			parameterType="Board" 
+			useGeneratedKeys="true">
+	
+		<selectKey order="BEFORE"
+				   resultType="_int"
+				   keyProperty="boardNo">
+			SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
+		</selectKey>
+	
+	
+		INSERT INTO "BOARD"
+		VALUES(
+			#{boardNo},
+			#{boardTitle},
+			#{boardContent},
+			DEFAULT, 
+			#{boardImg}, 
+			DEFAULT, 
+			#{memberNo}
+		)
+	</insert>
+	
+	
+	<select id="boardMain" resultType="Board">
+		SELECT
+			*
+		FROM
+			"BOARD"
+		ORDER BY BOARD_NO DESC
+	</select>
+
+
+
+
+
+
+
+
+	
+
+
+</mapper>

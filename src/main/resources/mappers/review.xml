@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.jmt.restaurant.mapper.ReviewMapper">
+
+	<insert id="imgRename">
+		INSERT INTO "REVIEW_IMAGE"
+		VALUES(SEQ_REVIEW_IMG_NO.NEXTVAL, #{renamePath}, 1)
+	</insert>
+
+
+	<insert id="reviewUpload">
+		INSERT INTO "REVIEW"
+		VALUES(
+		SEQ_REVIEW_NO.NEXTVAL,
+		#{content}, #{likeFl},
+		DEFAULT,
+		'N',
+		#{restaurantNo},
+		#{memberNo}
+		)
+	</insert>
+
+
+	<select id="selectNewReview" resultType="reviewDto">
+			SELECT
+				ROWNUM,
+				REVIEW_NO,
+				REVIEW_CONTENT,
+				LIKE_FL,
+				REVIEW_DATE,
+				REVIEW_DEL_FL,
+				RESTAURANT_NO,
+				MEMBER_NO,
+				MEMBER_NAME
+			FROM
+				(SELECT
+				REVIEW_NO,
+				REVIEW_CONTENT,
+				LIKE_FL,
+				REVIEW_DATE,
+				REVIEW_DEL_FL,
+				RESTAURANT_NO,
+				MEMBER_NO
+			FROM
+				REVIEW
+			WHERE
+				RESTAURANT_NO = #{restaurantNo}
+			ORDER BY
+				REVIEW_DATE DESC)
+			JOIN 
+				"MEMBER" USING (MEMBER_NO)
+			WHERE ROWNUM BETWEEN 1 AND #{rowNum}
+	</select>
+	
+
+
+	<select id="selectOldReview" resultType="reviewDto">
+			SELECT
+				ROWNUM,
+				REVIEW_NO,
+				REVIEW_CONTENT,
+				LIKE_FL,
+				REVIEW_DATE,
+				REVIEW_DEL_FL,
+				RESTAURANT_NO,
+				MEMBER_NO,
+				MEMBER_NAME
+			FROM
+				(SELECT
+				REVIEW_NO,
+				REVIEW_CONTENT,
+				LIKE_FL,
+				REVIEW_DATE,
+				REVIEW_DEL_FL,
+				RESTAURANT_NO,
+				MEMBER_NO
+			FROM
+				REVIEW
+			WHERE
+				RESTAURANT_NO = #{restaurantNo}
+			ORDER BY
+				REVIEW_DATE ASC)
+			JOIN 
+				"MEMBER" USING (MEMBER_NO)
+			WHERE ROWNUM BETWEEN 1 AND #{rowNum}
+	</select>
+
+
+
+
+
+
+</mapper>

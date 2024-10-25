@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 관리 페이지</title>
+  <link rel="stylesheet" href="/css/admin/memberManage.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+</head>
+<body>
+
+  <th:block th:replace="~{common/header}"></th:block>
+  
+  <main>
+    <th:block th:replace= "~{admin/adminSide}"></th:block>
+    <section class="main-section">
+
+      [[${session.loginMember}]]
+
+      <h1>회원 관리 페이지</h1>
+
+      <div class="memberStatus">
+        <div class="memberStatus-head">
+          JMT 회원 현황
+        </div>
+        <div class="container-1">
+          <div>전체 회원 수</div>
+          <div id="totalMember">0</div>
+        </div>
+        <div class="container-1">
+          <div>활동 회원 수</div>
+          <div id="activeMember">0</div>
+        </div>
+        <div class="container-1">
+          <div>차단 회원 수</div>
+          <div id="blockMember">0</div>
+        </div>
+        <div class="container-1">
+          <div>탈퇴 회원 수</div>
+          <div id="secessionMember">0</div>
+        </div>
+      </div>
+
+
+      <div class="search-area">
+        <input type="radio" name="searchCondition" id="totalMemberInput" value="0" checked></input>
+        <label for="totalMemberInput">전체 회원</label>
+
+        <input type="radio" name="searchCondition" id="blockMemberInput" value="1"></input>
+        <label for="blockMemberInput">차단 회원</label>
+
+        <input type="radio" name="searchCondition" id="recessionMemberInput" value="Y"></input>
+        <label for="recessionMemberInput">탈퇴 회원</label>
+
+
+        <br><br>
+
+        <select name="key" id="searchKey">
+          <option value="mn">이름</option>
+          <option value="e">이메일</option>
+          <option value="n">번호</option>
+        </select>
+
+        <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+        <button id="searchBtn" class="aaa">검색</button>
+
+      </div>
+
+      <table border="1" class="memberListTable">
+        <thead>
+          <tr>
+            <th>회원 번호</th>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>회원 상태</th>
+            <th colspan="3">-</th>
+          </tr>
+        </thead>
+        <tbody id="memberList">
+
+
+        </tbody>
+
+      </table>
+
+
+      <div id="paginationArea" class="pagination-area">
+      </div>
+
+    </section>
+    <section class="right-section">
+     
+
+    </section>
+  </main>
+
+  <script src="/js/admin/memberManage.js"></script>
+</body>
+</html>

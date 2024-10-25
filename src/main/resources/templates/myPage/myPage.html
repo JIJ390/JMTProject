@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myPage</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+    <link rel="stylesheet" href="/css/myPage/myPage.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <th:block th:replace="~{common/header}"></th:block>
+    <link rel="stylesheet" href="/css/common/header.css">
+
+    <!-- Main Content -->
+    <main>
+    <form action="myPage" method="POST" name="myPageForm" id="myPageForm">
+        <div class="container">
+            <div class="profile">
+                <div class="profile-img-wrapper"> <!-- 프로필 이미지 -->
+                    <a href="/myPage/profile">
+                        <img th:with="user=#{user.default.image}" 
+                             th:src="${session.loginMember.profileImg ?: user }"
+                             id="memberProfile"
+                             alt="프로필 이미지" >
+                    </a> 
+                </div>
+                <div class="name">
+                    <input type="text" name="memberName" id="memberName" th:value="${session.loginMember.memberName}">
+                </div>
+                <div class="email">
+                    <input type="text" name="memberEmail" id="memberEmail" th:value="${session.loginMember.memberEmail}">
+                </div>
+                <a href="/myPage/updateInfo" class="button">수정하기</a>
+            </div>
+            <div class="footer-links">
+                <div class="horizontal-links">
+                    <a href="/myPage/passwordChange">비밀 번호 변경</a> |
+                    <a href="/myPage/withdrawal">회원탈퇴</a>
+                </div>
+                <a href="#">내가 쓴글</a>
+                <a href="#">리뷰 목록</a>
+                <a href="#">찜목록</a>
+            </div>
+        </div>
+    </form>
+</main>
+
+    <script>
+        document.querySelector('.back-to-top').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+
+    
+
+</body>
+    
+</html>

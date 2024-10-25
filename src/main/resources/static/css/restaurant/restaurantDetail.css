@@ -1,29 +1,30 @@
-*{
+* {
   box-sizing: border-box;
 }
 
-html, body{
+html,
+body {
   background-color: rgb(241, 241, 241);
   width: 100%;
   height: 100%;
   margin: 0;
 }
 
-.viewContainer{
+.viewContainer {
   display: flex;
 }
 
 
-.sideBar{
-  width: 20%;
+.sideBar {
+  width: 400px;
   height: 100vh;
-  background-color: rgb(165, 201, 198);
+  background-color: white(165, 201, 198);
   position: sticky;
   top: 0;
 
 }
 
-.sideInput{
+/* .sideInput{
   height: 100px;
   width: 100%;
 
@@ -48,32 +49,34 @@ html, body{
 .sideCategory > a{
   text-decoration: none;
   color: black;
-}
+} */
 
-.main{
-  width: 50%;
+.main {
+  width: 900px;
   height: max-content;
   margin: 20px;
   margin-left: 40px;
-  
+
 }
 
-.mainDetail{
+.mainDetail {
   width: 100%;
-  height: 1000px;
+  height: max-content;
   box-shadow: 0px 0px 10px 0px rgb(230, 230, 230);
-  border-radius: 50px;
+  border-radius: 20px;
   background-color: white;
+  margin-bottom: 30px;
 
   text-align: start;
 }
 
 
 
-.mainDetailPhoto{
-  width: 65%;
-  height: 35%;
- 
+.mainDetailPhoto {
+  width: 90%;
+  height: 50%;
+
+  padding-top: 30px;
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -81,93 +84,248 @@ html, body{
   display: flex;
 }
 
-.photo1{
+.photo1 {
   width: 50%;
-  height: 100%;
+  height: 400px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  border: 1px solid black;
-}
-.photo2{
-  width: 50%;
-  height: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  border: 1px solid black;
 }
 
-.mainDetailContent{
+.photo2 {
+  width: 50%;
+  height: 400px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.mainDetailContent {
   width: 100%;
   height: max-content;
 
   margin-top: 20px;
+  padding: 30px;
 }
 
-
-.mainDetailContent > ul {
-  
+.mainDetailContent>ul>li {
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
-.mainDetailContent > ul > li{
+.menuContainer {
+  width: 100%;
+  height: max-content;
+  box-shadow: 0px 0px 10px 0px rgb(230, 230, 230);
+  border-radius: 20px;
+  background-color: white;
+  margin-top: 50px;
+  padding: 20px;
+
+}
+
+.menuList {
   display: flex;
   justify-content: space-between;
-  margin-right: 40px;
-
+  margin-bottom: 10px;
+  border-bottom: 1px dotted gray;
 }
 
 
 
-.mainReview{
+
+
+.mainReview {
   width: 100%;
   height: max-content;
   box-shadow: 0px 0px 10px 0px rgb(230, 230, 230);
   border-radius: 50px;
+  padding: 20px;
 
-  margin-top: 50px;
+  margin-top: 20px;
   background-color: white;
 
 }
 
-.reviewProfile{
+.reviewT {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.reviewT > b{
+  font-size: 30px;
+}
+
+.reviewProfile {
   width: 100%;
   height: 100px;
 
   display: flex;
 }
 
-.reviewProfileImg{
-  width: 10%;
-  height: 100%;
+.reviewProfileImg {
+  width: 70px;
+  height: 70%;
   margin-top: 30px;
   margin-left: 30px;
+  border-radius: 100%;
+  border: 1px solid gray;
+
+
+
 }
 
-.revewProfileName{
+
+.mainReviewContent {
+  padding: 20px;
+}
+
+.revewProfileName {
   margin-top: 30px;
   width: 90%;
   height: 100%;
+
+
+
+  margin-left: 20px;
+
 }
 
-.mainReviewContent{
-  
+.reviewView {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(199, 199, 199);
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+
+.addBtnDiv {
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgb(153, 153, 153);
+  border-radius: 20px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.2s;
+}
+
+
+.addBtnDiv:hover {
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgb(153, 153, 153);
+  border-radius: 20px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  background-color: rgb(206, 206, 206);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.2s;
 }
 
 
 
-
-
-.map{
+.map1 {
   width: 300px;
-  height: 300px;
+  height: 400px;
   margin-top: 50px;
   margin-left: 20px;
-  position : sticky; /* 화면 밖으로 벗어났을 때 지정된 위치 붙음 */
-  top : 0;           /* 붙을 위치(고정될 위치) 지정 */
-  z-index: 1000;   
+  position: sticky;
+  /* 화면 밖으로 벗어났을 때 지정된 위치 붙음 */
+  top: 20px;
+  /* 붙을 위치(고정될 위치) 지정 */
+  z-index: 1000;
+
+
+}
+
+.map {
+  width: 100%;
+  height: 300px;
 
   box-shadow: 0px 0px 10px 0px rgb(230, 230, 230);
   border-radius: 20px;
+}
+
+.reviewBtn {
+  width: 100%;
+  height: 50px;
+
+  margin-top: 40px;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
   background-color: white;
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 10px;
+
+  transition: all 0.2s;
+
+}
+
+.reviewBtn:hover {
+  width: 100%;
+  height: 50px;
+  margin-top: 40px;
+  font-size: 20px;
+  border-radius: 10px;
+  color: white;
+  background-color: rgb(66, 170, 161);
+  border: 1px solid rgb(192, 192, 192);
+
+  transition: all 0.2s;
+  transform: scale(1.1, 1.1);
+  -ms-transform: scale(1.1, 1.1);
+  -webkit-transform: scale(1.1, 1.1);
+}
+
+.reviewBtn1 {
+  width: 20%;
+  height: 50px;
+
+  margin-left: 200px;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  background-color: white;
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 10px;
+
+  transition: all 0.2s;
+}
+
+.reviewBtn1:hover {
+  width: 20%;
+  height: 50px;
+  font-size: 20px;
+
+  margin-left: 200px;
+  border-radius: 10px;
+  color: white;
+  background-color: rgb(66, 170, 161);
+  border: 1px solid rgb(192, 192, 192);
+
+  transition: all 0.2s;
+  transform: scale(1.1, 1.1);
+  -ms-transform: scale(1.1, 1.1);
+  -webkit-transform: scale(1.1, 1.1);
+}
+
+
+
+
+
+.map2 {
+  width: 100%;
+  height: 300px;
+
 }

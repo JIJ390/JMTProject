@@ -1,3 +1,7 @@
+h3 {font-family: 'NEXON Lv1 Gothic OTF';}
+th {font-family: 'NEXON Lv1 Gothic OTF';}
+
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -94,18 +98,14 @@ section{
 
 /* 이미지 */
 .restaurantImg img{
-  max-width: 100%;
-  max-height: 100%;
+  min-width: 198px;
+  min-height: 198px;
 }
 
-.delete-image{
-  color: var(--border-color);
-
+.plus-mark {
   position: absolute;
-  top: 0;
-  right: 7px;
-  font-size: 20px;
-  cursor: pointer;
+  top: 70px;
+  z-index : -1;
 }
 
 
@@ -129,11 +129,11 @@ input {
 
 
 /* 카테고리 선택용 label */
-.categoryChoose {
+.inputChoose {
  margin: 20px;
 }
 
- .categoryChoose label {
+.inputChoose label {
   width: 60px;
   height: 30px;
 
@@ -149,12 +149,12 @@ input {
   
 }
 
-[name=categoryNo] {
+.inputChoose input {
   display: none;
 }
 
 
-[name=categoryNo]:checked+label{
+.inputChoose input:checked+label{
   background-color: var(--main-color);
   border: none;
   color: white;
