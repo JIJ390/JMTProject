@@ -15,7 +15,7 @@
   <!-- Header Section -->
   <header>
     <div id="header-Font">
-      <a href="#">메인페이지</a>
+      <a href="/">메인페이지</a>
       <a href="#">점메추</a>
       <a href="/notice/notice">공지사항</a>
       <a href="/notice/faq">FAQ</a>
@@ -30,7 +30,7 @@
     </div>
       <!-- 로그인이 안되어있을때 -->
     <div class="user-actions" th:unless= "${session.loginMember}">
-      <a href="#">회원 가입</a> | <a href=".menu-container">로그인</a>
+      <a href="/myPage/signUp">회원 가입</a> | <a href="/myPage/loginPage">로그인</a>
       </a>
     </div>
 
