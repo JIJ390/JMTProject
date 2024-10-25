@@ -71,6 +71,7 @@ public class BoardController {
 			RedirectAttributes ra
 			) {
 		
+		System.out.println(inputBoard);
 		
 		// 1) 작성자 회원번호를 inputBoard에 세팅
 		//		inputBoard.setMemberNo(loginMember.getMemberNo());
@@ -139,15 +140,36 @@ public class BoardController {
 			
 		Board board = service.updateView(boardNo);
 		
+		// Model -> forward시 "board", board K : V 로 전달하기!!!
+		model.addAttribute("board", board);
 		
 		return "board/boardUpdate";
+
 	}
 	
-	@PostMapping("/update")
-	public String boardUpdate() {
+//	@SessionAttribute("loginMember")Member loginMember,
+	
+	@PostMapping("update")
+	public String boardUpdate(
+			@RequestParam("boardImage")MultipartFile boardImage,
+			@ModelAttribute Board inputBoard,
+			RedirectAttributes ra
+			) {
+		
+//		inputBoard.setMemberNo(loginMember.getMemberNo());
 		
 		
+		int result = service.boardUpdate(inputBoard, boardImage);
 		
+		String message = null;
+		
+		if(result > 0) {
+			message = "게시글이 수정되었습니다";
+		}else {
+			message = "수정 실패";
+		}
+		
+		ra.addFlashAttribute("message", message);
 		
 		return "redirect:boardMain";
 	}

@@ -19,76 +19,74 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Transactional
 @PropertySource("classpath:/config.properties")
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
 
 	private final BoardMapper mapper;
 
 	@Value("${my.board.web-path}")
 	private String webPath;
-	
+
 	@Value("${my.board.folder-path}")
 	private String folderPath;
-	
-	
+
 	// 게시글 등록
 	@Override
 	public int boardWrite(Board inputBoard, MultipartFile boardImage) {
-		
-		
-		//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+		// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 		// ★★★★★★ 파일을 가져와서 이름변경을 하고
 		// -> boardDto에 담아서 DB로 넘겨서 insert 하는것 ★★☆★☆★☆★☆
 		// -> INSERT가 성공이 된다면???? 실제 파일을 서버에 올린다!
-		
-		
-		String rename = null;	
-		
-		// 1) 파일 업로드 확인
-		if(!boardImage.isEmpty()) { 
-				
-		// 2) 웹 접근경로(config.properties) + 변경된 파일명
-		
-			rename = FileUtil.rename(boardImage.getOriginalFilename());
-			
-			String url = webPath + rename;
-			
-			inputBoard.setBoardImg(url);
-			
-			}
 
-			// 3) 게시글 부분 ( 제목, 내용, 작성자, 게시판 종류 ) INSERT
-			int result = mapper.boardWrite(inputBoard);
-			
-			System.out.println(inputBoard.getBoardNo());
-			
-	    // 삽입 실패 시
-			if(result == 0) return 0;
-			
-			/* 삽입된 게시글 번호 */
-			int boardNo = inputBoard.getBoardNo();
-		
+		String rename = null;
+
+		// 1) 파일 업로드 확인
+		if (!boardImage.isEmpty()) {
+
+			// 2) 웹 접근경로(config.properties) + 변경된 파일명
+
+			rename = FileUtil.rename(boardImage.getOriginalFilename());
+
+			String url = webPath + rename;
+
+			inputBoard.setBoardImg(url);
+
+		}
+
+		// 3) 게시글 부분 ( 제목, 내용, 작성자, 게시판 종류 ) INSERT
+		int result = mapper.boardWrite(inputBoard);
+
+		System.out.println(inputBoard.getBoardNo());
+
+		// 삽입 실패 시
+		if (result == 0)
+			return 0;
+
+		/* 삽입된 게시글 번호 */
+		int boardNo = inputBoard.getBoardNo();
+
 		// 4) DB UPDATE 수행
 
-			// 파일 없을 시 업로드 하지 않고 리턴
-			if(boardImage.isEmpty()) {
-				return boardNo;
-			}
-			
-				try {
-					// C:/uploadFiles/board2/ 폴더가 없으면 생성
-					File folder = new File(folderPath);
-					if(!folder.exists()) folder.mkdir();
-					
-					// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
-					boardImage.transferTo(
-							new File(folderPath + rename));
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-		
+		// 파일 없을 시 업로드 하지 않고 리턴
+		if (boardImage.isEmpty()) {
+			return boardNo;
+		}
+
+		try {
+			// C:/uploadFiles/board2/ 폴더가 없으면 생성
+			File folder = new File(folderPath);
+			if (!folder.exists())
+				folder.mkdir();
+
+			// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
+			boardImage.transferTo(new File(folderPath + rename));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return boardNo;
 	}
-	
+
 	// 메인페이지 출력
 	@Override
 	public List<Board> boardMain() {
@@ -106,6 +104,49 @@ public class BoardServiceImpl implements BoardService{
 	public Board updateView(int boardNo) {
 		return mapper.updateView(boardNo);
 	}
-	
-	
+
+	// 게시글 수정 2
+	@Override
+	public int boardUpdate(Board inputBoard, MultipartFile boardImage) {
+
+		
+
+		String rename = null;
+
+		if (!boardImage.isEmpty()) {
+
+			// 2) 웹 접근경로(config.properties) + 변경된 파일명
+
+			rename = FileUtil.rename(boardImage.getOriginalFilename());
+
+			String url = webPath + rename;
+
+			inputBoard.setBoardImg(url);
+
+		}
+		
+		System.out.println(inputBoard);
+		System.out.println(inputBoard);
+		System.out.println(inputBoard);
+
+		// 파일 없을 시 업로드 하지 않고 리턴
+		if (boardImage.isEmpty()) {
+			return 1;
+		}
+
+		try {
+			// C:/uploadFiles/board2/ 폴더가 없으면 생성
+			File folder = new File(folderPath);
+			if (!folder.exists())
+				folder.mkdir();
+
+			// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
+			boardImage.transferTo(new File(folderPath + rename));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return mapper.boardUpdate(inputBoard);
+	}
+
 }

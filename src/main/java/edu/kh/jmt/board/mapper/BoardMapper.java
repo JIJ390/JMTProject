@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.board.dto.Board;
 
@@ -35,5 +36,13 @@ public interface BoardMapper {
    * @return
    */
 	Board updateView(int boardNo);
+
+	/** 게시글 수정2
+	 * @param boardNo 
+	 * @param inputBoard
+	 * @param boardImg
+	 * @return
+	 */
+	int boardUpdate(Board inputBoard);
 
 }

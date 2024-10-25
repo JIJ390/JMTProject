@@ -36,4 +36,12 @@ public interface BoardService {
 	 */
 	Board updateView(int boardNo);
 
+	/** 게시글 수정2
+	 * @param boardNo 
+	 * @param inputBoard
+	 * @param boardImg
+	 * @return
+	 */
+	int boardUpdate(Board inputBoard, MultipartFile boardImg);
+
 }

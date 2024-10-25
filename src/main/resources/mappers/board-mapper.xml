@@ -52,10 +52,20 @@
 		FROM
 			"BOARD"
 		WHERE BOARD_NO = #{boardNo}
-		ORDER BY BOARD_NO DESC
 	
 	</select>
 
+  	<!-- 게시글부분만 수정(제목/내용) -->
+  	<update id="boardUpdate" >
+  		UPDATE
+  			"BOARD"
+		SET
+			BOARD_TITLE = #{boardTitle},
+			BOARD_CONTENT = #{boardContent},
+			BOARD_IMG = #{boardImg}
+  		WHERE
+  			BOARD_NO = #{boardNo}
+  	</update>
 
 
 	
