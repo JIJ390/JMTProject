@@ -28,14 +28,21 @@
       </div>
 
     </div>
-
-    <div class="user-actions">
-
+      <!-- 로그인이 안되어있을때 -->
+    <div class="user-actions" th:unless= "${session.loginMember}">
       <a href="#">회원 가입</a> | <a href=".menu-container">로그인</a>
+      </a>
+    </div>
+
+    <!-- 로그인이 되어있을경우 -->
+    <div th:if= "${session.loginMember}" class="user-actions">
+      <img th:src="${session.loginMember.profileImg ?: user }" alt="">
+      <p th:text="${session.loginMember.memberName}">유저 닉네임</p>
       <a class="menu" href="#">
         <i class="fa-solid fa-bars"></i>
       </a>
     </div>
+
   </header>
 
   <!-- Main Content -->
@@ -222,11 +229,11 @@
     <!-- --------------------------------------- side -->
     <div class="menu-container">
       <div class="profile-img">
-        <img src="../html/images/샘플.jpg" alt="profile">
+        <img src="${session.loginMember.profileImg ?: user }" alt="profile">
       </div>
 
 
-      <p class="sideP">김성민</p>
+      <p class="sideP" th:text="${session.loginMember.memberName}"></p>
 
       <nav>
         <a href="/myPage/myPage" id="myPage" class="sideItem">마이 페이지</a> <!-- 마이페이지 링크 추가 -->
