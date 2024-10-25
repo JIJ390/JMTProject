@@ -41,6 +41,10 @@ public interface MyPageService{
 	 */
 	int passwordChange(String currentPw, String newPw, Member loginMember);
 
+	/** 비밀번호 찾기
+	 * @param inputEmail
+	 * @return
+	 */
 	
 	/** 회원 탈퇴 기능
 	 * @param memberPw
@@ -54,5 +58,8 @@ public interface MyPageService{
 	 * @return result
 	 */
 	String updateInfo(Member inputMember, MultipartFile profileImg);
+
+
+
 
 }

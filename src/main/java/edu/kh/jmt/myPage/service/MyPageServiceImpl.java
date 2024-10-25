@@ -109,6 +109,7 @@ public class MyPageServiceImpl implements MyPageService{
 		return mapper.passwordChange(loginMember.getMemberNo(), encPw);
 	}
 	
+	
 
 	// 회원 탈퇴 기능
 	@Override
@@ -181,5 +182,7 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		// 끋
 	}
+	
+	
 	
 }

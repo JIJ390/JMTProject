@@ -33,20 +33,20 @@
 	
 	<!-- 이메일 중복 검사 -->
 	<select id="emailCheck" resultType="_int">
-		SELECT COUNT(*)
-		FROM "MEMBER"
-		WHERE MEMBER_EMAIL = #{email}
-		AND   MEMBER_DEL_FL = 'N'
+		SELECT COUNT(MEMBER_EMAIL)
+	    FROM MEMBER
+	    WHERE MEMBER_DEL_FL = 'N'
+	    AND MEMBER_EMAIL = #{email}
 	</select>
 
 
 
 	<!-- 이름 중복 검사 -->
 	<select id="nameCheck" resultType="_int">
-		SELECT COUNT(*)
-		FROM "MEMBER"
-		WHERE MEMBER_NAME = #{memberName}
-		AND	  MEMBER_DEL_FL = 'N'
+		SELECT COUNT(MEMBER_NAME)
+	    FROM MEMBER
+	    WHERE MEMBER_DEL_FL = 'N'
+	    AND MEMBER_NAME = #{memberName}
 	</select>
 	
 	
