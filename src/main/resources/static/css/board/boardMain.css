@@ -247,8 +247,8 @@
 /* 댓글작성 스타일 */
 .commentBtn {
   background-color: #6EC3C2;
-  width: 70px;
-  height: 30px;
+  width: 15%;
+  height: 40%;
   border: none;
   padding: 10px 20px;
   color: white;

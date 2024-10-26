@@ -45,3 +45,16 @@ for (let i = 0; i < commentClick.length; i++) {
 }
 
 //-------------------------------------------------------------------------------------------------
+
+// 댓글 내용 요소
+const commentContent = document.querySelector(".comment-context");
+
+/** 댓글 등록함수(AJAX)
+ * @param parentCommentNo : 부모댓글 번호 (없음 undefined)
+ */
+const intsertComment = (parentCommentNo) =>{
+
+  // 서버에 제출할 값을 저장할 객체
+
+
+}
