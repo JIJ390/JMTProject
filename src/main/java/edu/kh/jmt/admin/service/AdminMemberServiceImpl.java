@@ -70,6 +70,13 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		return mapper.changeMemberSecession(memberNo);
 	}
 	
+	// 회원 차단 기능
+	@Override
+	public int memberBlock(int memberNo) {
+		
+		return mapper.memberBlock(memberNo);
+	}
+	
 	
 	// 임시로그인
 	@Override

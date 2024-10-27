@@ -12,18 +12,6 @@ th {font-family: 'NEXON Lv1 Gothic OTF';}
 .memberStatus-head {font-family: 'NEXON Lv1 Gothic OTF';}
 
 
-*{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root{
-  --main-color : rgba(97, 192, 191, 1);
-  --border-color : rgb(182, 182, 182);
-}
-
-
 html, body, main {
   height: 100%;
 }

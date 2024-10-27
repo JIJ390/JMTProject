@@ -1,3 +1,12 @@
+const reportReviewDetail = document.querySelector("#reportReviewDetail");
+const blockBtn = document.querySelector("#blockBtn");
+const reportContentBtn = document.querySelector("#reportContentBtn");
+
+let memberNoTemp;
+let reportNoTemp;
+let urlTemp;
+
+
 // 페이지 이동을 위한 버튼 모두 얻어오기
 const pageNoList = document.querySelectorAll(".pagination a");
 
@@ -6,8 +15,6 @@ pageNoList?.forEach((item, index) => {
 
   // 클릭 되었을 때
   item.addEventListener("click", e => {
-
-    console.log("ASD");
 
     e.preventDefault();
 
@@ -92,3 +99,202 @@ pageNoList?.forEach((item, index) => {
     
 })();
 
+
+
+
+// 팝업 레이어 주소 가져와서 비동기로 조회 => 팝업 내용 채우기
+const selectReportReview = (url) => {
+  urlTemp = url;
+
+  fetch(url)
+  .then(response => {
+    if (response.ok) return response.json();
+  })
+  .then(map => {
+
+
+
+    reportReviewDetail.classList.remove("popup-hidden");
+
+    const reportReview = map.reportReview;
+    const member = map.member;
+
+
+    // 신고 관련 정보 요소 얻어오기
+    const reportTypeName = document.querySelector("#reportTypeName");
+    const reportReviewNo = document.querySelector("#reportReviewNo");
+    const reportMemberName = document.querySelector("#reportMemberName");
+    const reportDate = document.querySelector("#reportDate");
+    const reportContent = document.querySelector("#reportContent");
+
+    reportNoTemp = reportReview.reportReviewNo;
+
+    reportTypeName.innerText = reportReview.reportTypeName;
+    reportReviewNo.innerText = `# ${reportReview.reportReviewNo}`;
+    reportMemberName.innerText = `${reportReview.memberName} | `;
+    reportDate.innerText = reportReview.reportReviewDate;
+
+    reportContent.innerText = reportReview.reportReviewContent;
+
+
+    // 신고된 게시글+ 작성자 정보
+    const memberNo = document.querySelector("#memberNo");
+    const memberName = document.querySelector("#memberName");
+    const memberStatus = document.querySelector("#memberStatus");
+
+    memberNo.innerHTML = member.memberNo;
+    memberNoTemp = member.memberNo;
+
+    memberName.innerHTML = member.memberName;
+
+    let str = (member.memberAuth === 1) ? '차단' : '활동';
+    if (member.memberDelFl === 'Y') str = '탈퇴'
+
+    memberStatus.innerHTML = str;
+
+    
+    // 만약 탈퇴 상태 혹은 차단 상태일 경우 버튼 비활성화
+    if ((member.memberDelFl === 'Y') || (member.memberAuth === 1) ) {
+      blockBtn.disabled = true;
+    } 
+
+
+    const reportFeedBox = document.querySelector(".report-feed-box");
+
+    reportFeedBox.innerHTML = "";
+
+    
+    const reportFeedBtn = document.querySelector("#reportFeedBtn");
+
+    if (reportReview.reportReviewFl === 'Y') {
+
+      console.log(reportReview.reportReviewFeed);
+
+      div = document.createElement("div");
+      div.innerText = reportReview.reportReviewFeed;
+      div.classList.add("report-feed");
+
+      reportFeedBox.append(div);
+
+      reportFeedBtn.disabled = true;
+      reportFeedBtn.innerText = '이미 조치 완료된 신고입니다';
+      reportFeedBtn.classList.remove("blue");
+      reportFeedBtn.classList.add("gray");
+
+    }
+    else {
+
+      textarea = document.createElement("textarea");
+      textarea.placeholder = "조치 사항을 적어주세요";
+      textarea.name = 'reportReviewFeed';
+      textarea.classList.add("report-feed");
+  
+      reportFeedBox.append(textarea);
+
+      reportFeedBtn.disabled = false;
+      reportFeedBtn.innerText = '조치 완료';
+      reportFeedBtn.classList.remove("gray");
+      reportFeedBtn.classList.add("blue");
+    }
+  });
+};
+
+
+
+
+/**
+ * 해당 회원 차단
+ * @param {*} memberNo 
+ */
+const memberBlock = (memberNo) => {
+  fetch("/admin/member/block", {
+    method : "PUT", 
+    headers: {"Content-Type": "application/json"}, 
+    body : memberNo
+  })
+  .then(response => {
+    if(response.ok) return response.text();
+    throw new Error("차단 실패 : " + response.status);
+  })
+  .then(result => {
+    console.log(result);
+
+    if (result > 0) alert("차단 되었습니다");
+
+    selectReportReview(urlTemp);
+
+  })
+  .catch(err => console.error(err));
+}
+
+
+
+
+
+
+/**
+ * 처리 완료 버튼 누를 시 동작
+ */
+const reportFeed = () => {
+
+  const reportFeedFrm = document.querySelector("#reportFeedFrm");
+  const reportFeedBtn = document.querySelector("#reportFeedBtn");
+
+  reportFeedBtn.addEventListener("click", () => {
+
+    const input = document.createElement("input");
+    input.type  = "hidden";
+    input.name  = "reportReviewNo";
+    input.value = reportNoTemp;  
+  
+    reportFeedFrm.append(input); 
+  
+    reportFeedFrm.submit(); 
+  });
+
+};
+
+
+
+
+
+
+/** 
+ * 팝업 닫는 버튼
+*/
+document.querySelector("#popupClose").addEventListener("click", () => {
+  reportReviewDetail.classList.add("popup-hidden");
+})
+
+
+
+/* 화면 로딩 후 a 태그에 팝업 비동기 조회 이벤트 부여 */
+document.addEventListener("DOMContentLoaded", () => {
+  // DOMContentLoaded : 화면이 모두 로딩된 후
+  document.querySelector("#searchQuery").value = "";
+
+  // 차단 버튼 이벤트 추가
+  blockBtn.addEventListener("click", e => {
+    // 차단을 위한 회원 번호 가져오기
+    memberBlock(memberNoTemp);
+  });
+
+  // 처리 완료 버튼 동작 추가
+  reportFeed();
+
+  // id="restaurantList" 후손 중 a 태그 모두 선택 => 노드 리스트(a)
+  document.querySelectorAll("#reportReviewList a").forEach((a) => {
+    // 매개변수 a : 반복마다 하나씩 요소가 꺼내져 저장되는 변수
+
+    // a 기본 이벤트 막고 selectReportReview() 호출하게 하기
+    a.addEventListener("click", e => {
+
+      e.preventDefault();
+      // 여러 div 가 감싼 형태 다른 요소로 인식
+      // console.log(e.target);
+      // console.log(e.currentTarget);
+      selectReportReview(a.href);
+    })
+  })
+
+});

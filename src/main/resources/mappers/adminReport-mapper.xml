@@ -130,5 +130,55 @@
 		</choose>
 			
   	</select>
+  	
+  	
+  	<!-- 리뷰 신고 상세 조회 -->
+  	<select id="reportReviewDetail"
+  			resultType="ReportReview">
+		SELECT 
+			REPORT_REVIEW_NO,
+			REPORT_TYPE_NAME,
+			TO_CHAR(REPORT_REVIEW_DATE, 'YYYY-MM-DD HH24:MI:SS') AS REPORT_REVIEW_DATE,
+			REPORT_REVIEW_DATE,
+			REPORT_REVIEW_CONTENT,
+			REPORT_REVIEW_FEED,
+			MEMBER_NAME,
+			REVIEW_NO,
+			REPORT_REVIEW_FL,
+			R.MEMBER_NO AS "REVIEW_MEMBER_NO"
+		FROM
+			"REPORT_REVIEW"
+		JOIN
+			"MEMBER" USING (MEMBER_NO)
+		JOIN
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		JOIN 
+			"REVIEW" R USING (REVIEW_NO)
+		WHERE 
+			REPORT_REVIEW_NO = #{reportReviewNo}
+  	</select>
  
+ 
+ 	<!-- 신고 리뷰 작성자 정보 조회 -->
+ 	<select id="selectReviewMember"
+ 			resultType="Member">
+ 		SELECT 
+		  	MEMBER_NO, 
+		  	MEMBER_NAME,
+		  	MEMBER_EMAIL,
+		  	MEMBER_DEL_FL,
+		  	MEMBER_AUTH 
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{reviewMemberNo}
+ 	</select>
+ 	
+ 	
+ 	<update id="reportReviewFeed">
+ 		UPDATE "REPORT_REVIEW"
+ 		SET 
+ 			REPORT_REVIEW_FEED = #{reportReviewFeed},
+ 			REPORT_REVIEW_FL = 'Y'
+ 		WHERE
+ 			REPORT_REVIEW_NO = #{reportReviewNo}
+ 	</update>
 </mapper>

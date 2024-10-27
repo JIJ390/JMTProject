@@ -12,6 +12,7 @@ import edu.kh.jmt.admin.dto.AdminPagination;
 import edu.kh.jmt.admin.dto.ReportReview;
 import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.mapper.AdminReportMapper;
+import edu.kh.jmt.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -71,8 +72,32 @@ public class AdminReportServiceImpl implements AdminReportService{
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put(("reportReviewList"), reportReviewList);
-		map.put(("pagination"), adminPagination);		// 3 줄
+		map.put(("pagination"), adminPagination);		
 		
 		return map;
 	}
+	
+	// 리뷰 신고 상세 조회
+	@Override
+	public Map<String, Object> reportReviewDetail(int reportReviewNo) {
+		
+		// 리뷰 정보 조회
+		ReportReview reportReview = mapper.reportReviewDetail(reportReviewNo);
+		
+		Member member = mapper.selectReviewMember(reportReview.getReviewMemberNo());
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put(("reportReview"), reportReview);
+		map.put(("member"), member);	
+		
+		return map;
+	}
+	
+	// 리뷰 신고 처리
+	@Override
+	public int reportReviewFeed(ReportReview reportReview) {
+		return mapper.reportReviewFeed(reportReview);
+	}
+	
 }

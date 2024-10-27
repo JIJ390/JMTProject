@@ -41,6 +41,14 @@ public interface AdminMemberService {
 	 */
 	int changeMemberSecession(int memberNo);
 
+
+	/**
+	 * 회원 차단 기능
+	 * @param memberNo
+	 * @return
+	 */
+	int memberBlock(int memberNo);
+
 	
 	
 	/**
@@ -49,6 +57,7 @@ public interface AdminMemberService {
 	 * @return
 	 */
 	Member directLogin(int memberNo);
+
 
 
 }

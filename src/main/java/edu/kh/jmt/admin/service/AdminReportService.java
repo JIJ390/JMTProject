@@ -2,6 +2,8 @@ package edu.kh.jmt.admin.service;
 
 import java.util.Map;
 
+import edu.kh.jmt.admin.dto.ReportReview;
+
 public interface AdminReportService {
 
 	
@@ -19,6 +21,22 @@ public interface AdminReportService {
 	 * @return
 	 */
 	Map<String, Object> searchReportReviewList(int cp, Map<String, Object> paramMap);
+
+	
+	
+	/**
+	 * 리뷰 신고 상세 조회
+	 * @param reportReviewNo
+	 * @return
+	 */
+	Map<String, Object> reportReviewDetail(int reportReviewNo);
+
+	/**
+	 * 리뷰 신고 처리 
+	 * @param reportReview
+	 * @return
+	 */
+	int reportReviewFeed(ReportReview reportReview);
 
 
 }
