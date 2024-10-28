@@ -178,7 +178,7 @@ for (let i = 0; i < inputImageList.length; i++) {
 
 
 /* 필수 입력 항목의 입력 여부를 체크 */
-const form = document.querySelector("#restaurantResistFrm");
+const form = document.querySelector("#restaurantUpdateFrm");
 
 form.addEventListener("submit", e => {
 
@@ -198,7 +198,10 @@ form.addEventListener("submit", e => {
   const detailAddress = document.querySelector("#detailAddress");
 
   // 음식 가격 정규 표현식  세 자리 이상의 숫자
-  const priceFormat = /\d{3}/;
+  const priceFormat = /(?<!\S)\d{3,}(?!\S)/;
+
+  // (?<!\S): 숫자 앞에 공백 또는 문자열의 시작이 있는지 확인합니다. 
+  // \S는 공백이 아닌 문자에 매칭되므로, 이 표현식은 숫자 앞에 특수문자나 다른 문자가 없는지를 체크합
 
   // // 파일 이미지 형식 정규 표현식
   // const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;

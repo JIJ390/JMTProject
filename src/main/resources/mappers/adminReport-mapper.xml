@@ -37,13 +37,14 @@
 		  MEMBER_NAME,
 		  REPORT_REVIEW_FL
 		FROM
-		  "REPORT_REVIEW"
+		  "REPORT_REVIEW" RR
 		JOIN
 			"MEMBER" USING (MEMBER_NO)
 		JOIN
 			"REPORT_TYPE" USING (REPORT_TYPE_NO)
 		ORDER BY 
-			REPORT_REVIEW_DATE DESC
+			REPORT_REVIEW_FL ASC,
+			RR.REPORT_REVIEW_DATE DESC
   	</select>
  
  
@@ -108,7 +109,7 @@
 		  MEMBER_NAME,
 		  REPORT_REVIEW_FL
 		FROM
-		  "REPORT_REVIEW"
+		  "REPORT_REVIEW" RR
 		JOIN
 			"MEMBER" USING (MEMBER_NO)
 		JOIN
@@ -128,6 +129,9 @@
 				MEMBER_NAME LIKE '%' || #{query} || '%'
 			</when>
 		</choose>
+		ORDER BY 
+			REPORT_REVIEW_FL ASC,
+			RR.REPORT_REVIEW_DATE DESC
 			
   	</select>
   	
@@ -144,6 +148,7 @@
 			REPORT_REVIEW_FEED,
 			MEMBER_NAME,
 			REVIEW_NO,
+			REVIEW_DEL_FL,
 			REPORT_REVIEW_FL,
 			R.MEMBER_NO AS "REVIEW_MEMBER_NO"
 		FROM
@@ -172,7 +177,7 @@
 		WHERE MEMBER_NO = #{reviewMemberNo}
  	</select>
  	
- 	
+ 	<!-- 신고 처리 변경 -->
  	<update id="reportReviewFeed">
  		UPDATE "REPORT_REVIEW"
  		SET 
@@ -181,4 +186,424 @@
  		WHERE
  			REPORT_REVIEW_NO = #{reportReviewNo}
  	</update>
+ 	
+ 	<!-- 게시글 삭제 처리 -->
+ 	<update id="reportReviewDelete">
+ 	 	UPDATE "REVIEW"
+ 		SET 
+ 			REVIEW_DEL_FL = 'Y'
+ 		WHERE
+ 			REVIEW_NO = #{reviewNo}
+ 	</update>
+ 	
+ 	
+ 	
+ 	<!-- 점메추 게시판 신고 -->
+ 	<!-- 점메추 게시판 신고 -->
+ 	<!-- 점메추 게시판 신고 -->
+ 	<!-- 점메추 게시판 신고 -->
+ 	<!-- 점메추 게시판 신고 -->
+ 	<!-- 점메추 게시판 신고 -->
+ 	
+ 	
+ 	
+ 	<!-- 전체 게시글 신고 수 조회 -->
+	<select id="getReportBoardCount">
+		SELECT 
+			COUNT(*)
+		FROM "REPORT_BOARD"
+	</select>
+	
+
+
+
+	<!-- 신고 목록 게시판 신고 목록 가져오기 -->
+  	<select id="selectReportBoardList"
+  			resultType="ReportBoard">
+		SELECT 
+		  REPORT_BOARD_NO,
+		  REPORT_TYPE_NAME,
+		  	
+		  		<![CDATA[
+		  			CASE 
+						WHEN CURRENT_DATE - REPORT_BOARD_DATE < 1 / 24 / 60
+						THEN FLOOR((CURRENT_DATE - REPORT_BOARD_DATE) * 24 * 60 * 60) || '초 전'
+						
+						WHEN CURRENT_DATE - REPORT_BOARD_DATE <  1 / 24 
+						THEN FLOOR((CURRENT_DATE - REPORT_BOARD_DATE) * 24 * 60) || '분 전'
+						
+						WHEN CURRENT_DATE - REPORT_BOARD_DATE <  1 
+						THEN FLOOR((CURRENT_DATE - REPORT_BOARD_DATE) * 24) || '시간 전'
+					
+						ELSE TO_CHAR(REPORT_BOARD_DATE, 'YYYY-MM-DD')
+					END AS REPORT_BOARD_DATE
+					]]>
+			,
+		  MEMBER_NAME,
+		  REPORT_BOARD_FL
+		FROM
+		  "REPORT_BOARD" RR
+		JOIN
+			"MEMBER" USING (MEMBER_NO)
+		JOIN
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		ORDER BY 
+			REPORT_BOARD_FL ASC,
+			RR.REPORT_BOARD_DATE DESC
+  	</select>
+ 
+ 
+ 
+ 
+ 	<!-- 검색 조건에 맞는 전체 게시글 신고 수 조회 -->
+	<select id="searchReportBoardCount">
+		SELECT 
+			COUNT(*)
+		FROM "REPORT_BOARD"
+		JOIN
+		<if test='key == "t"'>
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		</if>
+		
+		<if test='key == "rn"'>
+			"MEMBER" USING (MEMBER_NO)
+		</if>
+		
+		WHERE
+		
+		<choose>
+			<!-- 신고 유형 검색인 경우 -->
+			<when test='key == "t"'>
+				REPORT_TYPE_NAME LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				REPORT_BOARD_NO LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고자 이름 검색인 경우 -->
+			<when test='key == "rn"'>
+				MEMBER_NAME LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	
+	
+	<!-- 신고 목록 게시판 조건에 맞는 신고 목록 가져오기 -->
+  	<select id="searchReportBoardList"
+  			resultType="ReportBoard">
+		SELECT 
+		  REPORT_BOARD_NO,
+		  REPORT_TYPE_NAME,
+		  	
+		  		<![CDATA[
+		  			CASE 
+						WHEN CURRENT_DATE - REPORT_BOARD_DATE < 1 / 24 / 60
+						THEN FLOOR((CURRENT_DATE - REPORT_BOARD_DATE) * 24 * 60 * 60) || '초 전'
+						
+						WHEN CURRENT_DATE - REPORT_BOARD_DATE <  1 / 24 
+						THEN FLOOR((CURRENT_DATE - REPORT_BOARD_DATE) * 24 * 60) || '분 전'
+						
+						WHEN CURRENT_DATE - REPORT_BOARD_DATE <  1 
+						THEN FLOOR((CURRENT_DATE - REPORT_BOARD_DATE) * 24) || '시간 전'
+					
+						ELSE TO_CHAR(REPORT_BOARD_DATE, 'YYYY-MM-DD')
+					END AS REPORT_BOARD_DATE
+					]]>
+			,
+		  MEMBER_NAME,
+		  REPORT_BOARD_FL
+		FROM
+		  "REPORT_BOARD" RR
+		JOIN
+			"MEMBER" USING (MEMBER_NO)
+		JOIN
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		WHERE
+		<choose>
+			<!-- 신고 유형 검색인 경우 -->
+			<when test='key == "t"'>
+				REPORT_TYPE_NAME LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				REPORT_BOARD_NO LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고자 이름 검색인 경우 -->
+			<when test='key == "rn"'>
+				MEMBER_NAME LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+		ORDER BY 
+			REPORT_BOARD_FL ASC,
+			RR.REPORT_BOARD_DATE DESC
+			
+  	</select>
+  	
+  	
+  	<!-- 게시글 신고 상세 조회 -->
+  	<select id="reportBoardDetail"
+  			resultType="ReportBoard">
+		SELECT 
+			REPORT_BOARD_NO,
+			REPORT_TYPE_NAME,
+			TO_CHAR(REPORT_BOARD_DATE, 'YYYY-MM-DD HH24:MI:SS') AS REPORT_BOARD_DATE,
+			REPORT_BOARD_DATE,
+			REPORT_BOARD_CONTENT,
+			REPORT_BOARD_FEED,
+			MEMBER_NAME,
+			BOARD_NO,
+			BOARD_DEL_FL,
+			REPORT_BOARD_FL,
+			R.MEMBER_NO AS "BOARD_MEMBER_NO"
+		FROM
+			"REPORT_BOARD"
+		JOIN
+			"MEMBER" USING (MEMBER_NO)
+		JOIN
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		JOIN 
+			"BOARD" R USING (BOARD_NO)
+		WHERE 
+			REPORT_BOARD_NO = #{reportBoardNo}
+  	</select>
+ 
+ 
+ 	<!-- 신고 게시글 작성자 정보 조회 -->
+ 	<select id="selectBoardMember"
+ 			resultType="Member">
+ 		SELECT 
+		  	MEMBER_NO, 
+		  	MEMBER_NAME,
+		  	MEMBER_EMAIL,
+		  	MEMBER_DEL_FL,
+		  	MEMBER_AUTH 
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{boardMemberNo}
+ 	</select>
+ 	
+ 	<!-- 신고 처리 변경 -->
+ 	<update id="reportBoardFeed">
+ 		UPDATE "REPORT_BOARD"
+ 		SET 
+ 			REPORT_BOARD_FEED = #{reportBoardFeed},
+ 			REPORT_BOARD_FL = 'Y'
+ 		WHERE
+ 			REPORT_BOARD_NO = #{reportBoardNo}
+ 	</update>
+ 	
+ 	<!-- 게시글 삭제 처리 -->
+ 	<update id="reportBoardDelete">
+ 	 	UPDATE "BOARD"
+ 		SET 
+ 			BOARD_DEL_FL = 'Y'
+ 		WHERE
+ 			BOARD_NO = #{boardNo}
+ 	</update>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 댓글 게시판 신고 -->
+ 	<!-- 댓글 게시판 신고 -->
+ 	<!-- 댓글 게시판 신고 -->
+ 	<!-- 댓글 게시판 신고 -->
+ 	<!-- 댓글 게시판 신고 -->
+ 	
+ 	
+ 	<!-- 전체 게시글 신고 수 조회 -->
+	<select id="getReportCommentCount">
+		SELECT 
+			COUNT(*)
+		FROM "REPORT_COMMENT"
+	</select>
+	
+
+
+
+	<!-- 신고 목록 게시판 신고 목록 가져오기 -->
+  	<select id="selectReportCommentList"
+  			resultType="ReportComment">
+		SELECT 
+		  REPORT_COMMENT_NO,
+		  REPORT_TYPE_NAME,
+		  	
+		  		<![CDATA[
+		  			CASE 
+						WHEN CURRENT_DATE - REPORT_COMMENT_DATE < 1 / 24 / 60
+						THEN FLOOR((CURRENT_DATE - REPORT_COMMENT_DATE) * 24 * 60 * 60) || '초 전'
+						
+						WHEN CURRENT_DATE - REPORT_COMMENT_DATE <  1 / 24 
+						THEN FLOOR((CURRENT_DATE - REPORT_COMMENT_DATE) * 24 * 60) || '분 전'
+						
+						WHEN CURRENT_DATE - REPORT_COMMENT_DATE <  1 
+						THEN FLOOR((CURRENT_DATE - REPORT_COMMENT_DATE) * 24) || '시간 전'
+					
+						ELSE TO_CHAR(REPORT_COMMENT_DATE, 'YYYY-MM-DD')
+					END AS REPORT_COMMENT_DATE
+					]]>
+			,
+		  MEMBER_NAME,
+		  REPORT_COMMENT_FL
+		FROM
+		  "REPORT_COMMENT" RR
+		JOIN
+			"MEMBER" USING (MEMBER_NO)
+		JOIN
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		ORDER BY 
+			REPORT_COMMENT_FL ASC,
+			RR.REPORT_COMMENT_DATE DESC
+  	</select>
+ 
+ 
+ 
+ 
+ 	<!-- 검색 조건에 맞는 전체 게시글 신고 수 조회 -->
+	<select id="searchReportCommentCount">
+		SELECT 
+			COUNT(*)
+		FROM "REPORT_COMMENT"
+		JOIN
+		<if test='key == "t"'>
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		</if>
+		
+		<if test='key == "rn"'>
+			"MEMBER" USING (MEMBER_NO)
+		</if>
+		
+		WHERE
+		
+		<choose>
+			<!-- 신고 유형 검색인 경우 -->
+			<when test='key == "t"'>
+				REPORT_TYPE_NAME LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				REPORT_COMMENT_NO LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고자 이름 검색인 경우 -->
+			<when test='key == "rn"'>
+				MEMBER_NAME LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	
+	
+	<!-- 신고 목록 게시판 조건에 맞는 신고 목록 가져오기 -->
+  	<select id="searchReportCommentList"
+  			resultType="ReportComment">
+		SELECT 
+		  REPORT_COMMENT_NO,
+		  REPORT_TYPE_NAME,
+		  	
+		  		<![CDATA[
+		  			CASE 
+						WHEN CURRENT_DATE - REPORT_COMMENT_DATE < 1 / 24 / 60
+						THEN FLOOR((CURRENT_DATE - REPORT_COMMENT_DATE) * 24 * 60 * 60) || '초 전'
+						
+						WHEN CURRENT_DATE - REPORT_COMMENT_DATE <  1 / 24 
+						THEN FLOOR((CURRENT_DATE - REPORT_COMMENT_DATE) * 24 * 60) || '분 전'
+						
+						WHEN CURRENT_DATE - REPORT_COMMENT_DATE <  1 
+						THEN FLOOR((CURRENT_DATE - REPORT_COMMENT_DATE) * 24) || '시간 전'
+					
+						ELSE TO_CHAR(REPORT_COMMENT_DATE, 'YYYY-MM-DD')
+					END AS REPORT_COMMENT_DATE
+					]]>
+			,
+		  MEMBER_NAME,
+		  REPORT_COMMENT_FL
+		FROM
+		  "REPORT_COMMENT" RR
+		JOIN
+			"MEMBER" USING (MEMBER_NO)
+		JOIN
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		WHERE
+		<choose>
+			<!-- 신고 유형 검색인 경우 -->
+			<when test='key == "t"'>
+				REPORT_TYPE_NAME LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				REPORT_COMMENT_NO LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 신고자 이름 검색인 경우 -->
+			<when test='key == "rn"'>
+				MEMBER_NAME LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+		ORDER BY 
+			REPORT_COMMENT_FL ASC,
+			RR.REPORT_COMMENT_DATE DESC
+			
+  	</select>
+  	
+  	
+  	<!-- 게시글 신고 상세 조회 -->
+  	<select id="reportCommentDetail"
+  			resultType="ReportComment">
+		SELECT 
+			REPORT_COMMENT_NO,
+			REPORT_TYPE_NAME,
+			TO_CHAR(REPORT_COMMENT_DATE, 'YYYY-MM-DD HH24:MI:SS') AS REPORT_COMMENT_DATE,
+			REPORT_COMMENT_DATE,
+			REPORT_COMMENT_CONTENT,
+			REPORT_COMMENT_FEED,
+			MEMBER_NAME,
+			COMMENT_NO,
+			COMMENT_DEL_FL,
+			REPORT_COMMENT_FL,
+			R.MEMBER_NO AS "COMMENT_MEMBER_NO"
+		FROM
+			"REPORT_COMMENT"
+		JOIN
+			"MEMBER" USING (MEMBER_NO)
+		JOIN
+			"REPORT_TYPE" USING (REPORT_TYPE_NO)
+		JOIN 
+			"COMMENT" R USING (COMMENT_NO)
+		WHERE 
+			REPORT_COMMENT_NO = #{reportCommentNo}
+  	</select>
+ 
+ 
+ 	<!-- 신고 게시글 작성자 정보 조회 -->
+ 	<select id="selectCommentMember"
+ 			resultType="Member">
+ 		SELECT 
+		  	MEMBER_NO, 
+		  	MEMBER_NAME,
+		  	MEMBER_EMAIL,
+		  	MEMBER_DEL_FL,
+		  	MEMBER_AUTH 
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{commentMemberNo}
+ 	</select>
+ 	
+ 	<!-- 신고 처리 변경 -->
+ 	<update id="reportCommentFeed">
+ 		UPDATE "REPORT_COMMENT"
+ 		SET 
+ 			REPORT_COMMENT_FEED = #{reportCommentFeed},
+ 			REPORT_COMMENT_FL = 'Y'
+ 		WHERE
+ 			REPORT_COMMENT_NO = #{reportCommentNo}
+ 	</update>
+ 	
+ 	<!-- 게시글 삭제 처리 -->
+ 	<update id="reportCommentDelete">
+ 	 	UPDATE "COMMENT"
+ 		SET 
+ 			COMMENT_DEL_FL = 'Y'
+ 		WHERE
+ 			COMMENT_NO = #{commentNo}
+ 	</update>
+ 	
 </mapper>

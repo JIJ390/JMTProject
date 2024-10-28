@@ -117,14 +117,6 @@ public class AdminMemberController {
 	public int memberBlock(
 	@RequestBody int memberNo) {
 		
-	int i = 	service.memberBlock(memberNo);
-	
-	log.debug("aaaa : {}", i);
-	log.debug("aaaa : {}", i);
-	log.debug("aaaa : {}", i);
-	log.debug("aaaa : {}", i);
-	
-	
 	return service.memberBlock(memberNo);
 	
 	}

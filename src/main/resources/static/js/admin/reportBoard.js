@@ -1,11 +1,11 @@
-const reportReviewDetail = document.querySelector("#reportReviewDetail");
+const reportBoardDetail = document.querySelector("#reportBoardDetail");
 const blockBtn = document.querySelector("#blockBtn");
 const deleteBtn = document.querySelector("#deleteBtn");
 const reportContentBtn = document.querySelector("#reportContentBtn");
 
 let memberNoTemp;
 let reportNoTemp;
-let reviewNoTemp;
+let boardNoTemp;
 let urlTemp;
 
 
@@ -105,7 +105,7 @@ pageNoList?.forEach((item, index) => {
 
 
 // 팝업 레이어 주소 가져와서 비동기로 조회 => 팝업 내용 채우기
-const selectReportReview = (url) => {
+const selectReportBoard = (url) => {
   urlTemp = url;
 
   fetch(url)
@@ -118,31 +118,31 @@ const selectReportReview = (url) => {
     deleteBtn.disabled = false;
     blockBtn.disabled = false;
 
-    reportReviewDetail.classList.remove("popup-hidden");
+    reportBoardDetail.classList.remove("popup-hidden");
 
-    const reportReview = map.reportReview;
+    const reportBoard = map.reportBoard;
     const member = map.member;
 
 
     memberNoTemp = member.memberNo;
-    reviewNoTemp = reportReview.reviewNo;
-    reportNoTemp = reportReview.reportReviewNo;
+    boardNoTemp = reportBoard.boardNo;
+    reportNoTemp = reportBoard.reportBoardNo;
 
     // 신고 관련 정보 요소 얻어오기
     const reportTypeName = document.querySelector("#reportTypeName");
-    const reportReviewNo = document.querySelector("#reportReviewNo");
+    const reportBoardNo = document.querySelector("#reportBoardNo");
     const reportMemberName = document.querySelector("#reportMemberName");
     const reportDate = document.querySelector("#reportDate");
     const reportContent = document.querySelector("#reportContent");
 
-    reportTypeName.innerText = reportReview.reportTypeName;
-    reportReviewNo.innerText = `# ${reportReview.reportReviewNo}`;
-    reportMemberName.innerText = `${reportReview.memberName} | `;
-    reportDate.innerText = reportReview.reportReviewDate;
+    reportTypeName.innerText = reportBoard.reportTypeName;
+    reportBoardNo.innerText = `# ${reportBoard.reportBoardNo}`;
+    reportMemberName.innerText = `${reportBoard.memberName} | `;
+    reportDate.innerText = reportBoard.reportBoardDate;
 
-    reportContent.innerText = reportReview.reportReviewContent;
+    reportContent.innerText = reportBoard.reportBoardContent;
 
-    console.log(reviewNoTemp);
+    console.log(boardNoTemp);
 
 
     // 신고된 게시글+ 작성자 정보
@@ -164,11 +164,11 @@ const selectReportReview = (url) => {
       blockBtn.disabled = true;
     } 
 
-    const reviewDelFl = reportReview.reviewDelFl;
-    console.log(reviewDelFl);
+    const boardDelFl = reportBoard.boardDelFl;
+    console.log(boardDelFl);
 
     // 만약 이미 삭제된 게시글일 경우 버튼 비활성화
-    if (reviewDelFl === 'Y') {
+    if (boardDelFl === 'Y') {
       deleteBtn.disabled = true;
     }
 
@@ -180,14 +180,14 @@ const selectReportReview = (url) => {
     
     const reportFeedBtn = document.querySelector("#reportFeedBtn");
 
-    if (reportReview.reportReviewFl === 'Y') {
+    if (reportBoard.reportBoardFl === 'Y') {
 
       // 이미 처리 완료된 신고의 경우 유저 차단, 글 삭제 불가
       deleteBtn.disabled = true;
       blockBtn.disabled = true;
 
       div = document.createElement("div");
-      div.innerText = reportReview.reportReviewFeed;
+      div.innerText = reportBoard.reportBoardFeed;
       div.classList.add("report-feed");
 
       reportFeedBox.append(div);
@@ -204,7 +204,7 @@ const selectReportReview = (url) => {
 
       textarea = document.createElement("textarea");
       textarea.placeholder = "조치 사항을 적어주세요";
-      textarea.name = 'reportReviewFeed';
+      textarea.name = 'reportBoardFeed';
       textarea.classList.add("report-feed");
   
       reportFeedBox.append(textarea);
@@ -238,21 +238,21 @@ const memberBlock = (memberNo) => {
 
     if (result > 0) alert("차단 되었습니다");
 
-    selectReportReview(urlTemp);
+    selectReportBoard(urlTemp);
 
   })
   .catch(err => console.error(err));
 }
 
 /**
- * 리뷰 삭제
- * @param {} reviewNo 
+ * 게시글 삭제
+ * @param {} boardNo 
  */
-const deleteReview = (reviewNo) => {
-  fetch("/admin/report/review/delete", {
+const deleteBoard = (boardNo) => {
+  fetch("/admin/report/board/delete", {
     method : "PUT", 
     headers: {"Content-Type": "application/json"}, 
-    body : reviewNo
+    body : boardNo
   })
   .then(response => {
     if(response.ok) return response.text();
@@ -262,7 +262,7 @@ const deleteReview = (reviewNo) => {
 
     if (result > 0) alert("삭제 되었습니다");
 
-    selectReportReview(urlTemp);
+    selectReportBoard(urlTemp);
 
   })
   .catch(err => console.error(err));
@@ -294,7 +294,7 @@ const reportFeed = () => {
 
     const input = document.createElement("input");
     input.type  = "hidden";
-    input.name  = "reportReviewNo";
+    input.name  = "reportBoardNo";
     input.value = reportNoTemp;  
   
     reportFeedFrm.append(input); 
@@ -313,7 +313,7 @@ const reportFeed = () => {
  * 팝업 닫는 버튼
 */
 document.querySelector("#popupClose").addEventListener("click", () => {
-  reportReviewDetail.classList.add("popup-hidden");
+  reportBoardDetail.classList.add("popup-hidden");
 })
 
 
@@ -331,24 +331,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 삭제 버튼 이벤트 추가
   deleteBtn.addEventListener("click", () => {
-    deleteReview(reviewNoTemp);
+    deleteBoard(boardNoTemp);
   })
 
   // 처리 완료 버튼 동작 추가
   reportFeed();
 
   // id="restaurantList" 후손 중 a 태그 모두 선택 => 노드 리스트(a)
-  document.querySelectorAll("#reportReviewList a").forEach((a) => {
+  document.querySelectorAll("#reportBoardList a").forEach((a) => {
     // 매개변수 a : 반복마다 하나씩 요소가 꺼내져 저장되는 변수
 
-    // a 기본 이벤트 막고 selectReportReview() 호출하게 하기
+    // a 기본 이벤트 막고 selectReportBoard() 호출하게 하기
     a.addEventListener("click", e => {
 
       e.preventDefault();
       // 여러 div 가 감싼 형태 다른 요소로 인식
       // console.log(e.target);
       // console.log(e.currentTarget);
-      selectReportReview(a.href);
+      selectReportBoard(a.href);
     })
   })
 

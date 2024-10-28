@@ -117,6 +117,8 @@ const selectRestaurant = (url) => {
 
     restaurantNoTemp = restaurant.restaurantNo;
 
+    console.log(restaurantNoTemp);
+
     // 필요한 요소 얻어오기
     const selectRestaurantName = document.querySelector("#selectRestaurantName");
     const selectLoctionName = document.querySelector("#selectLoctionName");
@@ -184,43 +186,20 @@ restaurantRegistBtn.addEventListener("click", e => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  // DOMContentLoaded : 화면이 모두 로딩된 후
-  document.querySelector("#searchQuery").value = "";
-
-  
-  // 수정, 삭제 버튼에 이벤트 추가
-  deleteRestaurant(restaurantNoTemp);
-  updateRestaurant(restaurantNoTemp);
-
-  // id="restaurantList" 후손 중 a 태그 모두 선택 => 노드 리스트(a)
-  document.querySelectorAll("#restaurantList a").forEach((a) => {
-    // 매개변수 a : 반복마다 하나씩 요소가 꺼내져 저장되는 변수
-
-    // a 기본 이벤트 막고 selectRestaurant() 호출하게 하기
-    a.addEventListener("click", e => {
-
-      e.preventDefault();
-      // 여러 div 가 감싼 형태 다른 요소로 인식
-      // console.log(e.target);
-      // console.log(e.currentTarget);
-      selectRestaurant(a.href);
-    })
-  })
-
-});
 
 
 /**
  * 팝업창 가게 삭제 버튼 클릭 동작 
  */
-const deleteRestaurant = (restaurantNo) => {
+const deleteRestaurant = () => {
 
   const deleteBtn = document.querySelector("#deleteBtn");
 
   deleteBtn.addEventListener("click", () => {
 
     if (confirm("정말 삭제 하시겠습니까?") == false) return;
+
+
   
     const url = "/admin/restaurant/delete";    // 요청 주소
   
@@ -231,7 +210,7 @@ const deleteRestaurant = (restaurantNo) => {
     const input = document.createElement("input");
     input.type  = "hidden";
     input.name  = "restaurantNo";
-    input.value = restaurantNo;  
+    input.value = restaurantNoTemp;  
   
     form.append(input); 
   
@@ -249,11 +228,12 @@ const deleteRestaurant = (restaurantNo) => {
 /**
  * 팝업창 가게 수정 버튼 클릭 동작 
  */
-const updateRestaurant = (restaurantNo) => {
+const updateRestaurant = () => {
 
   const updateBtn = document.querySelector("#updateBtn");
 
   updateBtn.addEventListener("click", () => {
+
 
     const url = "/admin/restaurant/updateView";    // 요청 주소
   
@@ -264,7 +244,7 @@ const updateRestaurant = (restaurantNo) => {
     const input = document.createElement("input");
     input.type  = "hidden";
     input.name  = "restaurantNo";
-    input.value = restaurantNo;  
+    input.value = restaurantNoTemp;  
   
     form.append(input); 
   
@@ -276,3 +256,30 @@ const updateRestaurant = (restaurantNo) => {
 
 }
 
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // DOMContentLoaded : 화면이 모두 로딩된 후
+  document.querySelector("#searchQuery").value = "";
+
+  // 수정, 삭제 버튼에 이벤트 추가
+  deleteRestaurant();
+  updateRestaurant();
+
+  // id="restaurantList" 후손 중 a 태그 모두 선택 => 노드 리스트(a)
+  document.querySelectorAll("#restaurantList a").forEach((a) => {
+    // 매개변수 a : 반복마다 하나씩 요소가 꺼내져 저장되는 변수
+
+    // a 기본 이벤트 막고 selectRestaurant() 호출하게 하기
+    a.addEventListener("click", e => {
+
+      e.preventDefault();
+      // 여러 div 가 감싼 형태 다른 요소로 인식
+      // console.log(e.target);
+      // console.log(e.currentTarget);
+      selectRestaurant(a.href);
+    })
+  })
+
+});

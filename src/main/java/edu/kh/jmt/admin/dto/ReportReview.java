@@ -21,6 +21,8 @@ public class ReportReview {
 	private String memberName;
 	private int reviewNo;
 	private String reportTypeName;
+	private String reviewDelFl;
+	
 	
 	// 신고 대상 리뷰를 쓴 작성자 번호
 	private int reviewMemberNo;
