@@ -1,12 +1,13 @@
 const heartBtn = document.querySelectorAll(".heartBtn");
 const storeSection = document.querySelectorAll(".store-section");
+const restaurantNo = document.querySelectorAll(".restaurantNo");
 
 
 //클릭 이벤트 전파되지 않게 설정 
 
 for (let i = 0; i < storeSection.length; i++) {
   storeSection[i].addEventListener('click', (event) => {
-    alert('section 클릭')
+    location.href = "/restaurant/view?restaurantNo="+restaurantNo[i].value
   })
 };
 

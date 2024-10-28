@@ -59,6 +59,35 @@ FROM
 </select>
 
 
+<!-- 찜여부 확인  -->
+<select id="storeLike" resultType="_int">
+
+SELECT COUNT(*) AS likeCheck
+FROM BOOKMARK
+WHERE 
+	MEMBER_NO = #{memberNo}
+AND 
+	RESTAURANT_NO = #{restaurantNo}
+
+</select>
+<!-- 찜 삭제  -->
+<delete id="deleteLike">
+	DELETE FROM "BOOKMARK"
+WHERE 
+	MEMBER_NO = #{memberNo}
+AND 
+	RESTAURANT_NO = #{restaurantNo}
+	
+
+
+</delete>
+<!-- 찜추가 -->
+<insert id="insertLike">
+
+	INSERT INTO "BOOKMARK" (MEMBER_NO, RESTAURANT_NO)
+	VALUES(#{memberNo}, #{restaurantNo})
+</insert>
+
 
 
 	
