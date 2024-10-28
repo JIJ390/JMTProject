@@ -15,6 +15,22 @@ button.addEventListener('click', () => {
 });
 
 
+
+
+getReportEvent = () => {
+  const popupReview = document.querySelectorAll('.popupReview');
+  const popupButtonReview = document.querySelectorAll('.popupButtonReview');
+
+  for(let i = 0; i < popupReview.length; i++){
+
+    popupButtonReview[i]?.addEventListener("click", () => {
+      popupReview[i]?.classList.toggle('hidden');
+    })
+  }
+}
+
+
+
 // 수정 버튼 요소 읽어와 이벤트 추가
 getUpdateEvent = () => {
   const updateBtn = document.querySelectorAll(".updateBtn");
@@ -68,7 +84,7 @@ getDeleteEvent = () => {
 
 // 비동기로 리뷰 리스트 조회
 selectReview = () => {
-  fetch("/review/selectReview?rowNum=" + rowNum + "&restaurantNo=" + restaurantNo + "&sort=" + sort)
+  fetch("/review/selectReview?rowNum=" + rowNum + "&restaurantNo=" + restaurantNo + "&sort=" + sort )
     .then(Response => {
       if (Response.ok) {
         return Response.text();
@@ -81,6 +97,7 @@ selectReview = () => {
 
       getUpdateEvent();
       getDeleteEvent();
+      getReportEvent();
 
     })
     .catch(err => console.log(err));

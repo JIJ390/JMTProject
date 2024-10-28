@@ -12,6 +12,7 @@
 
 <body>
     <div th:replace="~{common/header}"></div>
+    [[${session.loginMember}]]
     <div class="viewContainer">
         <div class="sideBar">
             <!-- <div class="sideInput">
@@ -35,7 +36,7 @@
             <input type="hidden" class="getRestaurantNo" th:value="*{restaurantNo}">
             <input type="hidden" class="getRestaurantAddress" th:value="*{restaurantAddress}">
             <input type="hidden" class="getRestaurantName" th:value="*{restaurantName}">
-            <input type="hidden" class="getLoginMemberNo" th:value="${session.loginMember.memberNo}">
+            <th:block th:if= "${session.loginMember}"><input type="hidden" class="getLoginMemberNo" th:value="${session.loginMember.memberNo}"></th:block>
 
             <div class="mainDetail">
                 <div class="mainDetailPhoto">

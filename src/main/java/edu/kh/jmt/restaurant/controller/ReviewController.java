@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.jmt.common.util.FileUtil;
+import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.restaurant.dto.RestaurantDto;
 import edu.kh.jmt.restaurant.dto.ReviewDto;
 import edu.kh.jmt.restaurant.service.RestaurantService;
@@ -87,9 +89,15 @@ public class ReviewController {
 	}
 
 	@GetMapping("review/selectReview")
-	public String selectReview(@RequestParam("rowNum") int rowNum, @RequestParam("restaurantNo") int restaurantNo,
-			@RequestParam("sort") int sort, Model model) {
+	public String selectReview(
+			@RequestParam("rowNum") int rowNum, 
+			@RequestParam("restaurantNo") int restaurantNo,
+			@RequestParam("sort") int sort, 
+			Model model
+			) {
 
+	
+		
 		List<ReviewDto> reviews = service.selectReview(restaurantNo, rowNum, sort);
 
 		if(reviews.size() > 0) {

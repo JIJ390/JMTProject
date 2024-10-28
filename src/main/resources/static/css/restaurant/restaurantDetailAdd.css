@@ -2,6 +2,8 @@
   box-sizing: border-box;
 }
 
+* {font-family: 'NEXON Lv1 Gothic OTF';}
+
 html, body{
   background-color: rgb(241, 241, 241);
 }
