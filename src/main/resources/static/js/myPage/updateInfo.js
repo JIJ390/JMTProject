@@ -97,9 +97,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (savedImageUrl) {
     profileImg.src = savedImageUrl;
 
-    // 로컬 스토리지에서 복구된 파일로 미리보기 상태 복구
-    lastVailidFile = new File([savedImageUrl], "profile.png", { type: "image/png" });
-
+    // 복구된 이미지가 있는 경우 statusCheck를 1로 설정
     statusCheck = 1; // 이미지가 선택된 상태로 초기화
   } else {
     profileImg.src = userDefaultImage; // 기본 이미지 사용
@@ -107,28 +105,33 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
-/* 프로필 화면에서 변경하기 버튼이 클릭된 경우 */
-const profileForm = document.querySelector("#profile");
-profileForm?.addEventListener("submit", e => {
-
-  let flag = true; // true인 경우 제출 불가능
+// 프로필 화면에서 변경하기 버튼이 클릭된 경우
+const profileForm = document.querySelector("#updateInfoForm");
+profileForm?.addEventListener("submit", (e) => {
+  let flag = false; // 기본적으로 제출이 가능하다고 가정
 
   // 미변경 시 제출 불가
-  if(statusCheck === -1) flag = true;
-
-  // 기존 프로필 이미지 X -> 새 이미지 선택
-  if(loginMemberProfileImg === null
-    && statusCheck === 1) flag = false;
-
-  // 기존 프로필 이미지 O -> X 버튼을 눌러 삭제
-  if(loginMemberProfileImg !== null
-    && statusCheck === 0) flag = false;
-
-  // 기존 프로필 이미지 O -> 새 이미지 선택
-  if(loginMemberProfileImg !== null
-    && statusCheck === 1) flag = false;
+  if (statusCheck === -1) {
+    flag = true; // 변경이 없을 때 제출 불가
   }
-)
 
+  // 기존 프로필 이미지가 없고 새 이미지가 선택된 경우
+  if (loginMemberProfileImg === null && statusCheck === 1) {
+    flag = false; // 제출 가능
+  }
 
+  // 기존 프로필 이미지가 있고 X 버튼을 눌러 삭제한 경우
+  if (loginMemberProfileImg !== null && statusCheck === 0) {
+    flag = false; // 제출 가능
+  }
+
+  // 기존 프로필 이미지가 있고 새 이미지를 선택한 경우
+  if (loginMemberProfileImg !== null && statusCheck === 1) {
+    flag = false; // 제출 가능
+  }
+
+  if (flag) {
+    e.preventDefault(); // 제출을 막음
+    alert("프로필 이미지에 변경사항이 없습니다.");
+  }
+});
