@@ -20,4 +20,7 @@ public interface NoticeViewMapper {
 	/* FAQ 전체 리스트 */
 	List<Faq> selectFaqList();
 
+	/* 공지사항 자세히 보기 */
+	Notice detailViewNotice(int noticeNo);
+
 }

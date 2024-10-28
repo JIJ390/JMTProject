@@ -32,6 +32,21 @@
 		WHERE FAQ_NO > 0
 		ORDER BY FAQ_NO DESC
 	</select>
+	
+	
+	<!-- 공지사항 전체 보기 -->
+	<select id="detailViewNotice">
+		SELECT
+			NOTICE_NO,
+			NOTICE_TITLE,
+			NOTICE_CATEGORY,
+			TO_CHAR(NOTICE_WRITE_DATE, 'YYYY"년" MM"월" DD"일"')
+		AS NOTICE_WRITE_DATE,
+			NOTICE_CONTENT		
+		FROM NOTICE
+		WHERE NOTICE_NO > 0
+		AND   NOTICE_NO = #{noticeNo}
+	</select>
 
 
 

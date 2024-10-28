@@ -50,6 +50,13 @@ public class NoticeViewServiceImpl implements NoticeViewService {
 	}
 	
 	
+	/* 공지사항 자세히 보기 */
+	@Override
+	public Notice detailViewNotice(int noticeNo) {
+		return mapper.detailViewNotice(noticeNo);
+	}
+	
+	
 	/**
 	 * FAQ 전체 조회
 	 */

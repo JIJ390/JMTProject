@@ -1,11 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>공지사항 번 글</title>
+  <link rel="stylesheet" href="/css/common/header.css">
+  <style>
+    
+      @font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+    @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+    body      { font-family: 'NanumSquare', sans-serif }
+    .normal      { font-weight: 400 }
+    .bold      { font-weight: 700 }
+    .bolder      { font-weight: 800 }
+    .light      { font-weight: 300 }
+
+    h3 {font-family: 'NEXON Lv1 Gothic OTF';}
+    header {font-family: 'NEXON Lv1 Gothic OTF';}
+
+
+    .main{
+      display: flex;
+      justify-content: center;
+      justify-content: space-around;
+      box-sizing: border-box;
+    }
+
+    #fix-area{
+      width: 800px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      box-sizing: border-box;
+      margin: 20px;
+    }
+
+    #faq-container{
+      display: flex;
+      flex-direction: column;
+      display: block;
+      justify-content: space-between;
+    }
+
+    /* 테이블 꾸미기 */
+    table{
+     width: 800px;
+     background-color: #D5EDE8;
+     padding: 15px;
+	 }
+
+    .table-underline{
+      text-align: center;
+    }
+
+    .detail-content{
+      padding: 20px;
+    }
+
+    /* 맨 위로 */
+    .floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  }
+  </style>
 </head>
 <body>
-  <h1>notice detail test</h1>
+  <th:block th:replace="~{common/header}"></th:block>
+  <main class="main">
+    <section id="back">
+  <!-- 감싸는 배경 -->
+
+    <section id="fix-area">
+        
+      <section id="faq-container">
+        <span><h3>공지사항</h3></span>
+        <br>
+        <!-- 내용 정렬 -->
+        
+          <div th:object="${notice}">
+            <table>
+              <thead>
+                <tr class="table-underline">
+                  <td class="detail-category" th:text="*{noticeCategory}">카테고리</td>
+                  <td class="detail-subject" th:text="*{noticeTitle}">제목</td>
+                  <td class="detail-write-day" th:text="*{noticeWriteDate}">작성일</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="3" class="detail-content" th:text="*{noticeContent}">본문</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+    
+      </section>
+
+      <div id="goToList"> 목록으로 </div>
+    </section>
+            <!-- Floating Buttons -->
+            <div class="floating-buttons">
+              <a class="scroll-top" href="#">⬆</a>
+            </div>
+</main>
+
 </body>
 </html>
