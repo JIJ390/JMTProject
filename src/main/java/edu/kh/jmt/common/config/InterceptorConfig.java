@@ -20,7 +20,7 @@ public class InterceptorConfig implements WebMvcConfigurer{
 	public LocationInterceptor selectLocationList() {
 		return new LocationInterceptor();
 	}
-
+	
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -31,19 +31,6 @@ public class InterceptorConfig implements WebMvcConfigurer{
 		
 		registry.addInterceptor(selectLocationList())
 				.addPathPatterns("/admin/restaurant/regist")
-				.addPathPatterns("/admin/restaurant/updateView")
-				.addPathPatterns("/**") 
-				.excludePathPatterns(
-						"/css/**",
-						"/js/**,",
-						"images/**",
-						"/favicon.ico");
-
+				.addPathPatterns("/admin/restaurant/updateView");
 	}
-	
-	
-
-	
-	
-	
 }

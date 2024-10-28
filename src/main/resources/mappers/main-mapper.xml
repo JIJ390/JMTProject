@@ -4,80 +4,65 @@
 
 
 <!-- 좋아요 많은순  -->
-	<select id="listLike" resultType="RestaurantDto">
+	<select id="listLike">
 SELECT
 	RESTAURANT_NAME,
 	RESTAURANT_IMG1,
-	MAIN.RESTAURANT_NO,
-	COUNT_NO,
-	(SELECT COUNT(*) 
-		 FROM BOOKMARK SUB
-		 WHERE SUB.RESTAURANT_NO  = MAIN.RESTAURANT_NO
-		 AND   MEMBER_NO = #{memberNo}) AS LIKE_CHECK
+	RESTAURANT_NO
 FROM 
-	RESTAURANT MAIN
+	RESTAURANT
 JOIN 	
 	(SELECT
 		RESTAURANT_NO,
 	 	COUNT(LIKE_FL) AS "COUNT_NO"
 	FROM
-	 	REVIEW 
+	 REVIEW 
 	WHERE
 		LIKE_FL = 'N'
 	GROUP BY 
 		RESTAURANT_NO
-	) SUB2
-	ON MAIN.RESTAURANT_NO = SUB2.RESTAURANT_NO
-ORDER BY 
-		COUNT_NO DESC
+	ORDER BY 
+		COUNT_NO DESC) USING (RESTAURANT_NO)
 	</select>
 	
 <!-- 최신순 순서 -->
-<select id="listCurrent" resultType="RestaurantDto">
+<select id="listCurrent">
 SELECT 
 	RESTAURANT_NAME,
 	RESTAURANT_IMG1,
-	MAIN.RESTAURANT_NO,
-		(SELECT COUNT(*) 
-		 FROM BOOKMARK SUB
-		 WHERE SUB.RESTAURANT_NO  = MAIN.RESTAURANT_NO
-		 AND   MEMBER_NO = #{memberNo}) AS LIKE_CHECK
+	RESTAURANT_NO
 FROM  
-		RESTAURANT MAIN
-	ORDER BY 
-		RESTAURANT_NO DESC
+	RESTAURANT
+ORDER BY 
+	RESTAURANT_NO DESC
 </select>
 <!-- 리뷰많은순 -->
-<select id="listReview" resultType="RestaurantDto">
+<select id="listReview">
 SELECT 
 	RESTAURANT_NAME,
 	RESTAURANT_IMG1,
 	RESTAURANT_NO,
-	LIKE_FL,
-	(SELECT COUNT(*) 
-		 FROM BOOKMARK SUB
-		 WHERE SUB.RESTAURANT_NO  = RESTAURANT_NO
-		 AND   MEMBER_NO = #{memberNo}) AS LIKE_CHECK
+	LIKE_FL
 FROM 
-	RESTAURANT
-	JOIN (
-		SELECT 
-		   	RESTAURANT_NO,
-		   	COUNT(LIKE_FL) AS "LIKE_FL"
-		    FROM 
-		    	REVIEW
-		    WHERE 
-		    	REVIEW_DEL_FL = 'N'
-		    GROUP BY 
-		    	RESTAURANT_NO
-  	 ) USING (RESTAURANT_NO)
+	RESTAURANT JOIN
+   (SELECT 
+   	RESTAURANT_NO,
+   	COUNT(LIKE_FL) AS "LIKE_FL"
+    FROM 
+    	REVIEW
+    WHERE 
+    	REVIEW_DEL_FL = 'N'
+   GROUP BY 
+  		RESTAURANT_NO
+  	ORDER BY 
+  	 	LIKE_FL DESC) USING (RESTAURANT_NO)
 </select>
 
 
 <!-- 찜여부 확인  -->
 <select id="storeLike" resultType="_int">
 
-SELECT COUNT(*)
+SELECT COUNT(*) AS likeCheck
 FROM BOOKMARK
 WHERE 
 	MEMBER_NO = #{memberNo}
@@ -92,6 +77,8 @@ WHERE
 	MEMBER_NO = #{memberNo}
 AND 
 	RESTAURANT_NO = #{restaurantNo}
+	
+
 
 </delete>
 <!-- 찜추가 -->
@@ -100,7 +87,6 @@ AND
 	INSERT INTO "BOOKMARK" (MEMBER_NO, RESTAURANT_NO)
 	VALUES(#{memberNo}, #{restaurantNo})
 </insert>
-
 
 
 
