@@ -53,7 +53,7 @@ public interface MyPageService{
 	 */
 	int withdrawal(String memberPw, Member loginMember);
 
-	/** 이름 수정
+	/** 이름/이미지 변경
 	 * @param inputMember
 	 * @return result
 	 */

@@ -86,6 +86,18 @@ public class MyPageController {
 		return "redirect:/";
 	}
 	
+	/** 로그 아웃
+	 * param status
+	 * @return
+	 */
+	@GetMapping("logout")
+	public String logout(SessionStatus status) {
+		
+		status.setComplete(); // 세션 상태 완료
+		
+		return "redirect:/"; // 메인 페이지
+	}
+	
 	
 	/** 회원가입 페이지로 이동
 	 * 
@@ -270,7 +282,7 @@ public class MyPageController {
 		return "myPage/updateInfo";
 	}
 	
-	/** 이름 수정 기능
+	/** 이름/이미지 변경
 	 * @param inputMember : 수정할 이름 주소
 	 * @param loginMember : 현재 로그인된 회원 정보
 	 * @param ra
@@ -288,10 +300,8 @@ public class MyPageController {
 		
 		String filePath = service.updateInfo(inputMember, profileImg);
 		
-		if (filePath != null) {
 			// DB, Session에 저장된 프로필 이미지 정보 동기화
 			loginMember.setProfileImg(filePath);
-		}
 		
 		// 세션에 이름 동기화
 		loginMember.setMemberName(inputMember.getMemberName());;
@@ -308,6 +318,12 @@ public class MyPageController {
 		return "redirect:myPage";
 	}
 	
+	
+	@GetMapping("myReview")
+	public String myReview() {
+		
+		return "/myPage/myreview";
+	}
 	
 		
 	}

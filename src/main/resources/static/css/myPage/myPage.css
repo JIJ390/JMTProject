@@ -44,8 +44,8 @@ main {
 }
 
 .profile-img-wrapper {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%; /* 원형으로 설정 */
   overflow: hidden; /* 원형 영역을 벗어나는 이미지 잘라내기 */
   display: flex;

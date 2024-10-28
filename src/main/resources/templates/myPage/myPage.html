@@ -19,11 +19,9 @@
         <div class="container">
             <div class="profile">
                 <div class="profile-img-wrapper"> <!-- 프로필 이미지 -->
-                    <a href="/myPage/profile">
                         <img th:with="user=#{user.default.image}" 
                              th:src="${session.loginMember.profileImg ?: user }"
-                             id="memberProfile"
-                             alt="프로필 이미지" >
+                             id="memberProfile">
                     </a> 
                 </div>
                 <div class="name">
@@ -40,8 +38,9 @@
                     <a href="/myPage/withdrawal">회원탈퇴</a>
                 </div>
                 <a href="#">내가 쓴글</a>
-                <a href="#">리뷰 목록</a>
+                <a href="/myPage/myReview">리뷰 목록</a>
                 <a href="#">찜목록</a>
+                <a href="/myPage/logout" id="logoutBtn">로그아웃</a>
             </div>
         </div>
     </form>

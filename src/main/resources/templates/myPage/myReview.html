@@ -5,145 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내 리뷰 목록</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-       
     <link rel="stylesheet" href="/css/myPage/myReview.css">
-
-    <style>
-      body {
-  font-family: 'Noto Sans KR', sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  margin-top: 100px;
-}
-.header {
-  height: 10%;
-  width: 100%;
-  background-color: #4dc4b4;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.header img {
-  max-width: 160px;
-  height: auto;
-  margin-left: 15px;
-}
-
-.header .sub-links {
-  position: absolute;
-  bottom: 5px;
-  left: 20px;
-  font-size: 0.8rem;
-  color: black;
-  display: flex;
-  gap: 15px;
-}
-
-.header .sub-links a {
-  color: black;
-  text-decoration: none;
-}
-.container {
-  display: flex;
-  margin-top: 20px;
-  height: 100vh;
-}
-.sidebar {
-  width: 250px;
-  padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.sidebar img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: block;
-  margin: 0 auto 20px;
-}
-.sidebar p {
-  text-align: center;
-  font-weight: bold;
-}
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-.sidebar ul li {
-  text-decoration: none;
-  margin-bottom: 15px;
-}
-.sidebar ul li a {
-  text-decoration: none;
-  color: black;
-  padding: 10px 0;
-}
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
-}
-.review-item {
-  background-color: #fff;
-  padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 10px;
-}
-.review-item img {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  margin-right: 15px;
-}
-.review-info {
-  flex-grow: 1;
-}
-.review-info p {
-  margin: 5px 0;
-}
-.review-actions {
-  text-align: right;
-  height: 100%;
-}
-
-.review-actions button {
-  background-color: transparent;
-  border: none;
-  color: #65c3ba;
-  cursor: pointer;
-}
-
-    </style>
-
 </head>
 <body>
-  <div class="header">
-    <img src="/static/images/logo.png" alt="로고" id="logoImage">
-    <div class="sub-links">
-        <span>메인페이지</span>
-        <span>점메추</span>
-        <span>공지사항</span>
-        <span>FAQ</span>
-    </div>
-  </div>
+  <!-- Header Section -->
+  <th:block th:replace="~{common/header}"></th:block>
+  <link rel="stylesheet" href="/css/common/header.css">
+
+  <!-- Main Content -->
     <div class="container">
         <div class="sidebar">
-            <img src="profile-placeholder.png" alt="프로필 이미지">
-            <p>이름</p>
+          <img th:with="user=#{user.default.image}" 
+               th:src="${session.loginMember.profileImg ?: user }"
+               id="memberProfile">
+            <div class="name"><input type="text" name="memberName" id="memberName" th:value="${session.loginMember.memberName}"></div>
             <ul>
-                <li><a href="#">내 정보</a></li>
+                <li><a href="/myPage/myPage">내 정보</a></li>
                 <li><a href="#">내가 쓴 글</a></li>
-                <li><a href="#">리뷰 목록</a></li>
                 <li><a href="#">찜목록</a></li>
             </ul>
         </div>
