@@ -4,40 +4,6 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
-}
-.header {
-  height: 10%;
-  width: 100%;
-  background-color: #4dc4b4;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.header img {
-  max-width: 160px;
-  height: auto;
-  margin-left: 15px;
-}
-
-.header .sub-links {
-  position: absolute;
-  bottom: 5px;
-  left: 20px;
-  font-size: 0.8rem;
-  color: black;
-  display: flex;
-  gap: 15px;
-}
-
-.header .sub-links a {
-  color: black;
-  text-decoration: none;
 }
 .container {
   display: flex;
@@ -102,6 +68,7 @@ body {
 }
 .review-actions {
   text-align: right;
+  height: 100%;
 }
 
 .review-actions button {
@@ -109,4 +76,17 @@ body {
   border: none;
   color: #65c3ba;
   cursor: pointer;
+}
+
+.name input {
+  width: 100%; /* 부모 컨테이너에 맞게 채우기 */
+  text-align: center; /* 텍스트를 수평으로 가운데 정렬 */
+  height: 40px; /* 높이 지정 */
+  line-height: 40px; /* 높이에 맞춘 줄 간격 설정 */
+  box-sizing: border-box; /* 패딩 포함한 크기 조절 */
+  border: 0px solid #ccc;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  pointer-events: none;
 }

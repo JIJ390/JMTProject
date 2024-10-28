@@ -148,7 +148,7 @@ public class MyPageServiceImpl implements MyPageService{
 			return null;
 			}
 		
-		
+		// 파일명 변경
 		String rename = FileUtil.rename(profileImg.getOriginalFilename());
 		
 		String url = profileWebPath + rename;

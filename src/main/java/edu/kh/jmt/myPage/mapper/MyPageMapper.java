@@ -54,7 +54,7 @@ public interface MyPageMapper {
 	int withdrawal(int memberNo);
 
 
-	/** 이름 변경
+	/** 이름/이미지 변경
 	 * @param inputMember
 	 * @return result
 	 */

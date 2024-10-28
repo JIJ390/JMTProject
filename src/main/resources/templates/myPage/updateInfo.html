@@ -15,27 +15,26 @@
 
     <!-- Main Content -->
     <main>
-    <form action="updateInfo" method="POST" name="updateInfoForm" id="updateInfoForm" enctype="multipart/form-data">
         <div class="container">
-            <div class="profile">
-                <h1 style="margin-bottom: 30px;">프로필 수정</h1>
-                <div class="profile-img-wrapper"> <!-- 프로필 이미지 -->
-                    <a href="/myPage/profile">
-                        <img th:with="user=#{user.default.image}" 
-                             th:src="${session.loginMember.profileImg}"
-                             id="memberProfile"
-                             alt="프로필 이미지" >
-                    </a> 
+            <form action="updateInfo" method="POST" name="updateInfoForm" id="updateInfoForm" enctype="multipart/form-data">
+                <div class="profile">
+                    <h1 style="margin-bottom: 30px;">프로필 수정</h1>
+                    <span id="deleteImage">x</span>
+                        <div class="profile-img-wrapper"> <!-- 프로필 이미지 -->
+                                <img th:with="user=#{user.default.image}" 
+                                     th:src="${session.loginMember.profileImg ?: user }"
+                                     id="profileImg">
+                        </div>
+    
+                    <label for="imageInput">이미지 선택</label> <!-- label의 for 속성 : 글자를 클릭해도 input 태그와 연결되게 참조 -->
+                    <input type="file" name="updateProfileImg" id="imageInput" accept="image/*">
+                    <div class="name">
+                        <input type="text" name="memberName" id="memberName" th:value="${session.loginMember.memberName}">
+                    </div>
+                    <button class="myPage-submit" >수정하기</button>
                 </div>
-                <label for="imageInput">이미지 선택</label> <!-- label의 for 속성 : 글자를 클릭해도 input 태그와 연결되게 참조 -->
-                <input type="file" name="updateProfileImg" id="imageInput" accept="image/*">
-                <div class="name">
-                    <input type="text" name="memberName" id="memberName" th:value="${session.loginMember.memberName}">
-                </div>
-                <button class="myPage-submit" >수정하기</button>
-            </div>
+            </form>
         </div>
-    </form>
 </main>
 
     <script>
@@ -44,7 +43,17 @@
         });
     </script>
 
-    
+    <script th:inline="javascript">
+    const userDefaultImage  = /*[[#{user.default.image}]]*/ "기본이미지";
+
+    // 로그인된 회원의 프로필 이미지 -> 기본 이미지인 경우 null
+    const loginMemberProfileImg = /*[[${session.loginMember.profileImg}]]*/ "프로필 이미지";
+     </script>
+
+     
+
+
+    <script src="/js/myPage/updateInfo.js"></script>
 
 </body>
     
