@@ -112,7 +112,7 @@ const selectMemberList = (cp) => {
         // 차단 버튼 이벤트 추가
         blockBtn.addEventListener("click", () => {
 
-          fetch("/admin/member/block", {
+          fetch("/admin/member/changeBlock", {
             method : "PUT", 
             headers: {"Content-Type": "application/json"}, 
             body : member.memberNo

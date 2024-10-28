@@ -15,28 +15,28 @@
     <th:block th:replace= "~{admin/adminSide}"></th:block>
     <section class="main-section">
 
-      <h1>신고 관리 페이지 - 리뷰</h1>
+      <h1>신고 관리 페이지 - 점메추 게시판</h1>
 
 
-      <th:block th:if="${#lists.isEmpty(reportReviewList)}">        
+      <th:block th:if="${#lists.isEmpty(reportBoardList)}">        
         <div class="none-list">조회된 결과가 없습니다</div>
       </th:block>
 
-      <div th:each= "reportReview : ${reportReviewList}" th:object="${reportReview}" id="reportReviewList">
-        <div class="report-div" th:classappend="${reportReview.reportReviewFl} == 'Y' ? 'completed'">
+      <div th:each= "reportBoard : ${reportBoardList}" th:object="${reportBoard}" id="reportBoardList">
+        <div class="report-div" th:classappend="${reportBoard.reportBoardFl} == 'Y' ? 'completed'">
           <div class="report-box">
-            <a th:href="@{/admin/report/review/{reportReviewNo}(reportReviewNo=*{reportReviewNo})}">
-              <span th:text="*{reportReviewNo}"></span>
+            <a th:href="@{/admin/report/board/{reportBoardNo}(reportBoardNo=*{reportBoardNo})}">
+              <span th:text="*{reportBoardNo}"></span>
               <span th:text="*{reportTypeName}"></span>
               <span th:text="*{memberName}"></span>
-              <span th:text="*{reportReviewDate}"></span>
+              <span th:text="*{reportBoardDate}"></span>
             </a>
           </div>
         </div>
       </div>
 
       <!-- 페이지 네이션 -->
-      <div class="pagination-area" th:unless="${#lists.isEmpty(reportReviewList)}">
+      <div class="pagination-area" th:unless="${#lists.isEmpty(reportBoardList)}">
 
         <ul class="pagination" th:object="${pagination}">
           <li><a href="#">&lt;&lt;</a></li>
@@ -62,7 +62,7 @@
 
     </section>
     <section class="right-section">
-      <form action="/admin/report/review" method="GET" id="restaurantSearch">
+      <form action="/admin/report/board" method="GET" id="restaurantSearch">
 
         <select name="key" id="searchKey">
           <option value="rn">신고자 이름</option>
@@ -80,13 +80,13 @@
 
     <!-- 리뷰 신고 팝업 -->
 
-      <div id="reportReviewDetail" class="popup-hidden report-detail-popup">
+      <div id="reportBoardDetail" class="popup-hidden report-detail-popup" >
 
         <span id="popupClose">&times;</span>
         <h1 id="reportTypeName">악의적인 리뷰</h1>
 
         <div class="popup-head-area">
-          <h3 id="reportReviewNo"># 12312455</h3>
+          <h3 id="reportBoardNo"># 12312455</h3>
           <div>
             <span id="reportMemberName"></span>
             <span id="reportDate"></span>
@@ -102,7 +102,7 @@
             <tr>
               <th>회원 번호</th>
               <th>이름</th>
-              <th>신고된 리뷰</th>
+              <th>신고된 게시글</th>
               <th>회원 상태</th>
               <th colspan="2">조치 사항</th>
             </tr>
@@ -112,7 +112,7 @@
               <td id="memberNo">1</td>
               <td id="memberName">지우개</td>
               <td>
-                <a href="#">대상 리뷰 이동</a>
+                <a href="#">대상 게시글 이동</a>
               </td>
               <td id="memberStatus">활동</td>
               <td>
@@ -130,7 +130,7 @@
   
         </table>
 
-        <form action="/admin/report/review/feed" method="POST" id="reportFeedFrm">
+        <form action="/admin/report/board/feed" method="POST" id="reportFeedFrm">
           <div class="report-feed-box"></div>
           <div class="reoprt-frm-btn-area">
             <button type="button" id="reportFeedBtn">조치 완료</button>
@@ -149,6 +149,6 @@
   </script>
 
 
-  <script src="/js/admin/reportReview.js"></script>
+  <script src="/js/admin/reportBoard.js"></script>
 </body>
 </html>

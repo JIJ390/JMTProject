@@ -4,6 +4,8 @@ const pageNoList = document.querySelectorAll(".pagination a");
 
 const restaurantDetail = document.querySelector("#restaurantDetail");
 
+let restaurantNoTemp;
+
 
 // 페이지 이동 버튼이 클릭 되었을 때
 pageNoList?.forEach( (item, index) => {
@@ -113,6 +115,10 @@ const selectRestaurant = (url) => {
     console.log(menuList);
     console.log(restaurant);
 
+    restaurantNoTemp = restaurant.restaurantNo;
+
+    console.log(restaurantNoTemp);
+
     // 필요한 요소 얻어오기
     const selectRestaurantName = document.querySelector("#selectRestaurantName");
     const selectLoctionName = document.querySelector("#selectLoctionName");
@@ -159,11 +165,11 @@ const selectRestaurant = (url) => {
       menuArea.append(div2);
     })
 
-    // 수정, 삭제 버튼에 이벤트 추가
-    deleteRestaurant(restaurant.restaurantNo);
-    updateRestaurant(restaurant.restaurantNo);
+
   });
 };
+
+
 
 
 /** 
@@ -180,9 +186,86 @@ restaurantRegistBtn.addEventListener("click", e => {
 });
 
 
+
+
+/**
+ * 팝업창 가게 삭제 버튼 클릭 동작 
+ */
+const deleteRestaurant = () => {
+
+  const deleteBtn = document.querySelector("#deleteBtn");
+
+  deleteBtn.addEventListener("click", () => {
+
+    if (confirm("정말 삭제 하시겠습니까?") == false) return;
+
+
+  
+    const url = "/admin/restaurant/delete";    // 요청 주소
+  
+    const form = document.createElement("form");
+    form.action = url;            // 요청 주소
+    form.method = "POST";         // 메소드 지정
+  
+    const input = document.createElement("input");
+    input.type  = "hidden";
+    input.name  = "restaurantNo";
+    input.value = restaurantNoTemp;  
+  
+    form.append(input); 
+  
+    document.querySelector("body").append(form);
+  
+    form.submit(); 
+    
+  });
+
+};
+
+
+
+
+/**
+ * 팝업창 가게 수정 버튼 클릭 동작 
+ */
+const updateRestaurant = () => {
+
+  const updateBtn = document.querySelector("#updateBtn");
+
+  updateBtn.addEventListener("click", () => {
+
+
+    const url = "/admin/restaurant/updateView";    // 요청 주소
+  
+    const form = document.createElement("form");
+    form.action = url;            // 요청 주소
+    form.method = "POST";         // 메소드 지정
+  
+    const input = document.createElement("input");
+    input.type  = "hidden";
+    input.name  = "restaurantNo";
+    input.value = restaurantNoTemp;  
+  
+    form.append(input); 
+  
+    document.querySelector("body").append(form);
+  
+    form.submit(); 
+
+  });
+
+}
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   // DOMContentLoaded : 화면이 모두 로딩된 후
   document.querySelector("#searchQuery").value = "";
+
+  // 수정, 삭제 버튼에 이벤트 추가
+  deleteRestaurant();
+  updateRestaurant();
 
   // id="restaurantList" 후손 중 a 태그 모두 선택 => 노드 리스트(a)
   document.querySelectorAll("#restaurantList a").forEach((a) => {
@@ -200,70 +283,3 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
 });
-
-
-/**
- * 팝업창 삭제 버튼 클릭 동작 
- */
-const deleteRestaurant = (restaurantNo) => {
-
-  const deleteBtn = document.querySelector("#deleteBtn");
-
-  deleteBtn.addEventListener("click", () => {
-
-    if (confirm("정말 삭제 하시겠습니까?") == false) return;
-  
-    const url = "/admin/restaurant/delete";    // 요청 주소
-  
-    const form = document.createElement("form");
-    form.action = url;            // 요청 주소
-    form.method = "POST";         // 메소드 지정
-  
-    const input = document.createElement("input");
-    input.type  = "hidden";
-    input.name  = "restaurantNo";
-    input.value = restaurantNo;  
-  
-    form.append(input); 
-  
-    document.querySelector("body").append(form);
-  
-    form.submit(); 
-    
-  });
-
-};
-
-
-
-
-/**
- * 팝업창 수정 버튼 클릭 동작 
- */
-const updateRestaurant = (restaurantNo) => {
-
-  const updateBtn = document.querySelector("#updateBtn");
-
-  updateBtn.addEventListener("click", () => {
-
-    const url = "/admin/restaurant/updateView";    // 요청 주소
-  
-    const form = document.createElement("form");
-    form.action = url;            // 요청 주소
-    form.method = "POST";         // 메소드 지정
-  
-    const input = document.createElement("input");
-    input.type  = "hidden";
-    input.name  = "restaurantNo";
-    input.value = restaurantNo;  
-  
-    form.append(input); 
-  
-    document.querySelector("body").append(form);
-  
-    form.submit(); 
-
-  });
-
-}
-
