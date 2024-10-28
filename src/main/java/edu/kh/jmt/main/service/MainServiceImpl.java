@@ -57,7 +57,7 @@ public class MainServiceImpl implements MainService{
 			result2 = mapper.insertLike(memberNo,restaurantNo);
 		}
 
-		System.out.printf("%d", result);
+		System.out.printf("result 값 확인하기 긱기ㅣ기기기기기기기기긱기기ㅣ기ㅣㄱ : : :: : : : : %d", result);
 		
 		
 		return result;

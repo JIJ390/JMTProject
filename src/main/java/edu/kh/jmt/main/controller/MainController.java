@@ -3,6 +3,7 @@ package edu.kh.jmt.main.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,12 +68,9 @@ public class MainController {
 				@RequestBody int restaurantNo1,
 				@SessionAttribute("loginMember") Member loginMember
 				) {
-			
-			log.debug("aaaa : {}", restaurantNo1);
-			
 			int memberNo = loginMember.getMemberNo();
 			
-			
+
 			return service.storeLike(memberNo,restaurantNo1);
 		}
 		

@@ -62,7 +62,7 @@ FROM
 <!-- 찜여부 확인  -->
 <select id="storeLike" resultType="_int">
 
-SELECT COUNT(*) 
+SELECT COUNT(*) AS likeCheck
 FROM BOOKMARK
 WHERE 
 	MEMBER_NO = #{memberNo}

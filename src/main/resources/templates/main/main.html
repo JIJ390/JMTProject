@@ -158,7 +158,8 @@
               </span>
               <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
               <button class="heartBtn" name="likeBtn">
-                <i class="far fa-heart fa-lg " style="color: #ff0000;"></i>
+                <i class="far fa-heart fa-lg " style="color: #ff0000;"
+                    th:classappend="*{likeCheck == 1}? fa-solid : fa-regular"></i>
               </button>
             </div>
           </div>
