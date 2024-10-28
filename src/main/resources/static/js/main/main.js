@@ -63,12 +63,15 @@ for (let i = 0; i < regionListBtn.length; i++) {
     const value = regionListBtn[i].innerText;
     console.log(value);
 
-    regionBtnResult.textContent = value;
+    regionCategorySubmit.addEventListener("click", () => {
+      regionBtnResult.textContent = value;
+
+      region.value = value;
+    })
 
     const region = document.querySelector(".region")
 
 
-    region.value = value;
 
   })
 }
@@ -148,8 +151,6 @@ for (let i = 0; i < mainHeartBtn.length; i++) {
 
     const restaurantNo1 = restaurantNo[i].value;
 
-    console.log("aaaaa");
-    console.log(restaurantNo1);
 
     fetch("/like", {
       method: "POST",
@@ -164,15 +165,16 @@ for (let i = 0; i < mainHeartBtn.length; i++) {
 
         //  fa-solid 하트 채우기  / fa-regular 하트 비우기
         if (result == 1) { // 채우기
-          event.target.classList.add("fa-solid");
-          event.target.classList.remove("fa-regular");
+          event.target.classList.remove("fa-solid");
+          event.target.classList.add("fa-regular");
 
         } else { // 비우기
-          event.target.classList.add("fa-regular");
-          event.target.classList.remove("fa-solid");
+          event.target.classList.remove("fa-regular");
+          event.target.classList.add("fa-solid");
         }
 
         
       })
   })
 };
+

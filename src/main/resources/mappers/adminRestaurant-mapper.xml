@@ -267,5 +267,9 @@
   			RESTAURANT_NO = #{restaurantNo}
   	</delete>
   	
+
+  	
+  	
+  	
   	
 </mapper>
