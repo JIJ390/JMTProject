@@ -82,7 +82,7 @@ public class AdminMemberController {
 	* @param memberNo
 	* @return
 	*/
-	@PutMapping("block")
+	@PutMapping("changeBlock")
 	@ResponseBody
 	public int changeMemberBlock(
 	@RequestBody int memberNo) {
@@ -104,6 +104,21 @@ public class AdminMemberController {
 	
 	
 	return service.changeMemberSecession(memberNo);
+	}
+	
+	
+	/**
+	 * 차단만 가능 복구 불가
+	 * @param memberNo
+	 * @return
+	 */
+	@PutMapping("block")
+	@ResponseBody
+	public int memberBlock(
+	@RequestBody int memberNo) {
+		
+	return service.memberBlock(memberNo);
+	
 	}
 	
 	

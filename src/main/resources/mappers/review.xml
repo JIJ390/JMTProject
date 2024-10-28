@@ -50,6 +50,7 @@
 			JOIN 
 				"MEMBER" USING (MEMBER_NO)
 			WHERE ROWNUM BETWEEN 1 AND #{rowNum}
+			AND REVIEW_DEL_FL = 'N'
 	</select>
 	
 
@@ -83,11 +84,35 @@
 			JOIN 
 				"MEMBER" USING (MEMBER_NO)
 			WHERE ROWNUM BETWEEN 1 AND #{rowNum}
+			AND REVIEW_DEL_FL = 'N'
 	</select>
 
+	<update id="reviewDelete">
+		UPDATE "REVIEW"
+		SET REVIEW_DEL_FL = 'Y'
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
 
+	<select id="selectReview" resultType="reviewDto">
+		SELECT *
+		FROM "REVIEW"
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
 
-
-
-
+	<select id="selectRestaurant">
+		SELECT *
+		FROM "RESTAURANT"
+		WHERE RESTAURANT_NO = #{restaurantNo}
+	</select>
+	
+	
+	<update id="reviewUpdate">
+		UPDATE "REVIEW"
+		SET REVIEW_CONTENT = #{content}, LIKE_FL = #{likeFl}
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+	
+	
+	
+	
 </mapper>

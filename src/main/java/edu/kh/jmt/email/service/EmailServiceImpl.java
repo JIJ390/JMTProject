@@ -38,8 +38,12 @@ public class EmailServiceImpl implements EmailService {
 				emailTitle = "[JMT] 회원 가입 인증번호 입니다.";
 				break;
 				
-			case "findPw" :
+			case "pwFind" :
 				emailTitle = "[JMT] 비밀번호 찾기 인증번호 입니다.";
+				break;
+				
+			case "tempPw" :
+				emailTitle = "[JMT] 임시 비밀번호 발송 드립니다.";
 				break;
 			}
 			

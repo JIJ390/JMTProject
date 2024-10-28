@@ -5,16 +5,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.myPage.service.MyPageService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,14 +44,18 @@ public class MyPageController {
 	 * @param loginPW : 제출된 비밀번호
 	 * @param loginPW : 리다이렉트 시 request scope로 값 전달
 	 * @param model : 데이터 전달용 객체 (기본값 : request scope)
+	 * @param saveEamil : 이메일 저장 여부
+	 * @param resp : 응답 방법을 제공하는 객체
 	 * @return
 	 */
 	@PostMapping("loginPage")
 	public String login(
 			@RequestParam("loginEmail") String loginEmail,
 			@RequestParam("loginPW") String loginPW,
+			@RequestParam(name ="saveEmail", required = false) String saveEmail,
 			RedirectAttributes ra,
-			Model model
+			Model model,
+			HttpServletResponse resp
 			) {
 		
 //		log.debug("loginEmail : {}", loginEmail);
@@ -61,11 +69,33 @@ public class MyPageController {
 			return "redirect:/myPage/loginPage";
 		} else { // 로그인 성공
 			model.addAttribute("loginMember", loginMember);
+			// 이메일 저장 기능
+			Cookie cookie = new Cookie("saveEmail", loginEmail);
 			
+			cookie.setPath("/");
+			
+			if(saveEmail == null) { // 체크가 안되어있을때
+				cookie.setMaxAge(0);
+			} else { // 체크가 되었을때
+				cookie.setMaxAge(60*60*24*30); // 30일 유지
+			}
+			resp.addCookie(cookie);
 		}
 		
 		
 		return "redirect:/";
+	}
+	
+	/** 로그 아웃
+	 * param status
+	 * @return
+	 */
+	@GetMapping("logout")
+	public String logout(SessionStatus status) {
+		
+		status.setComplete(); // 세션 상태 완료
+		
+		return "redirect:/"; // 메인 페이지
 	}
 	
 	
@@ -174,12 +204,20 @@ public class MyPageController {
 	}
 	
 	
-	
+	/** 비밀번호 찾기 페이지 호출
+	 * @return
+	 */
 	@GetMapping("pwFind")
 	public String pwFind() {
 		
 		return "myPage/pwFind";
 	}
+	
+	
+	/** 비밀번호 찾기
+	 * @param memberNo
+	 * @return
+	 */
 	
 	
 	
@@ -244,7 +282,7 @@ public class MyPageController {
 		return "myPage/updateInfo";
 	}
 	
-	/** 이름 수정 기능
+	/** 이름/이미지 변경
 	 * @param inputMember : 수정할 이름 주소
 	 * @param loginMember : 현재 로그인된 회원 정보
 	 * @param ra
@@ -252,6 +290,7 @@ public class MyPageController {
 	 */
 	@PostMapping("updateInfo")
 	public String updateInfo(
+			@RequestParam("updateProfileImg") MultipartFile profileImg,
 			@ModelAttribute Member inputMember,
 			@SessionAttribute ("loginMember") Member loginMember,
 			RedirectAttributes ra) {
@@ -259,16 +298,17 @@ public class MyPageController {
 		int memberNo = loginMember.getMemberNo();
 		inputMember.setMemberNo(memberNo);
 		
-		int result = service.updateInfo(inputMember);
+		String filePath = service.updateInfo(inputMember, profileImg);
+		
+			// DB, Session에 저장된 프로필 이미지 정보 동기화
+			loginMember.setProfileImg(filePath);
+		
+		// 세션에 이름 동기화
+		loginMember.setMemberName(inputMember.getMemberName());;
 		
 		String message = null;
 		
-		if(result > 0) {message = "수정 되었습니다";
-		
-		loginMember.setMemberName(inputMember.getMemberName());
-		
-		}
-		else					 message = "수정 실패";
+
 		
 		ra.addFlashAttribute("message", message);
 		
@@ -276,6 +316,13 @@ public class MyPageController {
 		
 		
 		return "redirect:myPage";
+	}
+	
+	
+	@GetMapping("myReview")
+	public String myReview() {
+		
+		return "/myPage/myreview";
 	}
 	
 		

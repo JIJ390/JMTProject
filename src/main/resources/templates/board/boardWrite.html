@@ -26,7 +26,7 @@
 
 	<!-- 게시글 리스트 -->
 	<form class="post-container" 
-		action="writeToMain"
+		th:action="writeToMain"
 		method="POST"
 		id="boardWriteFrm"
 		enctype="multipart/form-data">
@@ -45,10 +45,13 @@
 				<label for="img1">
 					<img class="board-img-preview" src="">
 				</label>
-				<input type="file" name="boardImage" class="imageInput" id="img1" accept="image/*">
-				<span id="deleteImage">x</span>
+			<div>
+					<input type="file" name="boardImage" class="imageInput" id="img1" accept="image/*">
+					<span id="deleteImage">x</span>
+					<br>
 			</div>
-
+			</div>
+			<br>
 			<!-- 메인내용 -->
 			<div class="post-content">
 				<textarea name="boardContent" id="write-content" class="body-write"></textarea>
@@ -56,7 +59,6 @@
 		</div>
 
 		<!-- 글쓰기 버튼 -->
-
 		<button class="writeBtn">등록</button>
 
 

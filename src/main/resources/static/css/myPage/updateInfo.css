@@ -47,8 +47,8 @@ main {
 }
 
 .profile-img-wrapper {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%; /* 원형으로 설정 */
   overflow: hidden; /* 원형 영역을 벗어나는 이미지 잘라내기 */
   display: flex;
@@ -65,6 +65,31 @@ main {
   display: block;
 }
 
+/* #imageInput{ display: none;} */
+
+#deleteImage{
+  position: sticky;
+  top: 0px;
+  left : 60%;
+  cursor: pointer;
+}
+
+label{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  background-color: #4dc4b4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 50px;
+}
 
 .imgBtn {
   width: 50%;

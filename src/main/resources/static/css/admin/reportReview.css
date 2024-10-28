@@ -1,0 +1,328 @@
+/* @font-face {
+  font-family: 'LeeSeoyun';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{font-family: 'LeeSeoyun';} */
+
+h3 {font-family: 'NEXON Lv1 Gothic OTF';}
+
+th {font-family: 'NEXON Lv1 Gothic OTF';}
+.memberStatus-head {font-family: 'NEXON Lv1 Gothic OTF';}
+
+
+
+
+html, body, main {
+  height: 100%;
+}
+
+main{
+  display: flex;
+
+}
+
+section{  
+  /* border: 1px solid black; */
+ /* 임시 */
+  height: 100%;
+
+}
+
+
+.left-section, .right-section{
+  width: 50%;
+}
+
+.main-section {
+  width: 2000px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+h1 {
+  margin: 10px;
+}
+
+
+.none-list {
+  width: 100%;
+  height: 30px;
+  text-align: center;
+
+  color: var(--border-color);
+}
+
+.report-div {
+  width: 90%;
+  height: 40px;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  margin: 5px auto; 
+  padding: 20px;
+
+  box-shadow: 0px 1px 6px -2px var(--border-color);
+}
+
+.completed {
+  background-color: var(--border-color);
+}
+
+.report-box {
+  width: 100%;
+
+}
+
+.report-box a {
+  text-decoration-line: none;
+  color: black;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+/* 글 정렬 */
+.report-box a span {
+  text-align: center;
+}
+
+.report-box a span:nth-child(1) {
+  width: 10%;
+}
+.report-box a span:nth-child(2) {
+  width: 40%;
+}
+
+.report-box a span:nth-child(3) {
+  width: 30%;
+}
+.report-box a span:nth-child(4) {
+  width: 20%;
+}
+
+
+
+
+/* pagination-area css */
+
+.pagination{
+  margin: 20px auto;
+
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.pagination li{
+  width: 20px;
+  margin: 0 5px;
+  text-align: center;
+}
+
+.pagination a{
+  text-decoration-line: none;
+  color: black;
+
+  line-height: 24px;
+
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.pagination a:hover {
+  cursor: pointer;
+}
+
+.current {
+
+  font-weight: bold;
+  background-color: var(--main-color);
+  border-radius: 50%;
+  color: white !important;
+  letter-spacing: 0 !important;
+}
+
+
+
+
+/* pop-up  영역 */
+
+.report-detail-popup {
+  background-color: white;
+
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+
+  width: 800px;
+  position: fixed; /* 브라우저에서 위치 고정 */
+
+  /* 브라우저 정가운데 배치 */
+  margin: auto;
+  top: 150px;
+  left: 0;
+  right: 0;
+
+  padding: 15px;
+  box-shadow: 0px 5px 6px -2px var(--border-color);
+
+}
+
+#popupClose {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  display: block;
+
+  font-size: 24px;
+  color: var(--border-color);
+  line-height: 10px;
+}
+
+#popupClose:hover {
+  cursor: pointer;
+}
+
+.popup-head-area {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 0 20px;
+}
+
+.report-content-area {
+
+  width: 96%;
+  min-height: 100px;
+  
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  
+  margin: 20px auto;
+  padding: 8px;
+}
+
+
+/* 멤버 테이블*/
+
+.memberTable {
+  border-collapse: collapse;
+
+  width: 90%;
+  margin: 0 auto;
+
+}
+
+.memberTable >thead{
+  background-color: var(--main-color);
+}
+
+.memberTable tr {
+  height: 30px;
+}
+
+.memberTable td {
+  text-align: center;
+}
+
+.memberTable >thead th:first-child {
+  width: 15%;
+}
+.memberTable th:nth-child(2) {
+  width: 15%;
+}
+.memberTable th:nth-child(3) {
+  width: 30%;
+}
+.memberTable th:nth-child(4) {
+  width: 15%;
+}
+.memberTable th:nth-child(5) {
+  width: 25%;
+}
+
+
+.memberTable button {
+  width: 100%;
+  height: 30px;
+
+  background-color: white;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 30px;
+
+  transition-duration: 0.1s;
+}
+
+
+button:hover{
+  cursor: pointer;
+}
+
+button:active{
+  background-color: rgb(181, 181, 255);
+}
+
+
+
+.report-feed {
+  display: block;
+
+  width: 96%;
+  min-height: 100px;
+  
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+
+  margin: 20px auto;
+  padding: 8px;
+}
+
+.reoprt-frm-btn-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#reportFeedBtn {
+  width: 90%;
+  height: 40px;
+  margin: 0 0 10px;
+
+  color: white;
+
+  font-size: 24px;
+
+  border: none;
+  
+}
+
+.gray {
+  background-color: var(--border-color);
+}
+
+.gray:active{
+  background-color: var(--border-color);
+}
+
+.blue {
+  background-color: var(--main-color);
+}
+
+.popup-hidden {
+  display: none;
+}
+
+

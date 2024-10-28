@@ -7,6 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,14 +33,14 @@ public class RestaurantController {
 	
 	@GetMapping("view")
 	public String view(
-//			@RequestParam("restaurantNo") int restaurantNo // 받아올 매개변수
-			Model model
+			Model model,
+			@RequestParam("restaurantNo") int restaurantNo
 			) {
 		
 //		 정보 전달용 레스토랑 객체
 //		 ** 구현 예정 -> restaurantNo를 파라미터로 얻어와 조회할 것
 //									예시로 3 넣어둔것
-		RestaurantDto restaurant = service.restaurantDetail(13);
+		RestaurantDto restaurant = service.restaurantDetail(restaurantNo);
 //		List<ReviewDto> reviews = service.selectReview(13, 1); 
 		
 		
@@ -54,7 +55,7 @@ public class RestaurantController {
 	
 	
 			
-	@GetMapping("add")
+	@PostMapping("add")
 	public String add(
 //			@RequestParam("restaurantNo") int restaurnatNo, 받아올 값
 			Model model

@@ -2,245 +2,252 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>J&T</title>
-    <link rel="stylesheet" href="/css/main/main.css">
-    <link rel="stylesheet" href="/css/main/popUp.css">
-    <link rel="stylesheet" href="https://fontawesome.com/v5/icons/heart?f=classic&s=solid">
+  <title>J&T</title>
+  <link rel="stylesheet" href="/css/main/main.css">
+  <link rel="stylesheet" href="/css/main/popUp.css">
+  <link rel="stylesheet" href="https://fontawesome.com/v5/icons/heart?f=classic&s=solid">
 </head>
+
 <body>
-    <!-- Header Section -->
-    <header>
-        <div id="header-Font">
-            <a href="#">메인페이지</a>
-            <a href="#">점메추</a>
-            <a href="/notice/noticeView">공지사항</a>
-            <a href="/notice/faq">FAQ</a>
 
-            <div class="logoBox">
-                <a href="#"><img src="/images/logo.png" alt="로고" id="logoImage">
-                <img src="/images/logoText.png" alt="로고 글자" id="logoText"></a>
-            </div>
+  <!-- Header Section -->
+  <header>
+    <div id="header-Font">
+      <a href="/">메인페이지</a>
+      <a href="#">점메추</a>
+      <a href="/notice/noticeView">공지사항</a>
+      <a href="/notice/faq">FAQ</a>
 
+      <div class="logoBox">
+        <a href="#">
+          <img src="/images/logo.png" alt="로고" id="logoImage">
+          <img src="/images/logoText.png" alt="로고 글자" id="logoText">
+        </a>
+      </div>
+
+    </div>
+      <!-- 로그인이 안되어있을때 -->
+    <div class="user-actions" th:unless= "${session.loginMember}">
+      <a href="/myPage/signUp">회원 가입</a> | <a href="/myPage/loginPage">로그인</a>
+    </div>
+
+    <!-- 로그인이 되어있을경우 -->
+    <div th:if= "${session.loginMember}" class="user-actions">
+      <img th:src="${session.loginMember.profileImg ?: user }" alt="">
+      <p th:text="${session.loginMember.memberName}">유저 닉네임</p>
+      <a class="menu" href="#">
+        <i class="fa-solid fa-bars"></i>
+      </a>
+    </div>
+
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <form class="content-header" action="/search" method="GET">
+      <h1>맛집 검색 J&T ! </h1>
+
+      <div class="searchBox">
+
+        <input type="text" id="searchCode" name="searchCode">
+
+        <button id="searchBtn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+      </div>
+
+
+      <div class="filter">
+        <a class="filter-category" id="foodCategoryBtn">음식 종류</a>
+
+
+        <a class="filter-category" id="regionCategoryBtn">지역 선택</a>
+      </div>
+
+      <div>
+        <input class="tag" name="tag" readonly> </input>
+  
+        <input class="region" name="region" readonly> </input>
+      </div>
+    </form>
+
+    <!-- ------------------------------------카테고리 팝업-------------------------------------------------------- -->
+
+    <div class="foodCategoryPopUp foodCategoryPopUp-close">
+      <div class="foodCategoryPopUp-title">음식 카테고리</div>
+
+      <div class="foodCategoryPopUp-arrow">
+        <div class="foodCategoryPopUp-left">
+          <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="한식">#한식</button> </div>
+          <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="양식">#양식</button> </div>
+          <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="일식">#일식</button> </div>
+          <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="중식">#중식</button> </div>
         </div>
 
+        <div class="foodCategoryPopUp-right">
 
-        <div class="user-actions">
-
-            <a href="/myPage/signUp">회원 가입</a> | <a href="/myPage/loginPage">로그인</a>
-            <a class="menu" href="#">
-              <i class="fa-solid fa-bars"></i>
-            </a>
+          <p id="foodBtnResult">카테고리를 선택해주세요</p>
+          <div>
+            <button class="foodCategorySubmit">적용하기</button>
+            <button class="foodClosePopup">팝업 닫기</button>
+          </div>
         </div>
-    </header>
+      </div>
+    </div>
 
-    <!-- Main Content -->
-    <main>
-        <section class="content-header">
-            <h1>맛집 검색 J&T ! </h1>
 
-            <br>
+    <div class="regionCategoryPopUp regionCategoryPopUp-close">
+      <div class="regionCategoryPopUpBox">
+        <div class="regionCategoryPopUp-title">지역 설정</div>
+        <div class="regionCategoryPopUp-arrow">
 
-            <div class="searchBox">
+          <div class="regionCategoryPopUp-left">
+            <div class="regionCategoryPopUp-leftBox">
 
-                <input type="text" id="searchBar">
+                <div class="regionListBtn">혜화</div>
+                <div class="regionListBtn">명동</div>
+                <div class="regionListBtn">회현</div>
+                <div class="regionListBtn">충무로</div>
+                <div class="regionListBtn">종로5가</div>
+                <div class="regionListBtn">종로3가</div>
+                <div class="regionListBtn">광화문역</div>
+                <div class="regionListBtn">경북궁역</div>
+                <div class="regionListBtn">시청역</div>
+                <div class="regionListBtn">안국역</div>
+                <div class="regionListBtn">을지로입구</div>
+                <div class="regionListBtn">종각역</div>
 
-                <button id="searchBtn" type="submit">🍳</button>
-                
-              </div>
-
-            <br>
-            <br>
-
-            <div class="filter">
-                <a href="#" class="filter-category">음식 종류</a>
-
-                <a href="#" class="filter-category">지역 선택</a>
-
-                <a href="#" class="filter-category">정렬 방식</a>
             </div>
+          </div>
+
+
+          <div class="regionCategoryPopUp-right">
+            <p id="regionBtnResult">지역을 선택해주세요</p>
+            <div>
+              <button class="regionCategorySubmit">적용하기</button>
+              <button class="regionClosePopUp">팝업 닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <!-- ------------------------------------------------------------------------------------- 하나만 필요  -->
+
+    <section>
+
+      <div class="sectionBox">
+
+        <h3>#인기순</h3>
+        <br>
+        <section class="popular-section">
+
+          <div class="store-box" th:each="like:${listLike}">
+            <input type="hidden" th:value="${like.restaurantNo}" class="restaurantNo">
+            <div class="store-image">
+              <!-- The image will go here -->
+              <img th:src="@{like.restaurantImg1}" alt="가게 사진">
+            </div>
+            <div class="store-info">
+              <span class="store-name" th:text="${like.restaurantName}">
+              </span>
+              <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+              <button class="heartBtn" name="likeBtn">
+                <i class="far fa-heart fa-lg " style="color: #ff0000;"
+                    th:classappend="*{likeCheck == 1}? fa-solid : fa-regular"></i>
+              </button>
+            </div>
+          </div>
 
 
         </section>
+      </div>
 
+      <div class="sectionBox">
 
-<!-- ------------------------------------------------------------------------------------- 하나만 필요  -->        
-    
-        <div class="sectionBox">
+        <h3>#최신등록순</h3>
+        <br>
+        <section class="popular-section">
 
-          <th:block th:text="${session.loginMember}"></th:block>
-
-            <h3>#인기순</h3>
-            <br>
-            <section class="popular-section">
-
-                    <div class="store-box" onclick="">
-                        <div class="store-image">
-                          <!-- The image will go here -->
-                          <img src="../html/images/샘플.jpg" alt="가게 사진">
-                        </div>
-                        <div class="store-info">
-                          <span class="store-name">떡볶이 엄청나</span>
-                          <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
-                          <button class="heartBtn">
-                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
-                          </button>
-                        </div>
-                      </div>
-
-
-                    <div class="store-box">
-                        <div class="store-image">
-                          <!-- The image will go here -->
-                          <img src="../html/images/샘플1.jpg" alt="가게 사진">
-                        </div>
-                        <div class="store-info">
-                          <span class="store-name">떡볶이 엄청나</span>
-                          <button class="heartBtn">
-                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
-                          </button>
-                        </div>
-                      </div>
-
-
-                    <div class="store-box">
-                        <div class="store-image">
-                          <!-- The image will go here -->
-                          <img src="../html/images/샘플3.jpg" alt="가게 사진">
-                        </div>
-                        <div class="store-info">
-                          <span class="store-name">떡볶이 엄청나</span>
-                          <button class="heartBtn">
-                            <i class="fas fa-heart fa-lg" style="color: #ff0000;"></i>
-                          </button>
-                        </div>
-                      </div>
-                </div>
-            </section>
-        </div>
-        <div class="sectionBox">
-
-            <h3>#인기순</h3>
-            <br>
-            <section class="popular-section">
-
-                    <div class="store-box">
-                        <div class="store-image">
-                          <!-- The image will go here -->
-                          <img src="../html/images/샘플.jpg" alt="가게 사진">
-                        </div>
-                        <div class="store-info">
-                          <span class="store-name">떡볶이 엄청나</span>
-                          <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
-                          <button class="heartBtn">
-                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
-                          </button>
-                        </div>
-                      </div>
-
-
-                    <div class="store-box">
-                        <div class="store-image">
-                          <!-- The image will go here -->
-                          <img src="../html/images/샘플1.jpg" alt="가게 사진">
-                        </div>
-                        <div class="store-info">
-                          <span class="store-name">떡볶이 엄청나</span>
-                          <button class="heartBtn">
-                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
-                          </button>
-                        </div>
-                      </div>
-
-
-                    <div class="store-box">
-                        <div class="store-image">
-                          <!-- The image will go here -->
-                          <img src="../html/images/샘플3.jpg" alt="가게 사진">
-                        </div>
-                        <div class="store-info">
-                          <span class="store-name">떡볶이 엄청나</span>
-                          <button class="heartBtn">
-                            <i class="fas fa-heart fa-lg" style="color: #ff0000;"></i>
-                          </button>
-                        </div>
-                      </div>
-                </div>
-            </section>
-        </div>
-        <div class="sectionBox">
-
-            <h3>#인기순</h3>
-            <br>
-            <section class="popular-section">
-
-                    <div class="store-box">
-                        <div class="store-image">
-                          <!-- The image will go here -->
-                          <img src="../html/images/샘플.jpg" alt="가게 사진">
-                        </div>
-                        <div class="store-info">
-                          <span class="store-name">떡볶이 엄청나</span>
-                          <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
-                          <button class="heartBtn">
-                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
-                          </button>
-                        </div>
-                      </div>
-
-
-                    <div class="store-box">
-                        <div class="store-image">
-                          <!-- The image will go here -->
-                          <img src="../html/images/샘플1.jpg" alt="가게 사진">
-                        </div>
-                        <div class="store-info">
-                          <span class="store-name">떡볶이 엄청나</span>
-                          <button class="heartBtn">
-                            <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
-                          </button>
-                        </div>
-                      </div>
-
-
-                    <div class="store-box">
-                        <div class="store-image">
-                          <!-- The image will go here -->
-                          <img src="../html/images/샘플3.jpg" alt="가게 사진">
-                        </div>
-                        <div class="store-info">
-                          <span class="store-name">떡볶이 엄청나</span>
-                          <button class="heartBtn">
-                            <i class="fas fa-heart fa-lg" style="color: #ff0000;"></i>
-                          </button>
-                        </div>
-                      </div>
-                </div>
-            </section>
-        </div>
-        <!-- -------------------------------------------------------------------------------------    밑에 샘플 -->    
-
-              
-          <!-- --------------------------------------- side --> 
-            <div class="menu-container">
-              <div class="profile-img">
-                <img src="../html/images/샘플.jpg" alt="profile">
-              </div>
-              
-              
-              <p class="sideP">김성민</p>
-              
-              <nav>
-                <a href="/myPage/myPage" id="myPage" class="sideItem">마이 페이지</a> <!-- 마이페이지 링크 추가 -->
-                <a href="#" class="sideItem">메인 페이지</a>
-                <a href="#" class="sideItem">점메추 게시판</a>
-                <a href="#" class="sideItem">공지 사항</a>
-                <a href="#" class="sideItem">FAQ</a>
-              </nav>
+          <div class="store-box" th:each="current:${listCurrent}">
+            <input type="hidden" th:value="${current.restaurantNo}" class="restaurantNo">
+            <div class="store-image">
+              <!-- The image will go here -->
+              <img th:src="@{current.restaurantImg1}" alt="가게 사진">
             </div>
-      <!-- --------------------------------------- -->
+            <div class="store-info">
+              <span class="store-name" th:text="${current.restaurantName}">
+
+              </span>
+              <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+              <button class="heartBtn" name="likeBtn">
+                <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+              </button>
+            </div>
+          </div>
+
+
+        </section>
+      </div>
+
+      <div class="sectionBox">
+
+        <h3>#리뷰 많은 순</h3>
+        <br>
+        <section class="popular-section">
+
+          <div class="store-box" th:each="review:${review}">
+            <input type="hidden" th:value="${review.restaurantNo}" class="restaurantNo">
+            <div class="store-image">
+              <!-- The image will go here -->
+              <img th:src="@{review.restaurantImg1}" alt="가게 사진">
+            </div>
+            <div class="store-info">
+              <span class="store-name" th:text="${review.restaurantName}">
+
+              </span>
+              <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+              <button class="heartBtn" name="likeBtn">
+                <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+              </button>
+            </div>
+          </div>
+
+
+        </section>
+      </div>
+
+
+    </section>
+
+    <!-- -------------------------------------------------------------------------------------    밑에 샘플 -->
+
+
+    <!-- --------------------------------------- side -->
+    <div class="menu-container" th:if="${session.loginMember}">
+      <div class="profile-img">
+        <img src="${session.loginMember.profileImg ?: user }" alt="profile">
+      </div>
+
+
+      <p class="sideP" th:text="${session.loginMember.memberName}"></p>
+
+      <nav>
+        <a href="/myPage/myPage" id="myPage" class="sideItem">마이 페이지</a> <!-- 마이페이지 링크 추가 -->
+        <a href="#" class="sideItem">메인 페이지</a>
+        <a href="#" class="sideItem">점메추 게시판</a>
+        <a href="#" class="sideItem">공지 사항</a>
+        <a href="#" class="sideItem">FAQ</a>
+      </nav>
+    </div>
+    <!-- --------------------------------------- -->
 
 
 
@@ -253,12 +260,18 @@
 
     <!-- Floating Buttons -->
     <div class="floating-buttons">
-        <a class="scroll-top" href="#">⬆</a>
+      <a class="scroll-top" href="#">⬆</a>
     </div>
 
-      </main>
+  </main>
 
-      <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
-      <script src="/js/main/main.js"> </script>
+  <script th:inline="javascript">
+        // 로그인 되어있으면 true, 아니면 false
+        const loginCheck = /*[[${session.loginMember != null}]]*/ false;
+  </script>
+
+  <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
+  <script src="/js/main/main.js"> </script>
 </body>
+
 </html>

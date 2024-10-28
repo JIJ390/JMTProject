@@ -8,7 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.kh.jmt.admin.dto.Pagination;
+import edu.kh.jmt.admin.dto.AdminPagination;
 import edu.kh.jmt.admin.mapper.AdminMemberMapper;
 import edu.kh.jmt.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +34,9 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 //		log.debug("count : {}", searchCount);
 		
 		// 페이지네이션 객체 생성
-		Pagination pagination = new Pagination(cp, searchCount);
+		AdminPagination adminPagination = new AdminPagination(cp, searchCount);
 		
-		int limit = pagination.getLimit();  // limit  : 한 페이지에 보여질 게시글의 최대 개수
+		int limit = adminPagination.getLimit();  // limit  : 한 페이지에 보여질 게시글의 최대 개수
 		int offset = (cp - 1) * limit;			// offset : 몇 개의 게시글을 건너뛰고 조회할 건지에 대한 값
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
@@ -45,7 +45,7 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put(("memberList"), memberList);
-		map.put(("pagination"), pagination);		
+		map.put(("pagination"), adminPagination);		
 		
 		return map;
 	}
@@ -68,6 +68,13 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	@Override
 	public int changeMemberSecession(int memberNo) {
 		return mapper.changeMemberSecession(memberNo);
+	}
+	
+	// 회원 차단 기능
+	@Override
+	public int memberBlock(int memberNo) {
+		
+		return mapper.memberBlock(memberNo);
 	}
 	
 	

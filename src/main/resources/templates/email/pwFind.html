@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 메일은 header 불필요 -->
+
+<body>
+
+  <div>
+
+    <!-- Content-ID로 등록된 이미지 중 logo를 출력 -->
+    <div style="text-align: center;">
+      <img src="cid:logo" width="200px">
+    </div>
+
+    <h3 style="text-align: center;">
+      아래 발급된 인증 번호를 제한 시간 내에
+      <br>
+      비밀번호 찾기 화면에 입력 후 인증 버튼을 눌러주세요.
+    </h3>
+
+    <div style="text-align: center; color:rgb(0, 0, 0);">
+      <h3 style="display: inline-block;  border: 3px solid black; width: 400px; padding:10px;">
+        <th:block th:text="${authKey}">ssssss</th:block>
+      </h3>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.jmt.restaurant.mapper.MainSearchMapper">
+
+<select id="searchResult">
+
+	SELECT 
+	   RESTAURANT_NO, 
+	   RESTAURANT_NAME,
+	   RESTAURANT_TEL,
+	   RESTAURANT_ADDRESS,
+	   RESTAURANT_IMG1,
+	   LOCATION_NAME,
+	   CATEGORY_NAME,
+	   (SELECT COUNT(*)   
+	    FROM REVIEW
+	    WHERE RESTAURANT_NO = R.RESTAURANT_NO) AS REVIEW_COUNT, 
+	   (SELECT COUNT(*)   
+	    FROM REVIEW
+	    WHERE LIKE_FL = 'Y'
+	    AND RESTAURANT_NO = R.RESTAURANT_NO) AS LIKE_COUNT,
+	    ROUND(NVL(    
+          (SELECT COUNT(*)
+          FROM REVIEW
+          WHERE LIKE_FL = 'Y'
+          AND RESTAURANT_NO = R.RESTAURANT_NO) /   
+          NULLIF(     
+                    (SELECT COUNT(*)
+                   FROM REVIEW
+                    WHERE RESTAURANT_NO = R.RESTAURANT_NO), 0), 0
+	    ) * 100 )AS "LIKE_PERCENT"  
+	FROM RESTAURANT r
+	JOIN LOCATION USING (LOCATION_NO)
+	JOIN CATEGORY USING (CATEGORY_NO)
+	WHERE RESTAURANT_DEL_FL = 'N'
+	<!-- 지역, 음식 카테고리만 했을 경우  -->
+	<if test="region != '' and tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 지역만 조회 -->
+	<if test="region != ''">
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 음식만 조회 -->
+	<if test="tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	</if>
+
+	<!-- 검색 결과만 한 결과 -->
+		<if test="searchCode != ''">
+		AND (RESTAURANT_NAME LIKE '%' || #{searchCode} || '%'
+			OR LOCATION_NAME LIKE '%' || #{searchCode} || '%'
+			OR CATEGORY_NAME LIKE '%' || #{searchCode} || '%')	
+		</if>
+	GROUP BY R.RESTAURANT_NO, RESTAURANT_IMG1,RESTAURANT_ADDRESS,RESTAURANT_TEL,R.RESTAURANT_NAME, LOCATION_NAME,   CATEGORY_NAME, RESTAURANT_IMG1
+	ORDER BY REVIEW_COUNT DESC
+</select>
+
+
+
+
+	
+</mapper>

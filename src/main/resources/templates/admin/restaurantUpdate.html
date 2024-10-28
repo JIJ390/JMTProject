@@ -18,31 +18,28 @@
       
       <div class="restaurant-regist-box">
 
-        <h1>가게 등록</h1>
+        <h1>가게 수정</h1>
 
         <form method="POST" 
               action="update" 
-              id="restaurantResistFrm" 
-              enctype="multipart/form-data">
+              id="restaurantUpdateFrm" 
+              enctype="multipart/form-data"
+              th:object="${restaurant}">
 
           <div class="img-area">
 
             <div class="restaurantImg">
               <label for="img1">
-                +
-                <img class="preview" th:src="">
+                <img class="preview" th:src="*{restaurantImg1}">
               </label>
               <input type="file" name="restaurantImages" class="inputImage" id="img1" accept="image/*">
-              <span class="delete-image">&times;</span>
             </div>
 
             <div class="restaurantImg">
               <label for="img2">
-                +
-                <img class="preview" src="">
+                <img class="preview" th:src="*{restaurantImg2}">
               </label>
               <input type="file" name="restaurantImages" class="inputImage" id="img2" accept="image/*">
-              <span class="delete-image">&times;</span>
             </div>
 
           </div>
@@ -51,7 +48,7 @@
 
             <h3># 가게 이름</h3>
             <label for="restaurantName"></label>
-            <input type="text" name="restaurantName" id="restaurantName" placeholder="가게 이름" value="">
+            <input type="text" name="restaurantName" id="restaurantName" placeholder="가게 이름" th:value="*{restaurantName}">
 
 
             <br><br>
@@ -59,8 +56,8 @@
             <h3># 카테고리 선택</h3>
 
             <div class="inputChoose" >
-              <th:block th:each= "category:${categoryList}">
-                <input type="radio" name="categoryNo"  th:value="${category.categoryNo}"  th:id="'category' + ${category.categoryNo}" >
+              <th:block th:each= "category:${categoryList}">         <!-- 타임리프 필드와 value 가 일치하면 체크된 상태로 forwerd -->
+                <input type="radio" name="categoryNo"  th:value="${category.categoryNo}"  th:id="'category' + ${category.categoryNo}" th:field="*{categoryNo}">
                 <label th:for="'category' + ${category.categoryNo}" th:text="${category.categoryName}"></label>
               </th:block>
             </div>
@@ -69,7 +66,7 @@
 
             <div class="inputChoose" >
               <th:block th:each= "location:${locationList}">
-                <input type="radio" name="locationNo"  th:value="${location.locationNo}"  th:id="'location' + ${location.locationNo}" >
+                <input type="radio" name="locationNo"  th:value="${location.locationNo}"  th:id="'location' + ${location.locationNo}" th:field="*{locationNo}">
                 <label th:for="'location' + ${location.locationNo}" th:text="${location.locationName}"></label>
               </th:block>
             </div>
@@ -87,23 +84,17 @@
                   <th>가격</th>
                 </tr>
               </thead>
-              <tbody class="menuTable-body">
-                <tr>  <!-- dto를 따로 만들어야 하는건가 여러가지 동시 insert -->
-                  <td><input type="text" name="menuName" placeholder="음식 이름을 입력해 주세요"></td>
-                  <td><input type="text" name="menuPrice" placeholder="가격을 입력해주세요" ></td>
-                </tr>
-                
-                <tr>  
-                  <td><input type="text" name="menuName" placeholder="음식 이름을 입력해 주세요"></td>
-                  <td><input type="text" name="menuPrice" placeholder="가격을 입력해주세요" ></td>
-
+              <tbody class="menuTable-body" >
+                <tr th:each= "menu:${menuList}">  <!-- dto를 따로 만들어야 하는건가 여러가지 동시 insert -->
+                  <td><input type="text" name="menuName" placeholder="음식 이름을 입력해 주세요" th:value="${menu.menuName}"></td>
+                  <td><input type="text" name="menuPrice" placeholder="가격을 입력해주세요" th:value="${menu.menuPrice}" ></td>
                 </tr>
 
               </tbody>
             </table>
 
             <h3># 전화번호 입력</h3>
-            <input type="text" name="restaurantTel"  placeholder="전화 번호('-' 제외하고 입력)" value="">
+            <input type="text" name="restaurantTel" placeholder="전화 번호('-' 제외하고 입력)" th:value="*{restaurantTel}">
 
             <h3># 주소 입력</h3>
 
@@ -129,13 +120,12 @@
               </div>
             </div>
 
-            <button class="registBtn">가게 등록</button>
+            <input type="hidden" name="restaurantNo" th:value="*{restaurantNo}">
+
+            <button class="registBtn">가게 수정</button>
           </div>
 
-
-
         </form>
-
 
 
       </div>
@@ -145,7 +135,7 @@
 
 
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script src="/js/admin/restaurantRegist.js"></script>
+  <script src="/js/admin/restaurantUpdate.js"></script>
 
 
 </body>

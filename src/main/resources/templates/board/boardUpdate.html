@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BoardWrite</title>
+
+	<link rel="stylesheet" href="/css/board/boardWrite.css">
+	<link rel="stylesheet" href="/css/common/header.css">
+</head>
+
+<th:block th:replace="~{common/header}"></th:block>
+
+<body>
+
+
+	<br><br>
+	<!-- 검색바 -->
+	<form class="search-container">
+		<div>
+			<input type="text" placeholder="　검색">
+			<i class="fa-solid fa-magnifying-glass"></i>
+		</div>
+	</form>
+
+	<!-- 게시글 리스트 -->
+	<form class="post-container" 
+		th:action="update"
+		method="POST"
+		id="boardWriteFrm"
+		enctype="multipart/form-data">
+    <!-- 제목 -->
+		<div class="post">
+			<div class="post-header">
+				<div class="post-title">
+					<textarea name="boardTitle" id="" class="title-write" placeholder="제목"
+                    th:text="${board.boardTitle}"></textarea>
+                    <!-- 보드타이틀 디폴트값 -->
+				</div>
+			</div>
+
+			<input type="hidden" name="boardNo" th:value="${board.boardNo}">
+			<hr>
+			<!-- 이미지 -->
+			<br>
+			<div class="boardImg">
+				<label for="img1">
+					<img class="board-img-preview" th:src="${board.boardImg}">
+				</label>
+			<div>
+					<input type="file" name="boardImage" class="imageInput" id="img1" accept="image/*">
+					<span id="deleteImage">x</span>
+					<br>
+			</div>
+			</div>
+			<br>
+			<!-- 메인내용 -->
+			<div class="post-content">
+				<textarea name="boardContent" id="write-content" class="body-write"
+                  th:text="${board.boardContent}">게시글 내용</textarea>
+			</div>
+		</div>
+
+		<!-- 글쓰기 버튼 -->
+
+		<button type="submit" class="writeBtn">등록</button>
+
+
+
+		<!-- 상단으로 이동 버튼 -->
+		
+	</form>
+	<button class="fa-solid fa-arrow-up" id="topBtn"></button>
+
+
+
+	<script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
+	<script src="/js/board/boardWrite.js"></script>
+</body>
+
+</html>

@@ -26,20 +26,46 @@
 		)
 	</insert>
 	
-	
+	<!-- 화면출력 -->
 	<select id="boardMain" resultType="Board">
 		SELECT
 			*
 		FROM
 			"BOARD"
+		WHERE BOARD_DEL_FL = 'N'
 		ORDER BY BOARD_NO DESC
 	</select>
 
+	<!-- 게시글 삭제 -->
+	<insert id="boardDelete">
+		UPDATE "BOARD"
+		SET
+			BOARD_DEL_FL = DECODE(BOARD_DEL_FL, 'Y', 'N', 'Y')
+		WHERE
+			"BOARD_NO" = #{boardNo}
+	</insert>
 
+	<!-- 게시글 수정 -->
+	<select id="updateView" resultType="Board">
+		SELECT
+			*
+		FROM
+			"BOARD"
+		WHERE BOARD_NO = #{boardNo}
+	
+	</select>
 
-
-
-
+  	<!-- 게시글부분만 수정(제목/내용) -->
+  	<update id="boardUpdate" >
+  		UPDATE
+  			"BOARD"
+		SET
+			BOARD_TITLE = #{boardTitle},
+			BOARD_CONTENT = #{boardContent},
+			BOARD_IMG = #{boardImg}
+  		WHERE
+  			BOARD_NO = #{boardNo}
+  	</update>
 
 
 	

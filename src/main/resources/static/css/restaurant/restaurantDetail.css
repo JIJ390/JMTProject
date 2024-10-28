@@ -2,6 +2,9 @@
   box-sizing: border-box;
 }
 
+
+* {font-family: 'NEXON Lv1 Gothic OTF';}
+
 html,
 body {
   background-color: rgb(241, 241, 241);
@@ -155,7 +158,7 @@ body {
   justify-content: space-between;
 }
 
-.reviewT > b{
+.reviewT>b {
   font-size: 30px;
 }
 
@@ -293,7 +296,6 @@ body {
   width: 20%;
   height: 50px;
 
-  margin-left: 200px;
   font-size: 20px;
   color: rgb(0, 0, 0);
   background-color: white;
@@ -308,7 +310,6 @@ body {
   height: 50px;
   font-size: 20px;
 
-  margin-left: 200px;
   border-radius: 10px;
   color: white;
   background-color: rgb(66, 170, 161);
@@ -327,5 +328,52 @@ body {
 .map2 {
   width: 100%;
   height: 300px;
+
+}
+
+.popup {
+  position: absolute;
+  width: 100px;
+  height: 80px;
+  background-color: white;
+  padding: 12px;
+  border: 1px solid gray;
+}
+
+.popupReview {
+  position: absolute;
+  width: 100px;
+  height: 80px;
+  background-color: white;
+  padding: 12px;
+  border: 1px solid gray;
+}
+
+.ud {
+
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+}
+
+.ud > button{
+  width: 100%;
+  height: 40%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-right: 20px;
+}
+
+.ud > button:hover{
+  width: 100%;
+  height: 40%;
+  border-radius: 10px;  
+
+  color: white;
+  background-color: rgb(66, 170, 161);
+  border: 1px solid rgb(192, 192, 192);
+
+  transition: all 0.2s;
 
 }

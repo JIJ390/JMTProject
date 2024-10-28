@@ -1,5 +1,7 @@
 package edu.kh.jmt.myPage.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import edu.kh.jmt.myPage.dto.Member;
 
 public interface MyPageService{
@@ -39,6 +41,10 @@ public interface MyPageService{
 	 */
 	int passwordChange(String currentPw, String newPw, Member loginMember);
 
+	/** 비밀번호 찾기
+	 * @param inputEmail
+	 * @return
+	 */
 	
 	/** 회원 탈퇴 기능
 	 * @param memberPw
@@ -47,10 +53,13 @@ public interface MyPageService{
 	 */
 	int withdrawal(String memberPw, Member loginMember);
 
-	/** 이름 수정
+	/** 이름/이미지 변경
 	 * @param inputMember
 	 * @return result
 	 */
-	int updateInfo(Member inputMember);
+	String updateInfo(Member inputMember, MultipartFile profileImg);
+
+
+
 
 }

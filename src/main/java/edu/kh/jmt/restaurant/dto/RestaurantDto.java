@@ -18,7 +18,7 @@ import lombok.ToString;
 public class RestaurantDto {
 	private int restaurantNo;
 	private String restaurantName;
-	private String restaurantAddress;
+	private String restaurantAddress; 
 	private String restaurantTel;
 	private String restaurantImg1;
 	private String restaurantImg2;
@@ -32,4 +32,8 @@ public class RestaurantDto {
 	
 	// resultMap으로 해당 가게 메뉴 조회
 	private List<MenuDto> menuList;
+	
+	
+	// 좋아요 백분율 지수
+	private String likePercent;
 }

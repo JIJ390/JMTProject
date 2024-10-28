@@ -63,6 +63,25 @@ public interface AdminRestaurantService {
 	 * @return
 	 */
 	int restaurantDelete(int restaurantNo);
+
+	/**
+	 * 가게 수정용 조회
+	 * @param restaurantNo
+	 * @return
+	 */
+	Map<String, Object> restaurantUpdateView(int restaurantNo);
+
+	
+	/**
+	 * 가게 정보 수정
+	 * @param restaurant
+	 * @param restaurantImages
+	 * @param menuNameList
+	 * @param menuPriceList
+	 * @return
+	 */
+	int restaurantUpdate(Restaurant restaurant, List<MultipartFile> restaurantImages, List<String> menuNameList,
+	    List<String> menuPriceList);
 	
 	
 	
