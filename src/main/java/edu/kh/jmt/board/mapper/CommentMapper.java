@@ -16,6 +16,12 @@ public interface CommentMapper {
 	 */
 	List<Comment> selectCommentList(int boardNo);
 
+	/** 댓글등록
+	 * @param comment
+	 * @return
+	 */
+	int commentInsert(Comment comment);
+
 	
 	
 }

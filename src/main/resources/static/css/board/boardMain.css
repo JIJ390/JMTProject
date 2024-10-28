@@ -90,8 +90,12 @@
   font-weight: bold;
 }
 
-.post-time {
+.post-name {
   margin-left: auto;
+  color: gray;
+  font-size: 12px;
+}
+.post-time {
   color: gray;
   font-size: 12px;
 }
@@ -198,7 +202,8 @@
 .comment-post-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  height: 50px;
+  gap: 15px;
 }
 
 /* 댓글 수정 ★★ margin-left : auto 로 가능!*/
@@ -245,9 +250,87 @@
 }
 
 /* 댓글작성 스타일 */
-.commentBtn {
+.commentBtn-write {
   background-color: #6EC3C2;
-  width: 15%;
+  width: 8%;
+  height: 40%;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+
+/***************************************************************/
+
+/* 댓글 post */
+.comment-child {
+  background-color: #6EC3C2;
+  border: none;
+  padding: 10px 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+  margin-left: auto;
+}
+
+
+
+.comment-child:hover{
+  background-color: white;
+  color : #6EC3C2;
+  border: 2px solid #6EC3C2;
+  
+}
+
+/* 댓글 post */
+.comment-update {
+  background-color: #6EC3C2;
+  border: none;
+  padding: 10px 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+}
+.comment-update:hover{
+  background-color: white;
+  color : #6EC3C2;
+  border: 2px solid #6EC3C2;
+  
+}
+
+/* 댓글 post */
+.comment-delete {
+  background-color: #6EC3C2;
+  border: none;
+  padding: 10px 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+
+.comment-delete:hover{
+  background-color: white;
+  color : #6EC3C2;
+  border: 2px solid #6EC3C2;
+  
+}
+
+/***************************************************************/
+
+.commentBtn:hover{
+  background-color: white;
+  color : #6EC3C2;
+  border: 2px solid #6EC3C2;
+  
+}
+/* 댓글작성 스타일 */
+.commentBtn-picture {
+  background-color: #6EC3C2;
+  width: 8%;
   height: 40%;
   border: none;
   padding: 10px 20px;
@@ -255,13 +338,6 @@
   border-radius: 20px;
   cursor: pointer;
   font-size: 10px;
-}
-
-.commentBtn:hover{
-  background-color: white;
-  color : #6EC3C2;
-  border: 2px solid #6EC3C2;
-  
 }
 
 .textarea-main{

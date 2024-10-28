@@ -1,22 +1,38 @@
+
+
+
+
+
 <th:block th:each= "comment:${commentList}">
-  <hr><br>
+
+  <input type="hidden" class="getBoardNo" th:value="${comment.boardNo}">
+
   <div class="comment-post-header">
+    
     <img class="profile-pic" th:src="${comment.profileImg}"></img>
     <div class="comment-id" th:text="${comment.memberName}">사용자</div>
     <div class="comment-context" th:text="${comment.commentContent}">댓글내용</div>
-    <div><button class="comment-child">답글</button></div>
-    <div><button class="comment-update">수정</button></div>
-    <div><button class="comment-delete">삭제</button></div>
+    <button class="comment-child">답글</button>
+    <button class="comment-update">수정</button>
+    <button class="comment-delete">삭제</button>
   </div>
   <br>
 </th:block>
 
+<!-- <div class="comment-post-header">
+  <img class="profile-pic"></img>
+  <div class="comment-id">사용자</div>
+  <div class="comment-context">댓글내용</div>
+  <div><button class="comment-child">답글</button></div>
+  <div><button class="comment-update">수정</button></div>
+  <div><button class="comment-delete">삭제</button></div>
+</div> -->
+
 
 <!-- 댓글 작성 부분 -->
   <div class="textarea-main">
-    <textarea name="commentBtn" id="co" class="comment-write" placeholder="댓글 입력">
-    </textarea>
+    <textarea name="commentBtn" id="co" class="comment-write" placeholder="댓글 입력"></textarea>
     <!-- <div style="color: gray;" class="commnetBtn">댓글<br>작성</div> -->
-     <button class="commentBtn">작성</button>
-     <button class="commentBtn">사진</button>
+     <button class="commentBtn-write" id="addComment">작성</button>
+     <button class="commentBtn-picture">사진</button>
   </div>
