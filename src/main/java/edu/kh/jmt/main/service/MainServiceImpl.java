@@ -22,18 +22,18 @@ public class MainServiceImpl implements MainService{
 
 //인기순 SQL
 	@Override
-	public List<RestaurantDto> listLike(int memberNo){
-		return mapper.listLike(memberNo);
+	public List<RestaurantDto> listLike(){
+		return mapper.listLike();
 	}
 	
 	// 최신순
 	@Override
-	public List<RestaurantDto> listCurrent(int memberNo) {
-		return mapper.listCurrent(memberNo);
+	public List<RestaurantDto> listCurrent() {
+		return mapper.listCurrent();
 	}
 	@Override
-	public List<RestaurantDto> listReview(int memberNo) {
-		return mapper.listReview(memberNo);
+	public List<RestaurantDto> listReview() {
+		return mapper.listReview();
 	}
 	
 	
@@ -52,15 +52,14 @@ public class MainServiceImpl implements MainService{
 		int result2 = 0;
 		
 		if(result == 1) {
-			//좋아요 지워짐
 			result2 = mapper.deleteLike(memberNo,restaurantNo);
 		}else {
-			//좋아요 생김
 			result2 = mapper.insertLike(memberNo,restaurantNo);
 		}
+
+		System.out.printf("result 값 확인하기 긱기ㅣ기기기기기기기기긱기기ㅣ기ㅣㄱ : : :: : : : : %d", result);
+		
 		
 		return result;
 	}
-		
-	
 }

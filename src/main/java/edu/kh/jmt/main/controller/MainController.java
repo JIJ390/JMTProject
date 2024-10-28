@@ -24,29 +24,29 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 
 public class MainController {
-
-	// 메인페이지 열면서 메인페이지 값 출력할거 가져오기
+	
+	
+	//메인페이지 열면서 메인페이지 값 출력할거 가져오기
 	private final MainService service;
 
-	@RequestMapping("/")
+		@RequestMapping("/")
 		public String main(
-				@SessionAttribute(value = "loginMember", required=false) Member loginMember,
 				Model model
 				) {
 
-			int memberNo =  loginMember == null ? 0 : loginMember.getMemberNo();
 			
-			// 좋아요 순서 / 인기순
-			List<RestaurantDto> listLike = service.listLike(memberNo);
+			// 좋아요 순서
+			List<RestaurantDto> listLike = service.listLike();
 			//최신순
-			List<RestaurantDto> listCurrent= service.listCurrent(memberNo);
+			List<RestaurantDto> listCurrent= service.listCurrent();
 			//리뷰 많은 슌
-			List<RestaurantDto> review= service.listReview(memberNo);
+			List<RestaurantDto> review= service.listReview();
 			
 			
 			
@@ -59,20 +59,21 @@ public class MainController {
 
 		}
 
-	// 메인 찜하기 표시하기
-	@ResponseBody
+		
+		
+		//메인 찜하기 표시하기
+		@ResponseBody
 		@PostMapping("/like")
 		public int storeLike(
 				@RequestBody int restaurantNo1,
 				@SessionAttribute("loginMember") Member loginMember
-				
 				) {
 			int memberNo = loginMember.getMemberNo();
-			
 			
 
 			return service.storeLike(memberNo,restaurantNo1);
 		}
+		
 		
 		
 

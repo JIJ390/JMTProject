@@ -315,10 +315,9 @@ public class AdminRestaurantServiceImpl implements AdminRestaurantService{
 				e.printStackTrace();
 				throw new Error("가게 정보 수정 실패");
 			}
+			
 
 		return result3;
 		
 	}
-	
-
 }

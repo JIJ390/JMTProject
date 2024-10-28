@@ -31,7 +31,7 @@ public class CategoryInterceptor implements HandlerInterceptor{
 		// 조회 결과를 request scope 에 세팅
 		request.setAttribute("categoryList", categoryList);
 		
-//		log.debug(categoryList.toString());
+		log.debug(categoryList.toString());
 		
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 	}

@@ -82,8 +82,6 @@ public interface AdminRestaurantService {
 	 */
 	int restaurantUpdate(Restaurant restaurant, List<MultipartFile> restaurantImages, List<String> menuNameList,
 	    List<String> menuPriceList);
-
-
 	
 	
 	
