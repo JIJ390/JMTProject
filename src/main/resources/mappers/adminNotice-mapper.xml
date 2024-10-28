@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.jmt.admin.mapper.AdminNoticeMapper">
+
+	<!-- 삭제되지 않은 공지사항 게시글 수 조회 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM "NOTICE"
+		WHERE NOTICE_DEL_FL = 'N'
+	</select>
+
+	<!-- 공지 사항 목록 확인 -->
+	<select id="selectNoticeList">
+		SELECT
+			NOTICE_NO,
+			ROW_NUMBER() OVER (ORDER BY NOTICE_NO ASC) "RNUM",
+			NOTICE_TITLE,
+			NOTICE_CATEGORY,
+			NOTICE_WRITE_DATE
+		FROM NOTICE
+		WHERE NOTICE_NO > 0
+		AND   NOTICE_DEL_FL = 'N'
+		ORDER BY NOTICE_NO DESC
+	</select>
+	
+
+	<!-- 삭제 처리 -->
+	<update id="deleteNotice">
+		UPDATE NOTICE
+		SET
+			NOTICE_DEL_FL = 'Y'
+		WHERE 
+			NOTICE_NO = #{noticeNo}
+	</update>
+	
+	<!-- 공지 등록 -->
+	<insert id="insertNotice">
+		INSERT INTO "NOTICE"
+		VALUES (
+			SEQ_NOTICE_NO.NEXTVAL,
+			#{noticeTitle}
+			#{noticeContent},
+			DEFAULT,
+			'N',
+			0,
+			#{noticeCategory}
+		)
+
+	
+	</insert>
+  	
+</mapper>

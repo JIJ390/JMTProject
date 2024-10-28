@@ -134,11 +134,15 @@ const selectReportReview = (url) => {
     const reportMemberName = document.querySelector("#reportMemberName");
     const reportDate = document.querySelector("#reportDate");
     const reportContent = document.querySelector("#reportContent");
+    const reviewLink = document.querySelector("#reviewLink");
+
+    reviewLink.href = `/restaurant/view?restaurantNo=${reportReview.restaurantNo}`;
 
     reportTypeName.innerText = reportReview.reportTypeName;
     reportReviewNo.innerText = `# ${reportReview.reportReviewNo}`;
     reportMemberName.innerText = `${reportReview.memberName} | `;
     reportDate.innerText = reportReview.reportReviewDate;
+
 
     reportContent.innerText = reportReview.reportReviewContent;
 

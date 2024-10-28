@@ -24,6 +24,9 @@ public class ReportReview {
 	private String reviewDelFl;
 	
 	
+	// 신고 대상 리뷰 가게 번호
+	private int	restaurantNo;
+	
 	// 신고 대상 리뷰를 쓴 작성자 번호
 	private int reviewMemberNo;
 	
