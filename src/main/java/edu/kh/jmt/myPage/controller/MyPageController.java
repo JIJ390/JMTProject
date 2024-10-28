@@ -214,13 +214,6 @@ public class MyPageController {
 	}
 	
 	
-	/** 비밀번호 찾기
-	 * @param memberNo
-	 * @return
-	 */
-	
-	
-	
 	/** 마이페이지 페이지 호출
 	 * @return
 	 */
@@ -282,7 +275,7 @@ public class MyPageController {
 		return "myPage/updateInfo";
 	}
 	
-	/** 이름/이미지 변경
+	/** 이름/프로필 이미지 수정
 	 * @param inputMember : 수정할 이름 주소
 	 * @param loginMember : 현재 로그인된 회원 정보
 	 * @param ra
@@ -292,27 +285,19 @@ public class MyPageController {
 	public String updateInfo(
 			@RequestParam("updateProfileImg") MultipartFile profileImg,
 			@ModelAttribute Member inputMember,
-			@SessionAttribute ("loginMember") Member loginMember,
-			RedirectAttributes ra) {
+			@SessionAttribute ("loginMember") Member loginMember) {
 		
 		int memberNo = loginMember.getMemberNo();
 		inputMember.setMemberNo(memberNo);
 		
 		String filePath = service.updateInfo(inputMember, profileImg);
 		
-			// DB, Session에 저장된 프로필 이미지 정보 동기화
-			loginMember.setProfileImg(filePath);
+		// DB, Session에 저장된 프로필 이미지 정보 동기화
+		loginMember.setProfileImg(filePath);
+		
 		
 		// 세션에 이름 동기화
 		loginMember.setMemberName(inputMember.getMemberName());;
-		
-		String message = null;
-		
-
-		
-		ra.addFlashAttribute("message", message);
-		
-		
 		
 		
 		return "redirect:myPage";

@@ -17,6 +17,14 @@ public interface EmailService {
 	 * @return 
 	 */
 	boolean checkAuthKey(Map<String, String> map);
+
+
+	/** 임시 비밀번호 발송
+	 * @param string
+	 * @param email
+	 * @return
+	 */
+	int findPw(String htmlName, String email);
 	
 	
 

@@ -203,11 +203,26 @@ checkAuthKeyBtn.addEventListener("click", () => {
   
   });
 
-  // 임시 비밀번호 세팅
+  // 임시 비밀번호 발송
 
-  const sendEmail = document.querySelector("#sendEmail"); // 인증번호 받기 버튼
+  const sendEmail = document.querySelector("#sendEmail"); // 이메일 발송 버튼
 
-  sendEmail.addEventListener("click", () => { // 인증 번호 받기 클릭 시
+  sendEmail.addEventListener("click", () => { // 이메일 발송 버튼 클릭 시
+
+
+    
+    if(memberEmail.value.trim().length == 0){
+      alert("이메일을 입력해주세요")
+      return
+    }
+    
+    if(checkObj.memberEmail && checkObj.authKey == false){
+      alert("이메일 또는 인증번호를 확인해주세요")
+      e.preventDefault();
+      return;
+    } else {
+      alert("인증된 이메일로 임시비밀번호를 발송드렸습니다")
+    } 
 
     // 서버에서 작성된 이메일로 인증 코드 발송 (Ajax)
     fetch("/email/sendAuthKey3", {
@@ -221,12 +236,15 @@ checkAuthKeyBtn.addEventListener("click", () => {
     })
     .then(result => {
       // console.log(result);
+      if(result === 1){
+      }
     })
     .catch(err => console.error(err));
-  
-    // 이메일 발송 메시지 출력 + 5분 타이머 출력
-  
-    alert("임시 비밀번호가 발송 되었습니다");
+
+    
+    location.href = "/myPage/loginPage";
+
+
   
   
   });
