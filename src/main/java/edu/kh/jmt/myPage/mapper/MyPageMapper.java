@@ -59,4 +59,13 @@ public interface MyPageMapper {
 	 * @return result
 	 */
 	int updateInfo(Member inputMember);
+
+  int findMemberNoByEmail(String email); // 이메일로 회원 번호 조회
+  
+  int updatePassword(
+  		@Param("memberNo") int memberNo, 
+  		@Param("encPw") String encPw); // 비밀번호 업데이트
+
+
+
 }

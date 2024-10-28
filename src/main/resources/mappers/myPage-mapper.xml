@@ -78,6 +78,20 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<select id="findMemberNoByEmail">
+		SELECT MEMBER_NO
+		FROM "MEMBER"
+		WHERE MEMBER_EMAIL = #{email}
+		AND MEMBER_DEL_FL = 'N'
+	</select>
+	
+
+	<update id="updatePassword">
+		UPDATE "MEMBER"
+		SET MEMBER_PW = #{encPw} 
+		WHERE MEMBER_NO = #{memberNo}
+		AND MEMBER_DEL_FL = 'N'
+	</update>
 	
 	
 	
