@@ -2,8 +2,8 @@
   box-sizing: border-box;
 }
 
-p {font-family: 'NEXON Lv1 Gothic OTF';}
-b {font-family: 'NEXON Lv1 Gothic OTF';}
+
+* {font-family: 'NEXON Lv1 Gothic OTF';}
 
 html,
 body {
@@ -332,6 +332,15 @@ body {
 }
 
 .popup {
+  position: absolute;
+  width: 100px;
+  height: 80px;
+  background-color: white;
+  padding: 12px;
+  border: 1px solid gray;
+}
+
+.popupReview {
   position: absolute;
   width: 100px;
   height: 80px;

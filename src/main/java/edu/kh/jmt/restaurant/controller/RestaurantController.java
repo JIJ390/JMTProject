@@ -7,6 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -54,7 +55,7 @@ public class RestaurantController {
 	
 	
 			
-	@GetMapping("add")
+	@PostMapping("add")
 	public String add(
 //			@RequestParam("restaurantNo") int restaurnatNo, 받아올 값
 			Model model

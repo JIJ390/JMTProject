@@ -2,7 +2,9 @@
   <input type="hidden" class="getReviewNo" th:value="${r.reviewNo}">
   <div class="reviewView">
     <div class="reviewProfile">
-      <img class="reviewProfileImg" th:src="${r.profileImg}"></img>
+      <img class="reviewProfileImg" 
+           th:with="user=#{user.default.image}" 
+           th:src="${r.profileImg ?: user }"></img>
       <div class="revewProfileName">
         <b th:text="${r.memberName}"></b>
         <p th:text="${r.reviewDate}"></p>
@@ -10,7 +12,23 @@
         <p th:if="${r.likeFl=='N'}"><i class="fa-regular fa-thumbs-down"></i></p>
       </div>
       <div class="ud">
-        <button class="updateBtn">수정</button><button class="deleteBtn">삭제</button>
+        <th:block th:if="${session.loginMember?.memberNo} == ${r.memberNo}">
+          <button class="updateBtn">수정</button>
+          <button class="deleteBtn">삭제</button>
+        </th:block>
+        <th:block th:if="${session.loginMember?.memberNo} != ${r.memberNo}">
+          <button class="popupButtonReview">신고</button>
+          <div id="popupReview" class="hidden popup">
+            <button class="">혐오발언</button>
+            <hr style="margin: 5px;">
+            <button class="">선정적</button>
+            <hr style="margin: 5px;">
+            <button class="">부적절</button>
+            <hr style="margin: 5px;">
+            <button class="">테러조장</button>
+        </div>
+        </th:block>
+        
       </div>
     </div>
     <hr style="margin-top: 20px;">
