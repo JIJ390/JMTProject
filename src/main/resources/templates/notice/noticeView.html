@@ -39,6 +39,7 @@
       justify-content: space-around;
       box-sizing: border-box;
     }
+    
     #panel {
       padding: 50px;
       width: 800px;
@@ -84,7 +85,6 @@
       position: absolute;
       width: 45px;
     }
-    
 
     /* new 추가 */
     .btn > div{
@@ -98,7 +98,6 @@
       right: 2px;
       top: 0.5px;
     }
-
 
     /* btn 효과 */
     .btn {
@@ -153,6 +152,7 @@
   flex-direction: row;
   font-weight: bold;
 }
+
 /* 목록 */
 .pagination{
     list-style: none;
@@ -202,8 +202,7 @@
             <div>
               <span class="btn">
                 <div class="category" th:text="${notice.noticeCategory}">[공지]</div>
-                <div th:text="${notice.noticeTitle}">공지사항 게시글 예시</div>
-
+                <a th:href="@{/notice/noticeView/{noticeNo} (noticeNo=${notice.noticeNo})}" th:text="${notice.noticeTitle}">공지사항 게시글 예시</a>
                 <div>
                   <span th:if="${stat.index == 0 && newMark != null}" class="new">new</span>
                 </div>

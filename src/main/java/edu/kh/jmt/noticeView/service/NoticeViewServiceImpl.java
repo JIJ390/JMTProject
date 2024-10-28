@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
+import edu.kh.jmt.noticeView.dto.Faq;
 import edu.kh.jmt.noticeView.dto.Notice;
 import edu.kh.jmt.noticeView.dto.NoticePagination;
 import edu.kh.jmt.noticeView.mapper.NoticeViewMapper;
@@ -47,5 +48,22 @@ public class NoticeViewServiceImpl implements NoticeViewService {
 			
 		return map;
 	}
+	
+	
+	/* 공지사항 자세히 보기 */
+	@Override
+	public Notice detailViewNotice(int noticeNo) {
+		return mapper.detailViewNotice(noticeNo);
+	}
+	
+	
+	/**
+	 * FAQ 전체 조회
+	 */
+	@Override
+	public List<Faq> selectFaqList() {
+				
+		return mapper.selectFaqList();
+	}
 
-}
+} // end

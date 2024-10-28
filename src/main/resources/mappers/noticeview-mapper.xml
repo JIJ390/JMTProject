@@ -20,6 +20,34 @@
 		WHERE NOTICE_NO > 0
 		ORDER BY NOTICE_NO DESC
 	</select>
+	
+	
+	<!-- FAQ 전체 조회 -->
+	<select id="selectFaqList">
+		SELECT
+			FAQ_NO,
+			FAQ_TITLE,
+			FAQ_CONTENT
+		FROM FAQ
+		WHERE FAQ_NO > 0
+		ORDER BY FAQ_NO DESC
+	</select>
+	
+	
+	<!-- 공지사항 전체 보기 -->
+	<select id="detailViewNotice">
+		SELECT
+			NOTICE_NO,
+			NOTICE_TITLE,
+			NOTICE_CATEGORY,
+			TO_CHAR(NOTICE_WRITE_DATE, 'YYYY"년" MM"월" DD"일"')
+		AS NOTICE_WRITE_DATE,
+			NOTICE_CONTENT		
+		FROM NOTICE
+		WHERE NOTICE_NO > 0
+		AND   NOTICE_NO = #{noticeNo}
+	</select>
+
 
 
 </mapper>
