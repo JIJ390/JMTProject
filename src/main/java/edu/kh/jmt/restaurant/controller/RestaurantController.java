@@ -57,11 +57,12 @@ public class RestaurantController {
 			
 	@PostMapping("add")
 	public String add(
-//			@RequestParam("restaurantNo") int restaurnatNo, 받아올 값
+			@RequestParam("restaurantNo") int restaurantNo,
+			@RequestParam("memberNo") int memberNo,
 			Model model
 			) {
 		
-		model.addAttribute("restaurant", service.restaurantDetail(13));
+		model.addAttribute("restaurant", service.restaurantDetail(restaurantNo));
 		
 		return "restaurant/restaurantDetailAdd";
 	}

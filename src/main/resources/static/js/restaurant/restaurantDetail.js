@@ -2,7 +2,8 @@ const reviewBtn = document.querySelector(".reviewBtn");
 
 reviewBtn.addEventListener("click", () => {
 
-  const memberNo = document.querySelector(".getLoginMemberNo").value;
+  const memberNo = document.querySelector(".getLoginMemberNo")?.value;
+  const restaurantNo = document.querySelector(".getRestaurantNo").value;
 
   if (memberNo == null) {
     alert("로그인 후 이용해주세요")
@@ -15,13 +16,21 @@ reviewBtn.addEventListener("click", () => {
   form.method = "POST"
 
 
-  const input = document.createElement("input");
+  const input1 = document.createElement("input");
 
-  input.name = "memberNo"
-  input.value = memberNo
-  input.type = "hidden"
+  input1.name = "memberNo"
+  input1.value = memberNo
+  input1.type = "hidden"
 
-  form.append(input);
+  form.append(input1);
+
+  const input2 = document.createElement("input");
+
+  input2.name = "restaurantNo"
+  input2.value = restaurantNo
+  input2.type = "hidden"
+
+  form.append(input2);
 
   document.querySelector("body").append(form);
 
@@ -33,8 +42,8 @@ const reviewBtn1 = document.querySelector(".reviewBtn1");
 
 reviewBtn1.addEventListener("click", () => {
 
-
-  const memberNo = document.querySelector(".getLoginMemberNo").value;
+  const memberNo = document.querySelector(".getLoginMemberNo")?.value;
+  const restaurantNo = document.querySelector(".getRestaurantNo").value;
 
   if (memberNo == null) {
     alert("로그인 후 이용해주세요")
@@ -47,23 +56,24 @@ reviewBtn1.addEventListener("click", () => {
   form.method = "POST"
 
 
-  const input = document.createElement("input");
+  const input1 = document.createElement("input");
 
-  input.name = "memberNo"
-  input.value = memberNo
-  input.type = "hidden"
+  input1.name = "memberNo"
+  input1.value = memberNo
+  input1.type = "hidden"
 
-  form.append(input);
+  form.append(input1);
+
+  const input2 = document.createElement("input");
+
+  input2.name = "restaurantNo"
+  input2.value = restaurantNo
+  input2.type = "hidden"
+
+  form.append(input2);
 
   document.querySelector("body").append(form);
 
   form.submit();
 });
 
-
-const popupReview = document.getElementById('popupReview');
-const popupButtonReview = document.getElementById('popupButtonReview');
-
-popupButtonReview?.addEventListener('click', () => {
-  popupReview.classList.toggle('hidden');
-});
