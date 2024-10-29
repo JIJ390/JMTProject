@@ -222,7 +222,7 @@ header {
 
 .popular-section{
   border: #DADADA solid 2px; 
-  
+  gap: 40px;
   border-radius: 30px;
   display: flex;
   justify-content: space-around;
@@ -234,15 +234,13 @@ header {
 }
 .store-box {
   width: 300px;
-
-
+  min-width: 300px;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  transition-duration: 0.2s;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -250,9 +248,7 @@ header {
   scale: 1.1;
   cursor: pointer;
 }
-.store-box:active{
 
-}
 
 .store-image {
   background-color: lightgray;
@@ -270,7 +266,7 @@ header {
 
 .store-info {
   background-color: white;
-  height: 100%;
+  height: 35%;
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -464,12 +460,12 @@ header {
   align-items: center;
   justify-content: center;
   flex: 1;
-  border: 1px solid black;
   cursor: pointer;
 }
 
 .regionListBtn-bc{ /* 버튼 배경색 */
   background-color: pink;
+  border-radius: 30px;
 }
 
 
@@ -492,4 +488,39 @@ header {
 .regionCategoryPopUpBox{
   width: 100%;
   height: 100%;
+}
+.foodClosePopup {
+  position: relative;
+  left: 200px;
+}
+.regionClosePopUp{
+  position: relative;
+  left: 200px;
+}
+/* ------------------------ */
+.slider {
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+}
+.slider-items {
+  scroll-snap-type: x mandatory; /* 가로 방향으로 snap */
+  overflow-x: auto;
+  scroll-behavior: smooth; /* 스크롤이 부드럽게 움직이도록 설정 */
+}
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+}
+.left {
+  left: 10px;
+}
+.right {
+  right: 10px;
 }

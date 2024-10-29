@@ -1,0 +1,22 @@
+diff a/src/main/java/edu/kh/jmt/common/config/InterceptorConfig.java b/src/main/java/edu/kh/jmt/common/config/InterceptorConfig.java	(rejected hunks)
+@@ -31,6 +31,19 @@
+ 		
+ 		registry.addInterceptor(selectLocationList())
+ 				.addPathPatterns("/admin/restaurant/regist")
+-				.addPathPatterns("/admin/restaurant/updateView");
++				.addPathPatterns("/admin/restaurant/updateView")
++				.addPathPatterns("/**") 
++				.excludePathPatterns(
++						"/css/**",
++						"/js/**,",
++						"images/**",
++						"/favicon.ico");
++
+ 	}
++	
++	
++
++	
++	
++	
+ }

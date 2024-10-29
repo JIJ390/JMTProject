@@ -36,4 +36,9 @@ public class RestaurantDto {
 	
 	// 좋아요 백분율 지수
 	private String likePercent;
+	
+	
+	//좋아요 했는지 안했는지  && 메인페이지 사용
+	private int likeCheck;
+	
 }

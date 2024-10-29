@@ -22,20 +22,17 @@ public class MainServiceImpl implements MainService{
 
 //인기순 SQL
 	@Override
-	public List<RestaurantDto> listLike(){
-		return mapper.listLike();
-	}
-	
-	// 최신순
-	@Override
-	public List<RestaurantDto> listCurrent() {
-		return mapper.listCurrent();
+	public List<RestaurantDto> listLike(int memberNo){
+		return mapper.listLike(memberNo);
 	}
 	@Override
-	public List<RestaurantDto> listReview() {
-		return mapper.listReview();
+	public List<RestaurantDto> listReview(int memberNo) {
+		return mapper.listReview(memberNo);
 	}
-	
+	@Override
+	public List<RestaurantDto> listCurrent(int memberNo) {
+		return mapper.listCurrent(memberNo);
+	}
 	
 	
 	// 찜하기 
@@ -57,8 +54,6 @@ public class MainServiceImpl implements MainService{
 			result2 = mapper.insertLike(memberNo,restaurantNo);
 		}
 
-		System.out.printf("result 값 확인하기 긱기ㅣ기기기기기기기기긱기기ㅣ기ㅣㄱ : : :: : : : : %d", result);
-		
 		
 		return result;
 	}
