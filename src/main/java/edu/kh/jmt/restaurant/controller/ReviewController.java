@@ -61,7 +61,7 @@ public class ReviewController {
 	 * @param likeFl
 	 * @return
 	 */
-	@GetMapping("review/reviewUpload")
+	@PostMapping("review/reviewUpload")
 	public String reviewUpload(
 			@RequestParam("getRestaurantNo") int restaurantNo, 
 			@RequestParam("content") String content,
@@ -86,7 +86,7 @@ public class ReviewController {
 			ra.addFlashAttribute("message", "리뷰 등록이 완료되었습니다");
 		}
 
-		return "redirect:/restaurant/view";
+		return "redirect:/restaurant/view?restaurantNo=" + restaurantNo;
 	}
 
 	@GetMapping("review/selectReview")
@@ -102,18 +102,7 @@ public class ReviewController {
 		List<ReviewDto> reviews = service.selectReview(restaurantNo, rowNum, sort);
 
 		int size = service.reviewSize(restaurantNo);
-		
-		System.out.println(size);
-		System.out.println(size);
-		System.out.println(size);
-		System.out.println(size);
-		System.out.println(size);
-		System.out.println(rowNum);
-		System.out.println(rowNum);
-		System.out.println(rowNum);
-		System.out.println(rowNum);
-		System.out.println(rowNum);
-		
+
 		if(rowNum >= size) {
 			model.addAttribute("maxSize", 1);
 		}
@@ -173,6 +162,7 @@ public class ReviewController {
 			@RequestParam("getReviewNo") int reviewNo,
 			@RequestParam("content") String content,
 			@RequestParam("likeFl") String likeFl, 
+			@RequestParam("getRestaurantNo") int restaurantNo,
 			RedirectAttributes ra
 			) {
 
@@ -192,7 +182,7 @@ public class ReviewController {
 			ra.addFlashAttribute("message", "리뷰 수정이 완료되었습니다");
 		}
 
-		return "redirect:/restaurant/view";
+		return "redirect:/restaurant/view?restaurantNo=" + restaurantNo;
 	}
 	
 	@ResponseBody
