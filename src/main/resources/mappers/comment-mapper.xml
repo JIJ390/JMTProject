@@ -9,6 +9,8 @@
 		FROM "COMMENT"
 		JOIN "MEMBER" USING (MEMBER_NO)
 		WHERE BOARD_NO = #{boardNo}
+		AND   COMMENT_DEL_FL = 'N'
+		ORDER BY COMMENT_DATE ASC
 	
 	</select>
 	
@@ -49,6 +51,25 @@
   	  		 </if>
 		)
 	</insert>
+	
+	
+	<!-- 댓삭 -->
+	<delete id="commentDelete">
+		UPDATE "COMMENT" 
+		SET 	COMMENT_DEL_FL = 'Y'
+		WHERE   COMMENT_NO = #{commentNo}
+	
+	</delete>
+	
+	<!-- 댓수 -->
+	<update id="commentUpdate">
+		UPDATE "COMMENT"
+		SET 	COMMENT_CONTENT = #{commentContent}
+		WHERE 	COMMENT_NO = #{commentNo}
+	</update>
+
+
+
 
 
 
