@@ -36,4 +36,6 @@ public interface AdminNoticeService {
 	 */
 	Notice updateNoticeView(int noticeNo);
 
+	int updateNotice(int noticeNo);
+
 }

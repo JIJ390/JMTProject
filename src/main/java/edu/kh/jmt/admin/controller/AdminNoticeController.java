@@ -118,4 +118,20 @@ public class AdminNoticeController {
 		return "/admin/noticeUpdate";
 		
 	}
+	
+	@PostMapping("update")
+	public String updateNotice(
+			@RequestParam("noticeNo") int noticeNo,
+			RedirectAttributes ra) {
+		
+		int result = service.updateNotice(noticeNo);
+		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "공지사항이 수정 되었습니다");
+		} else {
+			ra.addFlashAttribute("message", "수정 실패");
+		}
+		
+		return "redirect:/admin/notice";
+	}
 }
