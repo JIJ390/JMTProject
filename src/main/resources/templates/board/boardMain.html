@@ -24,13 +24,17 @@
 
 		<!-- 게시글 리스트 -->
 		<div class="post-container">
-				<div class="post" th:each="board : ${boardList}">
+				<div class="post" 
+				th:each="board : ${boardList}"
+				th:data-board-no="${board.boardNo}"
+				>
 						<div class="post-header">
 								<div class="profile-pic"></div>
 								<div class="post-title" th:text="${board.boardTitle}">제목</div>
-								<div class="post-time">이름 | 21분 전</div>
+								<div class="post-name">이름&nbsp;&nbsp;|</div>
+								<div class="post-time">&nbsp;21분 전</div>
 								<!-- 버튼 영역 -->
-								 <!-- <input type="hidden" class="getBoardNo" th:value="${board.boardNo}"> -->
+								 <input type="hidden" class="getBoardNo" th:value="${board.boardNo}">
 								<div class="board-btn-area" th:data-board-no="${board.boardNo}">
 									<!-- <th:block th:if="${session.loginMember?.memberNo} == ${board.memberNo}"> -->
 										<button class="updateBtn">수정</button>
@@ -42,6 +46,7 @@
 						<hr>
 						<div class="post-content">
 							<div th:if="${board.boardImg}">
+								<input type="hidden" class="boardNoList" th:value="${board.boardNo}">
 									<img th:src="${board.boardImg}" alt="게시글이미지"
 									class="imageSize">
 								</div>
@@ -52,8 +57,13 @@
 						
 						<div class="post-footer">
 								<span class="comment-toggle">
-										<div class="triangle"></div> 댓글 보기
+										<div class="triangle"></div> <p class="c">댓글 보기</p>
+										<!-- <div hidden class="triangle-b"></div> <p class="c">댓글 닫기</p> -->
 							</span>
+						</div>
+						<div class="commentArea">
+
+
 						</div>
 					</div>
 				</div>
@@ -67,11 +77,13 @@
 	<button class="fa-solid fa-arrow-up" id="topBtn"></button>
 
 	<script src="/js/board/boardMain.js"></script>
+	<script src="/js/board/boardComment.js"></script>
 	<script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
 	<script th:inline="javascript">
-		const message =  /*[[${message}]]*/ "전달 받은 message";
-	
-		if(message != null) alert(message);
+
+			// 로그인 되어있으면 true, 아니면 false
+			const loginCheck = /*[[${session.loginMember != null}]]*/ false;
+
 	</script>
 
 	</body>

@@ -61,8 +61,10 @@
   			"BOARD"
 		SET
 			BOARD_TITLE = #{boardTitle},
-			BOARD_CONTENT = #{boardContent},
-			BOARD_IMG = #{boardImg}
+			<if test="boardImg != null and !boardImg.equals('')">
+            	BOARD_IMG = #{boardImg},
+         	</if>
+			BOARD_CONTENT = #{boardContent}
   		WHERE
   			BOARD_NO = #{boardNo}
   	</update>

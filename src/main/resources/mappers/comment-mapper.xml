@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.jmt.board.mapper.CommentMapper">
+
+	<!-- 비동기 댓글창 -->
+	<select id="selectCommentList" resultType="Comment">
+		SELECT
+		*
+		FROM "COMMENT"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE BOARD_NO = #{boardNo}
+	
+	</select>
+	
+
+	<!-- useGeneratedKeys="true"
+		: DB에서 생성된 key(시퀀스) 값을
+		  자바에서도 사용할 수 있게 하는속성
+	 -->
+
+	<!-- 댓글 등록 -->
+	<insert id="commentInsert"
+			parameterType="Comment"
+			useGeneratedKeys="true">
+			
+		  <selectKey order="BEFORE" resultType="_int"
+	  			 	keyProperty="commentNo">
+		  	SELECT SEQ_COMMENT_NO.NEXTVAL FROM DUAL
+		  </selectKey>
+			
+		INSERT INTO "COMMENT"	
+		VALUES(#{commentNo},
+			   #{commentContent},
+		       DEFAULT,
+		       NULL,
+			   DEFAULT,
+			   #{memberNo},
+			   #{boardNo},
+			   
+   	  		 <!-- 부모 댓글 -->
+  	  		 <if test="parentCommentNo == 0">
+  	  		 	NULL
+  	  		 </if>
+  	  		 
+  	  		 <!-- 자식 댓글 -->
+  	  		 <if test="parentCommentNo != 0">
+  	  		 	#{parentCommentNo}
+
+  	  		 </if>
+		)
+	</insert>
+
+
+
+
+
+	
+
+
+</mapper>
