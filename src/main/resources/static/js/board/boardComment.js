@@ -11,13 +11,13 @@ for (let i = 0; i < commentClick.length; i++) {
     // 처음 main 창에서 check가 없는상태
     const post = commentClick[i].closest(".post");
     const commentArea = post.querySelector(".commentArea");
-    
+
     if (!commentClick[i].classList.contains("check")) {
-      
+
       commentClick[i].classList.add("check");
-      
+
       c[i].innerText = '댓글 닫기';
-      
+
       selectCurrBoardCommentList(post)
     }
 
@@ -43,28 +43,28 @@ const selectCurrBoardCommentList = (post) => {
   const commentArea = post.querySelector(".commentArea");
 
   fetch("/board/boardComment?boardNo=" + boardNo)
-  .then(response => {
-    if (response.ok) {
-      return response.text();
-    }
-    throw new Error("댓글 조회 실패");
-  })
-  .then(html => {
-    commentArea.innerHTML = html;
+    .then(response => {
+      if (response.ok) {
+        return response.text();
+      }
+      throw new Error("댓글 조회 실패");
+    })
+    .then(html => {
+      commentArea.innerHTML = html;
 
-    /** [주의사항] */
-    // innerHTML로 새로 만들어진 요소에는
-    // 이벤트 리스너가 추가 되어있지 않기 때문에
-    // 답글, 수정, 삭제등이 동작하지 않는다!!
+      /** [주의사항] */
+      // innerHTML로 새로 만들어진 요소에는
+      // 이벤트 리스너가 추가 되어있지 않기 때문에
+      // 답글, 수정, 삭제등이 동작하지 않는다!!
 
-    addEventCommentWrite(post);
-    addEventChildComment(); // 답글버튼에 클릭이벤트 추가
-    addEventDeleteComment(); // 삭제버튼에 이벤트 추가
-    addEventUpdateComment(); // 수정버튼에 이벤트 추가
+      addEventCommentWrite(post);
+      addEventChildComment(); // 답글버튼에 클릭이벤트 추가
+      addEventDeleteComment(); // 삭제버튼에 이벤트 추가
+      addEventUpdateComment(); // 수정버튼에 이벤트 추가
 
 
-  })
-  .catch(err => { console.log(err) });
+    })
+    .catch(err => { console.log(err) });
 }
 
 
@@ -78,10 +78,10 @@ const addEventCommentWrite = (post) => {
   const commentWriteBtn = post.querySelector(".commentBtn-write")
   const commentPictureBtn = post.querySelector(".commentBtn-picture")
 
-  
-  commentWriteBtn.addEventListener("click", ()=>{
+
+  commentWriteBtn.addEventListener("click", () => {
     const content = commentContentArea.value;
-    
+
     // key : value
     const data = {};
     data.boardNo = boardNo; // 댓글이 작성된 게시글 번호
@@ -100,14 +100,202 @@ const addEventCommentWrite = (post) => {
         }
         throw new Error("댓글 등록 실패");
       })
-    .catch(err => console.error(err));
+      .catch(err => console.error(err));
 
   })
 
 }
 
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+/** 댓글 삭제 */
+
+/**
+ * @param btn = 삭제버튼
+ */
+const deleteComment = (btn) => {
+
+  if (confirm("정말 삭제하시겠습니까?") === false) {
+
+    return;
+  }
+
+  // 삭제할 댓글번호 얻어오기
+  const commentDiv = btn.closest("div"); // 댓글 또는 답글
+  const commentNo = commentDiv.dataset.commentNo; // 댓글번호
+
+  fetch("/board/boardComment", {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: commentNo
+  })
+    .then(response => {
+      if (response.ok) return response.text();
+      throw new Error("댓글 삭제 실패");
+    })
+    .then(result => {
+      if (result > 0) {
+        alert("삭제되었습니다.");
+        const post = commentDiv.closest(".post");
+        selectCurrBoardCommentList(post);
+      } else {
+        alert("삭제 실패");
+      }
+
+    })
+    .catch(err => console.error(err));
+
+
+}
+
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+/** 댓글 수정 */
+let beforeCommentRow;
+
+showUpdateComment = (btn) => {
+  
+
+  // const commentList1 = document.querySelectorAll(".comment-post-header");
+  // for (let i = 0; i < commentList1.length; i++) {
+  //   if (commentList1[i].children[1].children[2].classList.contains(".textTarget")) {
+  //     selectCurrBoardCommentList(post);
+  //   }
+  // }
+  if (document.querySelector(".textTarget")) {
+    if (confirm("열린 수정창 닫으시겠습니까?")) {
+      const temp = document.querySelector(".textTarget").closest(".comment-post-header");
+      temp.after(beforeCommentRow);
+      temp.remove();
+
+      const uBtn = beforeCommentRow.children[2].children[0];
+      const dBtn = beforeCommentRow.children[2].children[1];
+
+      uBtn.addEventListener("click", () => { showUpdateComment(uBtn) });
+      dBtn.addEventListener("click", () => { deleteComment(dBtn) });
+    }
+    else{
+      return;
+    }
+  }
+
+  const commentRow = btn.closest(".comment-post-header");
+  beforeCommentRow = commentRow.cloneNode(true);
+
+  const commentContent = btn.closest(".comment-post-header").children[1].children[2].innerText;
+
+
+  btn.closest(".comment-post-header").children[1].children[2].remove();
+
+  const textarea = document.createElement("textarea");
+
+  textarea.value = commentContent;
+  textarea.style.resize = "none";
+  textarea.style.marginLeft = "30px";
+  textarea.style.border = "1px solid #6EC3C2";
+  textarea.style.width = "80%";
+  textarea.classList.add("textTarget")
+
+  btn.closest(".comment-post-header").children[1].append(textarea);
+  /** 버튼생성 */
+  //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+  const button1 = document.createElement("button");
+  const button2 = document.createElement("button");
+
+  button1.innerText = "수정하기";
+  button2.innerText = "수정취소";
+
+  button1.addEventListener("click", () => {
+
+    /** commentNo 가 commentDiv 에 담겨있기때문 */
+    const updateBtn = button1.closest(".commentDiv").dataset.commentNo;
+
+    const textContent = document.querySelector(".textTarget").value;
+
+    const data = {};
+    data.commentNo = updateBtn;
+    data.commentContent  = textContent;
+
+    fetch("/board/boardComment",{
+      method  : "PUT",
+      headers : { "Content-Type": "application/json" },
+      body    : JSON.stringify(data)
+    })
+    .then(response => {
+      if(response.ok) return response.text();
+      throw new Error("댓글 수정 실패");
+    })
+    .then(commentNo => {
+
+      if(commentNo == 0){
+        alert("댓글 수정 실패")
+        return;
+      }
+      const post = button1.closest(".post");
+      selectCurrBoardCommentList(post);
+
+    })
+    .catch(err => console.error(err));
+
+
+  })
+
+
+
+  /** 추가를 먼저해놔야 삭제먼저하면 추가도안된다 */
+  btn.closest(".comment-post-header").children[2].append(button1);
+  btn.closest(".comment-post-header").children[2].append(button2);
+
+  /** 수정취소 눌렀을때 원상 복귀시키기 */
+  button2.addEventListener("click", () => {
+
+    commentRow.after(beforeCommentRow);
+    commentRow.remove();
+
+    const uBtn =  beforeCommentRow.children[2].children[0];
+    const dBtn =  beforeCommentRow.children[2].children[1];
+      
+    uBtn.addEventListener("click", () => {showUpdateComment(uBtn)});
+    dBtn.addEventListener("click", () => {deleteComment(dBtn)});
+    // selectCurrBoardCommentList(post);
+    // console.log(button2);
+
+  
+
+
+  })
+
+
+  /** 원리 나중에 ★★ 먼저 [0]일때 삭제되면 끝이다.*/
+  btn.closest(".comment-post-header").children[2].children[1].remove();
+  btn.closest(".comment-post-header").children[2].children[0].remove();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+
+
+
+
+
+
+
+
 
 // 댓글 내용 요소
 const commentContent = document.querySelector(".comment-context");

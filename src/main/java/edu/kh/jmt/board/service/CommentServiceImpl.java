@@ -33,4 +33,17 @@ public class CommentServiceImpl implements CommentService{
 		return 0;
 	}
 	
+	// 댓삭
+	@Override
+	public int commentDelete(int commentNo) {
+		return mapper.commentDelete(commentNo);
+	}
+
+	// 댓수
+	@Override
+	public int commentUpdate(Comment comment) {
+		return mapper.commentUpdate(comment);
+	}
+	
+	
 }

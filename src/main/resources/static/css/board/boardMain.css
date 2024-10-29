@@ -20,7 +20,7 @@
   display: flex;
   justify-content: flex-end;
   padding: 10px 20px;
-  
+
 }
 
 .search-container input {
@@ -48,22 +48,23 @@
   padding: 40px;
   position: relative;
   width: 60%;
-  min-height: 400px;
+  height: max-content;
 }
 
 .post-header {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
 /* 버튼 영역 */
-.board-btn-area{
+.board-btn-area {
   text-align: right;
 }
 
 /* 버튼 */
-.board-btn-area button{
+.board-btn-area button {
   background-color: #6EC3C2;
   width: 80px;
   height: 30px;
@@ -73,9 +74,9 @@
   cursor: pointer;
 }
 
-.board-btn-area button:hover{
+.board-btn-area button:hover {
   background-color: white;
-  color : #6EC3C2;
+  color: #6EC3C2;
   border: 2px solid #6EC3C2;
 }
 
@@ -95,6 +96,7 @@
   color: gray;
   font-size: 12px;
 }
+
 .post-time {
   color: gray;
   font-size: 12px;
@@ -107,13 +109,13 @@
   display: flex;
 }
 
-.imageSize{
+.imageSize {
   margin-top: 30px;
   height: 200px;
   width: 200px;
 }
 
-.contentCss{
+.contentCss {
   margin-top: 30px;
   margin-left: 10px;
 }
@@ -167,17 +169,17 @@
   cursor: pointer;
   position: fixed;
   bottom: 70px;
-  right : 90px;
+  right: 90px;
 }
 
-.writeBtn button:hover{
+.writeBtn button:hover {
   background-color: white;
-  color : #6EC3C2;
+  color: #6EC3C2;
   border: 2px solid #6EC3C2;
 }
 
 /* 상단 버튼*/
-#topBtn{
+#topBtn {
   position: fixed;
   bottom: 70px;
   right: 20px;
@@ -187,7 +189,7 @@
   color: #6EC3C2;
   width: 60px;
   height: 60px;
-  font-size:40px;
+  font-size: 40px;
   cursor: pointer;
 }
 
@@ -202,9 +204,14 @@
 .comment-post-header {
   display: flex;
   align-items: center;
-  height: 50px;
+  height: max-content;
+
+  line-height: 40px;
   gap: 15px;
+
 }
+
+
 
 /* 댓글 수정 ★★ margin-left : auto 로 가능!*/
 .comment-post-update {
@@ -231,21 +238,34 @@
   font-weight: bold;
 }
 
-.comment-write{
+.comment-write {
 
-  width: 550px; /* 너비 */
-  height: 80px; /* 높이 */
-  padding: 10px; /* 안쪽 여백 */
-  border: 2px solid #ccc; /* 테두리 색상과 두께 */
-  border-radius: 8px; /* 모서리 둥글게 */
-  background-color: #f9f9f9; /* 배경색 */
-  font-family: 'Arial', sans-serif; /* 글꼴 */
-  font-size: 16px; /* 글자 크기 */
-  color: #333; /* 글자 색상 */
-  line-height: 1.5; /* 줄 간격 */
-  resize: none; /* 크기 조절 가능 여부 (none: 비활성화) */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
-  outline: none; /* 포커스 시 외곽선 제거 */
+  width: 550px;
+  /* 너비 */
+  height: 80px;
+  /* 높이 */
+  padding: 10px;
+  /* 안쪽 여백 */
+  border: 2px solid #ccc;
+  /* 테두리 색상과 두께 */
+  border-radius: 8px;
+  /* 모서리 둥글게 */
+  background-color: #f9f9f9;
+  /* 배경색 */
+  font-family: 'Arial', sans-serif;
+  /* 글꼴 */
+  font-size: 16px;
+  /* 글자 크기 */
+  color: #333;
+  /* 글자 색상 */
+  line-height: 1.5;
+  /* 줄 간격 */
+  resize: none;
+  /* 크기 조절 가능 여부 (none: 비활성화) */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  /* 박스 그림자 */
+  outline: none;
+  /* 포커스 시 외곽선 제거 */
 
 }
 
@@ -273,19 +293,28 @@
   color: white;
   cursor: pointer;
   font-size: 10px;
-  margin-left: auto;
 }
 
 
 
-.comment-child:hover{
+.comment-child:hover {
   background-color: white;
-  color : #6EC3C2;
+  color: #6EC3C2;
   border: 2px solid #6EC3C2;
-  
+
 }
 
-/* 댓글 post */
+/* 신고 */
+.comment-report {
+  background-color: #6EC3C2;
+  border: none;
+  padding: 10px 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+/* 댓글 post
 .comment-update {
   background-color: #6EC3C2;
   border: none;
@@ -294,39 +323,66 @@
   cursor: pointer;
   font-size: 10px;
 }
-.comment-update:hover{
+
+.comment-update:hover {
   background-color: white;
-  color : #6EC3C2;
+  color: #6EC3C2;
   border: 2px solid #6EC3C2;
-  
+
 }
 
 /* 댓글 post */
-.comment-delete {
+/* .comment-delete {
   background-color: #6EC3C2;
   border: none;
   padding: 10px 10px;
   color: white;
   cursor: pointer;
   font-size: 10px;
-}
+} */
 
 
-.comment-delete:hover{
+/* .comment-delete:hover {
   background-color: white;
-  color : #6EC3C2;
+  color: #6EC3C2;
   border: 2px solid #6EC3C2;
-  
+
+} */ 
+
+
+.commentDiv > button{
+  width: 50px;
+  height: 40px;
+  background-color: #6EC3C2;
+  border: 1px solid #6EC3C2;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
 }
+
+
+.commentDiv > button:hover{
+  width: 50px;
+  height: 40px;
+  background-color: white;
+  color: #6EC3C2;
+  border: 2px solid #6EC3C2;
+  font-size: 10px;
+}
+
+
+
+
 
 /***************************************************************/
 
-.commentBtn:hover{
+.commentBtn:hover {
   background-color: white;
-  color : #6EC3C2;
+  color: #6EC3C2;
   border: 2px solid #6EC3C2;
-  
+
 }
+
 /* 댓글작성 스타일 */
 .commentBtn-picture {
   background-color: #6EC3C2;
@@ -340,9 +396,37 @@
   font-size: 10px;
 }
 
-.textarea-main{
+.textarea-main {
   display: flex;
   align-items: center;
   gap: 10px;
 
+}
+
+
+.commentDiv {
+  display: flex;
+  justify-content: end;
+  margin-left: 70px;
+}
+
+.commentDiv>button {
+  margin-right: 10px;
+}
+
+.commentProfile {
+  width: 682px;
+  display: flex;
+}
+
+.comment-id{
+  width: 15%;
+}
+
+.comment-context{
+  width: 60%;
+}
+
+.commentArea{
+  margin-top: 20px;
 }
