@@ -294,4 +294,27 @@ public class AdminReportServiceImpl implements AdminReportService{
 	}
 	
 	
+	
+	///////////////////////////////////////////////////
+	
+	// 리뷰 신고 현황
+	@Override
+	public Map<String, String> reportReviewStatus() {
+		return mapper.reportReviewStatus();
+	}
+	
+	// 댓글 신고 현황
+	@Override
+	public Map<String, String> reportCommentStatus() {
+		return mapper.reportCommentStatus();
+	}
+	
+	
+	// 게시글 신고 현황
+	@Override
+	public Map<String, String> reportBoardStatus() {
+		return mapper.reportBoardStatus();
+	}
+	
+	
 }

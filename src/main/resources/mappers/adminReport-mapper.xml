@@ -607,4 +607,61 @@
  			COMMENT_NO = #{commentNo}
  	</update>
  	
+ 	
+ 	<!-- 리뷰 신고 현황 -->
+ 	<select id="reportReviewStatus"
+  			resultType="map">
+  	SELECT
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_REVIEW") AS VARCHAR2(4)) AS "totalCount",
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_REVIEW"
+		 WHERE REPORT_REVIEW_FL = 'Y') AS VARCHAR2(4)) AS "checkedCount",	
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_REVIEW"
+		 WHERE REPORT_REVIEW_FL = 'N') AS VARCHAR2(4)) AS "uncheckedCount",
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_REVIEW"
+		 WHERE TRUNC(REPORT_REVIEW_DATE) = TRUNC(SYSDATE)) AS VARCHAR2(4)) AS "todayCount"
+	FROM
+	DUAL
+  	</select>
+ 	
+ 	<!-- 댓글 신고 현황 -->
+ 	<select id="reportCommentStatus"
+  			resultType="map">
+  	SELECT
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_COMMENT") AS VARCHAR2(4)) AS "totalCount",
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_COMMENT"
+		 WHERE REPORT_COMMENT_FL = 'Y') AS VARCHAR2(4)) AS "checkedCount",	
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_COMMENT"
+		 WHERE REPORT_COMMENT_FL = 'N') AS VARCHAR2(4)) AS "uncheckedCount",
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_COMMENT"
+		 WHERE TRUNC(REPORT_COMMENT_DATE) = TRUNC(SYSDATE)) AS VARCHAR2(4)) AS "todayCount"
+	FROM
+	DUAL
+  	</select>
+  	
+  	<!-- 게시글 신고 현황 -->
+ 	<select id="reportBoardStatus"
+  			resultType="map">
+  	SELECT
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_BOARD") AS VARCHAR2(4)) AS "totalCount",
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_BOARD"
+		 WHERE REPORT_BOARD_FL = 'Y') AS VARCHAR2(4)) AS "checkedCount",	
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_BOARD"
+		 WHERE REPORT_BOARD_FL = 'N') AS VARCHAR2(4)) AS "uncheckedCount",
+		CAST((SELECT COUNT(*)
+		 FROM "REPORT_BOARD"
+		 WHERE TRUNC(REPORT_BOARD_DATE) = TRUNC(SYSDATE)) AS VARCHAR2(4)) AS "todayCount"
+	FROM
+	DUAL
+  	</select>
 </mapper>

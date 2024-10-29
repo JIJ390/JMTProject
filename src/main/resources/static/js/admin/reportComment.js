@@ -305,6 +305,35 @@ const reportFeed = () => {
 };
 
 
+/** 
+ * 현황판 최신화
+ * 
+*/
+const selectReportStatus = () => {
+
+  fetch("/admin/report/comment/status")
+  .then(response => {
+    if (response.ok) return response.json();
+    throw new Error("조회 오류");
+  })
+  .then(map => {
+    console.log(map);
+
+    const totalReportCount = document.querySelector("#totalReportCount");
+    const checkedReportCount = document.querySelector("#checkedReportCount");
+    const uncheckedReportCount = document.querySelector("#uncheckedReportCount");
+    const todayReportCount = document.querySelector("#todayReportCount");
+
+    totalReportCount.innerText = map.totalCount;
+    checkedReportCount.innerText = map.checkedCount;
+    uncheckedReportCount.innerText = map.uncheckedCount;
+    todayReportCount.innerText = map.todayCount;
+    
+  })
+  .catch(err => console.error(err));
+  
+};
+
 
 
 
@@ -318,14 +347,13 @@ document.querySelector("#popupClose").addEventListener("click", () => {
 
 
 
-/* 화면 로딩 후 a 태그에 팝업 비동기 조회 이벤트 부여 */
+/* 팝업 이벤트 추가 */
 document.addEventListener("DOMContentLoaded", () => {
   // DOMContentLoaded : 화면이 모두 로딩된 후
   document.querySelector("#searchQuery").value = "";
 
   // 차단 버튼 이벤트 추가
   blockBtn.addEventListener("click", () => {
-    // 차단을 위한 회원 번호 가져오기
     memberBlock(memberNoTemp);
   });
 
@@ -336,6 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 처리 완료 버튼 동작 추가
   reportFeed();
+  selectReportStatus();
 
   // id="restaurantList" 후손 중 a 태그 모두 선택 => 노드 리스트(a)
   document.querySelectorAll("#reportCommentList a").forEach((a) => {

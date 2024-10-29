@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 로그인 페이지</title>
+  <link rel="stylesheet" href="/css/admin/adminLogin.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+</head>
+<body>
+
+  <th:block th:replace="~{common/header}"></th:block>
+  
+  <main>
+    <section class="left-section">
+
+    </section>
+    <section class="main-section">
+
+      <div class="login-div">
+        <form action="admin/login" method="POST">
+          <h1>관리자 로그인</h1>
+          <div class="login-box">
+            <input type="text" placeholder="이메일 입력" name="memberEmail">
+            <input type="password" placeholder="PW 입력" name="memberPw">
+            <button id="loginBtn">로그인</button>
+          </div>
+        </form>
+      </div>
+      
+
+
+    </section>
+    <section class="right-section">
+     
+
+    </section>
+  </main>
+
+  <script src="/js/admin/memberManage.js"></script>
+</body>
+</html>
