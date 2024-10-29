@@ -15,10 +15,17 @@
 		
 		<br><br>
 		<!-- 검색바 -->
-		<form class="search-container">
+		<form th:action="@{/board/boardSearch}" method="GET" class="search-container">
+
+			<select name="category" id="searchContent">
+				<option value="title">제목</option>
+				<option value="author">작성자</option>
+				<option value="comment">댓글</option>
+			</select>
+
 			<div>
-					<input type="text" placeholder="　검색">
-					<i class="fa-solid fa-magnifying-glass"></i>
+				<input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
+				<i type="submit" class="fa-solid fa-magnifying-glass" style="cursor: pointer;"></i>
 			</div>
 		</form>
 
@@ -86,6 +93,7 @@
 
 	<script src="/js/board/boardMain.js"></script>
 	<script src="/js/board/boardComment.js"></script>
+	<script src="/js/board/boardSearch.js"></script>
 	<script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
 	<script th:inline="javascript">
 

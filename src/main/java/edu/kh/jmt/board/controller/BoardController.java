@@ -2,6 +2,7 @@ package edu.kh.jmt.board.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -179,6 +180,23 @@ public class BoardController {
 		return "redirect:boardMain";
 	}
 	
+	
+	/** 점메추게시판 검색기능
+	 * @param model
+	 * @param category
+	 * @param keyword
+	 * @return
+	 */
+	@GetMapping("boardSearch")
+	public String boardSearch (
+			Model model, 
+			@RequestParam(value="category", required=false)String category,
+			@RequestParam(value="keyword", required=false)String keyword) {
+		
+			model.addAttribute("");
+		
+		return null;
+	}
 	
 
 
