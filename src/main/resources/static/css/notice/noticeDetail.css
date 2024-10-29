@@ -1,0 +1,88 @@
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+  @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+  body      { font-family: 'NanumSquare', sans-serif }
+  .normal      { font-weight: 400 }
+  .bold      { font-weight: 700 }
+  .bolder      { font-weight: 800 }
+  .light      { font-weight: 300 }
+
+  h3 {font-family: 'NEXON Lv1 Gothic OTF';}
+  header {font-family: 'NEXON Lv1 Gothic OTF';}
+
+
+  .main{
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    box-sizing: border-box;
+  }
+
+  #fix-area{
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    box-sizing: border-box;
+    margin: 20px;
+  }
+
+  #notice-container{
+    display: flex;
+    flex-direction: column;
+    display: block;
+    justify-content: space-between;
+    margin-top: 50px;
+  }
+
+  /* 테이블 꾸미기 */
+  table{
+   width: 800px;
+   background-color: #D5EDE8;
+   padding: 15px;
+ }
+
+  .table-underline{
+    text-align: center;
+    border-bottom : 1px solid black;
+  }
+
+  thead >tr{
+    border-bottom : 1px solid black;
+  }
+
+  .detail-content{
+    padding: 20px;
+  }
+
+  /* 목록으로 */
+  #goToList{
+    width: 200px;
+    height: 50px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    text-align: center;
+    color: white;
+    background-color: #61C0BF;
+  }
+
+  #goToList > span:hover {
+    cursor: pointer;
+  }
+
+  /* 맨 위로 */
+  .floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  }
