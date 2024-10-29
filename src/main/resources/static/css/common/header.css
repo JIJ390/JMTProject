@@ -32,6 +32,7 @@ header {font-family: 'NEXON Lv1 Gothic OTF';}
 }
 
 
+
 html, body, main {
   height: 100%;
 }
@@ -114,20 +115,106 @@ header > img {
 
   justify-content: end;
 
+  padding-right: 30px;
+
+  
+
 }
 
 .headRight span{
   font-size: 20px;
   margin: 8px 5px;
   color: white;
+
 }
 
+.headRight span a{
+
+  color: white;
+  text-decoration-line: none;
+
+}
+
+
+#popUpSpan {
+  font-size: 40px;
+  color: white;
+  margin-top: 0px;
+}
+
+#popUpSpan:hover{
+  cursor: pointer;
+}
+/* 
 .headRight i {
   font-size: 30px;
   margin: 10px 20px;
   color: white;
+} */
+
+.menu-container {
+
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+
+  width: 200px;
+  height: 280px;
+  border: 1px solid var(--border-color);
+
+  background-color: white;
+
+  border-radius: 15px;
+  
+  padding: 20px;
+
+  z-index: 2;
+
+  position: absolute;
+  top: 50px;
+  right: 30px;
+
+
+  display: none;
 }
 
+.profile-img img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: inline-block;
+}
+
+.sideP {
+  margin: 20px 0;
+  font-size: 14px;
+  color: #333;
+  margin-top: 30px;
+  font-size: x-large;
+}
+
+.sideItem {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: color 0.1s ease;
+}
+
+.menu-container a:hover {
+  color: var(--main-color);
+}
+
+
+
+/* 로고 */
+.logo-img {
+  width: 120px;
+  height: 120px;
+}
 
 /******* 헤더  ****/
 /******* 헤더  ****/
