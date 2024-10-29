@@ -87,16 +87,35 @@ public class AdminNoticeController {
 			@ModelAttribute Notice notice,
 			RedirectAttributes ra) {
 		
+		
 		int result = service.insertNotice(notice);
 		
 		if (result > 0) {
-			ra.addFlashAttribute("message", "등록 되었습니다");
+			ra.addFlashAttribute("message", "공지사항이 등록 되었습니다");
 		} else {
 			ra.addFlashAttribute("message", "등록 실패");
 		}
 		
-		return "/admin/notice";
+		return "redirect:/admin/notice";
 	}
 	
 	
+	/**
+	 * 공지 사항 수정 페이지 이동
+	 * @param noticeNo : 수정하련느 공지사항 번호
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("updateView")
+	public String updateNoticeView(
+			@RequestParam("noticeNo") int noticeNo,
+			Model model) {
+		
+		Notice notice = service.updateNoticeView(noticeNo);
+		
+		model.addAttribute("notice", notice);
+		
+		return "/admin/noticeUpdate";
+		
+	}
 }

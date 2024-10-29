@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const noticeNo = deleteBtn[i].closest(".notice-box").children[0];
 
-      const url = "/admin/notice/update";    // 요청 주소
+      const url = "/admin/notice/updateView";    // 요청 주소
     
       const form = document.createElement("form");
       form.action = url;            // 요청 주소

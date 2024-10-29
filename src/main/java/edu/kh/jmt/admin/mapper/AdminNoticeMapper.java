@@ -40,4 +40,12 @@ public interface AdminNoticeMapper {
 	 */
 	int insertNotice(Notice notice);
 
+
+	/**
+	 * 공지 수정 페이지 이동
+	 * @param noticeNo : 수정하려는 공지 번호
+	 * @return notice
+	 */
+	Notice updateNoticeView(int noticeNo);
+
 }

@@ -54,4 +54,10 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 	public int insertNotice(Notice notice) {
 		return mapper.insertNotice(notice);
 	}
+	
+	// 공지 수정 페이지 이동
+	@Override
+	public Notice updateNoticeView(int noticeNo) {
+		return mapper.updateNoticeView(noticeNo);
+	}
 }

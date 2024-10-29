@@ -28,4 +28,12 @@ public interface AdminNoticeService {
 	 */
 	int insertNotice(Notice notice);
 
+	
+	/**
+	 * 공지 사항 수정 페이지 이동
+	 * @param string
+	 * @return
+	 */
+	Notice updateNoticeView(int noticeNo);
+
 }
