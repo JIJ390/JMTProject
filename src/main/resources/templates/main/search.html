@@ -19,16 +19,19 @@
 <body>
 
 
+
+
+
     <div class="bodyItem" >
         <!-- ------------- 사이드 ---------------------- -->
-        <aside class="category" >
+        <aside class="category">
 
-            <form action="/search" method="get" class="categoryBox" >
-                <div class="categorySearchBox" >
+            <form action="/search" method="get" class="categoryBox">
+                <div class="categorySearchBox">
 
                     <div class="searchBox">
                         <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색"
-                        > 
+                        th:value="${searchCode}">
                         <button class="categorySearch_btn">🍳</button>
                     </div>
 
@@ -36,9 +39,10 @@
 
                 <hr>
 
-                <div  th:text="${locationName}">지역별</div>
+                <div>지역별</div>
 
                 <hr>
+
                 <div>카테고리</div>
 
 
@@ -69,7 +73,6 @@
             <!-- 게시글이 존재할때 -->
             <th:block th:unless= "${#lists.isEmpty(searchResult)}">
                 <section class="store-section" th:each="searchCode:${searchResult}">
-                    <input type="hidden" th:value="${searchCode.restaurantNo}" class="restaurantNo">
                   <div class="store-image">
                     <img th:src="@{searchCode.restaurantImg1}" alt="매장 이미지">
                 </div>
@@ -121,10 +124,6 @@
         <a class="scroll-top" href="#">⬆</a>
     </div>
 
-    <script th:inline="javascript">
-        // 로그인 되어있으면 true, 아니면 false
-        const loginCheck = /*[[${session.loginMember != null}]]*/ false;
-    </script>
     <script src="/js/main/search.js"> </script>
     <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
 </body>

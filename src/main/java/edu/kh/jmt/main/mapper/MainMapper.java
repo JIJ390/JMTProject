@@ -1,7 +1,6 @@
 package edu.kh.jmt.main.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,18 +14,18 @@ public interface MainMapper {
 	 * 
 	 * @return
 	 */
-	List<RestaurantDto> listLike(int memberNo);
+	List<RestaurantDto> listLike();
 	
 	/** 메인페이지 최신 순
 	 * 
 	 * @return
 	 */
-	List<RestaurantDto> listCurrent(int memberNo);
+	List<RestaurantDto> listCurrent();
 	/** 리뷰 많은 순
 	 * 
 	 * @return
 	 */
-	List<RestaurantDto> listReview(int memberNo);
+	List<RestaurantDto> listReview();
 
 	
 	/** 찜하기
@@ -46,12 +45,6 @@ public interface MainMapper {
 	int insertLike(
 					@Param("memberNo")int memberNo, 
 					@Param("restaurantNo") int restaurantNo);
-
-	/** 메인페이지 인터셉터
-	 *  
-	 * @return
-	 */
-	List<Map<String, String>> locationList();
 	
 
 	

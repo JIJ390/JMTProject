@@ -123,7 +123,6 @@ public interface AdminRestaurantMapper {
 	 * @return
 	 */
 	int menuListDelete(int restaurantNo);
-
 	
 	
 
