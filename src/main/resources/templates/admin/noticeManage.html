@@ -70,7 +70,18 @@
 
     </section>
     <section class="right-section">
+      <form action="/admin/notice" method="GET" id="noticeSearch">
 
+        <select name="key" id="searchKey">
+          <option value="t">제목</option>
+          <option value="c">카테고리</option>
+          <option value="n">번호</option>
+        </select>
+
+        <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+        <button type="submit">검색</button>
+      </form>
     </section>
   </main>
 

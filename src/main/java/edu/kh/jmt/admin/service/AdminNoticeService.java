@@ -12,6 +12,15 @@ public interface AdminNoticeService {
 	 * @return
 	 */
 	Map<String, Object> selectNoticeList(int cp);
+	
+	/**
+	 * 검색 시 공지 사항 목록 불러오기
+	 * @param cp
+	 * @param paramMap
+	 * @return
+	 */
+	Map<String, Object> searchNoticeList(int cp, Map<String, Object> paramMap);
+
 
 	/**
 	 * 공지 삭제
@@ -35,5 +44,13 @@ public interface AdminNoticeService {
 	 * @return
 	 */
 	Notice updateNoticeView(int noticeNo);
+
+	
+	/**
+	 * 공지사항 수정
+	 * @param notice
+	 * @return
+	 */
+	int updateNotice(Notice notice);
 
 }

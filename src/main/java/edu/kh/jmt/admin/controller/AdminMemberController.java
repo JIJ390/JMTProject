@@ -136,7 +136,6 @@ public class AdminMemberController {
 	) {
 	Member loginMember = service.directLogin(memberNo);
 	
-	//log.debug("member : {}", loginMember);
 	
 	// @SessionAttributes({"loginMember"})
 	// 로그인된 회원 정보를 session 에 추가

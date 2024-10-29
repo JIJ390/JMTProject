@@ -1,6 +1,7 @@
 package edu.kh.jmt.admin.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
@@ -26,6 +27,24 @@ public interface AdminNoticeMapper {
 
 	
 	/**
+	 * 검색시 공지 숫자 카운트
+	 * @param paramMap
+	 * @return
+	 */
+	int searchNoticeCount(Map<String, Object> paramMap);
+
+	
+	/**
+	 * 검색 시 공지 목록 가져오기
+	 * @param paramMap
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Notice> searchNoticeList(Map<String, Object> paramMap, RowBounds rowBounds);
+
+	
+	
+	/**
 	 * 공지 삭제 처리
 	 * @param noticeNo
 	 * @return
@@ -47,5 +66,19 @@ public interface AdminNoticeMapper {
 	 * @return notice
 	 */
 	Notice updateNoticeView(int noticeNo);
+
+
+	/**
+	 * 공지 수정
+	 * @param notice
+	 * @return
+	 */
+	int updateNotice(Notice notice);
+
+
+
+
+
+	
 
 }

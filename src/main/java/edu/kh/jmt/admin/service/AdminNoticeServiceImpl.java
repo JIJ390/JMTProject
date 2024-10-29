@@ -1,5 +1,6 @@
 package edu.kh.jmt.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,23 +25,45 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 	// 공지 사항 불러오기
 	@Override
 	public Map<String, Object> selectNoticeList(int cp) {
+		
 		int listCount = mapper.getListCount();
 			
-			AdminPagination pagination = new AdminPagination(cp, listCount);
+		AdminPagination pagination = new AdminPagination(cp, listCount);
 			
-			int limit = pagination.getLimit();
-			int offset = (cp - 1)* limit;
+		int limit = pagination.getLimit();
+		int offset = (cp - 1)* limit;
 			
-			RowBounds rowBounds = new RowBounds(offset, limit);
+		RowBounds rowBounds = new RowBounds(offset, limit);
 			
-			List<Notice> noticeList = mapper.selectNoticeList(rowBounds);
+		List<Notice> noticeList = mapper.selectNoticeList(rowBounds);
 			
-			Map<String, Object> map = 
+		Map<String, Object> map = 
 					Map.of("noticeList", noticeList, "pagination", pagination);
 				
 		return map;
 	}
 	
+	
+	// 검색 시 공지 리스트 
+	@Override
+	public Map<String, Object> searchNoticeList(int cp, Map<String, Object> paramMap) {
+		
+		int searchCount = mapper.searchNoticeCount(paramMap);
+
+		AdminPagination adminPagination = new AdminPagination(cp, searchCount);
+		
+		int limit = adminPagination.getLimit(); // 10
+		int offset = (cp - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Notice> noticeList = mapper.searchNoticeList(paramMap, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put(("noticeList"), noticeList);
+		map.put(("pagination"), adminPagination);		
+		
+		return map;
+	}
 	
 	
 	// 공지 삭제
@@ -59,5 +82,11 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 	@Override
 	public Notice updateNoticeView(int noticeNo) {
 		return mapper.updateNoticeView(noticeNo);
+	}
+	
+	// 공지 수정
+	@Override
+	public int updateNotice(Notice notice) {
+		return mapper.updateNotice(notice);
 	}
 }

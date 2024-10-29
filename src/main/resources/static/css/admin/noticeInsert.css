@@ -50,6 +50,17 @@ h1 {
   justify-content: center;
 }
 
+.insert-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.insert-header span {
+  line-height: 60px;
+
+  margin: 0 20px;
+}
+
 .insert-frm {
   display: flex;
   flex-direction: column;
