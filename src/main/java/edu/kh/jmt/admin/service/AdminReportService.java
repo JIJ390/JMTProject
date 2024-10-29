@@ -141,5 +141,28 @@ public interface AdminReportService {
 	 * @return
 	 */
 	int reportCommentDelete(int commentNo);
+
+	
+	
+	/**
+	 * 리뷰 신고 현황
+	 * @return
+	 */
+	Map<String, String> reportReviewStatus();
+	
+	
+	/**
+	 * 댓글 신고 현황
+	 * @return
+	 */
+	Map<String, String> reportCommentStatus();
+	
+	
+	/**
+	 * 게시글 신고 현황
+	 * @return
+	 */
+	Map<String, String> reportBoardStatus();
+	
 	
 }

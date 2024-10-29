@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.jmt.admin.mapper.AdminMapper">
+
+	<!-- 로그인 -->
+  <select id="adminLogin"
+  		  resultType="Member">
+		SELECT 
+			MEMBER_NO, 
+			MEMBER_NAME, 
+			MEMBER_EMAIL, 
+			MEMBER_PW, 
+			PROFILE_IMG, 
+			MEMBER_DEL_FL, 
+			MEMBER_AUTH, 
+			TO_CHAR(MEMBER_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') MEMBER_DATE 
+		FROM MEMBER 
+		WHERE MEMBER_EMAIL = #{loginEmail} 
+		AND MEMBER_DEL_FL = 'N'
+		AND MEMBER_AUTH = 2 
+  </select>
+</mapper>

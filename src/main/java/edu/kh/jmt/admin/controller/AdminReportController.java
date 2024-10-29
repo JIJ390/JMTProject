@@ -307,4 +307,40 @@ public class AdminReportController {
 	}
 	
 	
+	/**
+	 * 리뷰 신고 현황판
+	 * @return
+	 */
+	@GetMapping("review/status")
+	@ResponseBody
+	public Map<String, String> reportReviewStatus () {
+		
+		return service.reportReviewStatus();
+	}
+	
+	
+	
+	/**
+	 * 댓글 신고 현황판
+	 * @return
+	 */
+	@GetMapping("comment/status")
+	@ResponseBody
+	public Map<String, String> reportCommentStatus () {
+		
+		return service.reportCommentStatus();
+	}
+	
+	
+	/**
+	 * 리뷰 신고 현황판
+	 * @return
+	 */
+	@GetMapping("board/status")
+	@ResponseBody
+	public Map<String, String> reportBoardStatus () {
+		
+		return service.reportBoardStatus();
+	}
+	
 }

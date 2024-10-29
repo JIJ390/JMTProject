@@ -244,10 +244,10 @@ const selectMemberStatus = () => {
   .then(map => {
     console.log(map);
 
-    const totalMember = document.querySelector("#totalMember");
-    const activeMember = document.querySelector("#activeMember");
-    const blockMember = document.querySelector("#blockMember");
-    const secessionMember = document.querySelector("#secessionMember");
+    const totalReportComment = document.querySelector("#totalReportComment");
+    const complReportComment = document.querySelector("#complReportComment");
+    const ReportComment = document.querySelector("#ReportComment");
+    const todayReportComment = document.querySelector("#todayReportComment");
 
     totalMember.innerText = map.totalMember;
     activeMember.innerText = map.activeMember;
