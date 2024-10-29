@@ -15,11 +15,13 @@ public interface MainSearchMapper {
 	 * @param searchCode
 	 * @param region 지역
 	 * @param tag 음식
+	 * @param memberNo 
 	 * @return
 	 */
 	List<RestaurantDto> searchResult(@Param ("searchCode") String searchCode, 
 									 @Param ("tag") String tag, 
-									 @Param ("region") String region);
+									 @Param ("region") String region, 
+									 @Param ("memberNo") int memberNo);
 
 
 	

@@ -20,7 +20,7 @@ const restaurantNo = document.querySelectorAll(".restaurantNo");
 
 
 // ----------------------- 
-for (let i = 0; i < storeSection.length; i++) {
+for (let i = 0;   i < storeSection.length; i++) {
   storeSection[i].addEventListener('click', () => {
     location.href = "/restaurant/view?restaurantNo=" + restaurantNo[i].value
 
@@ -41,7 +41,7 @@ for (let i = 0; i < heartBtn.length; i++) {
     }).then(response => {
       if(response.ok) return response.text(); 
     })
-      .then(result => {
+      .then(result => { 
         console.log("result : ", result);
         //  fa-solid 하트 채우기  / fa-regular 하트 비우기
         if (result == 1) { // 채우기

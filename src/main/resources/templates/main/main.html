@@ -77,7 +77,9 @@
 
     <div class="foodCategoryPopUp foodCategoryPopUp-close">
       <div class="foodCategoryPopUp-title">음식 카테고리
-        <button class="foodClosePopup">팝업 닫기</button>
+        <button class="foodClosePopup">
+          <i class="fa-solid fa-arrow-left"></i>팝업 닫기
+        </button>
       </div>
 
       <div class="foodCategoryPopUp-arrow">
@@ -102,7 +104,9 @@
     <div class="regionCategoryPopUp regionCategoryPopUp-close">
       <div class="regionCategoryPopUpBox">
         <div class="regionCategoryPopUp-title">지역 설정
-          <button class="regionClosePopUp">팝업 닫기</button>
+          <button class="regionClosePopUp">
+            <i class="fa-solid fa-arrow-left"></i>팝업 닫기
+          </button>
         </div>
         <div class="regionCategoryPopUp-arrow">
 
@@ -192,7 +196,6 @@
         <h3>#리뷰 많은 순</h3>
         <br>
         <section class="popular-section slider-items">
-
           <div class="store-box item" th:each="review:${review}">
             <input type="hidden" th:value="${review.restaurantNo}" class="restaurantNo">
             <div class="store-image">
@@ -206,7 +209,7 @@
               <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
               <button class="heartBtn" name="likeBtn">
                 <i class="far fa-heart fa-lg" style="color: #ff0000;"
-                th:classappend="${review.likeCheck == 1}? fa-solid : fa-regular"></i>
+                th:classappend="${review.likeCheck == 1}? fa-solid :  fa-regular"></i>
               </button>
             </div>
           </div>
@@ -218,10 +221,7 @@
 
     </section>
 
-    <!-- -------------------------------------------------------------------------------------    밑에 샘플 -->
 
-
-    <!-- --------------------------------------- side -->
     <div class="menu-container" th:if="${session.loginMember}">
       <div class="profile-img">
         <img src="${session.loginMember.profileImg ?: user }" alt="profile">

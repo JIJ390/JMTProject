@@ -18,11 +18,19 @@ public class MainSearchServiceImpl implements MainSearchService{
 
 	// 검색 기능
 	@Override
-		public List<RestaurantDto>  searchResult(String searchCode, String tag, String region) {
+		public List<RestaurantDto>  searchResult(String searchCode, String tag, String region, int memberNo) {
 		
+		if(tag == null) {
+			tag = "";
+		}
+		if(region == null) {
+			region = "";
+		}
 		
-		List<RestaurantDto>  searchResult =  mapper.searchResult(searchCode, tag, region);
+			List<RestaurantDto>  searchResult =  mapper.searchResult(searchCode, tag, region,memberNo);
+			
 		
+			
 		log.debug("================================searchResult : {} ", searchResult);
 		
 			return searchResult;

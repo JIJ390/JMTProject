@@ -49,34 +49,39 @@ FROM
 </select>
 <!-- 리뷰많은순 -->
 <select id="listReview" resultType="RestaurantDto">
-SELECT 
-	RESTAURANT_NAME,
-	RESTAURANT_IMG1,
-	RESTAURANT_NO,
-	LIKE_FL,
-	(SELECT COUNT(*) 
-		 FROM BOOKMARK SUB
-		 WHERE SUB.RESTAURANT_NO  = RESTAURANT_NO
-		 AND   MEMBER_NO = #{memberNo}) AS LIKE_CHECK
+  SELECT 
+    RESTAURANT_NAME,
+    RESTAURANT_IMG1,
+    MAIN.RESTAURANT_NO,
+    LIKE_FL,
+    (CASE 
+        WHEN EXISTS (SELECT 1 
+                     FROM BOOKMARK SUB 
+                     WHERE SUB.RESTAURANT_NO = MAIN.RESTAURANT_NO 
+                       AND MEMBER_NO = #{memberNo}) 
+        THEN 1 
+        ELSE 0 
+     END) AS LIKE_CHECK
 FROM 
-	RESTAURANT
-	JOIN (
-		SELECT 
-		   	RESTAURANT_NO,
-		   	COUNT(LIKE_FL) AS "LIKE_FL"
-		    FROM 
-		    	REVIEW
-		    WHERE 
-		    	REVIEW_DEL_FL = 'N'
-		    GROUP BY 
-		    	RESTAURANT_NO
-  	 ) USING (RESTAURANT_NO)
+    RESTAURANT MAIN
+JOIN 
+    (SELECT 
+         RESTAURANT_NO,
+         COUNT(LIKE_FL) AS LIKE_FL
+     FROM 
+         REVIEW
+     WHERE 
+         REVIEW_DEL_FL = 'N'
+     GROUP BY 
+         RESTAURANT_NO
+    ) REVIEW
+ON MAIN.RESTAURANT_NO = REVIEW.RESTAURANT_NO
+
 </select>
 
 
 <!-- 찜여부 확인  -->
 <select id="storeLike" resultType="_int">
-
 SELECT COUNT(*)
 FROM BOOKMARK
 WHERE 

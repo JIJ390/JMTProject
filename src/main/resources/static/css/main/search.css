@@ -226,3 +226,11 @@ hr {
     scale: 0.9;
   }
   
+
+
+  .boardIsEmpty{
+    position: relative;
+    left: 331px;
+    top: 300px;
+    font-size: 49px;
+  }

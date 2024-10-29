@@ -59,14 +59,19 @@ for (let i = 0; i < regionListBtn.length; i++) {
     regionListBtn[i].classList.add("regionListBtn-bc") // 선택된거 클래스 추가
 
     const regionBtnResult = document.querySelector("#regionBtnResult")
-
+    regionBtnResult.addEventListener("click", () => {
+      
+    })
     const value = regionListBtn[i].innerText;
-    console.log(value);
+    // console.log(value);
+    regionBtnResult.textContent = value;
 
     regionCategorySubmit.addEventListener("click", () => {
-      regionBtnResult.textContent = value;
       region.value = value;
     })
+    
+
+
     const region = document.querySelector(".region")
 
 

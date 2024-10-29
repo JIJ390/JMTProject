@@ -17,11 +17,7 @@
 <th:block th:replace= "~{common/header}"></th:block>
 <!-- ------------ 헤더 ----------------- -->
 <body>
-
-
-
-
-
+    [[${searchResult}]]
     <div class="bodyItem" >
         <!-- ------------- 사이드 ---------------------- -->
         <aside class="category">
@@ -38,7 +34,11 @@
                 </div>
 
                 <hr>
-                <div  th:text="${locationName}">지역별</div>
+                <div>
+                    <p>
+                        지역별
+                    </p>
+                </div>
 
                 <hr>
 
@@ -47,7 +47,6 @@
 
                 <div class="categoryBtns_box">
                     <button class="categoryBtns">최신순</button>|
-                    <button class="categoryBtns">호불호 순</button>|
                     <button class="categoryBtns">리뷰 많은 순</button>|
                     <button class="categoryBtns">찜 많은 순</button>
 
@@ -66,7 +65,18 @@
 
             <!-- 게시글이 존재하지않을때 -->
             <th:block th:if= "${#lists.isEmpty(searchResult)}">
-                <h1>  조회한 결과가 없습니다.  </h1>
+
+
+
+<div class="boardIsEmptyBox">   
+    <h1 class="boardIsEmpty">  
+        <i class="fa-solid fa-xmark" style="color: #ff0000;"></i>
+        조회한 결과가 없습니다.
+    </h1>
+</div>
+
+
+
             </th:block>
 
             <!-- 게시글이 존재할때 -->
@@ -85,7 +95,8 @@
                 <div class="store-actions">
                     <p class="store-rating" th:text="|${searchCode.likePercent}%|">퍼센트</p>
                     <button class="heartBtn">
-                        <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+                        <i class="far fa-heart fa-lg" style="color: #ff0000;"
+                        th:classappend="${searchCode.likeCheck == 1}? fa-solid :  fa-regular"></i>
                     </button>
                 </div>
                 <input type="hidden" th:value="${searchCode.restaurantNo}" class="restaurantNo">
