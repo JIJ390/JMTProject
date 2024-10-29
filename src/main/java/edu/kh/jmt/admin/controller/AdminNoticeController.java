@@ -36,9 +36,20 @@ public class AdminNoticeController {
 	@GetMapping("")
 	public String selectNoticeList(
 			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
-			Model model) {
+			Model model,			
+			@RequestParam Map<String, Object> paramMap) {
 		
-		Map<String, Object> map = service.selectNoticeList(cp);
+		Map<String, Object> map = null;
+		
+		if (paramMap.get("key") == null) {	
+			map = service.selectNoticeList(cp);
+			
+		} else { // 검색한 경우
+			
+			// paramMap 에 key, query 담겨 있음
+			map = service.searchNoticeList(cp, paramMap);
+		}
+
 		
 		List<Notice> noticeList = (List<Notice>)map.get("noticeList");
 		AdminPagination pagination = (AdminPagination)map.get("pagination");
@@ -121,10 +132,10 @@ public class AdminNoticeController {
 	
 	@PostMapping("update")
 	public String updateNotice(
-			@RequestParam("noticeNo") int noticeNo,
+			@ModelAttribute Notice notice,
 			RedirectAttributes ra) {
 		
-		int result = service.updateNotice(noticeNo);
+		int result = service.updateNotice(notice);
 		
 		if (result > 0) {
 			ra.addFlashAttribute("message", "공지사항이 수정 되었습니다");

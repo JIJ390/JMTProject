@@ -13,7 +13,6 @@
 	<select id="selectNoticeList">
 		SELECT
 			NOTICE_NO,
-			ROW_NUMBER() OVER (ORDER BY NOTICE_NO ASC) "RNUM",
 			NOTICE_TITLE,
 			NOTICE_CATEGORY,
 			NOTICE_WRITE_DATE
@@ -21,6 +20,58 @@
 		WHERE NOTICE_NO > 0
 		AND   NOTICE_DEL_FL = 'N'
 		ORDER BY NOTICE_NO DESC
+	</select>
+	
+	
+	<!-- 검색 조건에 맞는 전체 공지 수 조회 -->
+	<select id="searchNoticeCount">
+		SELECT 
+			COUNT(*)
+		FROM "NOTICE"
+		JOIN
+		WHERE
+		<choose>
+			<!-- 공지 종류 검색인 경우 -->
+			<when test='key == "c"'>
+				NOTICE_CATEGORY LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 공지 제목 검색인 경우 -->
+			<when test='key == "t"'>
+				NOTICE_TITLE LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 공지 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				NOTICE_NO LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 검색 조건에 맞는 전체 공지 목록 조회 -->
+	<select id="searchNoticeList">
+		SELECT 
+			NOTICE_NO,
+			NOTICE_TITLE,
+			NOTICE_CATEGORY,
+			NOTICE_WRITE_DATE
+		FROM "NOTICE"
+		JOIN
+		WHERE
+		<choose>
+			<!-- 공지 종류 검색인 경우 -->
+			<when test='key == "c"'>
+				NOTICE_CATEGORY LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 공지 제목 검색인 경우 -->
+			<when test='key == "t"'>
+				NOTICE_TITLE LIKE '%' || #{query} || '%'
+			</when>
+			<!-- 공지 번호 검색인 경우 -->
+			<when test='key == "n"'>
+				NOTICE_NO LIKE '%' || #{query} || '%'
+			</when>
+		</choose>
+		ORDER BY NOTICE_NO DESC
+		
 	</select>
 	
 
@@ -48,7 +99,7 @@
 
 	</insert>
 	
-	
+	<!-- 공지 수정 페이지 이동 -->
 	<select id="updateNoticeView">
 		SELECT
 			NOTICE_NO,
@@ -60,5 +111,16 @@
 		WHERE NOTICE_NO > 0
 		AND   NOTICE_NO = #{noticeNo}
 	</select>
+	
+	<update id="updateNotice">
+		UPDATE "NOTICE"
+		SET
+			NOTICE_TITLE = #{noticeTitle},
+			NOTICE_CATEGORY = #{noticeCategory},
+			NOTICE_CONTENT = #{noticeContent}
+		WHERE 
+			NOTICE_NO = #{noticeNo}
+	</update>
+	
   	
 </mapper>
