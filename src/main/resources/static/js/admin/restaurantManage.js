@@ -197,9 +197,9 @@ const deleteRestaurant = () => {
 
   deleteBtn.addEventListener("click", () => {
 
+
+    
     if (confirm("정말 삭제 하시겠습니까?") == false) return;
-
-
   
     const url = "/admin/restaurant/delete";    // 요청 주소
   
