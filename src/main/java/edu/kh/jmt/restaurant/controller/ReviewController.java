@@ -66,7 +66,8 @@ public class ReviewController {
 			@RequestParam("getRestaurantNo") int restaurantNo, 
 			@RequestParam("content") String content,
 			@RequestParam("likeFl") String likeFl, 
-			RedirectAttributes ra
+			RedirectAttributes ra,
+			@SessionAttribute("loginMember") Member loginMember
 			) {
 
 		int result = 0;
@@ -79,7 +80,7 @@ public class ReviewController {
 		}
 
 		// 로그인한 회원 번호로 등록예정 1 -> loginMemberNo
-		result = service.reviewUpload(restaurantNo, content, likeFl, 1);
+		result = service.reviewUpload(restaurantNo, content, likeFl, loginMember.getMemberNo());
 
 		if (result > 0) {
 			ra.addFlashAttribute("message", "리뷰 등록이 완료되었습니다");
@@ -100,9 +101,27 @@ public class ReviewController {
 		
 		List<ReviewDto> reviews = service.selectReview(restaurantNo, rowNum, sort);
 
+		int size = service.reviewSize(restaurantNo);
+		
+		System.out.println(size);
+		System.out.println(size);
+		System.out.println(size);
+		System.out.println(size);
+		System.out.println(size);
+		System.out.println(rowNum);
+		System.out.println(rowNum);
+		System.out.println(rowNum);
+		System.out.println(rowNum);
+		System.out.println(rowNum);
+		
+		if(rowNum >= size) {
+			model.addAttribute("maxSize", 1);
+		}
+		
 		if(reviews.size() > 0) {
 			model.addAttribute("reviews", reviews);
-
+			model.addAttribute("reviewSize", reviews.size());
+			
 		return "restaurant/review";
 		}
 		else {
@@ -118,16 +137,17 @@ public class ReviewController {
 	public String reviewDelete(
 			@RequestParam("reviewNo") int reviewNo,
 			@RequestParam("restaurantNo") int restaurantNo,
-			Model model
+			Model model,
+			RedirectAttributes ra
 			) {
 		
 		int result = service.reviewDelete(reviewNo);
 		if(result > 0) {
-			model.addAttribute("message", "삭제되었습니다");
+			ra.addFlashAttribute("message", "리뷰가 삭제되었습니다");
 		}
 		
 		// 레스토랑 넘버로 리다이렉트 추가
-		return "redirect:/restaurant/view";
+		return "redirect:/restaurant/view?restaurantNo="+restaurantNo;
 	}
 			
 	
@@ -174,5 +194,26 @@ public class ReviewController {
 
 		return "redirect:/restaurant/view";
 	}
+	
+	@ResponseBody
+	@GetMapping("review/report")
+	public int reviewReport(
+			@RequestParam("reportContent") String reportContent,
+			@RequestParam("reportType") String reportType,
+			@RequestParam("reviewNo") int reviewNo,
+			@SessionAttribute("loginMember") Member loginMember
+			) {
+		
+		int result = service.reportAdd(reportType, reportContent, reviewNo, loginMember.getMemberNo());
+		
+		
+		if(reportType.equals("")) {
+			return 0;
+		}
+		
+		return result;
+	}
+	
+	
 	
 }

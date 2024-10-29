@@ -112,7 +112,33 @@
 		WHERE REVIEW_NO = #{reviewNo}
 	</update>
 	
+	<insert id="reportAdd">
+		INSERT INTO "REPORT_REVIEW"
+		VALUES (
+			SEQ_REPORT_REVIEW_NO.NEXTVAL, 
+			#{reportContent}, 
+			DEFAULT, 
+			NULL, 
+			'N', 
+			#{memberNo}, 
+			#{reviewNo}, 
+			#{reportType})
+	</insert>
 	
+	<select id="selectReportReview" resultType="_int">
+		SELECT COUNT(*)
+		FROM REPORT_REVIEW
+		WHERE MEMBER_NO = #{memberNo}
+		AND REVIEW_NO = #{reviewNo}
+		AND REPORT_TYPE_NO = #{reportType}
 	
+	</select>
+	
+	<select id="selectReviewSize">
+		SELECT COUNT(*)
+		FROM "REVIEW"
+		WHERE RESTAURANT_NO = #{restaurantNo}
+		AND REVIEW_DEL_FL = 'N'
+	</select>
 	
 </mapper>

@@ -45,4 +45,18 @@ public interface ReviewMapper {
 			@Param("content")String content, 
 			@Param("likeFl")String likeFl);
 
+	int reportAdd(
+			@Param("reportType") String reportType, 
+			@Param("reportContent") String reportContent,
+			@Param("reviewNo") int reviewNo, 
+			@Param("memberNo") int memberNo);
+
+	int selectReportReview(
+			@Param("memberNo")int memberNo, 
+			@Param("reviewNo")int reviewNo, 
+			@Param("reportType")String reportType);
+
+	int selectReviewSize(int restaurantNo);
+
+	
 }

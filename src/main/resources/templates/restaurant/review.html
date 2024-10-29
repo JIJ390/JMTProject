@@ -1,5 +1,6 @@
 <th:block th:each="r:${reviews}">
   <input type="hidden" class="getReviewNo" th:value="${r.reviewNo}">
+  <input type="hidden" class="maxSize" th:value="${maxSize}">
   <div class="reviewView">
     <div class="reviewProfile">
       <img class="reviewProfileImg" 
@@ -12,21 +13,26 @@
         <p th:if="${r.likeFl=='N'}"><i class="fa-regular fa-thumbs-down"></i></p>
       </div>
       <div class="ud">
-        <th:block th:if="${session.loginMember?.memberNo} == ${r.memberNo}">
-          <button class="updateBtn">수정</button>
-          <button class="deleteBtn">삭제</button>
-        </th:block>
-        <th:block th:if="${session.loginMember?.memberNo} != ${r.memberNo}">
-          <button class="popupButtonReview">신고</button>
-          <div id="popupReview" class="hidden popup">
-            <button class="">혐오발언</button>
-            <hr style="margin: 5px;">
-            <button class="">선정적</button>
-            <hr style="margin: 5px;">
-            <button class="">부적절</button>
-            <hr style="margin: 5px;">
-            <button class="">테러조장</button>
-        </div>
+        <th:block th:if= "${session.loginMember != null}">
+          <th:block th:if="${session.loginMember?.memberNo} == ${r.memberNo}">
+            <button class="updateBtn">수정</button>
+            <button class="deleteBtn">삭제</button>
+          </th:block>
+          <th:block th:if="${session.loginMember?.memberNo} != ${r.memberNo}">
+            <button class="popupButtonReview">신고</button>
+            <div class="popupReview reviewPoppupHidden">
+                <button class="report1">악의적인 리뷰</button>
+                <hr style="margin: 5px;">
+                <button class="report2">선정적인 리뷰</button>
+                <hr style="margin: 5px;">
+                <button class="report3">부적절한 리뷰</button>
+                <hr style="margin: 5px;">
+                <button class="report4 ">욕설, 부적절한 단어선택</button>
+                <hr style="margin: 5px;">
+                <textarea type="text" class="reportContent" placeholder="신고 내용"></textarea>
+                <button style="border: 1px solid gray; width: 50%; text-align: center; margin-left: 30px; margin-top: 10px;" class="reportSubmit">제출</button>
+            </div>
+          </th:block>
         </th:block>
         
       </div>
