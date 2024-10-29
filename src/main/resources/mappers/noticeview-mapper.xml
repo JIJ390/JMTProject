@@ -30,6 +30,7 @@
 			FAQ_CONTENT
 		FROM FAQ
 		WHERE FAQ_NO > 0
+		AND FAQ_DEL_FL = 'N'
 		ORDER BY FAQ_NO DESC
 	</select>
 	

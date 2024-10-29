@@ -1,0 +1,118 @@
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+body      { font-family: 'NanumSquare', sans-serif }
+.normal      { font-weight: 400 }
+.bold      { font-weight: 700 }
+.bolder      { font-weight: 800 }
+.light      { font-weight: 300 }
+
+  h3 {font-family: 'NEXON Lv1 Gothic OTF';}
+ header {font-family: 'NEXON Lv1 Gothic OTF';}
+
+  .main{
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    box-sizing: border-box;
+  }
+
+  #panel {
+    padding: 50px;
+    width: 800px;
+    display: none;
+    box-sizing: border-box;
+  }
+
+  #fix-area{
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    box-sizing: border-box;
+    margin: 20px;
+  }
+
+  #faq-container{
+    display: flex;
+    flex-direction: column;
+    display: block;
+    justify-content: space-between;
+    margin-top: 50px;
+  }
+
+  /* 화살표 모양 */
+  .open-close {
+    font-size: 9pt;
+    color: #bbb;
+    text-align: center;
+  }
+
+  /* hr 효과 */
+  hr {
+    border-width:1px 0 0 0; 
+    border-style:solid; 
+    border-color:#bbb;
+  }
+
+  /* btn 효과 */
+  .btn {
+  width: 800px;
+  height: 40px;
+  padding: 10px 25px;
+  border: 1px solid #aaaaaa;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 1em;
+}
+.btn {
+  transition: all 0.3s ease;
+  overflow: hidden;
+  padding: 10px;
+}
+.btn:after {
+  position: absolute;
+  content: " ";
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease;
+  -webkit-transform: scale(.1);
+  transform: scale(.1);
+}
+.btn:hover {
+  color: #fff;
+}
+.btn:hover:after {
+  background: #BBDED6;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.floating-buttons {
+position: fixed;
+bottom: 20px;
+right: 30px;
+display: flex;
+flex-direction: row;
+font-weight: bold;
+}
+
+.panel {
+display: none;
+padding: 20px;
+}
