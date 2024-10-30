@@ -32,39 +32,3 @@ faqInsertFrm.addEventListener("submit", e => {
 
 });
 
-// 수정 버튼 클릭
-const insertBtn = document.querySelector("#insertBtn");
-
-insertBtn.addEventListener("click", e => {
-    // 서버로 제출되어야 하는 값을 JS 객체 형태로 묶기
-    const obj = {}; // 빈 객체 생성
-    obj.todoNo = updateBtn.dataset.todoNo; // 버튼에 dataset 값 얻어오기
-  
-    obj.todoSub = document.querySelector("#updateTitle").value;
-    obj.todoContent = document.querySelector("#updateContent").value;
-  
-    console.log(obj);
-  
-    // 비동기로 할일 수정 요청
-    fetch("/admin/faqEdit", {
-      method : "PUT",
-      headers : {"Content-Type" : "application/json"},
-      body : JSON.stringify(obj)
-    })
-    .then(response => {
-      if(response.ok) return response.text();
-      throw new Error("수정 실패 : " + response.status);
-    })
-    .then(result => {
-      console.log(result); // 1 or 0
-  
-      if(result > 0){
-        // 수정 성공
-        alert("수정 성공!!");  
-      } else {
-        // 수정 실패
-        alert("수정 실패 ㅠㅠ");
-      }
-    })
-    .catch( err => console.error(err) );
-})
