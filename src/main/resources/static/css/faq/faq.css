@@ -170,3 +170,17 @@ font-weight: bold;
   color: white !important;
   letter-spacing: 0 !important;
 }
+
+#topBtn {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  border-radius: 50%;
+  border: none;
+  padding: 40;
+  color: #6EC3C2;
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  cursor: pointer;
+}
