@@ -250,14 +250,18 @@
 
 
 
-    <!-- Floating Buttons -->
+    <!-- Floating Buttons
     <div class="floating-buttons">
       <a class="scroll-top" href="#">⬆</a>
-    </div>
+    </div> -->
 
   </main>
   <th:block th:replace="~{common/footer}"></th:block>
+<!-- Floating Buttons -->
+<button class="fa-solid fa-arrow-up" id="topBtn"></button>
+ 
 
+<script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
   <script th:inline="javascript">
         // 로그인 되어있으면 true, 아니면 false
         const loginCheck = /*[[${session.loginMember != null}]]*/ false;

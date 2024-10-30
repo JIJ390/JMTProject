@@ -171,8 +171,10 @@ font-weight: bold;
   letter-spacing: 0 !important;
 }
 
+/* 점메추 게시판과 동일한 Top버튼 */
 #topBtn {
-  position: fixed;
+  color: white;
+  position: absolute;
   bottom: 70px;
   right: 20px;
   border-radius: 50%;
