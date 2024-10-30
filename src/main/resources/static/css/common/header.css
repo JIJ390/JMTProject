@@ -215,11 +215,9 @@ header > img {
 }
 
 
-
 /* 로고 */
 .logo-img {
-  width: 130px;
-  height: 130px;
+  margin-top: 3px;
 }
 
 /******* 헤더  ****/
