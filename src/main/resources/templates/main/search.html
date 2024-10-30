@@ -17,43 +17,50 @@
 <th:block th:replace= "~{common/header}"></th:block>
 <!-- ------------ 헤더 ----------------- -->
 <body>
-    [[${searchResult}]]
     <div class="bodyItem" >
         <!-- ------------- 사이드 ---------------------- -->
         <aside class="category">
 
-            <form action="/search" method="get" class="categoryBox" >
+            <form action="/search" method="get" class="categoryBox" id="searchFrm"> 
+                <input type="hidden" class="result" name="result">
                 <div class="categorySearchBox" >
 
 
                     <div class="searchBox">
-                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색">
+                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색"
+                        th:value="${searchCode}">
                         <button class="categorySearch_btn">🍳</button>
                     </div>
 
                 </div>
 
                 <hr>
-                <div>
-                    <p>
-                        지역별
-                    </p>
-                </div>
 
-                <hr>
+               
+    <th:block th:if="${tag == ''}">
+        <div>검색한 지역이 없습니다.</div>
+    </th:block>
 
-                <div>카테고리</div>
+    <th:block th:unless= "${tag == ''}"> 
+        <div th:text="${tag}"></div>
+    </th:block>
+<hr>
+    <th:block th:if="${region == ''}">
+        <div>검색한 카테고리가 없습니다.</div>
+    </th:block>
 
+    <th:block th:unless= "${region == ''}"> 
+        <div th:text="${region}"></div>
+    </th:block>
 
                 <div class="categoryBtns_box">
-                    <button class="categoryBtns">최신순</button>|
-                    <button class="categoryBtns">리뷰 많은 순</button>|
-                    <button class="categoryBtns">찜 많은 순</button>
-
+                    <button type=button class="categoryBtns" value="1">최신순</button>|
+                    <button type=button class="categoryBtns" value="2">리뷰 많은 순</button>|
+                    <button type=button class="categoryBtns" value="3">찜 많은 순</button>
                 </div>
                 <hr>
-
-            </form>
+ </form>
+            
 
         </aside>
         <!-- ------------- 사이드 ---------------------- -->
@@ -82,9 +89,8 @@
             <!-- 게시글이 존재할때 -->
             <th:block th:unless= "${#lists.isEmpty(searchResult)}">
                 <section class="store-section" th:each="searchCode:${searchResult}">
-                    <input type="hidden" th:value="${searchCode.restaurantNo}" class="restaurantNo">
                   <div class="store-image">
-                    <img th:src="@{searchCode.restaurantImg1}" alt="매장 이미지">
+                    <img th:src="${searchCode.restaurantImg1}" alt="매장 이미지">
                 </div>
                 <div class="store-info">
                     <h1 th:text="${searchCode.restaurantName}">매장 이름</h1>

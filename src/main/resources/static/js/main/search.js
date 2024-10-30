@@ -62,7 +62,7 @@ for (let i = 0; i < heartBtn.length; i++) {
 const menu = document.querySelector(".menu");
 const MenuContainer = document.querySelector(".menu-container");
 
-menu.addEventListener('click', () => {
+menu?.addEventListener('click', () => {
 
   if (MenuContainer.style.display == "block") {
     MenuContainer.style.display = "none"
@@ -73,11 +73,25 @@ menu.addEventListener('click', () => {
 
 });
 
-//---------------------- 검색 값 남기기
+//---------------------------------------------------------
 
 
+const categoryBtns = document.querySelectorAll(".categoryBtns");
+const result = document.querySelector(".result");
 
+const searchFrm = document.querySelector("#searchFrm");
 
+for(let i = 0 ; i < categoryBtns.length ; i++){
 
+  
+  categoryBtns[i].addEventListener("click", () => {
+    console.log("aaa");
 
-//---------------------------------------------------------------------------
+    result.value = categoryBtns[i].innerText;
+
+    console.log(result.value);
+
+    searchFrm.submit();
+  })
+}
+
