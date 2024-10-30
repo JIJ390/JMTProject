@@ -31,6 +31,12 @@ public class InterceptorConfig implements WebMvcConfigurer{
 		
 		registry.addInterceptor(selectLocationList())
 				.addPathPatterns("/admin/restaurant/regist")
-				.addPathPatterns("/admin/restaurant/updateView");
+				.addPathPatterns("/admin/restaurant/updateView")
+				.addPathPatterns("/**") 
+				.excludePathPatterns(
+						"/css/**",
+						"/js/**,",
+						"images/**",
+						"/favicon.ico");
 	}
 }

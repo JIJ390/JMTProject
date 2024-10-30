@@ -1,5 +1,6 @@
 package edu.kh.jmt.restaurant.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,11 +19,28 @@ public class MainSearchServiceImpl implements MainSearchService{
 
 	// 검색 기능
 	@Override
-		public List<RestaurantDto>  searchResult(String searchCode, String tag, String region) {
+		public List<RestaurantDto>  searchResult(String searchCode, String tag, String region, int memberNo, String result) {
+		List<RestaurantDto>   searchResult = new ArrayList<>();
+		if(tag == null) {
+			tag = "";
+		}
+		if(region == null) {
+			region = "";
+		}
+		
+		if(result.equals("1")) {
+			searchResult = mapper.latest(searchCode, tag, region,memberNo);
+		}else if (result.equals("2")) {
+			searchResult =  mapper.searchResult(searchCode, tag, region,memberNo);
+		}else {
+			searchResult = mapper.likeOrder(searchCode, tag, region,memberNo);
+		}
 		
 		
-		List<RestaurantDto>  searchResult =  mapper.searchResult(searchCode, tag, region);
 		
+			
+		
+			
 		log.debug("================================searchResult : {} ", searchResult);
 		
 			return searchResult;

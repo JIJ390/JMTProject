@@ -12,6 +12,14 @@
 	   RESTAURANT_IMG1,
 	   LOCATION_NAME,
 	   CATEGORY_NAME,
+    (CASE 
+        WHEN EXISTS (SELECT 1 
+                     FROM BOOKMARK SUB 
+                     WHERE SUB.RESTAURANT_NO = R.RESTAURANT_NO 
+                       AND MEMBER_NO = #{memberNo}) 
+        THEN 1 
+        ELSE 0 
+     END) AS LIKE_CHECK,
 	   (SELECT COUNT(*)   
 	    FROM REVIEW
 	    WHERE RESTAURANT_NO = R.RESTAURANT_NO) AS REVIEW_COUNT, 
@@ -61,7 +69,144 @@
 	ORDER BY REVIEW_COUNT DESC
 </select>
 
+<select id="latest" resultType="RestaurantDto">
+	SELECT 
+	   RESTAURANT_NO, 
+	   RESTAURANT_NAME,
+	   RESTAURANT_TEL,
+	   RESTAURANT_ADDRESS,
+	   RESTAURANT_IMG1,
+	   LOCATION_NAME,
+	   CATEGORY_NAME,
+    (CASE 
+        WHEN EXISTS (SELECT 1 
+                     FROM BOOKMARK SUB 
+                     WHERE SUB.RESTAURANT_NO = R.RESTAURANT_NO 
+                       AND MEMBER_NO = #{memberNo}) 
+        THEN 1 
+        ELSE 0 
+     END) AS LIKE_CHECK,
+	   (SELECT COUNT(*)   
+	    FROM REVIEW
+	    WHERE RESTAURANT_NO = R.RESTAURANT_NO) AS REVIEW_COUNT, 
+	   (SELECT COUNT(*)   
+	    FROM REVIEW
+	    WHERE LIKE_FL = 'Y'
+	    AND RESTAURANT_NO = R.RESTAURANT_NO) AS LIKE_COUNT,
+	    ROUND(NVL(    
+          (SELECT COUNT(*)
+          FROM REVIEW
+          WHERE LIKE_FL = 'Y'
+          AND RESTAURANT_NO = R.RESTAURANT_NO) /   
+          NULLIF(     
+                    (SELECT COUNT(*)
+                   FROM REVIEW
+                    WHERE RESTAURANT_NO = R.RESTAURANT_NO), 0), 0
+	    ) * 100 )AS "LIKE_PERCENT"  
+	FROM RESTAURANT r
+	JOIN LOCATION USING (LOCATION_NO)
+	JOIN CATEGORY USING (CATEGORY_NO)
+	WHERE RESTAURANT_DEL_FL = 'N'
+	<!-- 지역, 음식 카테고리만 했을 경우  -->
+	<if test="region != '' and tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 지역만 조회 -->
+	<if test="region != ''">
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 음식만 조회 -->
+	<if test="tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	</if>
 
+	<!-- 검색 결과만 한 결과 -->
+		<if test="searchCode != ''">
+		AND (RESTAURANT_NAME LIKE '%' || #{searchCode} || '%'
+			OR LOCATION_NAME LIKE '%' || #{searchCode} || '%'
+			OR CATEGORY_NAME LIKE '%' || #{searchCode} || '%')	
+		</if>
+	GROUP BY R.RESTAURANT_NO, RESTAURANT_IMG1,RESTAURANT_ADDRESS,RESTAURANT_TEL,R.RESTAURANT_NAME, LOCATION_NAME,   CATEGORY_NAME, RESTAURANT_IMG1
+	ORDER BY RESTAURANT_NO DESC
+</select>
+
+
+<select id="likeOrder" resultType="RestaurantDto">
+	SELECT 
+	   R.RESTAURANT_NO, 
+	   RESTAURANT_NAME,
+	   RESTAURANT_TEL,
+	   RESTAURANT_ADDRESS,
+	   RESTAURANT_IMG1,
+	   LOCATION_NAME,
+	   CATEGORY_NAME,
+    (CASE 
+        WHEN EXISTS (SELECT 1 
+                     FROM BOOKMARK SUB 
+                     WHERE SUB.RESTAURANT_NO = R.RESTAURANT_NO 
+                       AND MEMBER_NO = #{memberNo}) 
+        THEN 1 
+        ELSE 0 
+     END) AS LIKE_CHECK,
+	   (SELECT COUNT(*)   
+	    FROM REVIEW
+	    WHERE RESTAURANT_NO = R.RESTAURANT_NO) AS REVIEW_COUNT, 
+	   (SELECT COUNT(*)   
+	    FROM REVIEW
+	    WHERE LIKE_FL = 'Y'
+	    AND RESTAURANT_NO = R.RESTAURANT_NO) AS LIKE_COUNT,
+	    ROUND(NVL(    
+          (SELECT COUNT(*)
+          FROM REVIEW
+          WHERE LIKE_FL = 'Y'
+          AND RESTAURANT_NO = R.RESTAURANT_NO) /   
+          NULLIF(     
+                    (SELECT COUNT(*)
+                   FROM REVIEW
+                    WHERE RESTAURANT_NO = R.RESTAURANT_NO), 0), 0
+	    ) * 100 )AS "LIKE_PERCENT"  
+	FROM RESTAURANT r
+	JOIN LOCATION USING (LOCATION_NO)
+	JOIN CATEGORY USING (CATEGORY_NO)
+	JOIN 
+	(SELECT RESTAURANT_NO, COUNT(*) AS "BOOKMARKCOUNT"
+		FROM RESTAURANT
+		JOIN BOOKMARK USING (RESTAURANT_NO)
+		GROUP BY RESTAURANT_NO)B ON (B.RESTAURANT_NO = R.RESTAURANT_NO)
+	WHERE RESTAURANT_DEL_FL = 'N'
+	<!-- 지역, 음식 카테고리만 했을 경우  -->
+	<if test="region != '' and tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 지역만 조회 -->
+	<if test="region != ''">
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 음식만 조회 -->
+	<if test="tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	</if>
+
+	<!-- 검색 결과만 한 결과 -->
+		<if test="searchCode != ''">
+		AND (RESTAURANT_NAME LIKE '%' || #{searchCode} || '%'
+			OR LOCATION_NAME LIKE '%' || #{searchCode} || '%'
+			OR CATEGORY_NAME LIKE '%' || #{searchCode} || '%')	
+		</if>
+	GROUP BY R.RESTAURANT_NO, RESTAURANT_IMG1,RESTAURANT_ADDRESS,
+	RESTAURANT_TEL,R.RESTAURANT_NAME, LOCATION_NAME,   CATEGORY_NAME, RESTAURANT_IMG1,BOOKMARKCOUNT
+	ORDER BY BOOKMARKCOUNT DESC
+</select>
 
 
 	

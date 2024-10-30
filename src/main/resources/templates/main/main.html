@@ -18,7 +18,7 @@
   <header>
     <div id="header-Font">
       <a href="/">메인페이지</a>
-      <a href="#">점메추</a>
+      <a href="/board/boardMain">점메추</a>
       <a href="/notice/noticeView">공지사항</a>
       <a href="/notice/faq">FAQ</a>
 
@@ -37,7 +37,7 @@
 
     <!-- 로그인이 되어있을경우 -->
     <div th:if= "${session.loginMember}" class="user-actions">
-      <img th:src="${session.loginMember.profileImg ?: user }" alt="">
+      <img th:src="${session.loginMember.profileImg ?: user }" alt="" class="userImage">
       <p th:text="${session.loginMember.memberName}">유저 닉네임</p>
       <a class="menu" href="#">
         <i class="fa-solid fa-bars"></i>
@@ -48,9 +48,9 @@
 
   <!-- Main Content -->
   <main>
-    <form class="content-header" action="/search" method="GET">
+    <form class="content-header" action="/search" method="GET" id="searchForm">
       <h1>맛집 검색 J&T ! </h1>
-
+      <input type="hidden" class="result" name="result">
       <div class="searchBox">
 
         <input type="text" id="searchCode" name="searchCode">
@@ -68,18 +68,22 @@
 
         <a class="filter-category" id="regionCategoryBtn">지역 선택</a>
       </div>
-
+      
       <div>
-        <input class="tag" name="tag" readonly> </input>
+        <input class="tag" name="tag" readonly >
   
-        <input class="region" name="region" readonly> </input>
+        <input class="region" name="region" readonly>
       </div>
     </form>
 
     <!-- ------------------------------------카테고리 팝업-------------------------------------------------------- -->
 
     <div class="foodCategoryPopUp foodCategoryPopUp-close">
-      <div class="foodCategoryPopUp-title">음식 카테고리</div>
+      <div class="foodCategoryPopUp-title">음식 카테고리
+        <button class="foodClosePopup">
+          <i class="fa-solid fa-arrow-left"></i>팝업 닫기
+        </button>
+      </div>
 
       <div class="foodCategoryPopUp-arrow">
         <div class="foodCategoryPopUp-left">
@@ -94,7 +98,6 @@
           <p id="foodBtnResult">카테고리를 선택해주세요</p>
           <div>
             <button class="foodCategorySubmit">적용하기</button>
-            <button class="foodClosePopup">팝업 닫기</button>
           </div>
         </div>
       </div>
@@ -103,24 +106,19 @@
 
     <div class="regionCategoryPopUp regionCategoryPopUp-close">
       <div class="regionCategoryPopUpBox">
-        <div class="regionCategoryPopUp-title">지역 설정</div>
+        <div class="regionCategoryPopUp-title">지역 설정
+          <button class="regionClosePopUp">
+            <i class="fa-solid fa-arrow-left"></i>팝업 닫기
+          </button>
+        </div>
         <div class="regionCategoryPopUp-arrow">
 
           <div class="regionCategoryPopUp-left">
-            <div class="regionCategoryPopUp-leftBox">
-
-                <div class="regionListBtn">혜화</div>
-                <div class="regionListBtn">명동</div>
-                <div class="regionListBtn">회현</div>
-                <div class="regionListBtn">충무로</div>
-                <div class="regionListBtn">종로5가</div>
-                <div class="regionListBtn">종로3가</div>
-                <div class="regionListBtn">광화문역</div>
-                <div class="regionListBtn">경북궁역</div>
-                <div class="regionListBtn">시청역</div>
-                <div class="regionListBtn">안국역</div>
-                <div class="regionListBtn">을지로입구</div>
-                <div class="regionListBtn">종각역</div>
+            <div class="regionCategoryPopUp-leftBox"
+                th:each="location:${locationList}">
+              <div class="regionListBtn"
+                th:text="${location.locationName}">지역 이름
+              </div>
 
             </div>
           </div>
@@ -129,8 +127,7 @@
           <div class="regionCategoryPopUp-right">
             <p id="regionBtnResult">지역을 선택해주세요</p>
             <div>
-              <button class="regionCategorySubmit">적용하기</button>
-              <button class="regionClosePopUp">팝업 닫기</button>
+              <button class="regionCategorySubmit">선택하기</button>
             </div>
           </div>
         </div>
@@ -144,17 +141,16 @@
 
     <section>
 
-      <div class="sectionBox">
-
+      <div class="sectionBox slider" >
         <h3>#인기순</h3>
         <br>
-        <section class="popular-section">
-
-          <div class="store-box" th:each="like:${listLike}">
+        <section class="popular-section  slider-items">
+          
+          <div class="store-box item" th:each="like:${listLike}">
             <input type="hidden" th:value="${like.restaurantNo}" class="restaurantNo">
             <div class="store-image">
               <!-- The image will go here -->
-              <img th:src="@{like.restaurantImg1}" alt="가게 사진">
+              <img th:src="${like.restaurantImg1}">
             </div>
             <div class="store-info">
               <span class="store-name" th:text="${like.restaurantName}">
@@ -162,7 +158,7 @@
               <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
               <button class="heartBtn" name="likeBtn">
                 <i class="far fa-heart fa-lg " style="color: #ff0000;"
-                    th:classappend="*{likeCheck == 1}? fa-solid : fa-regular"></i>
+                th:classappend="${like.likeCheck == 1}?  fa-solid : fa-regular"></i>
               </button>
             </div>
           </div>
@@ -171,17 +167,16 @@
         </section>
       </div>
 
-      <div class="sectionBox">
+      <div class="sectionBox slider">
 
         <h3>#최신등록순</h3>
         <br>
-        <section class="popular-section">
-
-          <div class="store-box" th:each="current:${listCurrent}">
+        <section class="popular-section slider-items">
+          <div class="store-box item" th:each="current:${listCurrent}">
             <input type="hidden" th:value="${current.restaurantNo}" class="restaurantNo">
             <div class="store-image">
               <!-- The image will go here -->
-              <img th:src="@{current.restaurantImg1}" alt="가게 사진">
+              <img th:src="${current.restaurantImg1}" alt="가게 사진">
             </div>
             <div class="store-info">
               <span class="store-name" th:text="${current.restaurantName}">
@@ -189,7 +184,8 @@
               </span>
               <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
               <button class="heartBtn" name="likeBtn">
-                <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+                <i class="far fa-heart fa-lg" style="color: #ff0000;"
+                th:classappend="${current.likeCheck == 1}? fa-solid :  fa-regular"></i>
               </button>
             </div>
           </div>
@@ -197,18 +193,16 @@
 
         </section>
       </div>
-
-      <div class="sectionBox">
+      <div class="sectionBox slider">
 
         <h3>#리뷰 많은 순</h3>
         <br>
-        <section class="popular-section">
-
-          <div class="store-box" th:each="review:${review}">
+        <section class="popular-section slider-items">
+          <div class="store-box item" th:each="review:${review}">
             <input type="hidden" th:value="${review.restaurantNo}" class="restaurantNo">
             <div class="store-image">
               <!-- The image will go here -->
-              <img th:src="@{review.restaurantImg1}" alt="가게 사진">
+              <img th:src="${review.restaurantImg1}" alt="가게 사진">
             </div>
             <div class="store-info">
               <span class="store-name" th:text="${review.restaurantName}">
@@ -216,7 +210,8 @@
               </span>
               <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
               <button class="heartBtn" name="likeBtn">
-                <i class="far fa-heart fa-lg" style="color: #ff0000;"></i>
+                <i class="far fa-heart fa-lg" style="color: #ff0000;"
+                th:classappend="${review.likeCheck == 1}? fa-solid :  fa-regular"></i>
               </button>
             </div>
           </div>
@@ -228,13 +223,10 @@
 
     </section>
 
-    <!-- -------------------------------------------------------------------------------------    밑에 샘플 -->
 
-
-    <!-- --------------------------------------- side -->
     <div class="menu-container" th:if="${session.loginMember}">
       <div class="profile-img">
-        <img src="${session.loginMember.profileImg ?: user }" alt="profile">
+        <img th:src="${session.loginMember.profileImg ?: user }" alt="profile" th:with= "user=#{user.default.image}">
       </div>
 
 
@@ -242,10 +234,9 @@
 
       <nav>
         <a href="/myPage/myPage" id="myPage" class="sideItem">마이 페이지</a> <!-- 마이페이지 링크 추가 -->
-        <a href="#" class="sideItem">메인 페이지</a>
-        <a href="#" class="sideItem">점메추 게시판</a>
-        <a href="#" class="sideItem">공지 사항</a>
-        <a href="#" class="sideItem">FAQ</a>
+        <a href="/board/boardMain" class="sideItem">점메추 게시판</a>
+        <a href="/notice/notice" class="sideItem">공지 사항</a>
+        <a href="/notice/faq" class="sideItem">FAQ</a>
       </nav>
     </div>
     <!-- --------------------------------------- -->

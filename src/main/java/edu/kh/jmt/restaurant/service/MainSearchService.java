@@ -11,9 +11,11 @@ public interface MainSearchService {
 	 * @param searchCode
 	 * @param region 지역 카테고리
 	 * @param tag 음식 카테고리
+	 * @param memberNo 
+	 * @param result 
 	 * @return
 	 */
-	List<RestaurantDto> searchResult(String searchCode, String tag, String region);
+	List<RestaurantDto> searchResult(String searchCode, String tag, String region, int memberNo, String result);
 
 
 	
