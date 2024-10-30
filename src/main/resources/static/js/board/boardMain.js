@@ -728,11 +728,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // 리뷰 신고 버튼 기능
 
 getReportEvent = () => {
+  
   const updateReport = document.querySelectorAll(".updateReport");
   const boardReport  = document.querySelectorAll(".boardReport");
   
   for(let i = 0; i < updateReport.length; i++){
-
+    
     if(updateReport[i])
 
     updateReport[i].addEventListener("click", () =>{

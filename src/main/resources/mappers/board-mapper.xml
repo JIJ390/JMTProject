@@ -166,7 +166,14 @@
   		WHERE
   			BOARD_NO = #{boardNo}
   	</update>
-
+  	
+  	<select id="boardReport" resultType="string">
+		SELECT COUNT(*)
+		FROM REPORT_REVIEW
+		WHERE MEMBER_NO = #{memberNo}
+		AND REVIEW_NO = #{reviewNo}
+		AND REPORT_TYPE_NO = #{reportType}
+	</select>
 
 	
 

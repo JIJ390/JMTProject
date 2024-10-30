@@ -55,6 +55,9 @@ public interface BoardService {
 	int boardUpdate(Board inputBoard, MultipartFile boardImage);
 
 
+	
+
+
 
 
 

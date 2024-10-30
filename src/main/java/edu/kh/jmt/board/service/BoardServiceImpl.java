@@ -183,4 +183,10 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 
+	// 게시글 신고
+	@Override
+	public String boardReport(String reportContent, String reportType) {
+		return mapper.boardReport(reportContent, reportType);
+	}
+	
 }

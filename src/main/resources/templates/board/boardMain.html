@@ -24,7 +24,7 @@
           <option value="c">본문 내용</option>
         </select>
 
-				<input type="text" name="query" id="searchQuery" placeholder="　검색">
+				<input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
 				<button type="submit">aaa</button>
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</div>
@@ -53,7 +53,8 @@
 									</th:block>
 
 									<!-- 신고하기!! -->
-									<th:block th:if="${session.loginMember?.memberNo} != ${board.memberNo}">
+									<th:block th:if="${session.loginMember?.memberNo} != ${board.memberNo}"
+											  th:data-board-no="${board.boardNo}">
 										<button class="updateReport">신고하기</button>
 										<div class="boardReport boardReportHidden">
 											<p class="r1">1. 혐오 표현이 포함된 게시글</p>

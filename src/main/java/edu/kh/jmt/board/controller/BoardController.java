@@ -246,15 +246,19 @@ public class BoardController {
 	@GetMapping("report")
 	public String boardReport(
 			@RequestParam("reportContent") String reportContent,
-			@RequestParam("reportType") String reportType
-			) {
+			@RequestParam("reportType") String reportType,
+			@RequestParam("boardNo") int boardNo,
+			@SessionAttribute("loginMember") Member loginMember) {
 		
 		System.out.println(reportContent);
 		System.out.println(reportType);
+		System.out.println(boardNo);
+		System.out.println(loginMember);
 		System.out.println(reportContent);
 		System.out.println(reportType);
-		System.out.println(reportContent);
-		System.out.println(reportType);
+		System.out.println(boardNo);
+		System.out.println(loginMember);
+		
 		
 		return null;
 	}
