@@ -61,12 +61,19 @@ public class RestaurantController {
 			@RequestParam("memberNo") int memberNo,
 			Model model
 			) {
+	
 		
 		model.addAttribute("restaurant", service.restaurantDetail(restaurantNo));
 		
 		return "restaurant/restaurantDetailAdd";
 	}
 	
+	@GetMapping("add")
+	public String add(
+			) {
+		return "redirect:/myPage/loginPage";
+	}
+	 
 	
 	
 	
