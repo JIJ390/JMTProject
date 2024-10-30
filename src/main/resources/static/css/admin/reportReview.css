@@ -332,7 +332,7 @@ button:active{
 .reportStatus{
   border-radius: 20px;
 
-  width: 300px;
+  width: 400px;
   height: 200px;
 
   margin: 20px 0;
@@ -385,3 +385,61 @@ button:active{
 
 
 
+#searchQuery {
+  width: 200px;
+  height: 30px;
+
+  padding: 10px;
+
+  border: 1px solid var(--border-color);
+  
+
+
+}
+
+.search-box {
+  display: flex;
+  width: 400px;
+  height: 30px;
+
+
+  border-radius: 30px;
+  margin-top: 20px;
+
+  box-shadow: 0px 1px 6px -2px var(--border-color);
+
+}
+
+.search-btn {
+  width: 100px;
+  height: 30px;
+
+  padding-right: 10px;
+
+  background-color: var(--main-color);
+  color: white;
+
+  border-left: none;
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+
+
+
+}
+
+#searchKey {
+  width: 100px;
+  height: 30px;
+
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+
+  border: 1px solid var(--border-color);
+  border-right: none;
+
+  padding-left: 5px;
+}
