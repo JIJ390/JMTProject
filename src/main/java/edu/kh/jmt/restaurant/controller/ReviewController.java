@@ -67,9 +67,13 @@ public class ReviewController {
 			@RequestParam("content") String content,
 			@RequestParam("likeFl") String likeFl, 
 			RedirectAttributes ra,
-			@SessionAttribute("loginMember") Member loginMember
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember
 			) {
 
+		if(loginMember == null) {
+			return "redirect:/myPage/loginPage";
+		}
+		 
 		int result = 0;
 
 		// 리뷰 수정
@@ -145,9 +149,15 @@ public class ReviewController {
 	public String Update(
 			@RequestParam("reviewNo" ) int reviewNo,
 			@RequestParam("restaurantNo") int restaurantNo,
-			Model model
+			Model model,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember
 			) {
 
+		if(loginMember == null) {
+			return "redirect:/myPage/loginPage";
+		}
+		
+		 
 		ReviewDto review = service.selectReview(reviewNo);
 		RestaurantDto restaurant = service.selectRestaurant(restaurantNo);
 		
