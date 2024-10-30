@@ -67,7 +67,7 @@ public class BoardController {
 	@PostMapping("writeToMain")
 	public String boardWrite(
 			@ModelAttribute Board inputBoard,
-//			@SessionAttribute("loginMember") Member loginMember,
+			@SessionAttribute("loginMember") Member loginMember,
 			@RequestParam("boardImage") MultipartFile boardImage,
 			RedirectAttributes ra
 			) {
@@ -75,8 +75,7 @@ public class BoardController {
 		System.out.println(inputBoard);
 		
 		// 1) 작성자 회원번호를 inputBoard에 세팅
-		//		inputBoard.setMemberNo(loginMember.getMemberNo());
-		inputBoard.setMemberNo(1);
+				inputBoard.setMemberNo(loginMember.getMemberNo());
 		
 		// 2) 서비스 호출 후 결과(작성된 게시글 번호) 반환받기
 		int boardNo = service.boardWrite(inputBoard, boardImage);
@@ -98,7 +97,7 @@ public class BoardController {
 	@PostMapping("delete")
 	public String boardDelete(
 			@RequestParam("boardNo")int boardNo,
-//			@SessionAttribute("loginMember")Member loginMember,
+			@SessionAttribute("loginMember")Member loginMember,
 			RedirectAttributes ra,
 			@RequestHeader("referer") String referer) {
 		
@@ -149,7 +148,12 @@ public class BoardController {
 	}
 	
 //	@SessionAttribute("loginMember")Member loginMember,
-	
+ 	/** 게시글 수정
+	 * @param boardImage
+	 * @param inputBoard
+	 * @param ra
+	 * @return
+	 */
 	@PostMapping("update")
 	public String boardUpdate(
 			@RequestParam("boardImage")MultipartFile boardImage,
@@ -176,19 +180,8 @@ public class BoardController {
 	}
 	
 	
-	@GetMapping("boardComment")
-	public String boardComment() {
-		
-		return "/board/boardComment";
-	}
-	
-	/** 게시글 수정화면 전환
-	 * @param boardNo
-	 * @param ra
-	 * @param model
-	 * @return
-	 */
-	
+
+
 	
 	
 	

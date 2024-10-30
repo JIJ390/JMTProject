@@ -82,7 +82,7 @@ public class AdminMemberController {
 	* @param memberNo
 	* @return
 	*/
-	@PutMapping("block")
+	@PutMapping("changeBlock")
 	@ResponseBody
 	public int changeMemberBlock(
 	@RequestBody int memberNo) {
@@ -107,6 +107,21 @@ public class AdminMemberController {
 	}
 	
 	
+	/**
+	 * 차단만 가능 복구 불가
+	 * @param memberNo
+	 * @return
+	 */
+	@PutMapping("block")
+	@ResponseBody
+	public int memberBlock(
+	@RequestBody int memberNo) {
+		
+	return service.memberBlock(memberNo);
+	
+	}
+	
+	
 	
 	/**
 	* 다이렉트 로그인//// 임시 삭제 예정
@@ -121,7 +136,6 @@ public class AdminMemberController {
 	) {
 	Member loginMember = service.directLogin(memberNo);
 	
-	//log.debug("member : {}", loginMember);
 	
 	// @SessionAttributes({"loginMember"})
 	// 로그인된 회원 정보를 session 에 추가

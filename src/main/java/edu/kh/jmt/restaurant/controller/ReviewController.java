@@ -61,14 +61,19 @@ public class ReviewController {
 	 * @param likeFl
 	 * @return
 	 */
-	@GetMapping("review/reviewUpload")
+	@PostMapping("review/reviewUpload")
 	public String reviewUpload(
 			@RequestParam("getRestaurantNo") int restaurantNo, 
 			@RequestParam("content") String content,
 			@RequestParam("likeFl") String likeFl, 
-			RedirectAttributes ra
+			RedirectAttributes ra,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember
 			) {
 
+		if(loginMember == null) {
+			return "redirect:/myPage/loginPage";
+		}
+		 
 		int result = 0;
 
 		// 리뷰 수정
@@ -79,13 +84,13 @@ public class ReviewController {
 		}
 
 		// 로그인한 회원 번호로 등록예정 1 -> loginMemberNo
-		result = service.reviewUpload(restaurantNo, content, likeFl, 1);
+		result = service.reviewUpload(restaurantNo, content, likeFl, loginMember.getMemberNo());
 
 		if (result > 0) {
 			ra.addFlashAttribute("message", "리뷰 등록이 완료되었습니다");
 		}
 
-		return "redirect:/restaurant/view";
+		return "redirect:/restaurant/view?restaurantNo=" + restaurantNo;
 	}
 
 	@GetMapping("review/selectReview")
@@ -100,9 +105,16 @@ public class ReviewController {
 		
 		List<ReviewDto> reviews = service.selectReview(restaurantNo, rowNum, sort);
 
+		int size = service.reviewSize(restaurantNo);
+
+		if(rowNum >= size) {
+			model.addAttribute("maxSize", 1);
+		}
+		
 		if(reviews.size() > 0) {
 			model.addAttribute("reviews", reviews);
-
+			model.addAttribute("reviewSize", reviews.size());
+			
 		return "restaurant/review";
 		}
 		else {
@@ -118,16 +130,17 @@ public class ReviewController {
 	public String reviewDelete(
 			@RequestParam("reviewNo") int reviewNo,
 			@RequestParam("restaurantNo") int restaurantNo,
-			Model model
+			Model model,
+			RedirectAttributes ra
 			) {
 		
 		int result = service.reviewDelete(reviewNo);
 		if(result > 0) {
-			model.addAttribute("message", "삭제되었습니다");
+			ra.addFlashAttribute("message", "리뷰가 삭제되었습니다");
 		}
 		
 		// 레스토랑 넘버로 리다이렉트 추가
-		return "redirect:/restaurant/view";
+		return "redirect:/restaurant/view?restaurantNo="+restaurantNo;
 	}
 			
 	
@@ -136,9 +149,15 @@ public class ReviewController {
 	public String Update(
 			@RequestParam("reviewNo" ) int reviewNo,
 			@RequestParam("restaurantNo") int restaurantNo,
-			Model model
+			Model model,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember
 			) {
 
+		if(loginMember == null) {
+			return "redirect:/myPage/loginPage";
+		}
+		
+		 
 		ReviewDto review = service.selectReview(reviewNo);
 		RestaurantDto restaurant = service.selectRestaurant(restaurantNo);
 		
@@ -153,6 +172,7 @@ public class ReviewController {
 			@RequestParam("getReviewNo") int reviewNo,
 			@RequestParam("content") String content,
 			@RequestParam("likeFl") String likeFl, 
+			@RequestParam("getRestaurantNo") int restaurantNo,
 			RedirectAttributes ra
 			) {
 
@@ -172,7 +192,28 @@ public class ReviewController {
 			ra.addFlashAttribute("message", "리뷰 수정이 완료되었습니다");
 		}
 
-		return "redirect:/restaurant/view";
+		return "redirect:/restaurant/view?restaurantNo=" + restaurantNo;
 	}
+	
+	@ResponseBody
+	@GetMapping("review/report")
+	public int reviewReport(
+			@RequestParam("reportContent") String reportContent,
+			@RequestParam("reportType") String reportType,
+			@RequestParam("reviewNo") int reviewNo,
+			@SessionAttribute("loginMember") Member loginMember
+			) {
+		
+		int result = service.reportAdd(reportType, reportContent, reviewNo, loginMember.getMemberNo());
+		
+		
+		if(reportType.equals("")) {
+			return 0;
+		}
+		
+		return result;
+	}
+	
+	
 	
 }

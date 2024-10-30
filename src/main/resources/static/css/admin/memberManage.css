@@ -12,18 +12,6 @@ th {font-family: 'NEXON Lv1 Gothic OTF';}
 .memberStatus-head {font-family: 'NEXON Lv1 Gothic OTF';}
 
 
-*{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root{
-  --main-color : rgba(97, 192, 191, 1);
-  --border-color : rgb(182, 182, 182);
-}
-
-
 html, body, main {
   height: 100%;
 }
@@ -147,17 +135,7 @@ h1 {
   display: inline;
 }
 
-.search-area  button {
-  width: 60px;
-  height: 20px;
 
-  background-color: white;
-  border: 1px solid rgb(182, 182, 182);
-  border-radius: 30px;
-
-
-  transition-duration: 0.1s;
-}
 
 
 
@@ -267,4 +245,66 @@ button:hover{
 
 button:active{
   background-color: rgb(181, 181, 255);
+}
+
+
+
+
+
+#searchQuery {
+  width: 240px;
+  height: 30px;
+
+  padding: 10px;
+
+  border: 1px solid var(--border-color);
+  
+
+
+}
+
+.search-box {
+  display: flex;
+  width: 400px;
+  height: 30px;
+
+
+  border-radius: 30px;
+
+  box-shadow: 0px 1px 6px -2px var(--border-color);
+
+}
+
+.search-btn {
+  width: 80px;
+  height: 30px;
+
+  padding-right: 10px;
+
+  background-color: var(--main-color);
+  color: white;
+
+  border: 1px solid var(--border-color);
+
+  border-left: none;
+
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+
+
+}
+
+#searchKey {
+  width: 80px;
+  height: 30px;
+
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+
+  border: 1px solid var(--border-color);
+  border-right: none;
+
+
+
+  padding-left: 10px;
 }

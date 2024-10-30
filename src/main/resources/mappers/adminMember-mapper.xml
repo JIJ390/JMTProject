@@ -68,20 +68,20 @@
 		 WHERE MEMBER_AUTH = 1) AS VARCHAR2(4)) AS "blockMember",
 		CAST((SELECT COUNT(*)
 		 FROM "MEMBER"
-		 WHERE MEMBER_DEL_FL = 'N') AS VARCHAR2(4)) AS "secessionMember"
+		 WHERE MEMBER_DEL_FL = 'Y') AS VARCHAR2(4)) AS "secessionMember"
 	FROM
 	DUAL
   	</select>
   	
   	
-  	<!-- 탈퇴 여부 변경 -->
+  	<!-- 차단 여부 변경 -->
   	<update id="changeMemberBlock">
   		UPDATE "MEMBER"
   		SET MEMBER_AUTH = DECODE(MEMBER_AUTH, 0, 1, 1, 0, 2)
   		WHERE MEMBER_NO = #{memberNo}
   	</update>
   	
-  	
+  	<!-- 탈퇴 여부 변경 -->
   	<update id="changeMemberSecession">
   		UPDATE "MEMBER"
   		SET MEMBER_DEL_FL = DECODE(MEMBER_DEL_FL, 'Y', 'N', 'Y')
@@ -128,6 +128,13 @@
   	
   	</select>
   	
+  	
+  	<!-- 회원 차단 기능 -->
+  	<update id="memberBlock">
+  		UPDATE "MEMBER"
+  		SET MEMBER_AUTH = 1
+  		WHERE MEMBER_NO = #{memberNo}
+  	</update>
   	
   	
   	

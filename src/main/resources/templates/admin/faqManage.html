@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ 관리</title>
+  <link rel="stylesheet" href="/css/admin/faqManage.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+  <link rel="stylesheet" href="css/admin/adminSide.css">
+</head>
+<body>
+
+  <th:block th:replace="~{common/header}"></th:block>
+  
+  <main>
+    <th:block th:replace= "~{admin/adminSide}"></th:block>
+    <section class="main-section">
+
+      <h1>FAQ 관리</h1>
+
+
+      <th:block th:if="${#lists.isEmpty(faqList)}">        
+        <div class="none-list">조회된 결과가 없습니다</div>
+      </th:block>
+
+      <div th:each= "faq : ${faqList}" th:object="${faq}" id="faqList">
+        <div class="faq-div">
+          <div class="faq-box">
+            <span th:text="*{faqNo}" class="targetSpan"></span>
+            <span th:text="*{faqTitle}"></span>
+            <div class="btn-area">
+              <button class="updateBtn">수정</button>
+              <button class="deleteBtn">삭제</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-box">
+        <button id="faqInsertBtn">FAQ 작성</button>
+      </div>
+
+      <!-- 페이지 네이션 -->
+      <div class="pagination-area" th:unless="${#lists.isEmpty(faqList)}">
+
+        <ul class="pagination" th:object="${pagination}">
+          <li><a href="#">&lt;&lt;</a></li>
+          <li><a href="#">&lt;</a></li>
+
+          <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}" >
+            
+            <li th:if= "${i} == *{currentPage}">
+              <a class="current" th:text="${i}">현재 페이지</a>
+            </li>
+    
+            <li th:unless= "${i} == *{currentPage}"> 
+              <a href="#" th:text="${i}">이동할 수 있는 페이지</a>   <!-- th:href="|?cp=${i}|" -->
+            </li>
+          </th:block>
+
+          <li><a href="#">&gt;</a></li>
+          <li><a href="#">&gt;&gt;</a></li>
+        </ul>
+
+      </div>
+
+
+    </section>
+    <section class="right-section">
+
+    </section>
+  </main>
+
+
+  <script th:inline="javascript">
+    const pagination = /*[[${pagination}]]*/ "페이지네이션 객체"    
+  </script>
+
+
+  <script src="/js/admin/faqManage.js"></script>
+</body>
+</html>

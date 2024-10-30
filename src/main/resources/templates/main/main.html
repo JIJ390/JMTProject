@@ -9,14 +9,17 @@
   <link rel="stylesheet" href="/css/main/main.css">
   <link rel="stylesheet" href="/css/main/popUp.css">
   <link rel="stylesheet" href="https://fontawesome.com/v5/icons/heart?f=classic&s=solid">
+  <link rel="stylesheet" href="css/admin/adminSide.css">
 </head>
 
 <body>
+
   <!-- Header Section -->
   <header>
     <div id="header-Font">
+      <a href="/">메인페이지</a>
       <a href="/board/boardMain">점메추</a>
-      <a href="/notice/notice">공지사항</a>
+      <a href="/notice/noticeView">공지사항</a>
       <a href="/notice/faq">FAQ</a>
 
       <div class="logoBox">
@@ -61,6 +64,7 @@
 
       <div class="filter">
         <a class="filter-category" id="foodCategoryBtn">음식 종류</a>
+
 
         <a class="filter-category" id="regionCategoryBtn">지역 선택</a>
       </div>
@@ -252,6 +256,7 @@
     </div>
 
   </main>
+  <th:block th:replace="~{common/footer}"></th:block>
 
   <script th:inline="javascript">
         // 로그인 되어있으면 true, 아니면 false

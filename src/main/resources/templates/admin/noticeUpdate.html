@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지 사항 수정 페이지</title>
+  <link rel="stylesheet" href="/css/admin/noticeInsert.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+</head>
+<body>
+
+  <th:block th:replace="~{common/header}"></th:block>
+  
+  <main>
+    <th:block th:replace= "~{admin/adminSide}"></th:block>
+    <section class="main-section">
+
+      <div class="insert-box" th:object="${notice}">
+
+        <div class="insert-header">
+          <h1>공지 사항 수정</h1>
+          <span th:text="*{noticeWriteDate}"></span>
+        </div>
+        <form action="update" method="POST"
+          id="noticeInsertFrm" class="insert-frm" >
+
+          <input type="text" name="noticeTitle" placeholder="제목" class="title-input" th:value="*{noticeTitle}"> 
+
+
+          <div class="inputChoose">
+            <input type="radio" value="공지" name="noticeCategory" id="noticeCategry1" th:field="*{noticeCategory}">
+            <label for="noticeCategry1"># 공지</label>
+
+            <input type="radio" value="이벤트" name="noticeCategory" id="noticeCategry2" th:field="*{noticeCategory}">
+            <label for="noticeCategry2"># 이벤트</label>
+          </div>
+
+          <textarea name="noticeContent" placeholder="본문 내용은 10 글자 이상으로 입력" class="text-area" th:text="*{noticeContent}"></textarea>
+
+          <input type="hidden" name="noticeNo" th:value="*{noticeNo}">
+          <button id="insertBtn">수정하기</button>
+        </form>
+      </div>
+
+
+
+    </section>
+    <section class="right-section">
+
+    </section>
+  </main>
+
+  <script src="/js/admin/noticeInsert.js"></script>
+</body>
+</html>

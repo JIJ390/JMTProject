@@ -214,13 +214,6 @@ public class MyPageController {
 	}
 	
 	
-	/** 비밀번호 찾기
-	 * @param memberNo
-	 * @return
-	 */
-	
-	
-	
 	/** 마이페이지 페이지 호출
 	 * @return
 	 */
@@ -300,8 +293,8 @@ public class MyPageController {
 		
 		String filePath = service.updateInfo(inputMember, profileImg);
 		
-			// DB, Session에 저장된 프로필 이미지 정보 동기화
-			loginMember.setProfileImg(filePath);
+		// DB, Session에 저장된 프로필 이미지 정보 동기화
+		loginMember.setProfileImg(filePath);
 		
 		// 세션에 이름 동기화
 		loginMember.setMemberName(inputMember.getMemberName());;

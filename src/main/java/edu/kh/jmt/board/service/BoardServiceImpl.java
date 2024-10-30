@@ -113,9 +113,9 @@ public class BoardServiceImpl implements BoardService {
 
 		String rename = null;
 
+		// 파일 존재 시 이름 바꾸기
 		if (!boardImage.isEmpty()) {
 
-			// 2) 웹 접근경로(config.properties) + 변경된 파일명
 
 			rename = FileUtil.rename(boardImage.getOriginalFilename());
 
@@ -128,11 +128,9 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println(inputBoard);
 		System.out.println(inputBoard);
 		System.out.println(inputBoard);
+		
+		int result = mapper.boardUpdate(inputBoard);
 
-		// 파일 없을 시 업로드 하지 않고 리턴
-		if (boardImage.isEmpty()) {
-			return 1;
-		}
 
 		try {
 			// C:/uploadFiles/board2/ 폴더가 없으면 생성
@@ -146,7 +144,7 @@ public class BoardServiceImpl implements BoardService {
 			e.printStackTrace();
 		}
 
-		return mapper.boardUpdate(inputBoard);
+		return result;
 	}
 
 }

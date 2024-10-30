@@ -48,4 +48,8 @@ public interface ReviewService {
 	// 리뷰 업데이트
 	int reviewUpdate(int reviewNo , String content, String likeFl);
 
+	int reportAdd(String reportType, String reportContent, int reviewNo, int memberNo);
+
+	int reviewSize(int restaurantNo);
+
 }

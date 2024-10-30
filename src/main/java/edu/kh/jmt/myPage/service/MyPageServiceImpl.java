@@ -124,7 +124,7 @@ public class MyPageServiceImpl implements MyPageService{
 		}
 	
 	
-	// 이름 수정 기능
+	// 이름/프로필 이미지 수정 기능
 	@Override
 	public String updateInfo(Member inputMember, MultipartFile profileImg) {
 		

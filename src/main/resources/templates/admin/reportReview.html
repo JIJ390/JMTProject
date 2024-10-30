@@ -17,22 +17,156 @@
 
       <h1>신고 관리 페이지 - 리뷰</h1>
 
+
+      <th:block th:if="${#lists.isEmpty(reportReviewList)}">        
+        <div class="none-list">조회된 결과가 없습니다</div>
+      </th:block>
+
+      <div th:each= "reportReview : ${reportReviewList}" th:object="${reportReview}" id="reportReviewList">
+        <div class="report-div" th:classappend="${reportReview.reportReviewFl} == 'Y' ? 'completed'">
+          <div class="report-box">
+            <a th:href="@{/admin/report/review/{reportReviewNo}(reportReviewNo=*{reportReviewNo})}">
+              <span th:text="*{reportReviewNo}"></span>
+              <span th:text="*{reportTypeName}"></span>
+              <span th:text="*{memberName}"></span>
+              <span th:text="*{reportReviewDate}"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 페이지 네이션 -->
+      <div class="pagination-area" th:unless="${#lists.isEmpty(reportReviewList)}">
+
+        <ul class="pagination" th:object="${pagination}">
+          <li><a href="#">&lt;&lt;</a></li>
+          <li><a href="#">&lt;</a></li>
+
+          <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}" >
+            
+            <li th:if= "${i} == *{currentPage}">
+              <a class="current" th:text="${i}">현재 페이지</a>
+            </li>
+    
+            <li th:unless= "${i} == *{currentPage}"> 
+              <a href="#" th:text="${i}">이동할 수 있는 페이지</a>   <!-- th:href="|?cp=${i}|" -->
+            </li>
+          </th:block>
+
+          <li><a href="#">&gt;</a></li>
+          <li><a href="#">&gt;&gt;</a></li>
+        </ul>
+
+      </div>
+
+
     </section>
     <section class="right-section">
-      <form action="/admin/restaurant" method="GET" id="restaurantSearch">
+      <form action="/admin/report/review" method="GET" id="restaurantSearch">
 
-        <select name="key" id="searchKey">
-          <option value="rn">이름</option>
-          <option value="l">지역</option>
-          <option value="n">번호</option>
-        </select>
+        <div class="search-box">
+          <select name="key" id="searchKey">
+            <option value="rn">신고자 이름</option>
+            <option value="t">신고 유형</option>
+            <option value="n">신고 번호</option>
+          </select>
+  
+          <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+  
+          <button type="submit" class="search-btn">검색</button>
+        </div>
 
-        <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
-
-        <button type="submit">검색</button>
       </form>
 
+
+      <div class="reportStatus">
+        <div class="reportStatus-head">
+          신고 현황 - 리뷰
+        </div>
+        <div class="container-1">
+          <div>전체 신고 수</div>
+          <div id="totalReportCount">0</div>
+        </div>
+        <div class="container-1">
+          <div>금일 신고 수</div>
+          <div id="todayReportCount">0</div>
+        </div>
+        <div class="container-1">
+          <div>처리된 신고 수</div>
+          <div id="checkedReportCount">0</div>
+        </div>
+        <div class="container-1">
+          <div>미처리 신고 수</div>
+          <div id="uncheckedReportCount">0</div>
+        </div>
+
+      </div>
+
     </section>
+
+
+    <!-- 리뷰 신고 팝업 -->
+
+      <div id="reportReviewDetail" class="popup-hidden report-detail-popup">
+
+        <span id="popupClose">&times;</span>
+        <h1 id="reportTypeName">악의적인 리뷰</h1>
+
+        <div class="popup-head-area">
+          <h3 id="reportReviewNo"># 12312455</h3>
+          <div>
+            <span id="reportMemberName"></span>
+            <span id="reportDate"></span>
+          </div>
+        </div>
+
+        <div id="reportContent" class="report-content-area">
+          내용
+        </div>
+
+        <table border="1" class="memberTable">
+          <thead>
+            <tr>
+              <th>회원 번호</th>
+              <th>이름</th>
+              <th>신고된 리뷰</th>
+              <th>회원 상태</th>
+              <th colspan="2">조치 사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="memberNo">1</td>
+              <td id="memberName">지우개</td>
+              <td>
+                <a href="#" id="reviewLink">대상 리뷰 이동</a>
+              </td>
+              <td id="memberStatus">활동</td>
+              <td>
+                <button id="blockBtn">
+                  차단
+                </button>
+              </td>
+              <td>
+                <button id="deleteBtn">
+                  삭제
+                </button>
+              </td>
+            </tr>
+          </tbody>
+  
+        </table>
+
+        <form action="/admin/report/review/feed" method="POST" id="reportFeedFrm">
+          <div class="report-feed-box"></div>
+          <div class="reoprt-frm-btn-area">
+            <button type="button" id="reportFeedBtn">조치 완료</button>
+          </div>
+        </form>
+
+      </div>
+
+
 
   </main>
 
@@ -41,6 +175,7 @@
     const pagination = /*[[${pagination}]]*/ "페이지네이션 객체"    
   </script>
 
-  <script src="/js/admin/restaurantManage.js"></script>
+
+  <script src="/js/admin/reportReview.js"></script>
 </body>
 </html>

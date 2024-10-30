@@ -1,5 +1,3 @@
-/* 프로필 이미지 미리보기, 삭제하기 */
-
 let statusCheck = -1; // 프로필 이미지 업로드 상태에 따라서 어떤 상태인지 구분하는 값
                       // -1 : 프로필 이미지를 바꾼적이 없음(초기상태)
                       //  0 : 프로필 이미지 삭제(X버튼 클릭)
@@ -35,6 +33,9 @@ if(imageInput !== null){ // 프로필 변경 화면인 경우
     reader.addEventListener("load", e => {
       profileImg.src = e.target.result;
       // e.target.result == 파일이 변환된 주소 형태 문자열
+
+      // 로컬 스토리지에 이미지 URL 저장
+      localStorage.setItem("updateProfileImg", e.target.result);
 
       statusCheck = 1; // 새 파일이 선택된 상태 체크
 
@@ -74,21 +75,6 @@ if(imageInput !== null){ // 프로필 변경 화면인 경우
     // 선택된 파일이 있을 경우
     updatePreview(file); // 미리보기 함수 호출
   })
-
-  /* X버튼 클릭 시 기본 이미지로 변환 */
-  deleteImage.addEventListener("click", () => {
-    
-    // 미리보기를 기본 이미지로 변경
-    profileImg.src = userDefaultImage;
-
-    // input 태그와 마지막 선택된 파일을 저장하는 lastValidFile에 저장된 값을 모두 삭제
-    imageInput.value = '';
-    lastVailidFile = null;
-
-    statusCheck = 0; // 삭제 상태 체크
-  })
-
-
 }
 
 /* X버튼 클릭 시 기본 이미지로 변환 */
@@ -104,40 +90,48 @@ deleteImage.addEventListener("click", () => {
   statusCheck = 0; // 삭제 상태 체크
 })
 
-/* 프로필 화면에서 변경하기 버튼이 클릭된 경우 */
-const profileForm = document.querySelector("#updateInfo");
-profileForm?.addEventListener("submit", e => {
-
-  let flag = true; // true인 경우 제출 불가능
-
-  // 미변경 시 제출 불가
-  if(statusCheck === -1) flag = true;
-
-  // 기존 프로필 이미지 X -> 새 이미지 선택
-  if(loginMemberProfileImg === null
-    && statusCheck === 1) flag = false;
-
-  // 기존 프로필 이미지 O -> X 버튼을 눌러 삭제
-  if(loginMemberProfileImg !== null
-    && statusCheck === 0) flag = false;
-
-  // 기존 프로필 이미지 O -> 새 이미지 선택
-  if(loginMemberProfileImg !== null
-    && statusCheck === 1) flag = false;
-
-
-  if(flag === true){
-    return;
-  }
-})
-
+// 로컬 스토리지에 저장된 파일 복구
 window.addEventListener("DOMContentLoaded", () => {
-  const savedImageUrl = localStorage.getItem("profileImageUrl");
+  const savedImageUrl = localStorage.getItem("updateProfileImg");
 
   if (savedImageUrl) {
     profileImg.src = savedImageUrl;
+
+    // 복구된 이미지가 있는 경우 statusCheck를 1로 설정
     statusCheck = 1; // 이미지가 선택된 상태로 초기화
   } else {
     profileImg.src = userDefaultImage; // 기본 이미지 사용
+    statusCheck = -1; // 이미지가 선택되지 않은 초기 상태로 설정
+  }
+});
+
+// 프로필 화면에서 변경하기 버튼이 클릭된 경우
+const profileForm = document.querySelector("#updateInfoForm");
+profileForm?.addEventListener("submit", (e) => {
+  let flag = false; // 기본적으로 제출이 가능하다고 가정
+
+  // 미변경 시 제출 불가
+  if (statusCheck === -1) {
+    flag = true; // 변경이 없을 때 제출 불가
+  }
+
+  // 기존 프로필 이미지가 없고 새 이미지가 선택된 경우
+  if (loginMemberProfileImg === null && statusCheck === 1) {
+    flag = false; // 제출 가능
+  }
+
+  // 기존 프로필 이미지가 있고 X 버튼을 눌러 삭제한 경우
+  if (loginMemberProfileImg !== null && statusCheck === 0) {
+    flag = false; // 제출 가능
+  }
+
+  // 기존 프로필 이미지가 있고 새 이미지를 선택한 경우
+  if (loginMemberProfileImg !== null && statusCheck === 1) {
+    flag = false; // 제출 가능
+  }
+
+  if (flag) {
+    e.preventDefault(); // 제출을 막음
+    alert("프로필 이미지에 변경사항이 없습니다.");
   }
 });

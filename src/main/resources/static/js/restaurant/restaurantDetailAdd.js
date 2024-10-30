@@ -1,7 +1,7 @@
 const goToList = document.querySelector(".goToList");
 goToList.addEventListener("click", () => {
   const restaurantNo = document.querySelector(".getRestaurantNo").value;
-  location.href = "/restaurant/view"
+  location.href = "/restaurant/view?restaurantNo="+restaurantNo;
 })
 
 

@@ -60,10 +60,15 @@ public interface AdminMemberMapper {
 	* @return
 	*/
 	Member directLogin(int memberNo);
-	
-	
-	
 
+
+
+	/**
+	 * 회원 차단 기능
+	 * @param memberNo
+	 * @return 
+	 */
+	int memberBlock(int memberNo);
 
 
 

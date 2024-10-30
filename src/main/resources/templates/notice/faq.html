@@ -5,150 +5,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ</title>
-  <!-- <link rel="stylesheet" href="/css/faq/faq.css"> -->
-
-  <style>
-
-  @font-face {
-    font-family: 'NEXON Lv1 Gothic OTF';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
-
-  body      { font-family: 'NanumSquare', sans-serif }
-  .normal      { font-weight: 400 }
-  .bold      { font-weight: 700 }
-  .bolder      { font-weight: 800 }
-  .light      { font-weight: 300 }
-
-    h3 {font-family: 'NEXON Lv1 Gothic OTF';}
-   header {font-family: 'NEXON Lv1 Gothic OTF';}
-
-    .main{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      justify-content: space-around;
-    }
-    #panel {
-      padding: 50px;
-      width: 800px;
-      display: none;
-      box-sizing: border-box;
-    }
-
-    #fix-area{
-      width: 800px;
-      height: 600px;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      align-items: center
-    }
-
-    #faq-container{
-      display: flex;
-      flex-direction: column;
-      display: block;
-      justify-content: space-between
-    }
-
-    /* hr 효과 */
-    hr {
-      border-width:1px 0 0 0; 
-      border-style:solid; 
-      border-color:#bbb;
-    }
-
-    /* btn 효과 */
-    .btn {
-    width: 800px;
-    height: 40px;
-    padding: 10px 25px;
-    border: 1px solid #aaaaaa;
-    font-family: 'Lato', sans-serif;
-    font-weight: 500;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    border-radius: 1em;
-  }
-  .btn {
-    transition: all 0.3s ease;
-    overflow: hidden;
-  }
-  .btn:after {
-    position: absolute;
-    content: " ";
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    transition: all 0.3s ease;
-    -webkit-transform: scale(.1);
-    transform: scale(.1);
-  }
-  .btn:hover {
-    color: #fff;
-  }
-  .btn:hover:after {
-    background: #BBDED6;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-
-  .floating-buttons {
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  display: flex;
-  flex-direction: row;
-  font-weight: bold;
-}
-  </style>
+  <link rel="stylesheet" href="/css/common/header.css">
+  <link rel="stylesheet" href="/css/notice/faq.css">
 </head>
 
 <body>
-
+  <th:block th:replace="~{common/header}"></th:block>
   <main class="main">
     <section id="back">
       <!-- 감싸는 배경 -->
 
       <section id="fix-area">
-        <section id="faq-container">
+        <div id="faq-container">
           <span><h3>자주 하는 질문 BEST 5</h3></span>
           <hr>
           <br>
           <!-- 내용 정렬 -->
+          <th:block th:each="faq, iterStat : ${faqList}">
            <div>
-              <span><button class="btn">
-                <div>Q</div>
-                <div>사이트 이용 어떻게 해요?</div>
+              <span><div class="btn">
+                <div class="q">Q</div>
+                <div class="faqTitle" th:text="${faq.faqTitle}">사이트 이용 어떻게 해요?</div>
                 <div><span class="open-close">▼</span></div>
-              </button></span>
-              <div id="panel">A1. 그렇게 되었다. </div>
+              </div></span>
+              <div class="panel"  th:text="${faq.faqContent}">
+               <p> A1. 그렇게 되었다.</p> </div>
            </div>
            <br>
+          </th:block>
 
         </section>
       </section>
           
     </section>
         
-        
-        
         <!-- Floating Buttons -->
-        <div class="floating-buttons">
+        <!-- <div id="topBtn">
           <a class="scroll-top" href="#">⬆</a>
-        </div>
+        </div> -->
   </main>
   <!-- <script src="/js/faq/faq.js"></script> -->
 
@@ -163,7 +57,8 @@
 
     $(document).ready(function () {
       $(".btn").click(function () {
-        $("#panel").slideToggle(100);
+        $(".panel").slideUp(100);
+        $(this).parent().next().slideDown(100);
       });
     });
 

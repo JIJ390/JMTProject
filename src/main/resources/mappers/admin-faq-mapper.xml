@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.jmt.admin.mapper.AdminFaqMapper">
+
+	<!-- 삭제되지 않은 FAQ 게시글 수 전체 조회 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM "FAQ"
+		WHERE FAQ_DEL_FL = 'N'
+	</select>
+
+	<!-- FAQ 목록 확인 -->
+	<select id="selectFaqList">
+		SELECT
+			FAQ_NO,
+			ROW_NUMBER() OVER (ORDER BY FAQ_NO ASC) "RNUM",
+			FAQ_TITLE,
+			FAQ_CONTENT
+		FROM FAQ
+		WHERE FAQ_NO > 0
+		AND   FAQ_DEL_FL = 'N'
+		ORDER BY FAQ_NO DESC
+	</select>
+	
+	
+	<!-- FAQ 삭제 처리 -->
+	<update id="deleteFaq">
+		UPDATE FAQ
+		SET
+			FAQ_DEL_FL = 'Y'
+		WHERE 
+			FAQ_NO = #{faqNo}
+	</update>
+	
+	
+	<!-- FAQ 신규 등록 -->
+	<insert id="insertFaq">
+		INSERT INTO "FAQ"
+		VALUES (
+			SEQ_FAQ_NO.NEXTVAL,
+			#{faqTitle},
+			#{faqContent},
+			'N'
+		)
+	</insert>
+	
+	
+	<!-- FAQ 수정용 셀렉트 -->
+	<select id="updateFaqView">
+		SELECT
+			FAQ_NO,
+			FAQ_TITLE,
+			FAQ_CONTENT		
+		FROM FAQ
+		WHERE FAQ_NO > 0
+		AND   FAQ_NO = #{faqNo}
+		AND   FAQ_DEL_FL = 'N'	
+	</select>
+	
+	
+	<update id="updateFaq">
+		UPDATE FAQ
+		SET
+			FAQ_TITLE = #{faqTitle},
+			FAQ_CONTENT = #{faqContent}
+		WHERE 
+			FAQ_NO = #{faqNo}
+	</update>
+
+  	
+</mapper>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신고 관리 페이지</title>
+  <link rel="stylesheet" href="/css/admin/reportReview.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+</head>
+<body>
+
+  <th:block th:replace="~{common/header}"></th:block>
+  
+  <main>
+    <th:block th:replace= "~{admin/adminSide}"></th:block>
+    <section class="main-section">
+
+      <h1>신고 관리 페이지 - 댓글</h1>
+
+
+      <th:block th:if="${#lists.isEmpty(reportCommentList)}">        
+        <div class="none-list">조회된 결과가 없습니다</div>
+      </th:block>
+
+      <div th:each= "reportComment : ${reportCommentList}" th:object="${reportComment}" id="reportCommentList">
+        <div class="report-div" th:classappend="${reportComment.reportCommentFl} == 'Y' ? 'completed'">
+          <div class="report-box">
+            <a th:href="@{/admin/report/comment/{reportCommentNo}(reportCommentNo=*{reportCommentNo})}">
+              <span th:text="*{reportCommentNo}"></span>
+              <span th:text="*{reportTypeName}"></span>
+              <span th:text="*{memberName}"></span>
+              <span th:text="*{reportCommentDate}"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 페이지 네이션 -->
+      <div class="pagination-area" th:unless="${#lists.isEmpty(reportCommentList)}">
+
+        <ul class="pagination" th:object="${pagination}">
+          <li><a href="#">&lt;&lt;</a></li>
+          <li><a href="#">&lt;</a></li>
+
+          <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}" >
+            
+            <li th:if= "${i} == *{currentPage}">
+              <a class="current" th:text="${i}">현재 페이지</a>
+            </li>
+    
+            <li th:unless= "${i} == *{currentPage}"> 
+              <a href="#" th:text="${i}">이동할 수 있는 페이지</a>   <!-- th:href="|?cp=${i}|" -->
+            </li>
+          </th:block>
+
+          <li><a href="#">&gt;</a></li>
+          <li><a href="#">&gt;&gt;</a></li>
+        </ul>
+
+      </div>
+
+
+    </section>
+    <section class="right-section">
+      <form action="/admin/report/comment" method="GET" id="restaurantSearch">
+
+        <div class="search-box">
+          <select name="key" id="searchKey">
+            <option value="rn">신고자 이름</option>
+            <option value="t">신고 유형</option>
+            <option value="n">신고 번호</option>
+          </select>
+  
+          <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+  
+          <button type="submit" class="search-btn">검색</button>
+        </div>
+
+
+      </form>
+
+      <div class="reportStatus">
+        <div class="reportStatus-head">
+          신고 현황 - 댓글
+        </div>
+        <div class="container-1">
+          <div>전체 신고 수</div>
+          <div id="totalReportCount">0</div>
+        </div>
+        <div class="container-1">
+          <div>금일 신고 수</div>
+          <div id="todayReportCount">0</div>
+        </div>
+        <div class="container-1">
+          <div>처리된 신고 수</div>
+          <div id="checkedReportCount">0</div>
+        </div>
+        <div class="container-1">
+          <div>미처리 신고 수</div>
+          <div id="uncheckedReportCount">0</div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 리뷰 신고 팝업 -->
+
+      <div id="reportCommentDetail" class="popup-hidden report-detail-popup" >
+
+        <span id="popupClose">&times;</span>
+        <h1 id="reportTypeName"></h1>
+
+        <div class="popup-head-area">
+          <h3 id="reportCommentNo"></h3>
+          <div>
+            <span id="reportMemberName"></span>
+            <span id="reportDate"></span>
+          </div>
+        </div>
+
+        <div id="reportContent" class="report-content-area">
+          내용
+        </div>
+
+        <table border="1" class="memberTable">
+          <thead>
+            <tr>
+              <th>회원 번호</th>
+              <th>이름</th>
+              <th>신고된 게시글</th>
+              <th>회원 상태</th>
+              <th colspan="2">조치 사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="memberNo">1</td>
+              <td id="memberName">지우개</td>
+              <td>
+                <a href="#">대상 댓글 이동</a>
+              </td>
+              <td id="memberStatus">활동</td>
+              <td>
+                <button id="blockBtn">
+                  차단
+                </button>
+              </td>
+              <td>
+                <button id="deleteBtn">
+                  삭제
+                </button>
+              </td>
+            </tr>
+          </tbody>
+  
+        </table>
+
+        <form action="/admin/report/comment/feed" method="POST" id="reportFeedFrm">
+          <div class="report-feed-box"></div>
+          <div class="reoprt-frm-btn-area">
+            <button type="button" id="reportFeedBtn">조치 완료</button>
+          </div>
+        </form>
+
+      </div>
+
+
+
+  </main>
+
+
+  <script th:inline="javascript">
+    const pagination = /*[[${pagination}]]*/ "페이지네이션 객체"    
+  </script>
+
+
+  <script src="/js/admin/reportComment.js"></script>
+</body>
+</html>

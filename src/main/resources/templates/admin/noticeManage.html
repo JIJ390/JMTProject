@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지 사항 관리</title>
+  <link rel="stylesheet" href="/css/admin/noticeManage.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+  <link rel="icon" href="/images/favicon.ico">
+</head>
+<body>
+
+  <th:block th:replace="~{common/header}"></th:block>
+  
+  <main>
+    <th:block th:replace= "~{admin/adminSide}"></th:block>
+    <section class="main-section">
+
+      <h1>공지 사항 관리</h1>
+
+
+      <th:block th:if="${#lists.isEmpty(noticeList)}">        
+        <div class="none-list">조회된 결과가 없습니다</div>
+      </th:block>
+
+      <div th:each= "notice : ${noticeList}" th:object="${notice}" id="noticeList">
+        <div class="notice-div">
+          <div class="notice-box">
+            <span th:text="*{noticeNo}" class="targetSpan"></span>
+            <span th:text="*{noticeCategory}"></span>
+            <span th:text="*{noticeTitle}"></span>
+            <span th:text="*{noticeReadCount}"> </span>
+            <span th:text="*{noticeWriteDate}"></span>
+            <div class="btn-area">
+              <button class="updateBtn">수정</button>
+              <button class="deleteBtn">삭제</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-box">
+        <button id="noticeInsertBtn">공지 작성</button>
+      </div>
+
+      <!-- 페이지 네이션 -->
+      <div class="pagination-area" th:unless="${#lists.isEmpty(noticeList)}">
+
+        <ul class="pagination" th:object="${pagination}">
+          <li><a href="#">&lt;&lt;</a></li>
+          <li><a href="#">&lt;</a></li>
+
+          <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}" >
+            
+            <li th:if= "${i} == *{currentPage}">
+              <a class="current" th:text="${i}">현재 페이지</a>
+            </li>
+    
+            <li th:unless= "${i} == *{currentPage}"> 
+              <a href="#" th:text="${i}">이동할 수 있는 페이지</a>   <!-- th:href="|?cp=${i}|" -->
+            </li>
+          </th:block>
+
+          <li><a href="#">&gt;</a></li>
+          <li><a href="#">&gt;&gt;</a></li>
+        </ul>
+
+      </div>
+
+
+    </section>
+    <section class="right-section">
+      <form action="/admin/notice" method="GET" id="noticeSearch">
+        <div class="search-box">
+          <select name="key" id="searchKey">
+            <option value="t">제목</option>
+            <option value="c">카테고리</option>
+            <option value="n">번호</option>
+          </select>
+
+          <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+          <button type="submit" class="search-btn">검색</button>
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+
+  <script th:inline="javascript">
+    const pagination = /*[[${pagination}]]*/ "페이지네이션 객체"    
+  </script>
+
+
+  <script src="/js/admin/noticeManage.js"></script>
+</body>
+</html>

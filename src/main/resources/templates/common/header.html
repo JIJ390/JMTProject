@@ -3,39 +3,66 @@
     <ul class="head">
 
       <li>
-        <a href="#">메인 페이지</a>
+        <a href="/">메인 페이지</a>
       </li>
 
       <li>
-        <a href="#">점메추</a>
+        <a href="/board/boardMain">점메추</a>
       </li>
 
       <li>
-        <a href="/notice/notice">공지사항</a>
+        <a href="/notice/noticeView">공지사항</a>
       </li>
 
       <li>
-        <a href="#">FAQ</a>
+        <a href="/notice/faq">FAQ</a>
       </li>
     </ul>
   </nav>
   
   <a href="/">
-    <img src="/images/logo.png" alt="">
+    <img src="/images/logo.png" alt="" class="logo-img">
   </a>
 
   
-  <div class="headRight">
-    <span>로그인</span>
-    <span>회원 가입</span>
-    <i class="fa-solid fa-bars"></i>
+  <div class="headRight" th:unless="${session.loginMember}">
+    <span><a href="/myPage/loginPage">로그인</a> |</span> 
+    <span><a href="/myPage/signUp">회원 가입</a></span>
   </div>
+
+  <!-- 만료될 거 같아서 임시로 아이콘 사용 x -->
+  <div class="headRight" th:if="${session.loginMember}">
+    <span th:text="${session.loginMember.memberName}">유저 닉네임</span>
+    <span id="popUpSpan"><img src="/images/menu1.png" width="20px" height="20px"></span>
+  </div>
+
+
+
+  <div class="menu-container" th:if="${session.loginMember}">
+    <div class="profile-img">
+      <img th:with="user=#{user.default.image}" 
+           th:src="${session.loginMember.profileImg ?: user }" alt="profile">
+    </div>
+
+    <p class="sideP" th:text="${session.loginMember.memberName}"></p>
+
+    <a href="/myPage/myPage" class="sideItem">마이 페이지</a> 
+    <a href="/admin/member/manage" class="sideItem" th:if="${#strings.equals((session.loginMember.memberAuth), '2')}">관리자 페이지</a> 
+    <a href="/myPage/logout" class="sideItem">로그 아웃</a>
+  </div>
+
 
 </header>
 
 <script th:inline="javascript">
   const message =  /*[[${message}]]*/ "전달 받은 message";
   if(message != null) alert(message);
+
+  // 로그인 되어 있을 경우 true
+  const loginCheck = /*[[${session.loginMember != null}]]*/ false;
 </script>
 
+
+
 <script src="https://kit.fontawesome.com/8c48587fe7.js" crossorigin="anonymous"></script>
+<script src="/js/common/header.js"></script>

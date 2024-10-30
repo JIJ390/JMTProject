@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항 번 글</title>
+  <link rel="stylesheet" href="/css/common/header.css">
+  <link rel="stylesheet" href="/css/notice/noticeDetail.css">
+</head>
+<body>
+  <th:block th:replace="~{common/header}"></th:block>
+  <main class="main">
+    <section id="back">
+  <!-- 감싸는 배경 -->
+
+    <section id="fix-area">
+        
+      <section id="notice-container">
+        <span><h3>공지사항</h3></span>
+        <br>
+        <!-- 내용 정렬 -->
+        
+          <div th:object="${notice}">
+            <table>
+              <thead>
+                <tr class="table-underline">
+                  <td class="detail-category" th:text="*{noticeCategory}">카테고리</td>
+                  <td class="detail-subject" th:text="*{noticeTitle}">제목</td>
+                  <td class="detail-write-day" th:text="*{noticeWriteDate}">작성일</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="3" class="detail-content" th:text="*{noticeContent}">본문</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+    
+      </section>
+
+      <div id="goToList" onclick="history.back()"> <span>목록으로</span> </div>
+    </section>
+            <!-- Floating Buttons -->
+            <div class="floating-buttons">
+              <a class="scroll-top" href="#">⬆</a>
+            </div>
+</main>
+
+</body>
+</html>

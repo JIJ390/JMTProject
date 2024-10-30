@@ -95,10 +95,6 @@ public class AdminRestaurantConroller {
 			@RequestParam("menuPrice") List<String> menuPriceList
 			) {
 		
-//		log.debug(" insertRestaurant : {}", insertRestaurant);
-//		log.debug(" menuNamelist : {}", menuNamelist);
-//		log.debug(" menuPricelist : {}", menuPricelist);
-		
 		int result = service.restaurantInsert(insertRestaurant, restaurantImages, menuNameList, menuPriceList);
 		
 		return "redirect:/admin/restaurant";
