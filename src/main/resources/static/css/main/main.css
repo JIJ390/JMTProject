@@ -385,7 +385,6 @@ header {
 .foodCategoryPopUp-left{
   display: flex;
   flex-direction: column;
-  border-right: 1px solid black;   border-top: 1px solid black;
   gap: 20px;
   width: 100%;
   height: 100%;
@@ -397,6 +396,8 @@ header {
   border-radius: 30px;
   margin: 10px;
   height: 100%;
+  background-color: #abd3d2;
+  font-family: 'NEXON Lv1 Gothic OTF';
 }
 .foodCategoryBtn{
   height: 100%;
@@ -507,7 +508,7 @@ header {
   border: 1px solid black;
   height: 70%;
   transition: all 0.3s ease;
-
+  border-radius: 30px;
 }
 
 .regionCategoryPopUp-leftBox > div:active{
@@ -539,6 +540,20 @@ header {
   height: 35px;
   cursor: pointer;
 }
+.foodCategorySubmit{
+  border: none;
+  background: none;
+  border: 1px solid black;
+  width: 130px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.foodCategorySubmit:hover{
+  background-color: #abd3d2;
+
+}
+
 .regionCategorySubmit:hover{
   background-color: #61C0BF;
 
