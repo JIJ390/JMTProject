@@ -13,3 +13,14 @@ popUpSpan?.addEventListener("click", () => {
 
 
 })
+
+
+// 상단으로 올라가기
+const topBtn = document.querySelector("#topBtn");
+
+topBtn.onclick = function () {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // 부드러운 스크롤 효과
+  });
+};
