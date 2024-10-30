@@ -2,8 +2,11 @@ package edu.kh.jmt.board.service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.board.dto.Board;
+import edu.kh.jmt.board.dto.BoardPagination;
 import edu.kh.jmt.board.mapper.BoardMapper;
 import edu.kh.jmt.common.util.FileUtil;
 import lombok.RequiredArgsConstructor;
@@ -89,9 +93,45 @@ public class BoardServiceImpl implements BoardService {
 
 	// 메인페이지 출력
 	@Override
-	public List<Board> boardMain() {
-		return mapper.boardMain();
+	public Map<String, Object> boardMain(int cp) {
+
+		int listCount = mapper.getBoardListCount();
+
+		BoardPagination pagination = new BoardPagination(cp, listCount);
+
+		int limit = pagination.getLimit();
+		int offset = (cp - 1) * limit;
+
+		RowBounds rowBounds = new RowBounds(offset, limit);
+
+		List<Board> boardList = mapper.selectBoardList(rowBounds);
+
+		Map<String, Object> map = Map.of("boardList", boardList, "pagination", pagination);
+
+		return map;
 	}
+	
+	// 검색 시 공지 리스트 
+	@Override
+	public Map<String, Object> searchBoardMain(int cp, Map<String, Object> paramMap) {
+		
+		int searchCount = mapper.searchBoardCount(paramMap);
+
+		BoardPagination boardPagination = new BoardPagination(cp, searchCount);
+		
+		int limit = boardPagination.getLimit(); // 10
+		int offset = (cp - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Board> boardList = mapper.searchBoardList(paramMap, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put(("boardList"), boardList);
+		map.put(("pagination"), boardPagination);		
+		
+		return map;
+	}
+	
 
 	// 게시글 삭제
 	@Override
@@ -109,13 +149,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int boardUpdate(Board inputBoard, MultipartFile boardImage) {
 
-		
-
 		String rename = null;
 
 		// 파일 존재 시 이름 바꾸기
 		if (!boardImage.isEmpty()) {
-
 
 			rename = FileUtil.rename(boardImage.getOriginalFilename());
 
@@ -124,13 +161,12 @@ public class BoardServiceImpl implements BoardService {
 			inputBoard.setBoardImg(url);
 
 		}
-		
-		System.out.println(inputBoard);
-		System.out.println(inputBoard);
-		System.out.println(inputBoard);
-		
-		int result = mapper.boardUpdate(inputBoard);
 
+		System.out.println(inputBoard);
+		System.out.println(inputBoard);
+		System.out.println(inputBoard);
+
+		int result = mapper.boardUpdate(inputBoard);
 
 		try {
 			// C:/uploadFiles/board2/ 폴더가 없으면 생성

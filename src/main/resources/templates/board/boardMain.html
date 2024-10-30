@@ -15,64 +15,88 @@
 		
 		<br><br>
 		<!-- 검색바 -->
-		<form class="search-container">
+		<form action="/board/boardMain" method="GET" id="boardSearch" class="search-container">
 			<div>
-					<input type="text" placeholder="　검색">
-					<i class="fa-solid fa-magnifying-glass"></i>
+					
+        <select name="key" id="searchKey">
+          <option value="t">제목</option>
+          <option value="m">작성자</option>
+          <option value="c">본문 내용</option>
+        </select>
+
+				<input type="text" name="query" id="searchQuery" placeholder="　검색">
+				<button type="submit">aaa</button>
+				<i class="fa-solid fa-magnifying-glass"></i>
 			</div>
 		</form>
 
 		<!-- 게시글 리스트 -->
+	<div class="board-box">
 		<div class="post-container">
-				<div class="post" 
-				th:each="board : ${boardList}"
-				th:data-board-no="${board.boardNo}">
+			<div class="post" 
+			th:each="board : ${boardList}"
+			th:data-board-no="${board.boardNo}">
 
-						<div class="post-header">
-								<div class="profile-pic"></div>
-								<div class="post-title" th:text="${board.boardTitle}">제목</div>
-								<div class="post-name">이름&nbsp;&nbsp;|</div>
-								<div class="post-time">&nbsp;21분 전</div>
-								<!-- 버튼 영역 -->
-								 <input type="hidden" class="getBoardNo" th:value="${board.boardNo}">
-								 
-								<div class="board-btn-area" th:data-board-no="${board.boardNo}">
-									<th:block th:if= "${session.loginMember}">
-										<th:block th:if="${session.loginMember?.memberNo} == ${board.memberNo}">
-											<button class="updateBtn">수정</button>
-											<button class="deleteBtn">삭제</button>
-										</th:block>
-										<th:block th:if="${session.loginMember?.memberNo} != ${board.memberNo}">
-											<button class="updateReport">신고하기</button>
-										</th:block>
+					<div class="post-header">
+							<div class="profile-pic"></div>
+							<div class="post-title" th:text="${board.boardTitle}">제목</div>
+							<div class="post-name" th:text="${board.memberName}">이름&nbsp;&nbsp;|</div>
+							<div class="post-time" th:text="${board.boardDate}">&nbsp;21분 전</div>
+							<!-- 버튼 영역 -->
+							 <input type="hidden" class="getBoardNo" th:value="${board.boardNo}">
+							 
+							<div class="board-btn-area" th:data-board-no="${board.boardNo}">
+								<th:block th:if= "${session.loginMember}">
+									<th:block th:if="${session.loginMember?.memberNo} == ${board.memberNo}">
+										<button class="updateBtn">수정</button>
+										<button class="deleteBtn">삭제</button>
 									</th:block>
-								</div>
-						</div>
-						<br>
-						<hr>
-						<div class="post-content">
-							<div th:if="${board.boardImg}">
-								<input type="hidden" class="boardNoList" th:value="${board.boardNo}">
-									<img th:src="${board.boardImg}" alt="게시글이미지"
-									class="imageSize">
-								</div>
-								<div class="contentCss">
-									<th:block  th:text="${board.boardContent}" class="contentCss">본문 내용</th:block>
-								</div>
-						</div>
-						
-						<div class="post-footer">
-								<span class="comment-toggle">
-										<div class="triangle"></div> <p class="c">댓글 보기</p>
-										<!-- <div hidden class="triangle-b"></div> <p class="c">댓글 닫기</p> -->
-							</span>
-						</div>
-						<div class="commentArea">
+
+									<!-- 신고하기!! -->
+									<th:block th:if="${session.loginMember?.memberNo} != ${board.memberNo}">
+										<button class="updateReport">신고하기</button>
+										<div class="boardReport boardReportHidden">
+											<p class="r1">1. 혐오 표현이 포함된 게시글</p>
+											<p class="r2">2. 욕설, 비방 표현 사용 게시글</p>
+											<p class="r3">3. 기타 사유 게시글</p>
+											<textarea name="" id="" style="" class="reportContent"></textarea>
+											<button class="reportBtn">제출하기</button>
+										</div>
+									
+									</th:block>
+								</th:block>
+							</div>
+					</div>
+					<br>
+					<hr>
+					<div class="post-content">
+						<div th:if="${board.boardImg}">
+							<input type="hidden" class="boardNoList" th:value="${board.boardNo}">
+								<img th:src="${board.boardImg}" alt="게시글이미지"
+								class="imageSize">
+							</div>
+							<div class="contentCss">
+								<th:block  th:text="${board.boardContent}" class="contentCss">본문 내용</th:block>
+							</div>
+					</div>
+					
+					<div class="post-footer">
+							<span class="comment-toggle">
+									<div class="triangle"></div> <p class="c">댓글 보기</p>
+									<!-- <div hidden class="triangle-b"></div> <p class="c">댓글 닫기</p> -->
+						</span>
+					</div>
+					<div class="commentArea">
 
 
-						</div>
 					</div>
 				</div>
+			</div>
+
+			<!-- 새로 로딩된 boardList가 쌓이는 곳 -->
+
+	</div>
+		
 				<!-- 글쓰기 버튼 -->
 				<div>
 					<th:block th:if="${session.loginMember}">
@@ -85,12 +109,12 @@
 	<button class="fa-solid fa-arrow-up" id="topBtn"></button>
 
 	<script src="/js/board/boardMain.js"></script>
-	<script src="/js/board/boardComment.js"></script>
+	<!-- <script src="/js/board/boardComment.js"></script> -->
 	<script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
+	
 	<script th:inline="javascript">
 
 			// 로그인 되어있으면 true, 아니면 false
-			const loginCheck = /*[[${session.loginMember != null}]]*/ false;
 
 	</script>
 

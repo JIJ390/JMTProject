@@ -1,10 +1,12 @@
 package edu.kh.jmt.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.board.dto.Board;
+import edu.kh.jmt.restaurant.dto.ReviewDto;
 
 public interface BoardService {
 
@@ -20,7 +22,15 @@ public interface BoardService {
 	 * 게시글 조회
 	 * @return
 	 */
-	List<Board> boardMain();
+	Map<String, Object> boardMain(int cp);
+	
+	
+	/**
+	 * 게시글 목록 검색시
+	 * @param paramMap
+	 * @return
+	 */
+	Map<String, Object> searchBoardMain(int cp, Map<String, Object> paramMap);
 
 	/** 게시글 삭제
 	 * @param boardNo
@@ -43,5 +53,11 @@ public interface BoardService {
 	 * @return
 	 */
 	int boardUpdate(Board inputBoard, MultipartFile boardImage);
+
+
+
+
+
+
 
 }

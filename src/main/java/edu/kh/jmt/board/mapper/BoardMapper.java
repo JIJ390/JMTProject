@@ -1,9 +1,11 @@
 package edu.kh.jmt.board.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.board.dto.Board;
@@ -16,11 +18,39 @@ public interface BoardMapper {
 	 * @return
 	 */
 	int boardWrite(Board inputBoard);
-
-	/** 게시글 출력
+	
+	/**
+	 * 전체 게시글의 개수
 	 * @return
 	 */
-	List<Board> boardMain();
+	int getBoardListCount();
+	
+	/**
+	 * 전체 게시글 목록 조회
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Board> selectBoardList(RowBounds rowBounds);
+	
+	
+	
+	/**
+	 * 검색 게시글 개수 조회
+	 * @param paramMap
+	 * @return
+	 */
+	int searchBoardCount(Map<String, Object> paramMap);
+	
+	
+	/**
+	 * 검색된 게시글 조회
+	 * @param paramMap
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Board> searchBoardList(Map<String, Object> paramMap, RowBounds rowBounds);
+
+
 
 	/** 게시글 삭제
 	 * @param boardNo
@@ -44,5 +74,13 @@ public interface BoardMapper {
 	 * @return
 	 */
 	int boardUpdate(Board inputBoard);
+
+
+
+	
+
+
+
+
 
 }
