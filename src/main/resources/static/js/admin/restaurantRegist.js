@@ -198,7 +198,7 @@ form.addEventListener("submit", e => {
   const detailAddress = document.querySelector("#detailAddress");
 
   // 음식 가격 정규 표현식  세 자리 이상의 숫자
-  const priceFormat = /\d{3}/;
+  const priceFormat = /(?<!\S)\d{3,}(?!\S)/;
 
   // // 파일 이미지 형식 정규 표현식
   // const fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;

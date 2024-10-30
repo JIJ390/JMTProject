@@ -119,7 +119,7 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 		
 		if(reportContent.equals("")) {
-			reportContent = "신고 내용 없음";
+			reportContent = "리뷰 신고";
 		}
 
 		if(mapper.selectReportReview(memberNo,reviewNo,reportType) > 0) {

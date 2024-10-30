@@ -134,8 +134,10 @@ input {
 }
 
 .inputChoose label {
-  width: 60px;
+  min-width: 60px;
   height: 30px;
+
+  padding: 0px 10px;
 
   border: 1px solid var(--border-color);
   border-radius: 20px;
