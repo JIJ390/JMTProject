@@ -1,8 +1,5 @@
 package edu.kh.jmt.admin.dto;
 
-import java.util.List;
-import java.util.Map;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

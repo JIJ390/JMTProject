@@ -3,7 +3,6 @@ package edu.kh.jmt.admin.service;
 import java.util.Map;
 
 import edu.kh.jmt.noticeView.dto.Faq;
-import edu.kh.jmt.noticeView.dto.Notice;
 
 public interface AdminFaqService {
 

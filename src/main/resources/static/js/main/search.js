@@ -28,6 +28,8 @@ for (let i = 0;   i < storeSection.length; i++) {
 }
 for (let i = 0; i < heartBtn.length; i++) {
   heartBtn[i].addEventListener('click', (event) => {
+
+    console.log("aaa");
     event.stopPropagation(); // 이벤트 전파를 막음
     if (loginCheck === false) { //로그인이 되어있지않을때에
       alert("로그인이 필요합니다.")
@@ -59,19 +61,6 @@ for (let i = 0; i < heartBtn.length; i++) {
 
 
 
-const menu = document.querySelector(".menu");
-const MenuContainer = document.querySelector(".menu-container");
-
-menu?.addEventListener('click', () => {
-
-  if (MenuContainer.style.display == "block") {
-    MenuContainer.style.display = "none"
-  } else {
-    MenuContainer.style.display = "block"
-  }
-
-
-});
 
 //---------------------------------------------------------
 

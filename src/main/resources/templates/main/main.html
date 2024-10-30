@@ -22,12 +22,6 @@
       <a href="/notice/noticeView">공지사항</a>
       <a href="/notice/faq">FAQ</a>
 
-      <div class="logoBox">
-        <a href="#">
-          <img src="/images/logo-m.png" alt="로고" id="logoImage">
-          <img src="/images/logoText.png" alt="로고 글자" id="logoText">
-        </a>
-      </div>
 
     </div>
       <!-- 로그인이 안되어있을때 -->
@@ -48,33 +42,36 @@
 
   <!-- Main Content -->
   <main>
-    <form class="content-header" action="/search" method="GET" id="searchForm">
-      <h1>맛집 검색 J&T ! </h1>
-      <input type="hidden" class="result" name="result">
-      <div class="searchBox">
-
-        <input type="text" id="searchCode" name="searchCode">
-
-        <button id="searchBtn" type="submit">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-
-      </div>
-
-
-      <div class="filter">
-        <a class="filter-category" id="foodCategoryBtn">음식 종류</a>
-
-
-        <a class="filter-category" id="regionCategoryBtn">지역 선택</a>
-      </div>
-      
-      <div>
-        <input class="tag" name="tag" readonly >
+    <div class="mainBox11">
+      <form class="content-header" action="/search" method="GET" id="searchForm">
+        <!-- <h1>맛집 검색 J&T ! </h1> -->
+          <img src="/images/logo-m.png" alt="로고" id="logoImage">
+        <input type="hidden" class="result" name="result">
+        <div class="searchBox">
   
-        <input class="region" name="region" readonly>
-      </div>
-    </form>
+          <input type="text" id="searchCode" name="searchCode">
+  
+          <button id="searchBtn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+  
+        </div>
+  
+  
+        <div class="filter">
+          <a class="filter-category" id="foodCategoryBtn">음식 종류</a>
+  
+  
+          <a class="filter-category" id="regionCategoryBtn">지역 선택</a>
+        </div>
+        
+        <div>
+          <input class="tag" name="tag" readonly >
+    
+          <input class="region" name="region" readonly>
+        </div>
+      </form>
+    </div>
 
     <!-- ------------------------------------카테고리 팝업-------------------------------------------------------- -->
 
@@ -234,11 +231,11 @@
 
       <nav>
         <a href="/myPage/myPage" id="myPage" class="sideItem">마이 페이지</a> <!-- 마이페이지 링크 추가 -->
-        <a href="/board/boardMain" class="sideItem">점메추 게시판</a>
-        <a href="/notice/notice" class="sideItem">공지 사항</a>
-        <a href="/notice/faq" class="sideItem">FAQ</a>
+        <a href="/admin/member/manage" class="sideItem" th:if="${#strings.equals((session.loginMember.memberAuth), '2')}">관리자 페이지</a> 
+        <a href="/myPage/logout" class="sideItem">로그 아웃</a>
       </nav>
     </div>
+    
     <!-- --------------------------------------- -->
 
 

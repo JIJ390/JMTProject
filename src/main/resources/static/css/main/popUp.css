@@ -1,31 +1,32 @@
-
+:root{
+  --main-color : #61C0BF;
+  --border-color : rgb(182, 182, 182);
+}
 
 
 .menu-container {
   display: flex;
   flex-direction: column;
-  /* display: none;  이거 없애고 생기고 하면 될거같은데..*/ 
-  /* width: 13vw; */
-  /* height: 45vh; */
 
-  width: 300px;
-  height: 500px;
+  text-align: center;
 
+  width: 200px;
+  height: 280px;
+  border: 1px solid var(--border-color);
 
-  background-color: #fff;
+  background-color: white;
+
   border-radius: 15px;
   
   padding: 20px;
 
-  
-  overflow: hidden; 
-  text-align: center;
-  
-  
-  /* -0------------------------------------------ */
-  
+  z-index: 2;
+
   position: absolute;
-  right: 0;
+  top: 90px;
+  right: 30px;
+
+
   display: none;
   
 
@@ -61,5 +62,5 @@
 }
 
 nav a:hover {
-  color: #007bff; /* Blue hover effect */
+  color: var(--main-color);
 }

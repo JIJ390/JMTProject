@@ -18,7 +18,6 @@ body      { font-family: 'NanumSquare', sans-serif }
   padding: 0;
   box-sizing: border-box;
   max-width: 100vw;
-  font-family: 'Lato', sans-serif;
 }
 body{
   margin: 0;
@@ -31,9 +30,15 @@ main{
 }
 
 #header-Font{
+  height: 80px;
   display: flex;
   align-items: center;
   gap: 10px;
+  font-size: 20px;
+}
+
+#header-Font > a:hover{
+  color: #61C0BF;
 }
 
 
@@ -66,7 +71,12 @@ header {
 }
 
 #logoImage{
-  width: 100px;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 1px;
+  pointer-events: none;
+  user-select: none;
 }
 #logoText{
   width: 130px;
@@ -105,7 +115,9 @@ header {
   margin: 0 5px;
 }
 
-
+.mainBox11{
+  margin-top: 20px;
+}
 
 .content-header {
   display: flex;
@@ -117,7 +129,8 @@ header {
   color: white;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid blakc;
+  justify-content: flex-end;
+  z-index: 10;
 }
 
 
@@ -221,7 +234,7 @@ header {
   height: 20%;
   background-color: #E3E3E3;
   border-radius: 30px;
-  margin-bottom: 10px;
+  margin: 10px;
 }
 #searchBtn{
   border: 0;
@@ -573,6 +586,24 @@ header {
   overflow-x: auto;
   scroll-behavior: smooth; /* 스크롤이 부드럽게 움직이도록 설정 */
 }
+.slider-items::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 50px;
+}
+.slider-items::-webkit-scrollbar-track {
+  background-color: gray;
+  border-radius: 50px;
+}
+.slider-items::-webkit-scrollbar-thumb { 
+  background-color: #61C0BF;
+  border-radius: 50px;
+}
+.slider-items::-webkit-scrollbar-button {
+  display: none;
+  border-radius: 50px;
+}
+
+
 .slide-btn {
   position: absolute;
   top: 50%;
