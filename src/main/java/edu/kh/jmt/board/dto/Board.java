@@ -23,4 +23,6 @@ public class Board {
 	private String boardDelFl;
 	private int memberNo;
 	
+	private String memberName;
+	
 }

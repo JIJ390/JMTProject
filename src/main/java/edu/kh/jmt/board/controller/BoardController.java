@@ -2,6 +2,7 @@ package edu.kh.jmt.board.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,13 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import edu.kh.jmt.myPage.dto.Member;
+import edu.kh.jmt.restaurant.dto.ReviewDto;
 import edu.kh.jmt.board.dto.Board;
+import edu.kh.jmt.board.dto.BoardPagination;
 import edu.kh.jmt.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,21 +42,80 @@ public class BoardController {
 	 */
 	@GetMapping("boardMain")
 	public String boardMain(
-			Model model) {
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			Model model,
+			@RequestParam Map<String, Object> paramMap) {
 		
-		List<Board> boardList = service.boardMain();
-				
-				
+		// 검색 결과 목록을 담을 객체
+		Map<String, Object> map = null;
+		
+		//paramMap 에 key 가 없을 경우, 검색이 아닐 경우
+		if (paramMap.get("key") == null) {	
+			map = service.boardMain(cp);
+			
+		} else { // 검색한 경우
+			
+			// paramMap 에 key, query 담겨 있음
+			map = service.searchBoardMain(cp, paramMap);
+		}
+
+		
+		List<Board> boardList = (List<Board>)map.get("boardList");
+		BoardPagination pagination = (BoardPagination)map.get("pagination");
+		
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("pagination", pagination);
 		
 		
 		
 		return "/board/boardMain";
 	}
 	
+	
+	@GetMapping("boardPlus")
+	public String boardPlus(
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			Model model,
+			@RequestParam Map<String, Object> paramMap) {
+		
+		// 검색 결과 목록을 담을 객체
+		Map<String, Object> map = null;
+		
+		//paramMap 에 key 가 없을 경우, 검색이 아닐 경우
+		if (paramMap.get("key") == null) {	
+			map = service.boardMain(cp);
+			
+		} else { // 검색한 경우
+			
+			// paramMap 에 key, query 담겨 있음
+			map = service.searchBoardMain(cp, paramMap);
+		}
+
+		
+		List<Board> boardList = (List<Board>)map.get("boardList");
+		
+		
+		BoardPagination pagination = (BoardPagination)map.get("pagination");
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pagination", pagination);
+		
+		
+		
+		return "/board/boardPlus";
+	}
+	
 
 	@GetMapping("boardWrite")
-	public String boardWrite() {
+	public String boardWrite(
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra) {
+		
+		if (loginMember.getMemberAuth() == 1) {
+			ra.addFlashAttribute("message", "자단된 회원입니다");
+			return "redirect:/board/boardMain";
+		}
+				
 		
 		return "/board/boardWrite";
 	}
@@ -179,12 +242,22 @@ public class BoardController {
 		return "redirect:boardMain";
 	}
 	
-	
-
-
-	
-	
-	
+	@ResponseBody
+	@GetMapping("report")
+	public String boardReport(
+			@RequestParam("reportContent") String reportContent,
+			@RequestParam("reportType") String reportType
+			) {
+		
+		System.out.println(reportContent);
+		System.out.println(reportType);
+		System.out.println(reportContent);
+		System.out.println(reportType);
+		System.out.println(reportContent);
+		System.out.println(reportType);
+		
+		return null;
+	}
 	
 	
 	
