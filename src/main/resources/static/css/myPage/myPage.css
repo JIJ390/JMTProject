@@ -13,14 +13,14 @@ main {
 }
 
 .container {
-  height: 100%;
-  width: 600px;
+  height: 100vh;
+  width: 1000px;
   max-width: 800px;
   background-color: white;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
+
+  
+  box-shadow: 0px 1px 6px -2px var(--border-color);
   text-align: center;
-  margin-bottom: 180px;
   padding: 20px; /* 내부 패딩 추가 */
 }
 
@@ -37,21 +37,22 @@ main {
 }
 
 .profile img {
-  width: 120px;
-  height: 120px;
+  width: 50%;
+  height: auto;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .profile-img-wrapper {
-  width: 150px;
-  height: 150px;
+  margin-top: 35px;
+  display: block;
+  width: 200px;
+  height: 200px;
   border-radius: 50%; /* 원형으로 설정 */
   overflow: hidden; /* 원형 영역을 벗어나는 이미지 잘라내기 */
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #d8d8d8; /* 이미지가 없는 경우 배경색 */
   pointer-events: none;
 }
 
@@ -80,7 +81,13 @@ main {
 }
 
 .profile .name {
-  font-size: 1.5rem;
+  height: 100px;
+  font-size: 48px;
+}
+
+#memberName {
+  height: 120px;
+  font-size: 48px;
 }
 
 .profile .email {
@@ -89,7 +96,7 @@ main {
 }
 
 .footer-links {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .footer-links .horizontal-links {
@@ -110,17 +117,6 @@ main {
   color: #4dc4b4;
 }
 
-.back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #4dc4b4;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  padding: 12px;
-  cursor: pointer;
-}
 
 .name input {
   width: 100%; /* 부모 컨테이너에 맞게 채우기 */

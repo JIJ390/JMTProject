@@ -73,7 +73,7 @@
 			<if test="profileImg != null and !profileImg.equals('')">
              	PROFILE_IMG = #{profileImg},
          	</if>
-			
+
 			MEMBER_NAME = #{memberName}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
@@ -95,8 +95,53 @@
 	
 	
 	
+	<!-- 찜 목록 개수 조회 -->
+	<select id="getLikeListCount">
+		SELECT
+			COUNT(*)
+		FROM "RESTAURANT"
+		JOIN "BOOKMARK" USING (RESTAURANT_NO)
+		WHERE
+			MEMBER_NO = #{memberNo}
+	</select>
 	
 	
-	
+	<select id="selectLikeList"
+			resultType="RestaurantDto">
+			SELECT 
+			   RESTAURANT_NO, 
+			   RESTAURANT_NAME,
+			   RESTAURANT_TEL,
+			   RESTAURANT_ADDRESS,
+			   RESTAURANT_IMG1,
+			   LOCATION_NAME,
+			   CATEGORY_NAME,
+		    (CASE 
+		        WHEN EXISTS (SELECT 1 
+		                     FROM BOOKMARK SUB 
+		                     WHERE SUB.RESTAURANT_NO = RESTAURANT_NO 
+		                       AND SUB.MEMBER_NO = #{memberNo}) 
+		        THEN 1 
+		        ELSE 0 
+		     END) AS LIKE_CHECK,
+
+			    ROUND(NVL(    
+		          (SELECT COUNT(*)
+		          FROM REVIEW
+		          WHERE LIKE_FL = 'Y'
+		          AND RESTAURANT_NO = RESTAURANT_NO) /   
+		          NULLIF(     
+		                   (SELECT COUNT(*)
+		                   	FROM REVIEW
+		                    WHERE RESTAURANT_NO = RESTAURANT_NO), 0), 0
+			    ) * 100 )AS "LIKE_PERCENT"  
+			FROM "RESTAURANT" R
+			JOIN LOCATION USING (LOCATION_NO)
+			JOIN CATEGORY USING (CATEGORY_NO)
+			JOIN "BOOKMARK" USING (RESTAURANT_NO)
+			WHERE RESTAURANT_DEL_FL = 'N'
+			AND MEMBER_NO = #{memberNo}
+			GROUP BY RESTAURANT_NO, RESTAURANT_IMG1,RESTAURANT_ADDRESS,RESTAURANT_TEL,R.RESTAURANT_NAME, LOCATION_NAME,   CATEGORY_NAME, RESTAURANT_IMG1
+	</select>
 	
 </mapper>
