@@ -55,6 +55,31 @@ public interface BoardService {
 	int boardUpdate(Board inputBoard, MultipartFile boardImage);
 
 
+	/**
+	 * 게시글 신고
+	 * @param reportType
+	 * @param reportContent
+	 * @param boardNo
+	 * @param memberNo
+	 * @return
+	 */
+	int boardReport(String reportType, String reportContent, int boardNo, int memberNo);
+
+
+	/**
+	 * 댓글신고
+	 * @param reportType
+	 * @param content
+	 * @param commentNo
+	 * @param memberNo
+	 * @return
+	 */
+	int commentReport(String reportType, String content, int commentNo, int memberNo);
+
+
+	
+
+
 
 
 

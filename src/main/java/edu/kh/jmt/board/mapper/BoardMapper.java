@@ -77,6 +77,35 @@ public interface BoardMapper {
 	 */
 	int boardUpdate(Board inputBoard);
 
+	/**
+	 * 게시글 신고
+	 * @param reportType
+	 * @param reportContent
+	 * @param boardNo
+	 * @param memberNo
+	 * @return
+	 */
+	int boardReport(
+		 @Param("reportType")	String reportType, 
+		 @Param("reportContent") String reportContent, 
+		 @Param("boardNo") int boardNo, 
+		 @Param("memberNo") int memberNo);
+
+	/** 댓글 신고
+	 * @param reportType
+	 * @param content
+	 * @param commentNo
+	 * @param memberNo
+	 * @return
+	 */
+	int commentReport(
+			@Param("reportType") String reportType, 
+			@Param("content") String content, 
+			@Param("commentNo") int commentNo, 
+			@Param("memberNo") int memberNo);
+
+
+
 
 
 	

@@ -24,5 +24,6 @@ public class Board {
 	private int memberNo;
 	
 	private String memberName;
+	private String profileImg; // 프로필 이미지
 	
 }

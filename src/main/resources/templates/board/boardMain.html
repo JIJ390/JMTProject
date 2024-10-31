@@ -24,7 +24,7 @@
           <option value="c">본문 내용</option>
         </select>
 
-				<input type="text" name="query" id="searchQuery" placeholder="　검색">
+				<input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
 				<button type="submit">aaa</button>
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</div>
@@ -38,7 +38,7 @@
 			th:data-board-no="${board.boardNo}">
 
 					<div class="post-header">
-							<div class="profile-pic"></div>
+							<img th:with="user=#{user.default.image}" th:src="${board.profileImg ?: user }" class="profile-pic" ></img>
 							<div class="post-title" th:text="${board.boardTitle}">제목</div>
 							<div class="post-name" th:text="${board.memberName}">이름&nbsp;&nbsp;|</div>
 							<div class="post-time" th:text="${board.boardDate}">&nbsp;21분 전</div>
@@ -55,7 +55,7 @@
 									<!-- 신고하기!! -->
 									<th:block th:if="${session.loginMember?.memberNo} != ${board.memberNo}">
 										<button class="updateReport">신고하기</button>
-										<div class="boardReport boardReportHidden">
+										<div class="boardReport boardReportHidden" th:data-board-no="${board.boardNo}">
 											<p class="r1">1. 혐오 표현이 포함된 게시글</p>
 											<p class="r2">2. 욕설, 비방 표현 사용 게시글</p>
 											<p class="r3">3. 기타 사유 게시글</p>
@@ -100,13 +100,30 @@
 				<!-- 글쓰기 버튼 -->
 				<div>
 					<th:block th:if="${session.loginMember}">
-					<button id="pageChange" class="writeBtn">글쓰기</button>
+						<button id="pageChange" class="writeBtn" th:value="${session.loginMember.memberAuth}">글쓰기</button>
 					</th:block>
 				</div>
 
 
 	<!-- 상단으로 이동 버튼 -->
 	<button class="fa-solid fa-arrow-up" id="topBtn"></button>
+
+
+		<div class="commentReportPopup commentPopupHidden" >
+	
+			<p class="rc">1. 혐오 표현이 포함된 댓글</p>
+			<p class="rc">2. 욕설, 비방 표현 사용 댓글</p>
+			<p class="rc">3. 기타 사유 댓글</p>
+			<textarea name="" id="" class="commentReportContent"></textarea>
+			<br>
+		<div style="display: flex; justify-content: space-between;">
+				<button class="commentReportBtn">신고</button>
+				<button class="commentCloseBtn">닫기</button>
+		</div>
+		<input type="hidden" class="getCommentNo">
+		</div>
+
+		<input type="hidden" class="getLoginMember" th:value="${session.loginMember}">
 
 	<script src="/js/board/boardMain.js"></script>
 	<!-- <script src="/js/board/boardComment.js"></script> -->

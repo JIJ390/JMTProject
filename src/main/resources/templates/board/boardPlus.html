@@ -4,7 +4,7 @@
 				th:data-board-no="${board.boardNo}">
 
 						<div class="post-header">
-								<div class="profile-pic"></div>
+								<img th:with="user=#{user.default.image}" th:src="${board.profileImg ?: user }" class="profile-pic"></img>
 								<div class="post-title" th:text="${board.boardTitle}">제목</div>
 								<div class="post-name" th:text="${board.memberName}">이름&nbsp;&nbsp;|</div>
 								<div class="post-time" th:text="${board.boardDate}">&nbsp;21분 전</div>

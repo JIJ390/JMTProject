@@ -185,4 +185,36 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 
+	// 게시글 신고
+	@Override
+	public int boardReport(String reportType, String reportContent, int boardNo, int memberNo) {
+		
+		if(reportType.equals("1. 혐오 표현이 포함된 게시글")) {
+			reportType = "5";
+		}
+		else if(reportType.equals("2. 욕설, 비방 표현 사용 게시글")) {
+			reportType = "6";
+		}
+		else{
+			reportType = "7";
+		}
+		
+		return mapper.boardReport(reportType,reportContent,boardNo,memberNo);
+	}
+	
+	// 댓글 신고
+	@Override
+	public int commentReport(String reportType, String content, int commentNo, int memberNo) {
+		
+		if(reportType.equals("1. 혐오 표현이 포함된 댓글")) {
+			reportType = "8";
+		}else if(reportType.equals("2. 욕설, 비방 표현 사용 댓글")) {
+			reportType = "9";
+		}else {
+			reportType = "10";
+		}
+		
+		return mapper.commentReport(reportType, content, commentNo, memberNo);
+	}
+	
 }
