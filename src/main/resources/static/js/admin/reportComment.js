@@ -5,6 +5,7 @@ const reportContentBtn = document.querySelector("#reportContentBtn");
 
 let memberNoTemp;
 let reportNoTemp;
+let boardNoTemp;
 let commentNoTemp;
 let urlTemp;
 
@@ -127,6 +128,10 @@ const selectReportComment = (url) => {
     memberNoTemp = member.memberNo;
     commentNoTemp = reportComment.commentNo;
     reportNoTemp = reportComment.reportCommentNo;
+    boardNoTemp = reportComment.boardNo;
+    
+
+    console.log(boardNoTemp);
 
     // 신고 관련 정보 요소 얻어오기
     const reportTypeName = document.querySelector("#reportTypeName");
@@ -144,14 +149,17 @@ const selectReportComment = (url) => {
 
     console.log(commentNoTemp);
 
+    
 
     // 신고된 댓글+ 작성자 정보
     const memberNo = document.querySelector("#memberNo");
     const memberName = document.querySelector("#memberName");
     const memberStatus = document.querySelector("#memberStatus");
+    const boardLink = document.querySelector("#boardLink");
 
     memberNo.innerHTML = member.memberNo;
     memberName.innerHTML = member.memberName;
+    boardLink.href = "/admin/report/board/detail?boardNo=" +  boardNoTemp;
 
     let str = (member.memberAuth === 1) ? '차단' : '활동';
     if (member.memberDelFl === 'Y') str = '탈퇴'

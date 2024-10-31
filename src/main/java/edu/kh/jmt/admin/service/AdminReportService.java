@@ -5,6 +5,7 @@ import java.util.Map;
 import edu.kh.jmt.admin.dto.ReportBoard;
 import edu.kh.jmt.admin.dto.ReportComment;
 import edu.kh.jmt.admin.dto.ReportReview;
+import edu.kh.jmt.board.dto.Board;
 
 public interface AdminReportService {
 
@@ -163,6 +164,14 @@ public interface AdminReportService {
 	 * @return
 	 */
 	Map<String, String> reportBoardStatus();
+
+	
+	/**
+	 * 게시글 페이지 이동
+	 * @param boradNo
+	 * @return
+	 */
+	Board reportBoardDetailView(int boradNo);
 	
 	
 }

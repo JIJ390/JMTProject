@@ -134,7 +134,7 @@ const selectReportReview = (url) => {
     const reportMemberName = document.querySelector("#reportMemberName");
     const reportDate = document.querySelector("#reportDate");
     const reportContent = document.querySelector("#reportContent");
-    const reviewLink = document.querySelector("#reviewLink");
+
 
     reviewLink.href = `/restaurant/view?restaurantNo=${reportReview.restaurantNo}`;
 
@@ -153,6 +153,7 @@ const selectReportReview = (url) => {
     const memberNo = document.querySelector("#memberNo");
     const memberName = document.querySelector("#memberName");
     const memberStatus = document.querySelector("#memberStatus");
+    const reviewLink = document.querySelector("#reviewLink");
 
     memberNo.innerHTML = member.memberNo;
     memberName.innerHTML = member.memberName;
@@ -161,7 +162,6 @@ const selectReportReview = (url) => {
     if (member.memberDelFl === 'Y') str = '탈퇴'
 
     memberStatus.innerHTML = str;
-
     
     // 만약 탈퇴 상태 혹은 차단 상태일 경우 버튼 비활성화
     if ((member.memberDelFl === 'Y') || (member.memberAuth === 1) ) {

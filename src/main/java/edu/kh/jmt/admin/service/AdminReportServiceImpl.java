@@ -13,6 +13,7 @@ import edu.kh.jmt.admin.dto.ReportBoard;
 import edu.kh.jmt.admin.dto.ReportComment;
 import edu.kh.jmt.admin.dto.ReportReview;
 import edu.kh.jmt.admin.mapper.AdminReportMapper;
+import edu.kh.jmt.board.dto.Board;
 import edu.kh.jmt.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -315,5 +316,13 @@ public class AdminReportServiceImpl implements AdminReportService{
 		return mapper.reportBoardStatus();
 	}
 	
+	
+	
+	
+	// 게시글 페이지 이동
+	@Override
+	public Board reportBoardDetailView(int boradNo) {
+		return mapper.reportBoardDetailView(boradNo);
+	}
 	
 }
