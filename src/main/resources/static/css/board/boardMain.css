@@ -444,7 +444,7 @@
 /* boardReport 란 */
 
 .boardReport {
-  width: 260px;
+  width: 240px;
   height: max-content;
   border: 1px solid gray;
   background-color: rgb(255, 255, 255);
@@ -457,14 +457,28 @@
   flex-direction: column;
   justify-content: start;
   text-align: start;
+  margin-top: 5px;
+}
+
+.reportContent {
+  border: none;  /* 평상 시 보이는 테두리 없앰 */
+  outline: none; /* 클릭 시 보이는 테두리 없앰*/
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.boardReport>span{
+  margin-top: 8px;
 }
 
 .rtext{
   margin-left: 5px;
+  font-size: 90%;
+  color: #848585;
 }
 
 .boardReport>textarea {
-  width: 100%;
+  width: 90%;
   height: 85px;
   border: 1px solid gray;
   margin-top: 10px;
@@ -472,13 +486,13 @@
   resize: none;
 }
 
-.boardReport>p {
+/* .boardReport>span {
   width: 100%;
   height: 30px;
-  border: 1px solid gray;
+  color: #b9b9b9;
 
   resize: none;
-}
+} */
 
 .boardReport>p:hover {
   width: 100%;
@@ -495,6 +509,8 @@
 .reportBtnArea{
   display: flex;
   justify-content: end;
+  align-items: center;
+  padding: 6px;
 }
 /* 
 .popupReview > textarea{
@@ -541,7 +557,7 @@ body		{ font-family: 'NanumSquare', sans-serif }
     width: 50px;
     height: 40px;
     background-color: #ffffff;
-    border: 1px solid #ff0000;
+    border: 1px solid #ffb3b3;
     color: rgb(0, 0, 0);
     cursor: pointer;
     font-size: 10px;
