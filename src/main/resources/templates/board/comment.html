@@ -40,7 +40,7 @@
 
 
 <!-- 댓글 작성 부분 -->
-<div class="textarea-main">
+<div class="textarea-main" th:if= "${session.loginMember}">
   <textarea name="commentBtn" id="co" class="comment-write" placeholder="댓글 입력"></textarea>
   <!-- <div style="color: gray;" class="commnetBtn">댓글<br>작성</div> -->
   <button class="commentBtn-write" id="addComment" th:value="${session.loginMember.memberAuth}">작성</button>

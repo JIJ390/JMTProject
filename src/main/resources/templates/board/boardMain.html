@@ -100,8 +100,7 @@
 				<!-- 글쓰기 버튼 -->
 				<div>
 					<th:block th:if="${session.loginMember}">
-					
-					<button id="pageChange" class="writeBtn" th:value="${session.loginMember.memberAuth}">글쓰기</button>
+						<button id="pageChange" class="writeBtn" th:value="${session.loginMember.memberAuth}">글쓰기</button>
 					</th:block>
 				</div>
 
