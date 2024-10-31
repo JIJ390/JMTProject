@@ -5,6 +5,7 @@ const reportContentBtn = document.querySelector("#reportContentBtn");
 
 let memberNoTemp;
 let reportNoTemp;
+let restaurantNoTemp;
 let reviewNoTemp;
 let urlTemp;
 
@@ -127,6 +128,7 @@ const selectReportReview = (url) => {
     memberNoTemp = member.memberNo;
     reviewNoTemp = reportReview.reviewNo;
     reportNoTemp = reportReview.reportReviewNo;
+    restaurantNoTemp = reportReview.restaurantNo;
 
     // 신고 관련 정보 요소 얻어오기
     const reportTypeName = document.querySelector("#reportTypeName");
@@ -136,7 +138,7 @@ const selectReportReview = (url) => {
     const reportContent = document.querySelector("#reportContent");
 
 
-    reviewLink.href = `/restaurant/view?restaurantNo=${reportReview.restaurantNo}`;
+
 
     reportTypeName.innerText = reportReview.reportTypeName;
     reportReviewNo.innerText = `# ${reportReview.reportReviewNo}`;
@@ -155,6 +157,9 @@ const selectReportReview = (url) => {
     const memberStatus = document.querySelector("#memberStatus");
     const reviewLink = document.querySelector("#reviewLink");
 
+    reviewLink.href = "/restaurant/view?restaurantNo=" + restaurantNoTemp;
+
+    
     memberNo.innerHTML = member.memberNo;
     memberName.innerHTML = member.memberName;
 
