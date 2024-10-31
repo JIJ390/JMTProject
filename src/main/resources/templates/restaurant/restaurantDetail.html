@@ -34,7 +34,8 @@
             <input type="hidden" class="getRestaurantNo" th:value="*{restaurantNo}">
             <input type="hidden" class="getRestaurantAddress" th:value="*{restaurantAddress}">
             <input type="hidden" class="getRestaurantName" th:value="*{restaurantName}">
-            <th:block th:if= "${session.loginMember}"><input type="hidden" class="getLoginMemberNo" th:value="${session.loginMember.memberNo}"></th:block>
+            <th:block th:if="${session.loginMember}"><input type="hidden" class="getLoginMemberNo"
+                    th:value="${session.loginMember.memberNo}"></th:block>
 
             <div class="mainDetail">
                 <div class="mainDetailPhoto">
@@ -49,8 +50,12 @@
                     </div>
                     <hr style="margin-top: 20px; margin-bottom: 20px;">
                     <ul style="list-style: none;">
-                        <li><i class="fa-solid fa-phone-volume"></i><p th:text="*{restaurantTel}"></p></li>
-                        <li><i class="fa-solid fa-house"></i><p  th:text="*{restaurantAddress}"></p></li>
+                        <li><i class="fa-solid fa-phone-volume"></i>
+                            <p th:text="*{restaurantTel}"></p>
+                        </li>
+                        <li><i class="fa-solid fa-house"></i>
+                            <p th:text="*{restaurantAddress}"></p>
+                        </li>
                         <li></li>
                     </ul>
                     <div class="map2" id="map2"></div>
@@ -70,10 +75,13 @@
             </div>
             <div class="mainReview">
                 <div class="reviewT">
-                    <b th:text="*{restaurantName}"></b>
-                    <p style="font-size: 30px; margin-right: 200px;">방문자 평가</p>
+                    <div style="width: 70%; height: max-content;">
+                        <b th:text="*{restaurantName}"></b>
+                        <p style="font-size: 30px;">방문자 평가</p>
+                    </div>
                     <div class="relative">
-                        <button id="popupButton" style="border: 1px solid gray; width: 50px; height: 30px; margin-top: 5px; border-radius: 5px;">
+                        <button id="popupButton"
+                            style="border: 1px solid gray; width: 50px; height: 30px; margin-top: 5px; border-radius: 5px;">
                             <i class="fa-solid fa-bars-staggered"></i>
                         </button>
                         <div id="popup" class="hidden popup">
@@ -123,7 +131,8 @@
     </script>
 
     <script src="https://kit.fontawesome.com/b289d4a0af.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" th:src="|//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey}&libraries=services|"></script>
+    <script type="text/javascript"
+        th:src="|//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey}&libraries=services|"></script>
     <script src="/js/restaurant/mapApi.js"></script>
     <script src="/js/restaurant/restaurantDetail.js"></script>
     <script src="/js/restaurant/review.js"></script>
@@ -133,11 +142,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
