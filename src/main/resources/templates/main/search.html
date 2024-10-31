@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detailpage</title>
+    <title>가게 검색</title>
 
     <link rel="stylesheet" href="/css/main/search.css">
     <link rel="stylesheet" href="/css/main/popUp.css">
@@ -28,8 +28,10 @@
 
 
                     <div class="searchBox">
-                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색"
-                            th:value="${searchCode}">
+
+                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색어를 입력해 주세요"
+                        th:value="${searchCode}">
+
                         <button class="categorySearch_btn">🍳</button>
                     </div>
 
@@ -38,17 +40,19 @@
                 <hr>
 
 
-                <th:block th:if="${tag == ''}">
-                    <div>검색한 지역이 없습니다.</div>
-                </th:block>
+    <th:block th:if="${tag == ''}">
+        <div class="searchText">검색한 지역이 없습니다.</div>
+    </th:block>
 
-                <th:block th:unless="${tag == ''}">
-                    <div th:text="${tag}"></div>
-                </th:block>
-                <hr>
-                <th:block th:if="${region == ''}">
-                    <div>검색한 카테고리가 없습니다.</div>
-                </th:block>
+    <th:block th:unless= "${tag == ''}"> 
+        <div th:text="${tag}"></div>
+    </th:block>
+    <hr>
+    <th:block th:if="${region == ''}">
+        <div class="searchText">검색한 카테고리가 없습니다.</div>
+    </th:block>
+    <hr>
+
 
                 <th:block th:unless="${region == ''}">
                     <div th:text="${region}"></div>
@@ -138,15 +142,21 @@
         </div>
         <!-- --------------------------------------- -->
 
-        <div class="floating-buttons">
-            <a class="scroll-top" href="#">⬆</a>
-        </div>
-        <script th:inline="javascript">
-            // 로그인 되어있으면 true, 아니면 false
-            const loginCheck = /*[[${session.loginMember != null}]]*/ false;
-        </script>
-        <script src="/js/main/search.js"></script>
-        <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
+    <!-- <div class="floating-buttons">
+        <a class="scroll-top" href="#">⬆</a>
+    </div> -->
+    <!-- Floating Buttons -->
+    <button class="fa-solid fa-arrow-up" id="topBtn"></button>
+ 
+
+    <script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        // 로그인 되어있으면 true, 아니면 false
+        const loginCheck = /*[[${session.loginMember != null}]]*/ false;
+    </script>
+    <script src="/js/main/search.js"> </script>
+    <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
