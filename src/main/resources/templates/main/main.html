@@ -22,22 +22,18 @@
       <a href="/notice/noticeView">공지사항</a>
       <a href="/notice/faq">FAQ</a>
 
-      <div class="logoBox">
-        <a href="#">
-          <img src="/images/logo-m.png" alt="로고" id="logoImage">
-          <img src="/images/logoText.png" alt="로고 글자" id="logoText">
-        </a>
-      </div>
 
     </div>
-      <!-- 로그인이 안되어있을때 -->
-    <div class="user-actions" th:unless= "${session.loginMember}">
+    <!-- 로그인이 안되어있을때 -->
+    <div class="user-actions" th:unless="${session.loginMember}">
       <a href="/myPage/signUp">회원 가입</a> | <a href="/myPage/loginPage">로그인</a>
     </div>
 
     <!-- 로그인이 되어있을경우 -->
+
     <div th:if= "${session.loginMember}" class="user-actions">
       <img th:src="${session.loginMember.profileImg ?: user }" th:with="user=#{user.default.image}" alt="" class="userImage">
+
       <p th:text="${session.loginMember.memberName}">유저 닉네임</p>
       <a class="menu" href="#">
         <i class="fa-solid fa-bars"></i>
@@ -48,33 +44,36 @@
 
   <!-- Main Content -->
   <main>
-    <form class="content-header" action="/search" method="GET" id="searchForm">
-      <h1>맛집 검색 J&T ! </h1>
-      <input type="hidden" class="result" name="result">
-      <div class="searchBox">
+    <div class="mainBox11">
+      <form class="content-header" action="/search" method="GET" id="searchForm">
+        <!-- <h1>맛집 검색 J&T ! </h1> -->
+        <img src="/images/logo-m.png" alt="로고" id="logoImage">
+        <input type="hidden" class="result" name="result">
+        <div class="searchBox">
 
-        <input type="text" id="searchCode" name="searchCode">
+          <input type="text" id="searchCode" name="searchCode">
 
-        <button id="searchBtn" type="submit">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+          <button id="searchBtn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
 
-      </div>
-
-
-      <div class="filter">
-        <a class="filter-category" id="foodCategoryBtn">음식 종류</a>
+        </div>
 
 
-        <a class="filter-category" id="regionCategoryBtn">지역 선택</a>
-      </div>
-      
-      <div>
-        <input class="tag" name="tag" readonly >
-  
-        <input class="region" name="region" readonly>
-      </div>
-    </form>
+        <div class="filter">
+          <a class="filter-category" id="foodCategoryBtn">음식 종류</a>
+
+
+          <a class="filter-category" id="regionCategoryBtn">지역 선택</a>
+        </div>
+
+        <div>
+          <input class="tag" name="tag" readonly>
+
+          <input class="region" name="region" readonly>
+        </div>
+      </form>
+    </div>
 
     <!-- ------------------------------------카테고리 팝업-------------------------------------------------------- -->
 
@@ -114,10 +113,8 @@
         <div class="regionCategoryPopUp-arrow">
 
           <div class="regionCategoryPopUp-left">
-            <div class="regionCategoryPopUp-leftBox"
-                th:each="location:${locationList}">
-              <div class="regionListBtn"
-                th:text="${location.locationName}">지역 이름
+            <div class="regionCategoryPopUp-leftBox" th:each="location:${locationList}">
+              <div class="regionListBtn" th:text="${location.locationName}">지역 이름
               </div>
 
             </div>
@@ -141,92 +138,137 @@
 
     <section>
 
-      <div class="sectionBox slider" >
-        <h3>#인기순</h3>
-        <br>
-        <section class="popular-section  slider-items">
-          
-          <div class="store-box item" th:each="like:${listLike}">
-            <input type="hidden" th:value="${like.restaurantNo}" class="restaurantNo">
-            <div class="store-image">
-              <!-- The image will go here -->
-              <img th:src="${like.restaurantImg1}">
+
+
+
+
+
+      <!-- 게시글이 존재하지않을때에 ========================================================= -->
+      <th:block th:if="${#lists.isEmpty(listLike)}">
+        <div class="sectionBox slider">
+
+          <h3># 인기순</h3>
+          <br>
+          <section class="popular-section slider-items">
+            <h1>게시글이 존재하지않습니다.</h1>
+          </section>
+        </div>
+      </th:block>
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+        <div class="sectionBox slider">
+          <h3># 인기순</h3>
+          <br>
+          <section class="popular-section  slider-items">
+  
+            <div class="store-box item" th:each="like:${listLike}">
+              <input type="hidden" th:value="${like.restaurantNo}" class="restaurantNo">
+              <div class="store-image">
+                <!-- The image will go here -->
+                <img th:src="${like.restaurantImg1}">
+              </div>
+              <div class="store-info">
+                <span class="store-name" th:text="${like.restaurantName}">
+                </span>
+                <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+                <button class="heartBtn" name="likeBtn">
+                  <i class="far fa-heart fa-lg " style="color: #ff0000;"
+                    th:classappend="${like.likeCheck == 1}?  fa-solid : fa-regular"></i>
+                </button>
+              </div>
             </div>
-            <div class="store-info">
-              <span class="store-name" th:text="${like.restaurantName}">
-              </span>
-              <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
-              <button class="heartBtn" name="likeBtn">
-                <i class="far fa-heart fa-lg " style="color: #ff0000;"
-                th:classappend="${like.likeCheck == 1}?  fa-solid : fa-regular"></i>
-              </button>
+  
+  
+          </section>
+        </div>
+      <!-- 게시글이 존재할때에========================================= -->
+
+      <!-- 게시글이 존재하지않을때에 ========================================================= -->
+      <th:block th:if="${#lists.isEmpty(listCurrent)}">
+        <div class="sectionBox slider">
+
+          <h3># 최신등록순</h3>
+          <br>
+          <section class="popular-section slider-items">
+            <h1>게시글이 존재하지않습니다.</h1>
+          </section>
+        </div>
+      </th:block>
+      <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+        <div class="sectionBox slider">
+
+          <h3># 최신등록순</h3>
+          <br>
+          <section class="popular-section slider-items">
+            <div class="store-box item" th:each="current:${listCurrent}">
+              <input type="hidden" th:value="${current.restaurantNo}" class="restaurantNo">
+              <div class="store-image">
+                <!-- The image will go here -->
+                <img th:src="${current.restaurantImg1}" alt="가게 사진">
+              </div>
+              <div class="store-info">
+                <span class="store-name" th:text="${current.restaurantName}">
+
+                </span>
+                <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+                <button class="heartBtn" name="likeBtn">
+                  <i class="far fa-heart fa-lg" style="color: #ff0000;"
+                    th:classappend="${current.likeCheck == 1}? fa-solid :  fa-regular"></i>
+                </button>
+              </div>
             </div>
-          </div>
 
 
-        </section>
-      </div>
+          </section>
+        </div>
+      <!-- 게시글이 존재할때에========================================= -->
 
-      <div class="sectionBox slider">
 
-        <h3>#최신등록순</h3>
-        <br>
-        <section class="popular-section slider-items">
-          <div class="store-box item" th:each="current:${listCurrent}">
-            <input type="hidden" th:value="${current.restaurantNo}" class="restaurantNo">
-            <div class="store-image">
-              <!-- The image will go here -->
-              <img th:src="${current.restaurantImg1}" alt="가게 사진">
+      <!-- 게시글이 존재하지않을때에 ========================================================= -->
+      <th:block th:if="${#lists.isEmpty(review)}">
+        <div class="sectionBox slider">
+
+          <h3># 리뷰 많은 순</h3>
+          <br>
+          <section class="popular-section slider-items">
+            <h1>게시글이 존재하지않습니다.</h1>
+          </section>
+        </div>
+      </th:block>
+      <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+        <div class="sectionBox slider" th:unless="${#lists.isEmpty(review)}">
+
+          <h3># 리뷰 많은 순</h3>
+          <br>
+          <section class="popular-section slider-items">
+            <div class="store-box item" th:each="review:${review}">
+              <input type="hidden" th:value="${review.restaurantNo}" class="restaurantNo">
+              <div class="store-image">
+                <!-- The image will go here -->
+                <img th:src="${review.restaurantImg1}" alt="가게 사진">
+              </div>
+              <div class="store-info">
+                <span class="store-name" th:text="${review.restaurantName}">
+
+                </span>
+                <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
+                <button class="heartBtn" name="likeBtn">
+                  <i class="far fa-heart fa-lg" style="color: #ff0000;"
+                    th:classappend="${review.likeCheck == 1}? fa-solid :  fa-regular"></i>
+                </button>
+              </div>
             </div>
-            <div class="store-info">
-              <span class="store-name" th:text="${current.restaurantName}">
-
-              </span>
-              <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
-              <button class="heartBtn" name="likeBtn">
-                <i class="far fa-heart fa-lg" style="color: #ff0000;"
-                th:classappend="${current.likeCheck == 1}? fa-solid :  fa-regular"></i>
-              </button>
-            </div>
-          </div>
 
 
-        </section>
-      </div>
-      <div class="sectionBox slider">
-
-        <h3>#리뷰 많은 순</h3>
-        <br>
-        <section class="popular-section slider-items">
-          <div class="store-box item" th:each="review:${review}">
-            <input type="hidden" th:value="${review.restaurantNo}" class="restaurantNo">
-            <div class="store-image">
-              <!-- The image will go here -->
-              <img th:src="${review.restaurantImg1}" alt="가게 사진">
-            </div>
-            <div class="store-info">
-              <span class="store-name" th:text="${review.restaurantName}">
-
-              </span>
-              <!-- <i class="fa-solid fa-heart"></i> 차있는 하트 -->
-              <button class="heartBtn" name="likeBtn">
-                <i class="far fa-heart fa-lg" style="color: #ff0000;"
-                th:classappend="${review.likeCheck == 1}? fa-solid :  fa-regular"></i>
-              </button>
-            </div>
-          </div>
-
-
-        </section>
-      </div>
-
+          </section>
+        </div>
+      <!-- 게시글이 존재할때에========================================= -->
 
     </section>
 
 
     <div class="menu-container" th:if="${session.loginMember}">
       <div class="profile-img">
-        <img th:src="${session.loginMember.profileImg ?: user }" alt="profile" th:with= "user=#{user.default.image}">
+        <img th:src="${session.loginMember.profileImg ?: user }" alt="profile" th:with="user=#{user.default.image}">
       </div>
 
 
@@ -234,11 +276,12 @@
 
       <nav>
         <a href="/myPage/myPage" id="myPage" class="sideItem">마이 페이지</a> <!-- 마이페이지 링크 추가 -->
-        <a href="/board/boardMain" class="sideItem">점메추 게시판</a>
-        <a href="/notice/notice" class="sideItem">공지 사항</a>
-        <a href="/notice/faq" class="sideItem">FAQ</a>
+        <a href="/admin/member/manage" class="sideItem"
+          th:if="${#strings.equals((session.loginMember.memberAuth), '2')}">관리자 페이지</a>
+        <a href="/myPage/logout" class="sideItem">로그 아웃</a>
       </nav>
     </div>
+
     <!-- --------------------------------------- -->
 
 
@@ -255,6 +298,9 @@
       <a class="scroll-top" href="#">⬆</a>
     </div> -->
 
+    <br>
+    <br>
+    <br>
   </main>
   <th:block th:replace="~{common/footer}"></th:block>
 <!-- Floating Buttons -->
@@ -263,8 +309,8 @@
 
 <script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
   <script th:inline="javascript">
-        // 로그인 되어있으면 true, 아니면 false
-        const loginCheck = /*[[${session.loginMember != null}]]*/ false;
+    // 로그인 되어있으면 true, 아니면 false
+    const loginCheck = /*[[${session.loginMember != null}]]*/ false;
   </script>
 
   <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>

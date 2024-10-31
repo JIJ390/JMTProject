@@ -38,10 +38,7 @@ public class MainSearchServiceImpl implements MainSearchService{
 		
 		
 		
-			
-		
-			
-		log.debug("================================searchResult : {} ", searchResult);
+//		log.debug("================================searchResult : {} ", searchResult);
 		
 			return searchResult;
 		}

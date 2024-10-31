@@ -3,8 +3,6 @@ package edu.kh.jmt.email.service;
 import java.util.Map;
 import java.util.Random;
 
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,9 +11,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
-import edu.kh.jmt.common.util.FileUtil;
 import edu.kh.jmt.common.util.RedisUtil;
-import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.myPage.mapper.MyPageMapper;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;

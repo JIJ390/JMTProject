@@ -110,14 +110,14 @@ regionCloseBtn.addEventListener("click", () => {
 // 메뉴 누를시 레이어 팝업
 
 const menu = document.querySelector(".menu");
-const MenuContainer = document.querySelector(".menu-container");
+const menuContainer1 = document.querySelector(".menu-container");
 
 menu?.addEventListener('click', () => {
 
-  if (MenuContainer.style.display == "block") {
-    MenuContainer.style.display = "none"
+  if (menuContainer1.style.display == "block") {
+    menuContainer1.style.display = "none"
   } else {
-    MenuContainer.style.display = "block"
+    menuContainer1.style.display = "block"
   }
 
 

@@ -3,12 +3,12 @@
 <mapper namespace="edu.kh.jmt.main.mapper.MainMapper">
 
 
-<!-- 좋아요 많은순  -->
+<!-- 인기순  -->
 	<select id="listLike" resultType="RestaurantDto">
 SELECT
 	RESTAURANT_NAME,
 	RESTAURANT_IMG1,
-		MAIN.RESTAURANT_NO,
+	MAIN.RESTAURANT_NO,
 	COUNT_NO,
 	(SELECT COUNT(*) 
 		 FROM BOOKMARK SUB
@@ -19,15 +19,17 @@ FROM
 JOIN 	
 	(SELECT
 		RESTAURANT_NO,
-	 	COUNT(LIKE_FL) AS "COUNT_NO"
+	 	COUNT(MEMBER_NO) AS "COUNT_NO"
 	FROM
-	 REVIEW 
-	WHERE
-		LIKE_FL = 'N'
+	 BOOKMARK 
 	GROUP BY 
 		RESTAURANT_NO
 ) SUB2
 	ON MAIN.RESTAURANT_NO = SUB2.RESTAURANT_NO
+	<![CDATA[
+		WHERE 
+ 			ROWNUM <= 10
+ 	]]>
 ORDER BY 
 		COUNT_NO DESC
 	</select>
@@ -44,6 +46,12 @@ SELECT
 		 AND   MEMBER_NO = #{memberNo}) AS LIKE_CHECK
 FROM  
 		RESTAURANT MAIN
+		
+	<![CDATA[
+		WHERE 
+ 			ROWNUM <= 10
+ 	]]>
+
 	ORDER BY 
 		RESTAURANT_NO DESC
 </select>
@@ -67,7 +75,7 @@ FROM
 JOIN 
     (SELECT 
          RESTAURANT_NO,
-         COUNT(LIKE_FL) AS LIKE_FL
+         COUNT(*) AS LIKE_FL
      FROM 
          REVIEW
      WHERE 
@@ -76,6 +84,12 @@ JOIN
          RESTAURANT_NO
     ) REVIEW
 ON MAIN.RESTAURANT_NO = REVIEW.RESTAURANT_NO
+	<![CDATA[
+		WHERE 
+ 			ROWNUM <= 10
+ 	]]>
+ORDER BY 
+		LIKE_FL DESC
 
 </select>
 

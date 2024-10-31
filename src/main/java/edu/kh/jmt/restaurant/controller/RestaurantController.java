@@ -1,7 +1,5 @@
 package edu.kh.jmt.restaurant.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.kh.jmt.restaurant.dto.RestaurantDto;
-import edu.kh.jmt.restaurant.dto.ReviewDto;
 import edu.kh.jmt.restaurant.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detailpage</title>
+    <title>가게 검색</title>
 
     <link rel="stylesheet" href="/css/main/search.css">
     <link rel="stylesheet" href="/css/main/popUp.css">
@@ -14,21 +14,24 @@
 
 <!-- ------------ 헤더 ----------------- -->
 
-<th:block th:replace= "~{common/header}"></th:block>
+<th:block th:replace="~{common/header}"></th:block>
 <!-- ------------ 헤더 ----------------- -->
+
 <body>
-    <div class="bodyItem" >
+    <div class="bodyItem">
         <!-- ------------- 사이드 ---------------------- -->
         <aside class="category">
 
-            <form action="/search" method="get" class="categoryBox" id="searchFrm"> 
+            <form action="/search" method="get" class="categoryBox" id="searchFrm">
                 <input type="hidden" class="result" name="result">
-                <div class="categorySearchBox" >
+                <div class="categorySearchBox">
 
 
                     <div class="searchBox">
-                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색"
+
+                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색어를 입력해 주세요"
                         th:value="${searchCode}">
+
                         <button class="categorySearch_btn">🍳</button>
                     </div>
 
@@ -36,22 +39,24 @@
 
                 <hr>
 
-               
+
     <th:block th:if="${tag == ''}">
-        <div>검색한 지역이 없습니다.</div>
+        <div class="searchText">검색한 지역이 없습니다.</div>
     </th:block>
 
     <th:block th:unless= "${tag == ''}"> 
         <div th:text="${tag}"></div>
     </th:block>
-<hr>
+    <hr>
     <th:block th:if="${region == ''}">
-        <div>검색한 카테고리가 없습니다.</div>
+        <div class="searchText">검색한 카테고리가 없습니다.</div>
     </th:block>
+    <hr>
 
-    <th:block th:unless= "${region == ''}"> 
-        <div th:text="${region}"></div>
-    </th:block>
+
+                <th:block th:unless="${region == ''}">
+                    <div th:text="${region}"></div>
+                </th:block>
 
                 <div class="categoryBtns_box">
                     <button type=button class="categoryBtns" value="1">최신순</button>|
@@ -59,8 +64,8 @@
                     <button type=button class="categoryBtns" value="3">찜 많은 순</button>
                 </div>
                 <hr>
- </form>
-            
+            </form>
+
 
         </aside>
         <!-- ------------- 사이드 ---------------------- -->
@@ -71,70 +76,70 @@
             <!-- -------------------------- 몸통 ------------------ -->
 
             <!-- 게시글이 존재하지않을때 -->
-            <th:block th:if= "${#lists.isEmpty(searchResult)}">
+            <th:block th:if="${#lists.isEmpty(searchResult)}">
 
 
 
-<div class="boardIsEmptyBox">   
-    <h1 class="boardIsEmpty">  
-        <i class="fa-solid fa-xmark" style="color: #ff0000;"></i>
-        조회한 결과가 없습니다.
-    </h1>
-</div>
+                <div class="boardIsEmptyBox">
+                    <h1 class="boardIsEmpty">
+                        <i class="fa-solid fa-xmark" style="color: #ff0000;"></i>
+                        조회한 결과가 없습니다.
+                    </h1>
+                </div>
 
 
 
             </th:block>
 
             <!-- 게시글이 존재할때 -->
-            <th:block th:unless= "${#lists.isEmpty(searchResult)}">
+            <th:block th:unless="${#lists.isEmpty(searchResult)}">
                 <section class="store-section" th:each="searchCode:${searchResult}">
-                  <div class="store-image">
-                    <img th:src="${searchCode.restaurantImg1}" alt="매장 이미지">
-                </div>
-                <div class="store-info">
-                    <h1 th:text="${searchCode.restaurantName}">매장 이름</h1>
-                    <p class="store-address" th:text="${searchCode.restaurantAddress}">주소</p>
-                    <p th:text="${searchCode.categoryName}"></p>
-                    <p class="store-phone" th:text="${searchCode.restaurantTel}">전화번호</p>
-                </div>
-                <div class="store-actions">
-                    <p class="store-rating" th:text="|${searchCode.likePercent}%|">퍼센트</p>
-                    <button class="heartBtn">
-                        <i class="far fa-heart fa-lg" style="color: #ff0000;"
-                        th:classappend="${searchCode.likeCheck == 1}? fa-solid :  fa-regular"></i>
-                    </button>
-                </div>
-                <input type="hidden" th:value="${searchCode.restaurantNo}" class="restaurantNo">
+                    <div class="store-image">
+                        <img th:src="${searchCode.restaurantImg1}" alt="매장 이미지">
+                    </div>
+                    <div class="store-info">
+                        <h1 th:text="${searchCode.restaurantName}">매장 이름</h1>
+                        <p class="store-address" th:text="${searchCode.restaurantAddress}">주소</p>
+                        <p th:text="|카테고리    : ${searchCode.categoryName}|"></p>
+                        <p class="store-phone" th:text="|가게 번호 : ${searchCode.restaurantTel}|">전화번호</p>
+                    </div>
+                    <div class="store-actions">
+                        <p class="store-rating" th:text="|${searchCode.likePercent}%|">퍼센트</p>
+                        <button class="heartBtn">
+                            <i class="far fa-heart fa-lg" style="color: #ff0000;"
+                                th:classappend="${searchCode.likeCheck == 1}? fa-solid :  fa-regular"></i>
+                        </button>
+                    </div>
+                    <input type="hidden" th:value="${searchCode.restaurantNo}" class="restaurantNo">
                 </section>
             </th:block>
 
 
-            
+
 
 
 
             <!-- -------------------------- 몸통 ------------------ -->
 
         </div>
-    
-              <!-- --------------------------------------- side --> 
-              <div class="menu-container">
-                <div class="profile-img">
-                  <img src="../html/images/샘플.jpg" alt="profile">
-                </div>
-                
-                
-                <p class="sideP">김성민</p>
-                
-                <nav>
-                  <a href="#" class="sideItem">마이 페이지</a>
-                  <a href="#" class="sideItem">메인 페이지</a>
-                  <a href="#" class="sideItem">점메추 게시판</a>
-                  <a href="#" class="sideItem">공지 사항</a>
-                  <a href="#" class="sideItem">FAQ</a>
-                </nav>
-              </div>
+
+        <!-- --------------------------------------- side -->
+        <div class="menu-container">
+            <div class="profile-img">
+                <img src="../html/images/샘플.jpg" alt="profile">
+            </div>
+
+
+            <p class="sideP">김성민</p>
+
+            <nav>
+                <a href="#" class="sideItem">마이 페이지</a>
+                <a href="#" class="sideItem">메인 페이지</a>
+                <a href="#" class="sideItem">점메추 게시판</a>
+                <a href="#" class="sideItem">공지 사항</a>
+                <a href="#" class="sideItem">FAQ</a>
+            </nav>
+        </div>
         <!-- --------------------------------------- -->
 
     <!-- <div class="floating-buttons">
@@ -151,5 +156,7 @@
     </script>
     <script src="/js/main/search.js"> </script>
     <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
+
 </body>
+
 </html>
