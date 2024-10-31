@@ -46,8 +46,8 @@ main {
 .profile-img-wrapper {
   margin-top: 35px;
   display: block;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%; /* 원형으로 설정 */
   overflow: hidden; /* 원형 영역을 벗어나는 이미지 잘라내기 */
   display: flex;
@@ -117,17 +117,6 @@ main {
   color: #4dc4b4;
 }
 
-.back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #4dc4b4;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  padding: 12px;
-  cursor: pointer;
-}
 
 .name input {
   width: 100%; /* 부모 컨테이너에 맞게 채우기 */

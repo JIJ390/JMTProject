@@ -295,11 +295,6 @@ public class MyPageController {
 		int memberNo = loginMember.getMemberNo();
 		inputMember.setMemberNo(memberNo);
 		
-		log.debug("aaaa : {}", inputMember.getProfileImg());
-		log.debug("aaaa : {}", inputMember.getProfileImg());
-		log.debug("aaaa : {}", inputMember.getProfileImg());
-		log.debug("aaaa : {}", inputMember.getProfileImg());
-		
 		String filePath = service.updateInfo(inputMember, profileImg);
 		
 		// DB, Session에 저장된 프로필 이미지 정보 동기화
