@@ -31,7 +31,7 @@ public class LocationInterceptor implements HandlerInterceptor{
 		// 조회 결과를 request scope 에 세팅
 		request.setAttribute("locationList", locationList);
 		
-		log.debug(locationList.toString());
+//		log.debug(locationList.toString());
 		
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 	}

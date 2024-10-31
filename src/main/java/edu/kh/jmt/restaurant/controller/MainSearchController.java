@@ -29,6 +29,7 @@ public class MainSearchController {
 	//  화면전환 값 넘기기
 	@GetMapping("search")
 	public String searchPage(
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
 			@RequestParam("searchCode") String searchCode,
 			RedirectAttributes ra,
 			Model model,
@@ -45,7 +46,7 @@ public class MainSearchController {
 //		log.debug("=======View searchBar 값 : {}", searchCode );
 		// 값 가져올수 있음
 		
-		log.debug("====================== result 전저넞너저너전저너전 : {}", result);
+//		log.debug("====================== result 전저넞너저너전저너전 : {}", result);
 		
 		if(result.equals("0")) {
 			result = "1";
@@ -61,7 +62,7 @@ public class MainSearchController {
 		}else {
 			result = "3";
 		}
-		log.debug("====================== result  후후후후ㅜ후후ㅜ후후후후후후후후후훟 : {}", result);
+//		log.debug("====================== result  후후후후ㅜ후후ㅜ후후후후후후후후후훟 : {}", result);
 		
 		
 		List<RestaurantDto> searchResult = service.searchResult(searchCode, tag, region,memberNo, result);
