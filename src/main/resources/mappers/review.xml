@@ -4,7 +4,7 @@
 
 	<insert id="imgRename">
 		INSERT INTO "REVIEW_IMAGE"
-		VALUES(SEQ_REVIEW_IMG_NO.NEXTVAL, #{renamePath}, 1)
+		VALUES(SEQ_REVIEW_IMG_NO.NEXTVAL, #{renamePath})
 	</insert>
 
 
