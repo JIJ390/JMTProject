@@ -1,7 +1,6 @@
 package edu.kh.jmt.myPage.service;
 
 import java.io.File;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

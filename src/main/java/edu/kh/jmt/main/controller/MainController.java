@@ -36,13 +36,12 @@ public class MainController {
 				) {
 			int memberNo =  loginMember == null ? 0 : loginMember.getMemberNo();
 			
-			// 좋아요 순서
+			// 인기 순서 찜 많은
 			List<RestaurantDto> listLike = service.listLike(memberNo);
 			//최신순
 			List<RestaurantDto> listCurrent= service.listCurrent(memberNo);
 			//리뷰 많은 슌
 			List<RestaurantDto> review= service.listReview(memberNo);
-			
 			
 			
 			model.addAttribute("listLike", listLike);

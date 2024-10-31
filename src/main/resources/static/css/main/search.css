@@ -20,7 +20,9 @@
     padding: 0;
     box-sizing: border-box;
     max-width: 100vw;
+
     color: rgb(61, 61, 61);
+
 }
 
 .bodyItem {
@@ -156,7 +158,16 @@ hr {
     cursor: pointer;
 }
 
-
+.store-image{
+    border: 3px solid #cbc9c9;
+    border-radius: 7px;
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+    height: 250px;
+    max-height: 250px;
+    min-height: 250px;
+}
 
 .store-image img {
     background-color: #e0e0e0;

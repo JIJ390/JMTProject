@@ -12,7 +12,6 @@ import edu.kh.jmt.admin.dto.AdminPagination;
 import edu.kh.jmt.admin.dto.ReportBoard;
 import edu.kh.jmt.admin.dto.ReportComment;
 import edu.kh.jmt.admin.dto.ReportReview;
-import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.admin.mapper.AdminReportMapper;
 import edu.kh.jmt.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;

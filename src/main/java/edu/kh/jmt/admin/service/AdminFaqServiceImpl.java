@@ -5,14 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.jmt.admin.dto.AdminPagination;
 import edu.kh.jmt.admin.mapper.AdminFaqMapper;
 import edu.kh.jmt.noticeView.dto.Faq;
-import edu.kh.jmt.noticeView.dto.Notice;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Service

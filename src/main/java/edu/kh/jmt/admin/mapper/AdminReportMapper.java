@@ -9,7 +9,6 @@ import org.apache.ibatis.session.RowBounds;
 import edu.kh.jmt.admin.dto.ReportBoard;
 import edu.kh.jmt.admin.dto.ReportComment;
 import edu.kh.jmt.admin.dto.ReportReview;
-import edu.kh.jmt.admin.dto.Restaurant;
 import edu.kh.jmt.myPage.dto.Member;
 
 @Mapper
