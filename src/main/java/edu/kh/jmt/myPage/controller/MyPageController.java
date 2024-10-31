@@ -1,11 +1,13 @@
 package edu.kh.jmt.myPage.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,8 +17,10 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.kh.jmt.admin.dto.AdminPagination;
 import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.myPage.service.MyPageService;
+import edu.kh.jmt.restaurant.dto.RestaurantDto;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -291,10 +295,18 @@ public class MyPageController {
 		int memberNo = loginMember.getMemberNo();
 		inputMember.setMemberNo(memberNo);
 		
+		log.debug("aaaa : {}", inputMember.getProfileImg());
+		log.debug("aaaa : {}", inputMember.getProfileImg());
+		log.debug("aaaa : {}", inputMember.getProfileImg());
+		log.debug("aaaa : {}", inputMember.getProfileImg());
+		
 		String filePath = service.updateInfo(inputMember, profileImg);
 		
 		// DB, Session에 저장된 프로필 이미지 정보 동기화
-		loginMember.setProfileImg(filePath);
+		
+		if (filePath != null) {
+			loginMember.setProfileImg(filePath);
+		}
 		
 		// 세션에 이름 동기화
 		loginMember.setMemberName(inputMember.getMemberName());;
@@ -318,6 +330,42 @@ public class MyPageController {
 		return "/myPage/myreview";
 	}
 	
+	
+		@GetMapping("like")
+		public String likeList(
+				@SessionAttribute ("loginMember") Member loginMember,
+				@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+				Model model
+				) {
+			
+			log.debug("aaaa : {}", loginMember.getMemberNo());
+			log.debug("aaaa : {}", loginMember.getMemberNo());
+			log.debug("aaaa : {}", loginMember.getMemberNo());
+			log.debug("aaaa : {}", loginMember.getMemberNo());
+			log.debug("aaaa : {}", loginMember.getMemberNo());
+			
+			
+			Map<String, Object> map = service.selectLikeList(cp, loginMember.getMemberNo());
+			
+			List<RestaurantDto> likeList = (List<RestaurantDto>)map.get("likeList");
+			AdminPagination pagination = (AdminPagination)map.get("pagination");
+			
+			
+			log.debug("aaaa : {}", likeList);
+			log.debug("aaaa : {}", likeList);
+			log.debug("aaaa : {}", likeList);
+			log.debug("aaaa : {}", likeList);
+			log.debug("aaaa : {}", likeList);
+			
+			
+			model.addAttribute("likeList", likeList);
+			model.addAttribute("pagination", pagination);
+			
+			
+			
+			return "/myPage/likeList";
+			
+		}
 		
 	}
 

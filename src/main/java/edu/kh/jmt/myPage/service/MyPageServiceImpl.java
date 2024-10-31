@@ -1,8 +1,11 @@
 package edu.kh.jmt.myPage.service;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -11,9 +14,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.jmt.admin.dto.AdminPagination;
 import edu.kh.jmt.common.util.FileUtil;
 import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.myPage.mapper.MyPageMapper;
+import edu.kh.jmt.restaurant.dto.RestaurantDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -141,6 +146,11 @@ public class MyPageServiceImpl implements MyPageService{
 		// 1) 파일 업로드 확인
 		if(profileImg.isEmpty()) {
 			
+			log.debug("aaaa : {}", profileImg.getOriginalFilename());
+			log.debug("aaaa : {}", profileImg.getOriginalFilename());
+			log.debug("aaaa : {}", profileImg.getOriginalFilename());
+			log.debug("aaaa : {}", profileImg.getOriginalFilename());
+			
 			// 제출된 파일이 없음 
 			// 이름만 변경
 			result =  mapper.updateInfo(inputMember);
@@ -184,5 +194,27 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	
+	// 찜 목록
+	@Override
+	public Map<String, Object> selectLikeList(int cp, int memberNo) {
+		
+		
+		int listCount = mapper.getLikeListCount(memberNo);
+		
+		AdminPagination pagination = new AdminPagination(cp, listCount);
+			
+		int limit = pagination.getLimit();
+		int offset = (cp - 1)* limit;
+			
+		RowBounds rowBounds = new RowBounds(offset, limit);
+			
+		List<RestaurantDto> likeList = mapper.selectLikeList(memberNo, rowBounds);
+			
+		Map<String, Object> map = 
+					Map.of("likeList", likeList, "pagination", pagination);
+				
+		return map;
+		
+	}
 	
 }

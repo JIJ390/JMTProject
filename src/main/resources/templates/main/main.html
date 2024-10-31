@@ -37,7 +37,7 @@
 
     <!-- 로그인이 되어있을경우 -->
     <div th:if= "${session.loginMember}" class="user-actions">
-      <img th:src="${session.loginMember.profileImg ?: user }" alt="" class="userImage">
+      <img th:src="${session.loginMember.profileImg ?: user }" th:with="user=#{user.default.image}" alt="" class="userImage">
       <p th:text="${session.loginMember.memberName}">유저 닉네임</p>
       <a class="menu" href="#">
         <i class="fa-solid fa-bars"></i>

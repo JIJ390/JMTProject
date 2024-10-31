@@ -7,12 +7,12 @@
     <title>myPage</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
     <link rel="stylesheet" href="/css/myPage/myPage.css">
+    <link rel="stylesheet" href="/css/common/header.css">
 </head>
 <body>
     <!-- Header Section -->
     <th:block th:replace="~{common/header}"></th:block>
-    <link rel="stylesheet" href="/css/common/header.css">
-
+    
     <!-- Main Content -->
     <main>
     <form action="myPage" method="POST" name="myPageForm" id="myPageForm">
@@ -37,15 +37,14 @@
                     <a href="/myPage/passwordChange">비밀 번호 변경</a> |
                     <a href="/myPage/withdrawal">회원탈퇴</a>
                 </div>
-                <a href="#">내가 쓴글</a>
-                <a href="/myPage/myReview">리뷰 목록</a>
-                <a href="#">찜목록</a>
+                <a href="/myPage/like">찜목록</a>
                 <a href="/myPage/logout" id="logoutBtn">로그아웃</a>
             </div>
         </div>
     </form>
-</main>
 
+</main>
+<th:block th:replace="~{common/footer}"></th:block>
     <script>
         document.querySelector('.back-to-top').addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: 'smooth' });

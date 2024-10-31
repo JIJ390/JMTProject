@@ -65,7 +65,7 @@ main {
   display: block;
 }
 
-/* #imageInput{ display: none;} */
+#imageInput{ display: none;}
 
 #deleteImage{
   position: sticky;

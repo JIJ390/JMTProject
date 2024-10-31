@@ -1,10 +1,14 @@
 package edu.kh.jmt.myPage.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.myPage.dto.Member;
+import edu.kh.jmt.restaurant.dto.RestaurantDto;
 
 @Mapper
 public interface MyPageMapper {
@@ -65,6 +69,25 @@ public interface MyPageMapper {
   int updatePassword(
   		@Param("memberNo") int memberNo, 
   		@Param("encPw") String encPw); // 비밀번호 업데이트
+
+
+  
+  /**
+   * 전체 찜 목록 개수 조회
+   * @param memberNo 
+   * @return
+   */
+	int getLikeListCount(int memberNo);
+
+
+	/**
+	 * 전체 찜목록 조회하기
+	 * @param memberNo 
+	 * @param rowBounds
+	 * @return
+	 */
+	List<RestaurantDto> selectLikeList(int memberNo, RowBounds rowBounds);
+
 
 
 

@@ -54,6 +54,8 @@
 
 </header>
 
+<button class="fa-solid fa-arrow-up" id="topBtn"></button>
+
 <script th:inline="javascript">
   const message =  /*[[${message}]]*/ "전달 받은 message";
   if(message != null) alert(message);
@@ -62,7 +64,9 @@
   const loginCheck = /*[[${session.loginMember != null}]]*/ false;
 </script>
 
+<script src=""></script>
 
 
+<script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/8c48587fe7.js" crossorigin="anonymous"></script>
 <script src="/js/common/header.js"></script>

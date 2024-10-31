@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>찜 목록 페이지</title>
+
+    <link rel="stylesheet" href="/css/main/search.css">
+    <link rel="stylesheet" href="/css/main/popUp.css">
+    <link rel="stylesheet" href="/css/common/header.css">
+    <link rel="stylesheet" href="/css/myPage/likeList.css">
+</head>
+
+
+<!-- ------------ 헤더 ----------------- -->
+
+<th:block th:replace= "~{common/header}"></th:block>
+<!-- ------------ 헤더 ----------------- -->
+<body>
+    <div class="bodyItem" >
+        <!-- ------------- 사이드 ---------------------- -->
+        <div class="sidebar">
+            <img th:with="user=#{user.default.image}" 
+                 th:src="${session.loginMember.profileImg ?: user }"
+                 id="memberProfile">
+              <div class="name"><input type="text" name="memberName" id="memberName" th:value="${session.loginMember.memberName}"></div>
+              <ul>
+                  <li><a href="/myPage/myPage">내 정보</a></li>
+                  <li><a href="#">찜목록</a></li>
+              </ul>
+          </div>
+
+        <!-- ------------- 사이드 ---------------------- -->
+
+
+
+        <div>
+            <!-- -------------------------- 몸통 ------------------ -->
+
+            <!-- 게시글이 존재하지않을때 -->
+            <th:block th:if= "${#lists.isEmpty(likeList)}">
+
+
+
+<div class="boardIsEmptyBox">   
+    <h1 class="boardIsEmpty">  
+        <i class="fa-solid fa-xmark" style="color: #ff0000;"></i>
+        조회한 결과가 없습니다.
+    </h1>
+</div>
+
+
+
+            </th:block>
+
+            <!-- 게시글이 존재할때 -->
+            <th:block th:unless= "${#lists.isEmpty(likeList)}">
+                <section class="store-section" th:each="like:${likeList}">
+                  <div class="store-image">
+                    <img th:src="${like.restaurantImg1}" alt="매장 이미지">
+                </div>
+                <div class="store-info">
+                    <h1 th:text="${like.restaurantName}">매장 이름</h1>
+                    <p class="store-address" th:text="${like.restaurantAddress}">주소</p>
+                    <p th:text="${like.categoryName}"></p>
+                    <p class="store-phone" th:text="${like.restaurantTel}">전화번호</p>
+                </div>
+                <div class="store-actions">
+                    <p class="store-rating" th:text="|${like.likePercent}%|">퍼센트</p>
+                    <button class="heartBtn">
+                        <i class="far fa-heart fa-lg" style="color: #ff0000;"
+                        th:classappend="${like.likeCheck == 1}? fa-solid :  fa-regular"></i>
+                    </button>
+                </div>
+                <input type="hidden" th:value="${like.restaurantNo}" class="restaurantNo">
+                </section>
+            </th:block>
+
+
+            
+
+      <!-- 페이지 네이션 -->
+      <div class="pagination-area" th:unless="${#lists.isEmpty(likeList)}">
+
+        <ul class="pagination" th:object="${pagination}">
+          <li><a href="#">&lt;&lt;</a></li>
+          <li><a href="#">&lt;</a></li>
+
+          <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}" >
+            
+            <li th:if= "${i} == *{currentPage}">
+              <a class="current" th:text="${i}">현재 페이지</a>
+            </li>
+    
+            <li th:unless= "${i} == *{currentPage}"> 
+              <a href="#" th:text="${i}">이동할 수 있는 페이지</a>   <!-- th:href="|?cp=${i}|" -->
+            </li>
+          </th:block>
+
+          <li><a href="#">&gt;</a></li>
+          <li><a href="#">&gt;&gt;</a></li>
+        </ul>
+
+      </div>
+
+            <!-- -------------------------- 몸통 ------------------ -->
+
+        </div>
+    
+              <!-- --------------------------------------- side --> 
+
+        <!-- --------------------------------------- -->
+
+    <!-- <div class="floating-buttons">
+        <a class="scroll-top" href="#">⬆</a>
+    </div> -->
+    <!-- Floating Buttons -->
+    <button class="fa-solid fa-arrow-up" id="topBtn"></button>
+ 
+
+    <script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        // 로그인 되어있으면 true, 아니면 false
+        const loginCheck = /*[[${session.loginMember != null}]]*/ false;
+    </script>
+    <script src="/js/main/search.js"> </script>
+    <script src="/js/myPage/likeList.js"></script>
+    <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
+</body>
+</html>
