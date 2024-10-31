@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detailpage</title>
+    <title>가게 검색</title>
 
     <link rel="stylesheet" href="/css/main/search.css">
     <link rel="stylesheet" href="/css/main/popUp.css">
@@ -27,7 +27,7 @@
 
 
                     <div class="searchBox">
-                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색"
+                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색어를 입력해 주세요"
                         th:value="${searchCode}">
                         <button class="categorySearch_btn">🍳</button>
                     </div>
@@ -38,16 +38,17 @@
 
                
     <th:block th:if="${tag == ''}">
-        <div>검색한 지역이 없습니다.</div>
+        <div class="searchText">검색한 지역이 없습니다.</div>
     </th:block>
 
     <th:block th:unless= "${tag == ''}"> 
         <div th:text="${tag}"></div>
     </th:block>
-<hr>
+    <hr>
     <th:block th:if="${region == ''}">
-        <div>검색한 카테고리가 없습니다.</div>
+        <div class="searchText">검색한 카테고리가 없습니다.</div>
     </th:block>
+    <hr>
 
     <th:block th:unless= "${region == ''}"> 
         <div th:text="${region}"></div>
