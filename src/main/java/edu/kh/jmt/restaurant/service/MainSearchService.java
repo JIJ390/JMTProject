@@ -1,6 +1,7 @@
 package edu.kh.jmt.restaurant.service;
 
 import java.util.List;
+import java.util.Map;
 
 import edu.kh.jmt.restaurant.dto.RestaurantDto;
 
@@ -13,9 +14,10 @@ public interface MainSearchService {
 	 * @param tag 음식 카테고리
 	 * @param memberNo 
 	 * @param result 
+	 * @param cp 
 	 * @return
 	 */
-	List<RestaurantDto> searchResult(String searchCode, String tag, String region, int memberNo, String result);
+	Map<String, Object> searchResult(String searchCode, String tag, String region, int memberNo, String result, int cp);
 
 
 	

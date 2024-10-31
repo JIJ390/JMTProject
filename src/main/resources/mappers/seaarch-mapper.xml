@@ -176,7 +176,7 @@
 	JOIN 
 	(SELECT RESTAURANT_NO, COUNT(*) AS "BOOKMARKCOUNT"
 		FROM RESTAURANT
-		JOIN BOOKMARK USING (RESTAURANT_NO)
+		LEFT JOIN BOOKMARK USING (RESTAURANT_NO)
 		GROUP BY RESTAURANT_NO)B ON (B.RESTAURANT_NO = R.RESTAURANT_NO)
 	WHERE RESTAURANT_DEL_FL = 'N'
 	<!-- 지역, 음식 카테고리만 했을 경우  -->
@@ -206,6 +206,113 @@
 	GROUP BY R.RESTAURANT_NO, RESTAURANT_IMG1,RESTAURANT_ADDRESS,
 	RESTAURANT_TEL,R.RESTAURANT_NAME, LOCATION_NAME,   CATEGORY_NAME, RESTAURANT_IMG1,BOOKMARKCOUNT
 	ORDER BY BOOKMARKCOUNT DESC
+</select>
+
+
+
+
+
+
+
+<select id="searchResultCount">
+
+	SELECT 
+		COUNT(*)
+	FROM RESTAURANT r
+	JOIN LOCATION USING (LOCATION_NO)
+	JOIN CATEGORY USING (CATEGORY_NO)
+	WHERE RESTAURANT_DEL_FL = 'N'
+	<!-- 지역, 음식 카테고리만 했을 경우  -->
+	<if test="region != '' and tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 지역만 조회 -->
+	<if test="region != ''">
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 음식만 조회 -->
+	<if test="tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	</if>
+
+	<!-- 검색 결과만 한 결과 -->
+		<if test="searchCode != ''">
+		AND (RESTAURANT_NAME LIKE '%' || #{searchCode} || '%'
+			OR LOCATION_NAME LIKE '%' || #{searchCode} || '%'
+			OR CATEGORY_NAME LIKE '%' || #{searchCode} || '%')	
+		</if>
+</select>
+
+<select id="latestCount" >
+	SELECT 
+		COUNT(*)
+	FROM RESTAURANT r
+	JOIN LOCATION USING (LOCATION_NO)
+	JOIN CATEGORY USING (CATEGORY_NO)
+	WHERE RESTAURANT_DEL_FL = 'N'
+	<!-- 지역, 음식 카테고리만 했을 경우  -->
+	<if test="region != '' and tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 지역만 조회 -->
+	<if test="region != ''">
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 음식만 조회 -->
+	<if test="tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	</if>
+
+	<!-- 검색 결과만 한 결과 -->
+		<if test="searchCode != ''">
+		AND (RESTAURANT_NAME LIKE '%' || #{searchCode} || '%'
+			OR LOCATION_NAME LIKE '%' || #{searchCode} || '%'
+			OR CATEGORY_NAME LIKE '%' || #{searchCode} || '%')	
+		</if>
+</select>
+
+
+<select id="likeOrderCount">
+	SELECT 
+		COUNT(*)
+	FROM RESTAURANT r
+	JOIN LOCATION USING (LOCATION_NO)
+	JOIN CATEGORY USING (CATEGORY_NO)
+	WHERE RESTAURANT_DEL_FL = 'N'
+	<!-- 지역, 음식 카테고리만 했을 경우  -->
+	<if test="region != '' and tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 지역만 조회 -->
+	<if test="region != ''">
+	AND 
+		LOCATION_NAME = #{region}
+	</if>
+	<!-- 음식만 조회 -->
+	<if test="tag != ''">
+	AND 
+		CATEGORY_NAME = #{tag}
+	</if>
+
+	<!-- 검색 결과만 한 결과 -->
+		<if test="searchCode != ''">
+		AND (RESTAURANT_NAME LIKE '%' || #{searchCode} || '%'
+			OR LOCATION_NAME LIKE '%' || #{searchCode} || '%'
+			OR CATEGORY_NAME LIKE '%' || #{searchCode} || '%')	
+		</if>
 </select>
 
 

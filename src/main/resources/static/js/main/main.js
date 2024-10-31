@@ -26,7 +26,7 @@ foodCategoryBtnValue.forEach(function (button) { // 모든 각각에버튼을 �
 
   button.addEventListener("click", function () {
     var value = button.value; // 클릭된 버튼의 value값 가져옴
-    document.getElementById("foodBtnResult").textContent = "카테고리 : #" + value; //저장할 요소 불러와 textContent 넣어주기
+    document.getElementById("foodBtnResult").textContent = value; //저장할 요소 불러와 textContent 넣어주기
     // console.log(value); //value값 넘어오는거보기
 
 

@@ -2,6 +2,7 @@ package edu.kh.jmt.restaurant.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.kh.jmt.admin.dto.AdminPagination;
 import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.restaurant.dto.RestaurantDto;
 import edu.kh.jmt.restaurant.service.MainSearchService;
@@ -65,9 +67,14 @@ public class MainSearchController {
 //		log.debug("====================== result  후후후후ㅜ후후ㅜ후후후후후후후후후훟 : {}", result);
 		
 		
-		List<RestaurantDto> searchResult = service.searchResult(searchCode, tag, region,memberNo, result);
+		Map<String, Object> map = service.searchResult(searchCode, tag, region,memberNo, result, cp);
+		
+		
+		List<RestaurantDto> searchResult = (List<RestaurantDto>)map.get("searchResult");
+		AdminPagination pagination = (AdminPagination)map.get("pagination");
 		
 		model.addAttribute("searchResult", searchResult);
+		model.addAttribute("pagination", pagination);
 		
 		if(tag == null) {
 			model.addAttribute("tag", "");
