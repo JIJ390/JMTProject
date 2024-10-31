@@ -49,9 +49,14 @@ public class AdminNoticeController {
 			// paramMap 에 key, query 담겨 있음
 			map = service.searchNoticeList(cp, paramMap);
 		}
-
 		
-+
+		List<Notice> noticeList = (List<Notice>)map.get("noticeList");
+		AdminPagination adminPagination = (AdminPagination)map.get("pagination");
+		
+		
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("pagination", adminPagination);
+
 		
 		return "admin/noticeManage";
 	}
