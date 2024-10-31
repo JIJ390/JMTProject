@@ -72,7 +72,7 @@
 
 
 
-        <div>
+        <div class="lists">
             <!-- -------------------------- 몸통 ------------------ -->
 
             <!-- 게시글이 존재하지않을때 -->
@@ -115,7 +115,29 @@
             </th:block>
 
 
+            <!-- 페이지 네이션 -->
+            <div class="pagination-area" th:unless="${#lists.isEmpty(searchResult)}">
 
+                <ul class="pagination" th:object="${pagination}">
+                <li><a href="#">&lt;&lt;</a></li>
+                <li><a href="#">&lt;</a></li>
+
+                <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}" >
+                    
+                    <li th:if= "${i} == *{currentPage}">
+                    <a class="current" th:text="${i}">현재 페이지</a>
+                    </li>
+
+                    <li th:unless= "${i} == *{currentPage}"> 
+                    <a href="#" th:text="${i}">이동할 수 있는 페이지</a>   <!-- th:href="|?cp=${i}|" -->
+                    </li>
+                </th:block>
+
+                <li><a href="#">&gt;</a></li>
+                <li><a href="#">&gt;&gt;</a></li>
+                </ul>
+
+            </div>
 
 
 

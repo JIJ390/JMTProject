@@ -13,6 +13,9 @@ body      { font-family: 'NanumSquare', sans-serif }
 .bolder      { font-weight: 800 }
 .light      { font-weight: 300 }
 
+h1 {font-family: 'NEXON Lv1 Gothic OTF';}
+header {font-family: 'NEXON Lv1 Gothic OTF';}
+
 * {
   margin: 0;
   padding: 0;
@@ -73,8 +76,8 @@ header {
 #logoImage{
   position: absolute;
   width: 200px;
-  height: 200px;
-  top: 1px;
+
+  top: 11px;
   pointer-events: none;
   user-select: none;
 }

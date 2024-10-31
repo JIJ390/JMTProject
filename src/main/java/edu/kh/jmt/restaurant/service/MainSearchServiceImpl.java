@@ -1,10 +1,14 @@
 package edu.kh.jmt.restaurant.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
+import edu.kh.jmt.admin.dto.AdminPagination;
 import edu.kh.jmt.restaurant.dto.RestaurantDto;
 import edu.kh.jmt.restaurant.mapper.MainSearchMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +23,15 @@ public class MainSearchServiceImpl implements MainSearchService{
 
 	// 검색 기능
 	@Override
-		public List<RestaurantDto>  searchResult(String searchCode, String tag, String region, int memberNo, String result) {
-		List<RestaurantDto>   searchResult = new ArrayList<>();
+		public Map<String, Object> searchResult(String searchCode, String tag, String region, int memberNo, String result, int cp) {
+		
+		
+		
+		List<RestaurantDto>   searchResult = new ArrayList<RestaurantDto>();
+		
+		int listCount = 0;
+		
+		
 		if(tag == null) {
 			tag = "";
 		}
@@ -29,19 +40,46 @@ public class MainSearchServiceImpl implements MainSearchService{
 		}
 		
 		if(result.equals("1")) {
-			searchResult = mapper.latest(searchCode, tag, region,memberNo);
+			listCount = mapper.latestCount(searchCode, tag, region,memberNo);
 		}else if (result.equals("2")) {
-			searchResult =  mapper.searchResult(searchCode, tag, region,memberNo);
+			listCount = mapper.searchResultCount(searchCode, tag, region,memberNo);
 		}else {
-			searchResult = mapper.likeOrder(searchCode, tag, region,memberNo);
+			listCount = mapper.likeOrderCount(searchCode, tag, region,memberNo);
 		}
 		
+	
 		
 		
-//		log.debug("================================searchResult : {} ", searchResult);
+		AdminPagination pagination = new AdminPagination(cp, listCount);
+			
+		int limit = pagination.getLimit();
+		int offset = (cp - 1)* limit;
+			
+		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-			return searchResult;
+		
+		
+		
+		if(result.equals("1")) {
+			searchResult = mapper.latest(searchCode, tag, region,memberNo, rowBounds);
+		}else if (result.equals("2")) {
+			searchResult =  mapper.searchResult(searchCode, tag, region,memberNo, rowBounds);
+		}else {
+			searchResult = mapper.likeOrder(searchCode, tag, region,memberNo, rowBounds);
 		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put(("searchResult"), searchResult);
+		map.put(("pagination"), pagination);		
+		
+		return map;
+		
+
+		
+		
+		
+
+	}
 	
 	
 

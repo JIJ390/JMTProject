@@ -25,6 +25,9 @@
 
 }
 
+.lists{
+    margin: 20px;
+}
 .bodyItem {
     display: flex;
 }
@@ -142,16 +145,19 @@ hr {
 /* ---------------------------------- section-------------------------------- */
 
 .store-section {
-    margin: 10px;
-    border: 3px solid #DADADA;
+    margin: 30px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0px 1px 6px -2px var(--border-color);
     border-radius: 30px;
     padding: 20px;
-    width: 100%;
-    max-width: 800px;
+    width: 900px;
+    max-width: 900px;
     height: 300px;
     display: flex;
     align-items: center;
     word-break: break-all;
+
+    transition-duration: 0.1s;
 }
 .store-section:hover{
     scale: 1.01;
@@ -286,3 +292,64 @@ hr {
     top: 300px;
     font-size: 49px;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* pagination-area css */
+
+.pagination{
+    margin: 20px auto;
+  
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  .pagination li{
+    width: 20px;
+    margin: 0 5px;
+    text-align: center;
+  }
+  
+  .pagination a{
+    text-decoration-line: none;
+    color: black;
+  
+    line-height: 24px;
+  
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .pagination a:hover {
+    cursor: pointer;
+  }
+  
+  .current {
+  
+    font-weight: bold;
+    background-color: var(--main-color);
+    border-radius: 50%;
+    color: white !important;
+    letter-spacing: 0 !important;
+  }
+  
+  
