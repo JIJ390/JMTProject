@@ -51,11 +51,7 @@ public class AdminNoticeController {
 		}
 
 		
-		List<Notice> noticeList = (List<Notice>)map.get("noticeList");
-		AdminPagination pagination = (AdminPagination)map.get("pagination");
-		
-		model.addAttribute("noticeList", noticeList);
-		model.addAttribute("pagination", pagination);
++
 		
 		return "admin/noticeManage";
 	}
