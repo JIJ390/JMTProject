@@ -561,6 +561,7 @@
 			COMMENT_NO,
 			COMMENT_DEL_FL,
 			REPORT_COMMENT_FL,
+			BOARD_NO,
 			R.MEMBER_NO AS "COMMENT_MEMBER_NO"
 		FROM
 			"REPORT_COMMENT"
@@ -664,4 +665,43 @@
 	FROM
 	DUAL
   	</select>
+  	
+  	
+  	
+  	
+  	
+  	<select id="reportBoardDetailView"
+			resultType="Board">
+		SELECT 
+			BOARD_NO,
+			BOARD_TITLE,
+			BOARD_CONTENT,
+				<![CDATA[
+		  			CASE 
+						WHEN CURRENT_DATE - BOARD_DATE < 1 / 24 / 60
+						THEN FLOOR((CURRENT_DATE - BOARD_DATE) * 24 * 60 * 60) || '초 전'
+						
+						WHEN CURRENT_DATE - BOARD_DATE <  1 / 24 
+						THEN FLOOR((CURRENT_DATE - BOARD_DATE) * 24 * 60) || '분 전'
+						
+						WHEN CURRENT_DATE - BOARD_DATE <  1 
+						THEN FLOOR((CURRENT_DATE - BOARD_DATE) * 24) || '시간 전'
+					
+						ELSE TO_CHAR(BOARD_DATE, 'YYYY-MM-DD')
+					END AS BOARD_DATE
+					]]>
+			,
+			BOARD_IMG,
+			MEMBER_NO,
+			MEMBER_NAME,
+			PROFILE_IMG
+		FROM "BOARD"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE BOARD_DEL_FL = 'N'
+		AND
+			BOARD_NO = #{boardNo}
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	
 </mapper>

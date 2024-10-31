@@ -21,6 +21,7 @@ import edu.kh.jmt.admin.dto.ReportBoard;
 import edu.kh.jmt.admin.dto.ReportComment;
 import edu.kh.jmt.admin.dto.ReportReview;
 import edu.kh.jmt.admin.service.AdminReportService;
+import edu.kh.jmt.board.dto.Board;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -338,6 +339,29 @@ public class AdminReportController {
 	public Map<String, String> reportBoardStatus () {
 		
 		return service.reportBoardStatus();
+	}
+	
+	
+	
+	
+	
+	@GetMapping("board/detail")
+	public String reportBoardDetailViEW (
+			@RequestParam("boardNo") int boradNo,
+			Model model, 
+			RedirectAttributes ra) {
+		
+		Board board = service.reportBoardDetailView(boradNo);
+		
+		model.addAttribute("board", board);
+		
+		if (board == null) {
+			ra.addFlashAttribute("message", "이미 삭제된 게시글입니다.");
+			return "redirect:/admin/report/comment";
+		}
+		
+		
+		return "admin/reportBoardDetail";
 	}
 	
 }

@@ -22,8 +22,9 @@ public class ReportComment {
 	private String memberName;
 	private int commentNo;
 	private String reportTypeName;
-	private String CommentDelFl;
+	private String commentDelFl;
 	
 	// 신고 대상 게시글을 쓴 작성자 번호
 	private int commentMemberNo;
+	private int boardNo;
 }
