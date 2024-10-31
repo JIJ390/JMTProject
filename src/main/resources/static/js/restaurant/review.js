@@ -108,7 +108,7 @@ getReportBtnEvent = () => {
 }
 
 
-// 리뷰 제출 버튼
+// 리뷰 신고 버튼
 getReportSubmitFn = () => {
   const reportSubmit = document.querySelectorAll(".reportSubmit");
 
@@ -119,7 +119,7 @@ getReportSubmitFn = () => {
       const reportContent = document.querySelectorAll(".reportContent");
       const selectReportBtn = document.querySelector(".selectReportBtn");
       const popupReview = document.querySelectorAll(".popupReview");
-      const reviewNo = document.querySelector(".getReviewNo").value;
+      const reviewNo = reportSubmit[i].closest(".reviewView").children[0].value;
 
       fetch("/review/report?reportContent=" + reportContent[i]?.value + "&reportType=" + selectReportBtn.innerText + "&reviewNo=" + reviewNo)
         .then(Response => {
@@ -183,16 +183,17 @@ getReportSubmitFn = () => {
 // 수정 버튼 요소 읽어와 이벤트 추가
 getUpdateEvent = () => {
   const updateBtn = document.querySelectorAll(".updateBtn");
-  const reviewNoList = document.querySelectorAll(".getReviewNo");
 
   for (let i = 0; i < updateBtn.length; i++) {
-    updateBtn[i].addEventListener("click", () => {
+    updateBtn[i].addEventListener("click", (e) => {
+
+      const reviewNo = updateBtn[i].closest(".reviewView").children[0].value;
 
       const form = document.createElement("form");
       form.action = "/review/update";
       form.method = "POST"
 
-      const reviewNo = reviewNoList[i].value;
+      
 
       const input = document.createElement("input");
       input.type = "hidden";
@@ -217,14 +218,14 @@ getUpdateEvent = () => {
 // 삭제 버튼 요소 읽어와 이벤트 추가
 getDeleteEvent = () => {
   const deleteBtn = document.querySelectorAll(".deleteBtn");
-  const reviewNoList = document.querySelectorAll(".getReviewNo");
-
+  
   for (let i = 0; i < deleteBtn.length; i++) {
     deleteBtn[i].addEventListener("click", () => {
-
+      
+      const reviewNo = deleteBtn[i].closest(".reviewView").children[0].value;
       if (confirm("정말 삭제하시겠습니까?")) {
 
-        location.href = "/review/delete?restaurantNo=" + restaurantNo + "&reviewNo=" + reviewNoList[i].value;
+        location.href = "/review/delete?restaurantNo=" + restaurantNo + "&reviewNo=" + reviewNo;
       }
 
     })

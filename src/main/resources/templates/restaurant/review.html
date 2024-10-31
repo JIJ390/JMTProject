@@ -1,7 +1,7 @@
 <th:block th:each="r:${reviews}">
-  <input type="hidden" class="getReviewNo" th:value="${r.reviewNo}">
-  <input type="hidden" class="maxSize" th:value="${maxSize}">
   <div class="reviewView">
+    <input type="text" class="getReviewNo" th:value="${r.reviewNo}">
+    <input type="hidden" class="maxSize" th:value="${maxSize}">
     <div class="reviewProfile">
       <img class="reviewProfileImg" 
            th:with="user=#{user.default.image}" 
