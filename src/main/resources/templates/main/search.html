@@ -29,8 +29,8 @@
 
                     <div class="searchBox">
 
-                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch" placeholder="검색어를 입력해 주세요"
-                        th:value="${searchCode}">
+                        <input type="text" class="categorySearch" name="searchCode" id="categorySearch"
+                            placeholder="검색어를 입력해 주세요" th:value="${searchCode}">
 
                         <button class="categorySearch_btn">🍳</button>
                     </div>
@@ -40,23 +40,21 @@
                 <hr>
 
 
-    <th:block th:if="${tag == ''}">
-        <div class="searchText">검색한 지역이 없습니다.</div>
-    </th:block>
-
-    <th:block th:unless= "${tag == ''}"> 
-        <div th:text="${tag}"></div>
-    </th:block>
-    <hr>
-    <th:block th:if="${region == ''}">
-        <div class="searchText">검색한 카테고리가 없습니다.</div>
-    </th:block>
-    <hr>
-
-
-                <th:block th:unless="${region == ''}">
-                    <div th:text="${region}"></div>
+                <th:block th:if="${tag == ''}">
+                    <div class="searchText">검색한 지역이 없습니다.</div>
                 </th:block>
+
+                <th:block th:unless="${tag == ''}">
+                    <div th:text="${tag}" class="tagText"></div>
+                </th:block>
+                <hr>
+                <th:block th:if="${region == ''}">
+                    <div class="searchText">검색한 카테고리가 없습니다.</div>
+                </th:block>
+                <th:block th:unless="${region == ''}">
+                    <div th:text="${region}" class="regionText"></div>
+                </th:block>
+                <hr>
 
                 <div class="categoryBtns_box">
                     <button type=button class="categoryBtns" value="1">최신순</button>|
@@ -119,22 +117,22 @@
             <div class="pagination-area" th:unless="${#lists.isEmpty(searchResult)}">
 
                 <ul class="pagination" th:object="${pagination}">
-                <li><a href="#">&lt;&lt;</a></li>
-                <li><a href="#">&lt;</a></li>
+                    <li><a href="#">&lt;&lt;</a></li>
+                    <li><a href="#">&lt;</a></li>
 
-                <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}" >
-                    
-                    <li th:if= "${i} == *{currentPage}">
-                    <a class="current" th:text="${i}">현재 페이지</a>
-                    </li>
+                    <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
 
-                    <li th:unless= "${i} == *{currentPage}"> 
-                    <a href="#" th:text="${i}">이동할 수 있는 페이지</a>   <!-- th:href="|?cp=${i}|" -->
-                    </li>
-                </th:block>
+                        <li th:if="${i} == *{currentPage}">
+                            <a class="current" th:text="${i}">현재 페이지</a>
+                        </li>
 
-                <li><a href="#">&gt;</a></li>
-                <li><a href="#">&gt;&gt;</a></li>
+                        <li th:unless="${i} == *{currentPage}">
+                            <a href="#" th:text="${i}">이동할 수 있는 페이지</a> <!-- th:href="|?cp=${i}|" -->
+                        </li>
+                    </th:block>
+
+                    <li><a href="#">&gt;</a></li>
+                    <li><a href="#">&gt;&gt;</a></li>
                 </ul>
 
             </div>
@@ -164,20 +162,20 @@
         </div>
         <!-- --------------------------------------- -->
 
-    <!-- <div class="floating-buttons">
+        <!-- <div class="floating-buttons">
         <a class="scroll-top" href="#">⬆</a>
     </div> -->
-    <!-- Floating Buttons -->
-    <button class="fa-solid fa-arrow-up" id="topBtn"></button>
- 
+        <!-- Floating Buttons -->
+        <button class="fa-solid fa-arrow-up" id="topBtn"></button>
 
-    <script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
-    <script th:inline="javascript">
-        // 로그인 되어있으면 true, 아니면 false
-        const loginCheck = /*[[${session.loginMember != null}]]*/ false;
-    </script>
-    <script src="/js/main/search.js"> </script>
-    <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
+
+        <script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
+        <script th:inline="javascript">
+            // 로그인 되어있으면 true, 아니면 false
+            const loginCheck = /*[[${session.loginMember != null}]]*/ false;
+        </script>
+        <script src="/js/main/search.js"> </script>
+        <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
 
 </body>
 
