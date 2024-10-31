@@ -4,9 +4,15 @@ reviewBtn.addEventListener("click", () => {
 
   const memberNo = document.querySelector(".getLoginMemberNo")?.value;
   const restaurantNo = document.querySelector(".getRestaurantNo").value;
-
+  
   if (memberNo == null) {
     alert("로그인 후 이용해주세요")
+    return;
+  }
+  
+  const memberAuth = document.querySelector(".memberAuth").value;
+  if (memberAuth == '1') {
+    alert("차단당한 회원은 불가능합니다")
     return;
   }
 
@@ -49,6 +55,13 @@ reviewBtn1.addEventListener("click", () => {
     alert("로그인 후 이용해주세요")
     return;
   }
+
+  const memberAuth = document.querySelector(".memberAuth").value;
+  if (memberAuth == '1') {
+    alert("차단당한 회원은 불가능합니다")
+    return;
+  }
+
 
 
   const form = document.createElement("form");

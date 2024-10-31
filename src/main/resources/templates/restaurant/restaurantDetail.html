@@ -34,8 +34,12 @@
             <input type="hidden" class="getRestaurantNo" th:value="*{restaurantNo}">
             <input type="hidden" class="getRestaurantAddress" th:value="*{restaurantAddress}">
             <input type="hidden" class="getRestaurantName" th:value="*{restaurantName}">
-            <th:block th:if="${session.loginMember}"><input type="hidden" class="getLoginMemberNo"
-                    th:value="${session.loginMember.memberNo}"></th:block>
+            <th:block th:if="${session.loginMember}">
+                <input type="hidden" class="getLoginMemberNo"
+                    th:value="${session.loginMember.memberNo}">
+                <input type="hidden" class="memberAuth" th:value="${session.loginMember.memberAuth}">
+                </th:block>
+                
 
             <div class="mainDetail">
                 <div class="mainDetailPhoto">
