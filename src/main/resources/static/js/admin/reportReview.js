@@ -138,6 +138,7 @@ const selectReportReview = (url) => {
     const reportContent = document.querySelector("#reportContent");
 
 
+    console.log("aaa");
 
 
     reportTypeName.innerText = reportReview.reportTypeName;
