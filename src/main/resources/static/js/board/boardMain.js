@@ -12,6 +12,12 @@ topBtn.onclick = function () {
 const btn = document.querySelector(".writeBtn");
 
 btn?.addEventListener("click", () => {
+
+  if (btn.value == '1') {
+    alert("차단당한 회원 입니다. 글쓰기를 이용하실 수 없습니다.");
+    return;
+  }
+
   location.href = "/board/boardWrite";
 })
 
@@ -37,8 +43,8 @@ for (let i = 0; i < deleteBtn.length; i++) {
   // 삭제버튼이 존재할 때 이벤트 리스너 추가
 
   deleteBtn[i]?.addEventListener("click", () => {
-    
-    
+
+
     if (confirm("정말 삭제하시겠습니까?") == false) {
       return;
     }
@@ -86,37 +92,37 @@ for (let i = 0; i < deleteBtn.length; i++) {
 
 const updateBtn = document.querySelectorAll(".updateBtn");
 
-for(let i=0; i<updateBtn.length; i++){
+for (let i = 0; i < updateBtn.length; i++) {
 
-updateBtn[i]?.addEventListener("click", () => {
-  // if(confirm("수정할거야?") == false){
-  //   return;
-  // }
-  
-  // location.href = "/board/updateView"; * 겟방식 &*&*
-  const boardNo = deleteBtn[i].closest(".board-btn-area").dataset.boardNo;
+  updateBtn[i]?.addEventListener("click", () => {
+    // if(confirm("수정할거야?") == false){
+    //   return;
+    // }
 
-  const form = document.createElement("form");
+    // location.href = "/board/updateView"; * 겟방식 &*&*
+    const boardNo = deleteBtn[i].closest(".board-btn-area").dataset.boardNo;
 
-  form.action = "/board/updateView";
-  form.method = "POST";
+    const form = document.createElement("form");
 
-  const input = document.createElement("input");
-  input.type = "hidden";
-  input.name = "boardNo";
-  input.value = boardNo;
+    form.action = "/board/updateView";
+    form.method = "POST";
 
-  form.append(input);
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "boardNo";
+    input.value = boardNo;
 
-  document.querySelector("body").append(form);
+    form.append(input);
 
-  form.submit();
+    document.querySelector("body").append(form);
 
-})
+    form.submit();
+
+  })
 
 };
 
-// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ한무스크롤
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ무한무스크롤
 
 const boardBox = document.querySelector(".board-box");
 
@@ -138,102 +144,118 @@ const plusBoardList = (currentPage, searchKey, searchQuery) => {
   }
 
   fetch(url)
-  .then(Response => {
-    if (Response.ok) {
-      return Response.text();
-    }
-    throw new Error("게시글 조회 실패");
-  })
-  .then(html => {
-
-
-    // 로딩이 끝나면 로딩중 변수를 false 로 바꿔서 다시 로딩이 되도록
-    isFetching = false;
-
-    // 데이터가 없으면 false;
-    // 전체 html 길이가 0 일 때 더 이상 로딩이 안되도록
-    if (html.trim().length === 0) {
-      hasMore = false;
-      return;
-    }
-
-    // div를 만들어서 비동기로 가져온 boardList 목록 담기 
-    const div = document.createElement("div");
-    div.classList.add("post-container");
-
-    div.innerHTML = html;
-
-    boardBox.append(div);
-
-
-    // 강사님코드
-
-    div.querySelectorAll(".comment-toggle").forEach(item => {
-      item.addEventListener("click", () => {
-
-        const post = item.closest(".post");
-        const commentArea = post.querySelector(".commentArea");
-
-        const ptag = item.children[1];
-  
-      if (!ptag.classList.contains("check")) {
-        
-        console.log(ptag);
-
-        ptag.classList.add("check");
-  
-        ptag.innerText = '댓글 닫기';
-  
-        selectCurrBoardCommentList(post)
+    .then(Response => {
+      if (Response.ok) {
+        return Response.text();
       }
-  
-  
-      else {
-  
-        ptag.classList.remove("check");
-  
-        ptag.innerText = '댓글 보기';
-  
-        // 덮어쓰기@@
-        commentArea.innerHTML = "";
+      throw new Error("게시글 조회 실패");
+    })
+    .then(html => {
+
+
+      // 로딩이 끝나면 로딩중 변수를 false 로 바꿔서 다시 로딩이 되도록
+      isFetching = false;
+
+      // 데이터가 없으면 false;
+      // 전체 html 길이가 0 일 때 더 이상 로딩이 안되도록
+      if (html.trim().length === 0) {
+        hasMore = false;
+        return;
       }
+
+      // div를 만들어서 비동기로 가져온 boardList 목록 담기 
+      const div = document.createElement("div");
+      div.classList.add("post-container");
+
+
+      div.innerHTML = html;
+
+      boardBox.append(div);
+
+
+      // 강사님코드
+
+
+
+      // div.querySelectorAll(".updateReport").forEach(item => {
+      //   item.addEventListener("click", () => {
+      //     if (item.classList.contains(".boardReportHidden")) {
+      //       item.classList.remove(".boardReportHidden")
+      //     }
+      //     else {
+      //       item.classList.add(".boardReportHidden")
+      //     }
+
+      //   })
+
+      // })
+      div.querySelectorAll(".comment-toggle").forEach(item => {
+        item.addEventListener("click", () => {
+
+          const post = item.closest(".post");
+          const commentArea = post.querySelector(".commentArea");
+
+          const ptag = item.children[1];
+
+          if (!ptag.classList.contains("check")) {
+
+            console.log(ptag);
+
+            ptag.classList.add("check");
+
+            ptag.innerText = '댓글 닫기';
+
+            selectCurrBoardCommentList(post)
+          }
+
+
+          else {
+
+            ptag.classList.remove("check");
+
+            ptag.innerText = '댓글 보기';
+
+            // 덮어쓰기@@
+            commentArea.innerHTML = "";
+          }
+
+        })
 
       })
 
+      // div.querySelectorAll(".updateReport").forEach(item => {
+      //   item.addEventListener("click", () => {
+
+      //     const updateReport = item.closest(".updateReport");
+      //     const boardReport = item.closest(".boardReport");
+
+
+      //     updateReport.addEventListener("click", () => {
+
+      //       if (boardReport.classList.contains("boardReportHidden")) {
+      //         boardReport.classList.remove("boardReportHidden")
+
+      //       } else {
+
+      //         boardReport.classList.add("boardReportHidden")
+      //       }
+
+      //     })
+      //   })
+      // })
+
+
+
+
+      getReportEvent(); // 리뷰신고버튼
+      reportBtn();
+      getReportBtn();
+
+
+
     })
 
-    div.querySelectorAll(".updateReport").forEach(item => {
-      item.addEventListener("click", () => {
-
-        const updateReport = item.closest(".updateReport");
-        const boardReport = item.closest(".boardReport");
-
-
-        updateReport.addEventListener("click", () =>{
-            
-          if(boardReport.classList.contains("boardReportHidden")){
-            boardReport.classList.remove("boardReportHidden")
-      
-          }else{
-      
-            boardReport.classList.add("boardReportHidden")
-          }
-      
-    }) 
-  }) 
-}) 
-    
-
-
-
-    // getReportEvent(); // 리뷰신고버튼
-    // reportBtn();
-    // getReportBtn();
-  
-
-  })
-  
-  .catch(err => console.log(err));
+    .catch(err => console.log(err));
 
 }
 
@@ -245,7 +267,7 @@ const plusBoardList = (currentPage, searchKey, searchQuery) => {
 window.addEventListener('scroll', () => {
 
   if (isFetching || !hasMore) {
-      return;
+    return;
   }
 
   const documentHeight = document.documentElement.scrollHeight;
@@ -263,7 +285,7 @@ window.addEventListener('scroll', () => {
     const searchQuery = searchParams.get("query");
 
     plusBoardList(currentPage, searchKey, searchQuery);
-    
+
 
     currentPage++;
   }
@@ -296,23 +318,23 @@ const commentOpen = () => {
       // 처음 main 창에서 check가 없는상태
       const post = commentClick[i].closest(".post");
       const commentArea = post.querySelector(".commentArea");
-  
+
       if (!commentClick[i].classList.contains("check")) {
-  
+
         commentClick[i].classList.add("check");
-  
+
         c[i].innerText = '댓글 닫기';
-  
+
         selectCurrBoardCommentList(post)
       }
-  
-  
+
+
       else {
-  
+
         commentClick[i].classList.remove("check");
-  
+
         c[i].innerText = '댓글 보기';
-  
+
         // 덮어쓰기@@
         commentArea.innerHTML = "";
       }
@@ -346,9 +368,11 @@ const selectCurrBoardCommentList = (post) => {
       // 답글, 수정, 삭제등이 동작하지 않는다!!
 
       addEventCommentWrite(post);
-      addEventChildComment(); // 답글버튼에 클릭이벤트 추가
       addEventDeleteComment(); // 삭제버튼에 이벤트 추가
       addEventUpdateComment(); // 수정버튼에 이벤트 추가
+
+      commentReport();
+      commentReportCheck();
 
 
     })
@@ -374,6 +398,20 @@ const addEventCommentWrite = (post) => {
     const data = {};
     data.boardNo = boardNo; // 댓글이 작성된 게시글 번호
     data.commentContent = content; // 작성된 댓글 내용
+
+    const getLoginMember = document.querySelector(".getLoginMember");
+
+    if(getLoginMember == null){
+      alert("댓글작성은 회원만 가능해요^^");
+      commentContentArea.value="";
+      return;
+    }
+
+    if(commentWriteBtn.value == '1'){
+      alert("차단된 회원입니다. 댓글을 작성하실 수 없습니다");
+      commentContentArea.value="";
+      return;
+    }
 
     fetch("/board/boardComment", {
       method: "POST",
@@ -444,7 +482,7 @@ const deleteComment = (btn) => {
 let beforeCommentRow;
 
 showUpdateComment = (btn) => {
-  
+
 
   // const commentList1 = document.querySelectorAll(".comment-post-header");
   // for (let i = 0; i < commentList1.length; i++) {
@@ -464,7 +502,7 @@ showUpdateComment = (btn) => {
       uBtn.addEventListener("click", () => { showUpdateComment(uBtn) });
       dBtn.addEventListener("click", () => { deleteComment(dBtn) });
     }
-    else{
+    else {
       return;
     }
   }
@@ -496,6 +534,9 @@ showUpdateComment = (btn) => {
   button1.innerText = "수정하기";
   button2.innerText = "수정취소";
 
+  button1.classList.add("button1")
+  button2.classList.add("button1")
+
   button1.addEventListener("click", () => {
 
     /** commentNo 가 commentDiv 에 담겨있기때문 */
@@ -505,28 +546,28 @@ showUpdateComment = (btn) => {
 
     const data = {};
     data.commentNo = updateBtn;
-    data.commentContent  = textContent;
+    data.commentContent = textContent;
 
-    fetch("/board/boardComment",{
-      method  : "PUT",
-      headers : { "Content-Type": "application/json" },
-      body    : JSON.stringify(data)
+    fetch("/board/boardComment", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     })
-    .then(response => {
-      if(response.ok) return response.text();
-      throw new Error("댓글 수정 실패");
-    })
-    .then(commentNo => {
+      .then(response => {
+        if (response.ok) return response.text();
+        throw new Error("댓글 수정 실패");
+      })
+      .then(commentNo => {
 
-      if(commentNo == 0){
-        alert("댓글 수정 실패")
-        return;
-      }
-      const post = button1.closest(".post");
-      selectCurrBoardCommentList(post);
+        if (commentNo == 0) {
+          alert("댓글 수정 실패")
+          return;
+        }
+        const post = button1.closest(".post");
+        selectCurrBoardCommentList(post);
 
-    })
-    .catch(err => console.error(err));
+      })
+      .catch(err => console.error(err));
 
 
   })
@@ -543,15 +584,15 @@ showUpdateComment = (btn) => {
     commentRow.after(beforeCommentRow);
     commentRow.remove();
 
-    const uBtn =  beforeCommentRow.children[2].children[0];
-    const dBtn =  beforeCommentRow.children[2].children[1];
-      
-    uBtn.addEventListener("click", () => {showUpdateComment(uBtn)});
-    dBtn.addEventListener("click", () => {deleteComment(dBtn)});
+    const uBtn = beforeCommentRow.children[2].children[0];
+    const dBtn = beforeCommentRow.children[2].children[1];
+
+    uBtn.addEventListener("click", () => { showUpdateComment(uBtn) });
+    dBtn.addEventListener("click", () => { deleteComment(dBtn) });
     // selectCurrBoardCommentList(post);
     // console.log(button2);
 
-  
+
 
 
   })
@@ -661,15 +702,7 @@ const insertComment = (parentCommentNo) => {
 // })
 
 /** 화면에 존재하는 답글버튼을 모두 찾아 이벤트리스너 추가 */
-const addEventChildComment = () => {
 
-  const btns = document.querySelectorAll(".comment-child");
-  btns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      showChildComment(btn); // 답글 작성화면 출력함수 호출
-    });
-  })
-}
 
 /** 화면에 존재하는 댓글 삭제버튼에 이벤트리스너 추가 */
 const addEventDeleteComment = () => {
@@ -702,12 +735,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   commentOpen();
 
-  addEventChildComment();  // 답글 버튼에 이벤트 추가
   addEventDeleteComment(); // 삭제 버튼에 이벤트 추가
   addEventUpdateComment(); // 수정 버튼에 이벤트 추가
   getReportEvent(); // 리뷰신고버튼
   reportBtn();
   getReportBtn();
+  commentReportCheck();
+  commentReportInsert();
 
 });
 
@@ -727,38 +761,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 리뷰 신고 버튼 기능
 
+let index = 0;
+
 getReportEvent = () => {
-  
+
   const updateReport = document.querySelectorAll(".updateReport");
-  const boardReport  = document.querySelectorAll(".boardReport");
-  
-  for(let i = 0; i < updateReport.length; i++){
-    
-    if(updateReport[i])
+  const boardReport = document.querySelectorAll(".boardReport");
 
-    updateReport[i].addEventListener("click", () =>{
-      
-    if(boardReport[i].classList.contains("boardReportHidden")){
-    boardReport[i].classList.remove("boardReportHidden")
+  for (let i = index; i < updateReport.length; i++) {
 
-    }else{
+    // updateReport[i].removeEventListener("click", getEventListeners( document.querySelector('#updateReport')).click[0].listener)
 
-    boardReport[i].classList.add("boardReportHidden")
-    }
+    updateReport[i].addEventListener("click", () => {
+      const boardReport1 = document.querySelectorAll(".boardReport");
+      if (boardReport[i]?.classList.contains("boardReportHidden")) {
+
+        for (let j = 0; j < boardReport1.length; j++) {
+          boardReport1[j].classList.add("boardReportHidden");
+          boardReport1[j].children[0].classList.remove("click")
+          boardReport1[j].children[1].classList.remove("click")
+          boardReport1[j].children[2].classList.remove("click")
+          boardReport1[j].children[3].value = "";
+
+        }
+
+        boardReport[i].classList.remove("boardReportHidden")
 
 
 
-  })
+      } else {
+
+        boardReport[i].classList.add("boardReportHidden")
+      }
+
+
+    })
+    index = i + 1;
   }
 }
 
+let index2 = 0;
 // 게시물신고 1,2,3 클릭된 애만 색나오게//
 reportBtn = () => {
   const r1 = document.querySelectorAll(".r1");
   const r2 = document.querySelectorAll(".r2");
   const r3 = document.querySelectorAll(".r3");
 
-  for(let i = 0; i < r1.length; i++){
+  for (let i = index2; i < r1.length; i++) {
 
     r1[i].addEventListener("click", () => {
       r2[i].classList.remove("click");
@@ -775,39 +824,122 @@ reportBtn = () => {
       r2[i].classList.remove("click");
       r3[i].classList.add("click");
     })
+    index2 = i + 1;
   }
 }
+
+let index3 = 0;
 
 getReportBtn = () => {
   // 1,2,3
   // 텍스트에어리어
   // 제출버튼
   const getreportBtn = document.querySelectorAll(".reportBtn");
-  
-  for(i = 0; i < getreportBtn.length; i++){
+
+  for (let i = index3; i < getreportBtn.length; i++) {
 
 
-    getreportBtn[i].addEventListener("click", () => {
+    getreportBtn[i].addEventListener("click", e => {
       const click = document.querySelector(".click");
 
       const reportContent = click.closest(".boardReport").children[3].value;
 
-      fetch("/board/report?reportContent=" + reportContent + "&reportType=" + click.innerText)
+      const boardNo = e.target.closest(".post").dataset.boardNo;
+
+      fetch("/board/report?reportContent=" + reportContent + "&reportType=" + click.innerText + "&boardNo=" + boardNo)
+        .then(response => {
+          if (response.ok) return response.text();
+          throw new Error("신고 제출 실패!");
+        })
+        .then(result => {
+          if (result > 0) {
+            alert("신고 완료");
+            const boardReport1 = document.querySelectorAll(".boardReport");
+
+            for (let j = 0; j < boardReport1.length; j++) {
+              boardReport1[j].classList.add("boardReportHidden");
+              boardReport1[j].children[0].classList.remove("click")
+              boardReport1[j].children[1].classList.remove("click")
+              boardReport1[j].children[2].classList.remove("click")
+              boardReport1[j].children[3].value = "";
+
+            }
+          }
+        })
+        .catch(err => console.log(err));
+    })
+    index3 = i + 1;
+  }
+
+}
+
+
+let index4 = 0;
+commentReport = () => {
+  const commentReport = document.querySelectorAll(".commentReport");
+  const commentReportPopup = document.querySelector(".commentReportPopup");
+
+  for (let i = index4; i < commentReport.length; i++) {
+    commentReport[i].addEventListener("click", () => {
+
+      const commentNo = commentReport[i].closest(".commentDiv").dataset.commentNo;
+      document.querySelector(".getCommentNo").value = commentNo;
+      console.log(commentNo);
+      console.log(document.querySelector(".getCommentNo").value);
+      commentReportPopup.classList.remove("commentPopupHidden");
+
+    })
+    index = i + 1;
+  }
+
+  const commentCloseBtn = document.querySelector(".commentCloseBtn");
+  commentCloseBtn.addEventListener("click", () => {
+    commentReportPopup.classList.add("commentPopupHidden");
+  })
+
+}
+
+commentReportCheck = () => {
+  const rc = document.querySelectorAll(".rc");
+  for (let i = 0; i < rc.length; i++) {
+    rc[i].addEventListener("click", () => {
+      rc[0].classList.remove("commentclick");
+      rc[1].classList.remove("commentclick");
+      rc[2].classList.remove("commentclick");
+      rc[i].classList.add("commentclick");
+    })
+  }
+}
+
+commentReportInsert = () => {
+  const commentReportBtn = document.querySelector(".commentReportBtn")
+  commentReportBtn.addEventListener("click", () => {
+
+    const content = document.querySelector(".commentReportContent").value;
+    const reportType = document.querySelector(".commentclick").innerText;
+    const commentNo = document.querySelector(".getCommentNo").value;
+    const rc = document.querySelectorAll(".rc");
+
+    console.log(reportType);
+    fetch("/board/commentReport?reportType=" + reportType + "&content=" + content + "&commentNo=" + commentNo)
       .then(response => {
-        if(response.ok) return response.text();
-        throw new Error("신고 제출 실패!");
+        if (response.ok) return response.text();
+        throw new Error("댓글 신고 실패");
       })
       .then(result => {
-        if(result > 1){
-          alert("신고 완료");
+        if (result > 0) {
+          alert("신고완료!");
+  
+              rc[0].classList.remove("commentclick");
+              rc[1].classList.remove("commentclick");
+              rc[2].classList.remove("commentclick");
+     
+
+          commentNo.value="0";
+          document.querySelector(".commentReportContent").value="";
+          document.querySelector(".commentReportPopup").classList.add("commentPopupHidden");
         }
       })
       .catch(err => console.log(err));
-    })
-
-  }
-
-
-
-
+  })
 }

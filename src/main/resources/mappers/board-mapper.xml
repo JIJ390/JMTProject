@@ -58,7 +58,8 @@
 			,
 			BOARD_IMG,
 			MEMBER_NO,
-			MEMBER_NAME
+			MEMBER_NAME,
+			PROFILE_IMG
 		FROM "BOARD"
 		JOIN "MEMBER" USING (MEMBER_NO)
 		WHERE BOARD_DEL_FL = 'N'
@@ -112,7 +113,8 @@
 			,
 			BOARD_IMG,
 			MEMBER_NO,
-			MEMBER_NAME
+			MEMBER_NAME,
+			PROFILE_IMG
 		FROM "BOARD"
 		JOIN "MEMBER" USING (MEMBER_NO)
 		WHERE BOARD_DEL_FL = 'N'
@@ -167,15 +169,42 @@
   			BOARD_NO = #{boardNo}
   	</update>
   	
-  	<select id="boardReport" resultType="string">
+ <!--  	<insert id="boardReport" resultType="_int">
 		SELECT COUNT(*)
 		FROM REPORT_REVIEW
 		WHERE MEMBER_NO = #{memberNo}
 		AND REVIEW_NO = #{reviewNo}
 		AND REPORT_TYPE_NO = #{reportType}
-	</select>
+	</select> -->
 
+	<!-- 게시물 신고 -->
+	<insert id="boardReport">
+		INSERT INTO REPORT_BOARD
+		VALUES(
+			SEQ_REPORT_BOARD_NO.NEXTVAL,
+			#{reportContent},
+			DEFAULT,
+			NULL,
+			'N',
+			#{memberNo},
+			#{boardNo},
+			#{reportType} )
+	</insert>
 	
-
+	<!-- 댓글 신고 -->
+	<insert id="commentReport">
+		INSERT INTO REPORT_COMMENT
+		VALUES(
+			SEQ_REPORT_COMMENT_NO.NEXTVAL,
+			#{content},
+			DEFAULT,
+			NULL,
+			'N',
+			#{memberNo},
+			#{commentNo},
+			#{reportType}
+		)
+	</insert>
+	
 
 </mapper>

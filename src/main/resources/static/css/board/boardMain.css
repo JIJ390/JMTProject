@@ -303,6 +303,9 @@
   font-size: 10px;
 }
 
+.comment-child > div {
+  position: absolute;
+}
 
 
 .comment-child:hover {
@@ -355,10 +358,10 @@
   color: #6EC3C2;
   border: 2px solid #6EC3C2;
 
-} */ 
+} */
 
 
-.commentDiv > button{
+.commentDiv> .button1 {
   width: 50px;
   height: 40px;
   background-color: #6EC3C2;
@@ -369,7 +372,7 @@
 }
 
 
-.commentDiv > button:hover{
+.commentDiv> .button1:hover {
   width: 50px;
   height: 40px;
   background-color: white;
@@ -427,15 +430,15 @@
   display: flex;
 }
 
-.comment-id{
+.comment-id {
   width: 15%;
 }
 
-.comment-context{
+.comment-context {
   width: 80%;
 }
 
-.commentArea{
+.commentArea {
   margin-top: 20px;
 }
 
@@ -446,7 +449,7 @@
 /* //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● */
 /* boardReport 란 */
 
-.boardReport{
+.boardReport {
   width: 300px;
   height: max-content;
   border: 1px solid gray;
@@ -455,29 +458,30 @@
   position: absolute;
   right: 40px;
   top: 75px;
-
+  
   z-index: 10;
   display: flex;
   flex-direction: column;
   justify-content: start;
   text-align: start;
-
+  
 }
 
-.boardReport > textarea {
+.boardReport>textarea {
   width: 100%;
   height: 85px;
   border: 1px solid gray;
   resize: none;
 }
 
-.boardReport > p {
+.boardReport>p {
   width: 100%;
   height: 30px;
   border: 1px solid gray;
   resize: none;
 }
-.boardReport > p:hover {
+
+.boardReport>p:hover {
   width: 100%;
   height: 30px;
   border: 1px solid gray;
@@ -485,7 +489,7 @@
   resize: none;
 }
 
-.click{
+.click {
   background-color: antiquewhite;
 }
 
@@ -495,30 +499,79 @@
   height: 85px;
   border: 1px solid gray;
   resize: none;
-}
-.popupReview > button{
-  transition: all 0.1s;
-  width: 100%;
-  text-align: start;
-  border-radius: 5px;
-}
-
-.popupReview > button:hover{
-
-  text-align: left;
-  transition: all 0.1s;
+  }
+  .popupReview > button{
+    transition: all 0.1s;
+    width: 100%;
+    text-align: start;
+    border-radius: 5px;
+    }
+    
+    .popupReview > button:hover{
+      
+    text-align: left;
+    transition: all 0.1s;
+    background-color: rgb(177, 177, 177);
+    border-radius: 5x;
+    }
+    
+    .selectReportBtn{
   background-color: rgb(177, 177, 177);
-  border-radius: 5x;
-}
-
-.selectReportBtn{
-  background-color: rgb(177, 177, 177);
   border-radius: 5px;
   transition: all 0.1s;
-} */
+  } */
+  
+  
+  
+  .boardReportHidden {
+    display: none;
+  }
+
+  .commentReport {
+    width: 50px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid #ff0000;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 10px;
+  }
+  
+  .commentReport:hover{
+    width: 50px;
+    height: 40px;
+    background-color: #ff0000;
+    border: 1px solid #ffffff;
+    color: ffffff;
+    cursor: pointer;
+    font-size: 10px;
+  }
 
 
+  .commentReportPopup{
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    width: 290px;
+    position: fixed;
+    margin: auto;
+    top: 350px;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    box-shadow: 0px 5px 6px -2px var(--border-color);
+  }
 
-.boardReportHidden{
-  display: none;
-}
+  .commentReportContent{
+    width: 260px;
+    height: 87px;
+    resize: none;
+  }
+
+  .commentPopupHidden{
+    display: none;
+  }
+
+  .commentclick{
+    background-color: gray;
+  }

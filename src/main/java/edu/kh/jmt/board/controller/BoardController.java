@@ -244,24 +244,54 @@ public class BoardController {
 	
 	@ResponseBody
 	@GetMapping("report")
-	public String boardReport(
+	public int boardReport(
 			@RequestParam("reportContent") String reportContent,
 			@RequestParam("reportType") String reportType,
 			@RequestParam("boardNo") int boardNo,
 			@SessionAttribute("loginMember") Member loginMember) {
 		
+		System.out.println(reportContent);	
+		System.out.println(reportType);
 		System.out.println(reportContent);
 		System.out.println(reportType);
 		System.out.println(boardNo);
-		System.out.println(loginMember);
-		System.out.println(reportContent);
-		System.out.println(reportType);
 		System.out.println(boardNo);
-		System.out.println(loginMember);
 		
 		
-		return null;
+		return service.boardReport(reportType, reportContent, boardNo, loginMember.getMemberNo());
 	}
+	
+	/** 댓글신고
+	 * @param reportType
+	 * @param content
+	 * @param commentNo
+	 * @param loginMember
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping("commentReport")
+	public int commentReport(
+			@RequestParam("reportType")String reportType,
+			@RequestParam("content")String content,
+			@RequestParam("commentNo")int commentNo,
+			@SessionAttribute("loginMember")Member loginMember) {
+
+
+		int result = service.commentReport(reportType, content, commentNo, loginMember.getMemberNo());
+		
+		
+		return result;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
