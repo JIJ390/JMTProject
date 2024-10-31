@@ -98,8 +98,8 @@ section{
 
 /* 이미지 */
 .restaurantImg img{
-  min-width: 198px;
-  min-height: 198px;
+  width: 198px;
+  height: 198px;
 }
 
 .plus-mark {

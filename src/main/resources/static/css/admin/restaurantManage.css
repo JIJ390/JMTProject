@@ -93,6 +93,7 @@ h1 {
 
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 /* 글 정렬 */
@@ -111,11 +112,11 @@ h1 {
   width: 10%;
 }
 .restaurant-box a span:nth-child(4) {
-  width: 10%;
+  width: 20%;
 }
 
 .restaurant-box a span:last-child {
-  width: 40%;
+  width: 30%;
 }
 
 
