@@ -407,7 +407,7 @@ h3{
 .foodCategoryBtnBox { 
   display: flex;
   justify-content: space-around;
-  border: 1px solid black;
+  border: 1px solid #E3E3E3;
   border-radius: 30px;
   margin: 10px;
   height: 100%;
@@ -419,13 +419,16 @@ h3{
   height: 100%;
   width: 97%;
   font-weight: bold;
-
+  
   background-color: none;
   border: none;
   cursor: pointer;
   background-color:transparent;
 
   font-size: 20px;
+}
+.foodCategoryBtn:hover{
+  color: var(--main-color);
 }
 
 #foodBtnResult{
@@ -523,7 +526,7 @@ h3{
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 1px solid black;
+  border: 1px solid var(--main-color);;
   height: 70%;
   transition: all 0.3s ease;
   border-radius: 30px;
@@ -553,7 +556,7 @@ h3{
 .regionCategorySubmit{
   border: none;
   background: none;
-  border: 1px solid black;
+  border: 1px solid var(--border-color);
   width: 130px;
   height: 35px;
   cursor: pointer;
@@ -561,7 +564,7 @@ h3{
 .foodCategorySubmit{
   border: none;
   background: none;
-  border: 1px solid black;
+  border: 1px solid var(--border-color);
   width: 130px;
   height: 35px;
   cursor: pointer;
