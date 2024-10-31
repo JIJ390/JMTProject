@@ -48,17 +48,25 @@
    padding: 15px;
  }
 
-  .table-underline{
-    text-align: center;
-    border-bottom : 1px solid black;
+  table :nth-child(1){
+    border-bottom : 1px solid rgb(209, 209, 209);
   }
 
-  thead >tr{
-    border-bottom : 1px solid black;
+  table :nth-child(2){
+    border-bottom : 1px solid rgb(209, 209, 209);
+  }
+
+  table :nth-child(3){
+    border-bottom : 1px solid rgb(209, 209, 209);
+  }
+
+  .table-underline{
+    text-align: center;
   }
 
   .detail-content{
     padding: 20px;
+    white-space: pre-wrap;
   }
 
   /* 목록으로 */
