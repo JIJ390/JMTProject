@@ -16,7 +16,8 @@
 		<br><br>
 		<!-- 검색바 -->
 		<form action="/board/boardMain" method="GET" id="boardSearch" class="search-container">
-			<div>
+			<div class="search-box">
+
 					
         <select name="key" id="searchKey">
           <option value="t">제목</option>
@@ -25,10 +26,16 @@
         </select>
 
 				<input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
-				<button type="submit">aaa</button>
-				<i class="fa-solid fa-magnifying-glass"></i>
+				<button type="submit" class="search-btn">검색</button>
 			</div>
+
 		</form>
+
+		
+		<th:block th:if="${#lists.isEmpty(boardList)}">        
+			<div class="none-list">조회된 결과가 없습니다</div>
+		</th:block>
+
 
 		<!-- 게시글 리스트 -->
 	<div class="board-box">
@@ -56,11 +63,11 @@
 									<th:block th:if="${session.loginMember?.memberNo} != ${board.memberNo}">
 										<button class="updateReport">신고하기</button>
 										<div class="boardReport boardReportHidden" th:data-board-no="${board.boardNo}">
-											<p class="r1">1. 혐오 표현이 포함된 게시글</p>
-											<p class="r2">2. 욕설, 비방 표현 사용 게시글</p>
-											<p class="r3">3. 기타 사유 게시글</p>
+											<span class="r1 rtext">1. 혐오 표현이 포함된 게시글</span>
+											<span class="r2 rtext">2. 욕설, 비방 표현 사용 게시글</span>
+											<span class="r3 rtext">3. 기타 사유 게시글</span>
 											<textarea name="" id="" style="" class="reportContent"></textarea>
-											<button class="reportBtn">제출하기</button>
+											<div class="reportBtnArea"><button class="reportBtn">제출하기</button></div>
 										</div>
 									
 									</th:block>
