@@ -1,8 +1,12 @@
 package edu.kh.jmt.myPage.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.jmt.myPage.dto.Member;
+import edu.kh.jmt.restaurant.dto.RestaurantDto;
 
 public interface MyPageService{
 
@@ -58,6 +62,16 @@ public interface MyPageService{
 	 * @return result
 	 */
 	String updateInfo(Member inputMember, MultipartFile profileImg);
+
+	/**
+	 * 찜 목록
+	 * @param cp
+	 * @param memberNo
+	 * @return
+	 */
+	Map<String, Object> selectLikeList(int cp, int memberNo);
+
+	
 
 
 
