@@ -11,6 +11,8 @@ noticeInsertFrm.addEventListener("submit", e => {
   const noticeContent = document.querySelector("[name=noticeContent]");
   const noticeCategory = document.querySelectorAll("[name=noticeCategory]");
 
+  noticeContent.value = noticeContent.replaceAll("<br>", "\n");
+
   // 제목 유효성 검사
   if (noticeTitle.value.trim().length < 3) {
     alert("제목을 2글자 이상으로 작성해 주세요");
