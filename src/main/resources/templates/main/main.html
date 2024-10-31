@@ -75,18 +75,20 @@
     <!-- ------------------------------------카테고리 팝업-------------------------------------------------------- -->
 
     <div class="foodCategoryPopUp foodCategoryPopUp-close">
-      <div class="foodCategoryPopUp-title">음식 카테고리
+      <div class="foodCategoryPopUp-title">
+        <div class="category-title">음식 카테고리</div>
         <button class="foodClosePopup">
           <i class="fa-solid fa-arrow-left"></i>팝업 닫기
         </button>
       </div>
-
+<!-- th:each="category:${categoryList}" -->
       <div class="foodCategoryPopUp-arrow">
-        <div class="foodCategoryPopUp-left">
-          <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="한식">#한식</button> </div>
-          <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="양식">#양식</button> </div>
-          <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="일식">#일식</button> </div>
-          <div class="foodCategoryBtnBox"> <button class="foodCategoryBtn" name="valus" value="중식">#중식</button> </div>
+        <div class="foodCategoryPopUp-left" >
+          <th:block th:each="category:${categoryList}" >
+            <div class="foodCategoryBtnBox">
+              <button class="foodCategoryBtn" th:text="${category.categoryName}" name="valus" th:value="${category.categoryName}"></button> 
+            </div>
+          </th:block>
         </div>
 
         <div class="foodCategoryPopUp-right">
@@ -102,7 +104,8 @@
 
     <div class="regionCategoryPopUp regionCategoryPopUp-close">
       <div class="regionCategoryPopUpBox">
-        <div class="regionCategoryPopUp-title">지역 설정
+        <div class="regionCategoryPopUp-title">
+          <div class="category-title">지역 설정</div>
           <button class="regionClosePopUp">
             <i class="fa-solid fa-arrow-left"></i>팝업 닫기
           </button>
