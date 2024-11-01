@@ -43,18 +43,25 @@ const formTag = document.querySelector(".pormTag")
 formTag.addEventListener("submit", (e) => {
 
   const content = document.querySelector("#content").value.trim();
-  const selectBtnText = document.querySelector(".selectBtn").innerText;
+  const selectBtnText = document.querySelector(".selectBtn").dataset.suggest;
   if(content === ""){
     alert("내용을 입력해주세요");
     e.preventDefault();
     return;
   }
 
+  // alert(selectBtnText)
+
+  // e.preventDefault();
+  // return;
+
   const likeFl = document.createElement("input");
 
   likeFl.value = selectBtnText;
   likeFl.type = "hidden";
   likeFl.name = "likeFl";
+
+  console.log(likeFl);
 
   formTag.append(likeFl);
 

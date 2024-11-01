@@ -63,6 +63,7 @@ public class ReviewController {
 		 
 		int result = 0;
 
+
 		// 리뷰 수정
 		if (likeFl.equals("추천")) {
 			likeFl = "Y";

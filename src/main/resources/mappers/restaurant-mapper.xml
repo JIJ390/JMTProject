@@ -30,7 +30,8 @@
 
 
 	<select id="selectMenuList" resultType="MenuDto">
-		SELECT MENU_NO, MENU_NAME, MENU_PRICE
+		SELECT MENU_NO, MENU_NAME, 
+	  			TO_CHAR(MENU_PRICE, '999,999,999') AS "MENU_PRICE"
 		FROM MENU
 		WHERE RESTAURANT_NO = #{restaurantNo}
 	</select>
