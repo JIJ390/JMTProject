@@ -106,22 +106,26 @@
 		
 				<!-- 글쓰기 버튼 -->
 				<div>
-					<th:block th:if="${session.loginMember}">
-						<button id="pageChange" class="writeBtn" th:value="${session.loginMember.memberAuth}">글쓰기</button>
+					<th:block>
+						<button id="pageChange" class="writeBtn">글쓰기</button>
 					</th:block>
 				</div>
 
 
 
 
+
 		<div class="commentReportPopup commentPopupHidden" >
 	
-			<p class="rc">1. 혐오 표현이 포함된 댓글</p>
-			<p class="rc">2. 욕설, 비방 표현 사용 댓글</p>
-			<p class="rc">3. 기타 사유 댓글</p>
-			<textarea name="" id="" class="commentReportContent"></textarea>
+			<p class="rc rc1">1. 혐오 표현이 포함된 댓글</p>
+			<hr style="margin: 5px;">
+			<p class="rc rc2">2. 욕설, 비방 표현 사용 댓글</p>
+			<hr style="margin: 5px;">
+			<p class="rc rc3">3. 기타 사유 댓글</p>
+			<hr style="margin: 5px;">
+			<textarea name="" id="" class="commentReportContent" placeholder="내용을 입력해주세요"></textarea>
 			<br>
-		<div style="display: flex; justify-content: space-between;">
+		<div style="display: flex; justify-content: end;">
 				<button class="commentReportBtn">신고</button>
 				<button class="commentCloseBtn">닫기</button>
 		</div>
@@ -133,8 +137,22 @@
 	<script src="/js/board/boardMain.js"></script>
 	<!-- <script src="/js/board/boardComment.js"></script> -->
 	<script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
-	
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
+	</script>
 
+<script>
+	$(document).mouseup(function (e){
+	  var LayerPopup = $(".updateReport");
+	  if(LayerPopup.has(e.target).length === 0){
+	    LayerPopup.removeClass("show");
+	  }
+	});
+</script>
+
+<script th:inline="javascript">
+	const loginMember = /*[[${session.loginMember}]]*/ '회원';
+</script>
 
 	</body>
 

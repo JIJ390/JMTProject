@@ -11,9 +11,16 @@ topBtn.onclick = function () {
 // 글쓰기 버튼을 눌렀을때 글쓰기 페이지로 넘어가는 효과
 const btn = document.querySelector(".writeBtn");
 
-btn?.addEventListener("click", () => {
+btn?.addEventListener("click", e => {
 
-  if (btn.value == '1') {
+  if (loginMember === null) {
+    alert("로그인해야 글쓰기를 할 수 있습니다.");
+    
+    e.preventDefault();
+    return;
+  }
+
+  if (loginMember.memberAuth == '1') {
     alert("차단당한 회원 입니다. 글쓰기를 이용하실 수 없습니다.");
     return;
   }
@@ -763,6 +770,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let index = 0;
 
+let openBoardReport;
+
 getReportEvent = () => {
 
   const updateReport = document.querySelectorAll(".updateReport");
@@ -787,7 +796,7 @@ getReportEvent = () => {
 
         boardReport[i].classList.remove("boardReportHidden")
 
-
+        openBoardReport = boardReport[i];
 
       } else {
 
@@ -943,5 +952,42 @@ commentReportInsert = () => {
       .catch(err => console.log(err));
   })
 }
+
+
+
+
+// ------------------------------------------------------------------------------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  // 화면 클릭 시
+  document.addEventListener("click", e => {
+    // console.log(e.target); // 화면에서 클릭된 요소
+
+    // 클릭된 요소가 신고 버튼인 경우
+    if(e.target.classList.contains("updateReport")) return;
+    
+    // 클릭된 요소가 현재 열려있는 신고 팝업레이어인 경우 
+    if(e.target == openBoardReport) return;
+    
+    // 현재 열려있는 신고 팝업레이어의 후손 요소 모두 얻어오기
+    const elements = openBoardReport?.querySelectorAll("*");
+
+    let flag = true;
+    elements?.forEach(item => { // 클릭된 요소가 열려있는 신고 팝업의 후손인 경우 
+      if(item == e.target){
+        flag = false;
+        return;
+      } 
+    });
+
+    // 신고 버튼, 신고 팝업, 신고 팝업 후손이 아니면
+    // 열려있는 신고 팝업 닫기
+    if(flag)  openBoardReport.classList.add("boardReportHidden");
+
+  });
+
+
+})
 
 

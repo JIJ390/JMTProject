@@ -1,3 +1,13 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+body		{ font-family: 'NanumSquare', sans-serif }
+.normal		{ font-weight: 400 }
+.bold		{ font-weight: 700 }
+.bolder		{ font-weight: 800 }
+.light		{ font-weight: 300 }
+
+/* * {font-family: 'NEXON Lv1 Gothic OTF';} */
+
 /* 기본 스타일 초기화 */
 * {
   margin: 0;
@@ -540,13 +550,7 @@
   transition: all 0.1s;
   } */
   
-  @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
-body		{ font-family: 'NanumSquare', sans-serif }
-.normal		{ font-weight: 400 }
-.bold		{ font-weight: 700 }
-.bolder		{ font-weight: 800 }
-.light		{ font-weight: 300 }
   
   
   .boardReportHidden {
@@ -575,23 +579,114 @@ body		{ font-family: 'NanumSquare', sans-serif }
 
 
   .commentReportPopup{
-    background-color: white;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    width: 290px;
     position: fixed;
-    margin: auto;
-    top: 350px;
-    left: 0;
-    right: 0;
-    padding: 15px;
-    box-shadow: 0px 5px 6px -2px var(--border-color);
+    right: 650px;
+    top: 330px;
+    min-height: 240px;
+    width: 232px;
+    height: max-content;
+    background-color: white;
+    padding: 12px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    z-index: 1;
+  }
+
+  .rc1{
+    transition: all 0.1s;
+    width: 100%;
+    text-align: start;
+    border-radius: 5px;
+    font-family: 'NEXON Lv1 Gothic OTF';
+  }
+  .rc2{
+    transition: all 0.1s;
+    width: 100%;
+    text-align: start;
+    border-radius: 5px;
+    font-family: 'NEXON Lv1 Gothic OTF';
+  }
+  .rc3{
+    transition: all 0.1s;
+    width: 100%;
+    text-align: start;
+    border-radius: 5px;
+    font-family: 'NEXON Lv1 Gothic OTF';
+  }
+
+  .rc1:hover{
+    text-align: left;
+    transition: all 0.1s;
+    background-color: rgb(177, 177, 177);
+    border-radius: 5x;
+  }
+
+  .rc2:hover{
+    text-align: left;
+    transition: all 0.1s;
+    background-color: rgb(177, 177, 177);
+    border-radius: 5x;
+  }
+
+  .rc3:hover{
+    text-align: left;
+    transition: all 0.1s;
+    background-color: rgb(177, 177, 177);
+    border-radius: 5x;
   }
 
   .commentReportContent{
-    width: 260px;
-    height: 87px;
+    width: 100%;
+    height: 85px;
+    border: 1px solid;
     resize: none;
+  }
+
+  .commentReportBtn{
+    border: 1px solid #6EC3C2;
+    text-align: center;
+    margin-left: 10px;
+    margin-top: 10px;
+    transition: all 0.1s;
+    width: 20%;
+    text-align: start;
+    border-radius: 5px;
+    font-size: 92%;
+    height: 20%;
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    
+  }
+
+  .commentReportBtn:hover{
+    text-align: left;
+    transition: all 0.1s;
+    background-color: #6EC3C2;
+    border-radius: 5x;
+  }
+
+  .commentCloseBtn{
+    border: 1px solid #6EC3C2;
+    text-align: center;
+    margin-left: 10px;
+    margin-top: 10px;
+    transition: all 0.1s;
+    width: 20%;
+    text-align: start;
+    border-radius: 5px;
+    font-size: 92%;
+    height: 20%;
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+  }
+
+  .commentCloseBtn:hover{
+    text-align: left;
+    transition: all 0.1s;
+    background-color: #6EC3C2;
+    border-radius: 5x;
   }
 
   .commentPopupHidden{
