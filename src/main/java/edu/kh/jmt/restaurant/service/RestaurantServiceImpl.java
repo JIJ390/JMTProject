@@ -34,5 +34,23 @@ public class RestaurantServiceImpl implements RestaurantService{
 	public ReviewDto selectUserReview(int reviewNo) {
 		return mapper.selectUserReview(reviewNo);
 	}
+
+	// 찜 여부
+	@Override
+	public int likeCheck(int restaurantNo, int memberNo) {
+		return mapper.likeCheck(restaurantNo, memberNo);
+	}
+	
+	// 찜 추가
+	@Override
+	public int bookmarkadd(int restaurantNo, int memberNo) {
+		return mapper.bookmarkadd(restaurantNo,memberNo);
+	}
+	
+	// 찜 삭제
+	@Override
+	public int bookmarkdelete(int restaurantNo, int memberNo) {
+		return mapper.bookmarkdelete(restaurantNo,memberNo);
+	}
 	
 }

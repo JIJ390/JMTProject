@@ -38,7 +38,7 @@
 	
 
 	<select id="restaurantDetail" resultMap="restaurant_rm">
-			SELECT *
+			SELECT * 
 			FROM (
 				SELECT 
 					RESTAURANT_NO, 
@@ -95,6 +95,28 @@
 		FROM "REVIEW"
 		WHERE REVIEW_NO = #{reviewNo}
 	</select>
+
+	<select id="likeCheck">
+		SELECT COUNT(*)
+		FROM BOOKMARK
+		WHERE RESTAURANT_NO = #{restaurantNo}
+		AND MEMBER_NO = #{memberNo}
+	</select>
+
+	<insert id="bookmarkadd">
+		INSERT INTO "BOOKMARK"
+		VALUES (
+			#{restaurantNo},
+			#{memberNo}
+			)
+	</insert>
+	
+	<delete id="bookmarkdelete">
+		DELETE
+		FROM BOOKMARK
+		WHERE RESTAURANT_NO = #{restaurantNo}
+		AND   MEMBER_NO = #{memberNo}
+	</delete>
 
 
 </mapper>

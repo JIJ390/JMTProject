@@ -31,4 +31,13 @@ public interface RestaurantMapper {
 	// 리뷰 수정하기 위한 조회
 	ReviewDto selectUserReview(int reviewNo);
 
+	// 찜 여부
+	int likeCheck(@Param("restaurantNo") int restaurantNo, @Param("memberNo") int memberNo);
+
+	// 찜 추가
+	int bookmarkadd(@Param("restaurantNo") int restaurantNo, @Param("memberNo") int memberNo);
+
+	// 찜 삭제
+	int bookmarkdelete(@Param("restaurantNo") int restaurantNo, @Param("memberNo") int memberNo);
+
 }
