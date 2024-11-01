@@ -25,4 +25,14 @@ public interface RestaurantService {
 	// 리뷰 수정하기 위해 리뷰 조회
 	ReviewDto selectUserReview(int reviewNo);
 
+	// 찜 여부
+	int likeCheck(int restaurantNo, int memberNo);
+
+	// 찜 추가
+	int bookmarkadd(int restaurantNo, int memberNo);
+
+	// 찜 삭제
+	int bookmarkdelete(int restaurantNo, int memberNo);
+
+
 }

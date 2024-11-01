@@ -90,3 +90,46 @@ reviewBtn1.addEventListener("click", () => {
   form.submit();
 });
 
+
+
+const htBtn = document.querySelector(".htBtn");
+htBtn.addEventListener("click", () => {
+
+  if (loginCheck === false) {
+    alert("로그인 후 이용해 주세요");
+    return;
+  }
+
+  const restaurantNo = document.querySelector(".getRestaurantNo").value;
+
+  fetch("/restaurant/bookMark?restaurantNo="+restaurantNo)
+  .then(Response => {
+    if(Response.ok){
+      return Response.text();
+    }
+    throw new Error("찜 실패");
+  })
+  .then(result => {
+    if(result > 0){
+      fetch("/restaurant/bookMarkDelete?restaurantNo="+restaurantNo)
+      .then(response => {
+        if(response.ok){
+          htBtn.classList.remove("fa-solid");
+          htBtn.classList.add("fa-regular");
+        }
+      })
+    }
+    else{
+      fetch("/restaurant/bookMarkAdd?restaurantNo="+restaurantNo)
+      .then(response => {
+        if(response.ok){
+          htBtn.classList.add("fa-solid");
+          htBtn.classList.remove("fa-regular");
+        }
+      })
+
+    }
+  })
+  
+
+})

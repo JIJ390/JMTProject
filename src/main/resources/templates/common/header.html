@@ -57,11 +57,9 @@
 <button class="fa-solid fa-arrow-up" id="topBtn"></button>
 
 <script th:inline="javascript">
-  const message =  /*[[${message}]]*/ "전달 받은 message";
-  if(message != null) alert(message);
-
   // 로그인 되어 있을 경우 true
   const loginCheck = /*[[${session.loginMember != null}]]*/ false;
+
 </script>
 
 <script src=""></script>

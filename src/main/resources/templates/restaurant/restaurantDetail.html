@@ -34,12 +34,12 @@
             <input type="hidden" class="getRestaurantNo" th:value="*{restaurantNo}">
             <input type="hidden" class="getRestaurantAddress" th:value="*{restaurantAddress}">
             <input type="hidden" class="getRestaurantName" th:value="*{restaurantName}">
+     
             <th:block th:if="${session.loginMember}">
-                <input type="hidden" class="getLoginMemberNo"
-                    th:value="${session.loginMember.memberNo}">
+                <input type="hidden" class="getLoginMemberNo" th:value="${session.loginMember.memberNo}">
                 <input type="hidden" class="memberAuth" th:value="${session.loginMember.memberAuth}">
-                </th:block>
-                
+            </th:block>
+
 
             <div class="mainDetail">
                 <div class="mainDetailPhoto">
@@ -48,6 +48,10 @@
                 </div>
                 <div class="mainDetailContent">
                     <b th:text="*{restaurantName}" style="font-size: 40px;"></b>
+                    <button class="heartBtn" name="likeBtn">
+                        <i class="far fa-heart fa-lg htBtn" style="color: #ff0000; font-size: 50px;"
+                            th:classappend="${likeCheck == 1}? fa-solid :  fa-regular"></i>
+                    </button>
                     <div style="display: flex; margin-top: 10px;">
                         <p th:text="*{categoryName}" style="font-size: 30px; margin-right: 20px; color: gray;"></p>
                         <p th:text="*{locationName}" style="font-size: 30px; color: gray;"></p>
@@ -132,7 +136,11 @@
         const message =  /*[[${message}]]*/ "전달 받은 message";
 
         if (message != null) alert(message);
+
+        const loginCheck = /*[[${session.loginMember} ? true : false]]*/ false;
     </script>
+
+
 
     <script src="https://kit.fontawesome.com/b289d4a0af.js" crossorigin="anonymous"></script>
     <script type="text/javascript"
