@@ -51,7 +51,7 @@ form.addEventListener("submit", e =>{
   if(boardTitle.value.trim().length === 0){
     alert("제목을 작성해주세요");
     boardTitle.focus();
-    e.preventDefault;
+    e.preventDefault();
     return;
   }
 

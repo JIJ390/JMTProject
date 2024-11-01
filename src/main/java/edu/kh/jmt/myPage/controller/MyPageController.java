@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,7 @@ import edu.kh.jmt.restaurant.dto.RestaurantDto;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,7 +41,8 @@ public class MyPageController {
 	/** 로그인 페이지로 이동
 	 */
 	@GetMapping("loginPage")
-	public String login() {
+	public String login(@RequestHeader("referer") String prevPage, HttpSession session) {
+		session.setAttribute("prevPage", prevPage);
 		return "myPage/loginPage";
 	}
 	
@@ -60,7 +63,8 @@ public class MyPageController {
 			@RequestParam(name ="saveEmail", required = false) String saveEmail,
 			RedirectAttributes ra,
 			Model model,
-			HttpServletResponse resp
+			HttpServletResponse resp,
+			HttpSession session
 			) {
 		
 //		log.debug("loginEmail : {}", loginEmail);
@@ -88,7 +92,16 @@ public class MyPageController {
 		}
 	
 		
-		return "redirect:/";
+		if(loginMember == null) {
+			return "redirect:loginPage";
+		}else {
+			String prevPage = (String)session.getAttribute("prevPage");
+			
+			session.removeAttribute("prevPage");
+			
+			return "redirect:" + prevPage;
+		}
+		
 	}
 	
 	/** 로그 아웃
