@@ -1,7 +1,7 @@
 const mainHeartBtn = document.querySelectorAll(".heartBtn");
 const mainStoreBtn = document.querySelectorAll(".store-box");
 const foodCategoryPopUp = document.querySelector(".foodCategoryPopUp"); // 푸드 팝업
-
+const foodCategoryBtn = document.querySelector("#foodCategoryBtn")
 //클릭 이벤트 전파되지 않게 설정 
 
 
@@ -176,7 +176,7 @@ for (let i = 0; i < mainHeartBtn.length; i++) {
       if(response.ok) return response.text(); 
     })
       .then(result => {
-        console.log("result : ", result);
+        // console.log("result : ", result);
 
 
         //  fa-solid 하트 채우기  / fa-regular 하트 비우기
@@ -192,3 +192,55 @@ for (let i = 0; i < mainHeartBtn.length; i++) {
       })
   })
 };
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  //==========================================음식
+  document.addEventListener("click", e => {
+    // console.log(e.target)
+
+  //팝업
+  if(e.target.classList.contains("foodCategoryPopUp")) return;
+
+  //버튼
+  if(e.target == foodCategoryBtn) return;
+
+  const elements = foodCategoryPopUp?.querySelectorAll("*");
+  
+  let flag = true;
+  elements?.forEach(item => { // 클릭된 요소가 열려있는 신고 팝업의 후손인 경우 
+    if(item == e.target){
+      flag = false;
+      return;
+    } 
+  })
+  if(flag)  foodCategoryPopUp.classList.add("foodCategoryPopUp-close");
+
+  });
+});
+
+  //=============================================지역
+  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("click", e => {
+    // console.log(e.target)
+
+  //팝업
+  if(e.target.classList.contains("regionCategoryPopUp")) return;
+
+  //버튼
+  if(e.target == regoinBtn) return;
+
+  const elements = regionCategoryPopUp?.querySelectorAll("*");
+  
+  let flag = true;
+  elements?.forEach(item => { // 클릭된 요소가 열려있는 신고 팝업의 후손인 경우 
+    if(item == e.target){
+      flag = false;
+      return;
+    } 
+  })
+  if(flag)  regionCategoryPopUp.classList.add("regionCategoryPopUp-close");
+
+  });
+})

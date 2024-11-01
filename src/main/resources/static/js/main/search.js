@@ -29,7 +29,7 @@ for (let i = 0;   i < storeSection.length; i++) {
 for (let i = 0; i < heartBtn.length; i++) {
   heartBtn[i].addEventListener('click', (event) => {
 
-    console.log("aaa");
+    // console.log("aaa");
     event.stopPropagation(); // 이벤트 전파를 막음
     if (loginCheck === false) { //로그인이 되어있지않을때에
       alert("로그인이 필요합니다.")
@@ -44,7 +44,7 @@ for (let i = 0; i < heartBtn.length; i++) {
       if(response.ok) return response.text(); 
     })
       .then(result => { 
-        console.log("result : ", result);
+        // console.log("result : ", result);
         //  fa-solid 하트 채우기  / fa-regular 하트 비우기
         if (result == 1) { // 채우기
           event.target.classList.remove("fa-solid");
