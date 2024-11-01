@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지를 찾을 수 없습니다</title>
+</head>
+
+<style>
+    :root{ 
+        font-size: 62.5%;
+        --main-color : #61C0BF;
+    }
+
+    @font-face {
+        font-family: 'OAGothic-ExtraBold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+        font-weight: 800;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'LINESeedKR-Bd';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    *{ padding: 0; margin: 0; box-sizing: border-box; }
+
+
+    .container{
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        position: relative;
+    }
+
+    .error-number-container{
+        position: absolute;
+        z-index: -10;
+    }
+
+    .error-number-container > h1{
+        color : var(--main-color);
+        opacity: 0.2;
+        font-size: 40rem;
+        font-family: 'OAGothic-ExtraBold';
+    }
+
+    .error-message-container{  text-align: center;  }
+    .error-message-container > * { 
+        margin: 1rem;
+        font-family: 'LINESeedKR-Bd';
+        letter-spacing: 0.2rem;
+    }
+
+    .error-message-container > h1{
+        font-size: 7rem;
+    }
+
+    .error-message-container > p{
+        font-size: 2rem;
+    }
+
+    .btn-area{
+        display: flex;
+        justify-content: center;
+    }
+
+    .main-btn{
+        text-decoration: none;
+        font-size: 2rem;
+        color : white;
+        background-color: var(--main-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30rem;
+        height: 5rem;
+        border-radius: 2rem;
+        border: 0.2rem solid var(--main-color);
+        transition-duration: 0.2s;
+    }
+
+    .main-btn:hover{
+        background-color: white;
+        color: var(--main-color);
+    }
+
+
+
+</style>
+
+<body>
+
+    <main class="container">
+
+        <section class="error-number-container">
+            <h1>404</h1>
+        </section>
+
+        <section class="error-message-container">
+
+            <h1>페이지를 찾을 수 없습니다</h1>
+
+            <p>페이지의 주소가 올바르지 않거나, 변경/삭제되어 이용할 수 없습니다.</p>
+
+            <article class="btn-area">
+                <a class="main-btn" href="/">메인 페이지로 이동</a>
+            </article>
+        </section>
+    </main>
+</body>
+
+</html>
