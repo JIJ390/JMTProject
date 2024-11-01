@@ -175,48 +175,10 @@ const selectMemberList = (cp) => {
       }
 
 
-      const td7 = document.createElement("td");
-      const loginBtn = document.createElement("button");
-      loginBtn.innerText = "로그인";
-      td7.append(loginBtn);
-
-      // 만약 탈퇴 상태인 경우 로그인 버튼 비활성화
-      if (member.memberDelFl === 'Y') {
-        loginBtn.disabled = true;
-        
-      } else {
-
-        // 탈퇴 상태가 아닌 경우
-        // 만들어진 로그인 버튼에 클릭 이벤트 추가
-        loginBtn.addEventListener("click", () => {
-
-          // body 태그 제일 마지막에 form 태그를 추가해
-          // 저출하는 형식으로 코드 작성
-          // WHY? POST 방식 요청을 하고 싶기 때문에
-          // form / Ajax 만 POST 방식
-
-          const form = document.createElement("form");
-          form.action = "/admin/member/directLogin"; // 요청 주소
-          form.method = "POST";         // 메소드 지정
-
-          const input = document.createElement("input");
-          input.type  = "hidden";
-          input.name  = "memberNo";
-          input.value = member.memberNo;  // 반복문 내부
-
-          form.append(input); // form 자식으로 input 추가
-
-          // body 태그 자식으로 form 추가
-          document.querySelector("body").append(form);
-
-          form.submit(); // 제출
-        })
-      }
-
     
 
       
-      tr.append(td1, td2, td3, td4, td5, td6, td7);
+      tr.append(td1, td2, td3, td4, td5, td6);
 
       memberList.append(tr);
 
@@ -244,10 +206,10 @@ const selectMemberStatus = () => {
   .then(map => {
     console.log(map);
 
-    const totalReportComment = document.querySelector("#totalReportComment");
-    const complReportComment = document.querySelector("#complReportComment");
-    const ReportComment = document.querySelector("#ReportComment");
-    const todayReportComment = document.querySelector("#todayReportComment");
+    const totalMember = document.querySelector("#totalMember");
+    const activeMember = document.querySelector("#activeMember");
+    const blockMember = document.querySelector("#blockMember");
+    const secessionMember = document.querySelector("#secessionMember");
 
     totalMember.innerText = map.totalMember;
     activeMember.innerText = map.activeMember;
