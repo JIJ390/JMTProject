@@ -126,6 +126,8 @@ const updatePreview = (file, order) => {
 
     inputImageList[order].files = dataTransfer.files;
 
+    
+
     updatePreview(lastValidFiles[i], i); 
 
 
@@ -140,6 +142,7 @@ const updatePreview = (file, order) => {
 
   reader.addEventListener("load", e => {
     previewList[order].src = e.target.result;
+    previewList[order].style.visibility="visible"
   })
 
 }
