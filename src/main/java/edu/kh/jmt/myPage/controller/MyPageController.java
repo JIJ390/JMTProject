@@ -22,6 +22,7 @@ import edu.kh.jmt.myPage.dto.Member;
 import edu.kh.jmt.myPage.service.MyPageService;
 import edu.kh.jmt.restaurant.dto.RestaurantDto;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -85,7 +86,7 @@ public class MyPageController {
 			}
 			resp.addCookie(cookie);
 		}
-		
+	
 		
 		return "redirect:/";
 	}
@@ -333,11 +334,11 @@ public class MyPageController {
 				Model model
 				) {
 			
-			log.debug("aaaa : {}", loginMember.getMemberNo());
-			log.debug("aaaa : {}", loginMember.getMemberNo());
-			log.debug("aaaa : {}", loginMember.getMemberNo());
-			log.debug("aaaa : {}", loginMember.getMemberNo());
-			log.debug("aaaa : {}", loginMember.getMemberNo());
+//			log.debug("aaaa : {}", loginMember.getMemberNo());
+//			log.debug("aaaa : {}", loginMember.getMemberNo());
+//			log.debug("aaaa : {}", loginMember.getMemberNo());
+//			log.debug("aaaa : {}", loginMember.getMemberNo());
+//			log.debug("aaaa : {}", loginMember.getMemberNo());
 			
 			
 			Map<String, Object> map = service.selectLikeList(cp, loginMember.getMemberNo());
@@ -346,11 +347,11 @@ public class MyPageController {
 			AdminPagination pagination = (AdminPagination)map.get("pagination");
 			
 			
-			log.debug("aaaa : {}", likeList);
-			log.debug("aaaa : {}", likeList);
-			log.debug("aaaa : {}", likeList);
-			log.debug("aaaa : {}", likeList);
-			log.debug("aaaa : {}", likeList);
+//			log.debug("aaaa : {}", likeList);
+//			log.debug("aaaa : {}", likeList);
+//			log.debug("aaaa : {}", likeList);
+//			log.debug("aaaa : {}", likeList);
+//			log.debug("aaaa : {}", likeList);
 			
 			
 			model.addAttribute("likeList", likeList);
