@@ -251,3 +251,7 @@ button {
 button:active{
   background-color: rgb(181, 181, 255);
 }
+
+#topBtn {
+  background-color: #f4f4f4;
+}

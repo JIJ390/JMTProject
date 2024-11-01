@@ -1,0 +1,320 @@
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+body		{ font-family: 'NanumSquare', sans-serif }
+.normal		{ font-weight: 400 }
+.bold		{ font-weight: 700 }
+.bolder		{ font-weight: 800 }
+.light		{ font-weight: 300 }
+
+h1 {font-family: 'NEXON Lv1 Gothic OTF';}
+header {font-family: 'NEXON Lv1 Gothic OTF';}
+
+
+
+/* 기본 사항 css */
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  --main-color : #61C0BF;
+  --border-color : rgb(182, 182, 182);
+}
+
+
+
+html, body, main {
+  height: 100%;
+}
+
+main{
+  display: flex;
+
+}
+
+.left-section, .right-section{
+  width: 50%;
+}
+
+.main-section {
+  width: 2000px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+/******* 헤더  ****/
+/******* 헤더  ****/
+/******* 헤더  ****/
+
+header {
+  height: 130px;
+  background-color: var(--main-color);
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+/* 페이지 링크 */
+nav {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: end;
+}
+
+nav ul{
+  list-style: none;
+
+  display: flex;
+  justify-content: start;
+
+  padding: 0;
+  margin: 10px 10px;
+}
+
+nav li{
+  width: 100px;
+  text-align: center;
+}
+
+nav a{
+  text-decoration-line: none;
+  color: white;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  transition-duration: 0.1s;
+}
+
+nav a:hover {
+  color: black;
+}
+
+/* 로고 이미지 */
+header > img {
+  width: 60px;
+  height: 60px;
+}
+
+
+.headRight {
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+
+  justify-content: end;
+
+  padding-right: 30px;
+
+  
+
+}
+
+.headRight span{
+  font-size: 20px;
+  margin: 8px 5px;
+  color: white;
+
+}
+
+.headRight span a{
+
+  color: white;
+  text-decoration-line: none;
+
+}
+
+
+#popUpSpan {
+  font-size: 40px;
+  color: white;
+  margin-top: 10px;
+}
+
+#popUpSpan:hover{
+  cursor: pointer;
+}
+/* 
+.headRight i {
+  font-size: 30px;
+  margin: 10px 20px;
+  color: white;
+} */
+
+.menu-container {
+
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+
+  width: 200px;
+  height: 280px;
+  border: 1px solid var(--border-color);
+
+  background-color: white;
+
+  border-radius: 15px;
+  
+  padding: 20px;
+
+  z-index: 2000;
+
+  position: absolute;
+  top: 50px;
+  right: 30px;
+
+
+  display: none;
+}
+
+.profile-img img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: inline-block;
+}
+
+.sideP {
+  margin: 20px 0;
+  font-size: 14px;
+  color: #333;
+  margin-top: 20px;
+  font-size: x-large;
+}
+
+.sideItem {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: color 0.1s ease;
+}
+
+.menu-container a:hover {
+  color: var(--main-color);
+}
+
+
+/* 로고 */
+.logo-img {
+  margin-top: 3px;
+}
+
+/******* 헤더  ****/
+/******* 헤더  ****/
+/******* 헤더  ****/
+
+/* 어드민 사이드 */
+div.button {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  padding: 0;
+  margin: 10px 20px 10px 0;
+  font-weight: 500;
+  text-align: center;
+  line-height: 30px;
+  color: #FFF;
+  border-radius: 5px;
+  transition: all 0.2s ;
+}
+
+.admin-icon {
+  margin-left: 5px;
+  margin-top: 10px;
+}
+
+.adminSideMenu{
+  margin-left: 12px;
+  height: 50%;
+}
+
+.btnLightBlue {
+  background: #5DC8CD;
+}
+
+.btnFade.btnLightBlue:hover {
+  background: #01939A;
+}
+
+a{
+  text-decoration: none;
+}
+
+
+.button a{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+/* 점메추 게시판과 동일한 Top버튼 */
+#topBtn {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  border-radius: 50%;
+  border: none;
+  padding: 40;
+  color: #6EC3C2;
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+
+
+footer {
+  width: 100%;
+  height: 120px;
+  background-color: #F1FADA;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #61C0BF;
+}
+
+footer>p {
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+footer>article>* {
+  font-size: 14px;
+}
+
+footer a {
+  color: rgb(153, 153, 153);
+  text-decoration: none;
+}
+
+footer span {
+  padding: 0 10px;
+
+}
